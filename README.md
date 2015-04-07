@@ -1,3 +1,1 @@
-# peanut
-
-A minimal command-line application.
+`pub build` to `gh-pages`

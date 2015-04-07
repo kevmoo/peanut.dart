@@ -8,3 +8,5 @@ environment:
 dependencies:
   git: ^0.4.3
   path: ^1.3.4
+executables:
+  peanut: peanut
