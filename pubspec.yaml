@@ -1,5 +1,5 @@
 name: peanut
-version: 0.0.1
+version: 0.0.1+1
 description: pub build to gh-pages
 author: Kevin Moore <github@j832.com>
 homepage: https://github.com/kevmoo/peanut.dart
