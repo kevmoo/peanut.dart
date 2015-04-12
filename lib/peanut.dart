@@ -37,7 +37,7 @@ Future<Null> run(
   try {
     var args = ['build', '--output', tempDir.path, targetDir];
 
-    Process process = await Process.start('pub', args);
+    Process process = await Process.start('pub', args, runInShell: true);
 
     process.stdout.transform(_lineDecoder).listen((line) {
       stdout.writeln(line);
