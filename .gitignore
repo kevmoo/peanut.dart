@@ -4,3 +4,4 @@
 .pub/
 packages
 pubspec.lock
+.packages
