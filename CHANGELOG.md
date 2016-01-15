@@ -1,3 +1,7 @@
+## 0.0.2
+
+* Add mode options, to allow `pub build` to run in debug mode.
+
 ## 0.0.1+2
 
 * Run `pub` with `runInShell` to make things work on Windows.
