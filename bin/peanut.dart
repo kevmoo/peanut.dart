@@ -12,6 +12,7 @@ void main(List<String> args) {
   ArgParser parser = new ArgParser(allowTrailingOptions: false)
     ..addOption(_directoryFlag, abbr: 'd', defaultsTo: 'web')
     ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
+    ..addOption('mode', defaultsTo: 'release', allowed: ['release', 'debug'])
     ..addOption(_messageFlag, abbr: 'm', defaultsTo: 'Built <$_directoryFlag>')
     ..addFlag('help', abbr: 'h', negatable: false);
 
@@ -30,10 +31,12 @@ void main(List<String> args) {
   var dir = result[_directoryFlag];
   var branch = result['branch'];
 
+  var mode = result['mode'];
+
   var message = result[_messageFlag];
   if (message == parser.getDefault(_messageFlag)) {
     message = "Built $dir";
   }
 
-  run(dir, branch, message);
+  run(dir, branch, message, mode);
 }
