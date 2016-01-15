@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:git/git.dart';
 
 Future<Null> run(
-    String targetDir, String targetBranch, String commitMessage) async {
+    String targetDir, String targetBranch, String commitMessage, String mode) async {
   var current = p.current;
 
   var isGitDir = await GitDir.isGitDir(current);
@@ -35,7 +35,7 @@ Future<Null> run(
       await Directory.systemTemp.createTemp('peanut.$_secondsSinceEpoch.');
 
   try {
-    var args = ['build', '--output', tempDir.path, targetDir];
+    var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
 
     Process process = await Process.start('pub', args, runInShell: true);
 
