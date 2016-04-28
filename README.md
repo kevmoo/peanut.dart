@@ -20,7 +20,7 @@ This will build your project into a temporary directory, and then it will update
 The easiest way to push your `gh-pages` branch to github (without switching from your working branch) is:
 
 ```
-$ git push origin gh-pages:gh-pages
+$ git push origin --set-upstream gh-pages
 ```
 
 To create (or update) your local `gh-pages` branch to match what's on the server.
