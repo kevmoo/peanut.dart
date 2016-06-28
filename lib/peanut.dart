@@ -60,7 +60,9 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       print('There was no change in branch. No commit created.');
     } else {
       print('Branch "$targetBranch" was updated '
-          'with "pub build" output from "$targetDir".');
+          'with "pub build" output from "$targetDir".\n'
+          'You might want to run the following command now:\n'
+          '\$ git update-ref refs/heads/gh-pages origin/gh-pages');
     }
   } catch (e, stack) {
     print(e);
