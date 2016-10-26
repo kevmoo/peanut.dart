@@ -39,11 +39,11 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 
     Process process = await Process.start('pub', args, runInShell: true);
 
-    process.stdout.transform(_lineDecoder).listen((line) {
+    getStrings(process.stdout).listen((line) {
       stdout.writeln(line);
     });
 
-    process.stderr.transform(_lineDecoder).listen((line) {
+    getStrings(process.stderr).listen((line) {
       stderr.writeln(line);
     });
 
@@ -74,4 +74,5 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 
 int _secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
 
-final _lineDecoder = SYSTEM_ENCODING.decoder.fuse(const LineSplitter());
+Stream<String> getStrings(Stream<List<int>> std) =>
+    const LineSplitter().bind(SYSTEM_ENCODING.decoder.bind(std));
