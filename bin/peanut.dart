@@ -20,12 +20,14 @@ void main(List<String> args) {
 
   if (result['help']) {
     print(parser.usage);
-    exit(1);
+    exitCode = 1;
+    return;
   }
 
   if (result.rest.isNotEmpty) {
     print(parser.usage);
-    exit(1);
+    exitCode = 1;
+    return;
   }
 
   var dir = result[_directoryFlag];
