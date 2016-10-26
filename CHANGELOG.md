@@ -1,3 +1,8 @@
+## 0.1.0
+
+* Tweak some things.
+* Update readme.
+
 ## 0.0.2
 
 * Add mode options, to allow `pub build` to run in debug mode.
