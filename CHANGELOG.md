@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Set exit code correctly on errors.
+
 ## 0.1.0
 
 * Tweak some things.

@@ -1,5 +1,3 @@
-library peanut.bin;
-
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -8,7 +6,7 @@ import 'package:peanut/peanut.dart';
 const _directoryFlag = 'directory';
 const _messageFlag = 'message';
 
-void main(List<String> args) {
+main(List<String> args) async {
   ArgParser parser = new ArgParser(allowTrailingOptions: false)
     ..addOption(_directoryFlag, abbr: 'd', defaultsTo: 'web')
     ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
@@ -18,7 +16,7 @@ void main(List<String> args) {
 
   var result = parser.parse(args);
 
-  if (result['help']) {
+  if (result['help'] == true) {
     print(parser.usage);
     exitCode = 1;
     return;
@@ -30,15 +28,23 @@ void main(List<String> args) {
     return;
   }
 
-  var dir = result[_directoryFlag];
-  var branch = result['branch'];
+  var dir = result[_directoryFlag] as String;
+  var branch = result['branch'] as String;
 
-  var mode = result['mode'];
+  var mode = result['mode'] as String;
 
-  var message = result[_messageFlag];
+  var message = result[_messageFlag] as String;
   if (message == parser.getDefault(_messageFlag)) {
-    message = "Built $dir";
+    message = 'Built $dir';
   }
 
-  run(dir, branch, message, mode);
+  try {
+    await run(dir, branch, message, mode);
+  } catch (e, stack) {
+    print(e);
+    if (e is! String) {
+      print(stack);
+    }
+    exitCode = 1;
+  }
 }

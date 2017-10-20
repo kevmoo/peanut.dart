@@ -1,6 +1,3 @@
-/// The peanut library.
-library peanut;
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -15,8 +12,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   var isGitDir = await GitDir.isGitDir(current);
 
   if (!isGitDir) {
-    print("Not a git directory: $current");
-    exit(1);
+    throw 'Not a git directory: $current';
   }
 
   GitDir gitDir = await GitDir.fromExisting(current);
@@ -26,13 +22,14 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   var currentBranch = await gitDir.getCurrentBranch();
 
   if (currentBranch.branchName == targetBranch) {
-    print("Cannot update the current branch ${targetBranch}");
-    exit(1);
+    throw 'Cannot update the current branch ${targetBranch}';
   }
+
+  var secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
 
   // create a temp dir to dump 'pub build' output to
   Directory tempDir =
-      await Directory.systemTemp.createTemp('peanut.$_secondsSinceEpoch.');
+      await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
     var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
@@ -47,9 +44,9 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       stderr.writeln(line);
     });
 
-    var exitCode = await process.exitCode;
+    var procExitCode = await process.exitCode;
 
-    if (exitCode != 0) {
+    if (procExitCode != 0) {
       throw 'Error running pub ${args.join(' ')}';
     }
 
@@ -62,17 +59,10 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       print('Branch "$targetBranch" was updated '
           'with "pub build" output from "$targetDir".');
     }
-  } catch (e, stack) {
-    print(e);
-    if (e is! String) {
-      print(stack);
-    }
   } finally {
     await tempDir.delete(recursive: true);
   }
 }
-
-int _secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
 
 Stream<String> getStrings(Stream<List<int>> std) =>
     const LineSplitter().bind(SYSTEM_ENCODING.decoder.bind(std));
