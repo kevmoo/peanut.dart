@@ -1,0 +1,19 @@
+targets:
+  $default:
+    builders:
+      build_web_compilers|entrypoint:
+        # These are globs for the entrypoints you want to compile.
+        generate_for:
+        # See https://github.com/dart-lang/build/issues/1006
+        - example/**.dart
+        options:
+          compiler: dart2js
+          # List any dart2js specific args here, or omit it.
+          dart2js_args:
+            - --show-package-warnings
+            - --dump-info
+            #- --no-frequency-based-minification
+            #- --trust-type-annotations
+            #- --trust-primitives
+            #- --fast-startup
+            #- --minify
