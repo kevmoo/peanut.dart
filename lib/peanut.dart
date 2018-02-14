@@ -48,7 +48,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
             // TODO Add --no-source-maps flag when fix is published.
             '--define',
             '"build_web_compilers|entrypoint=dart2js_args=[\"--checked\", '
-            '\"--minify\"]"'
+                '\"--minify\"]"'
           ]
         // Build with pub.
         : ['build', '--output', tempDir.path, targetDir, '--mode', mode];
