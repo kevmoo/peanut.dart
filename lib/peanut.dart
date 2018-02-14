@@ -6,7 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:git/git.dart';
 
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
-    String mode) async {
+    String mode, bool useBuildRunner) async {
   var current = p.current;
 
   var isGitDir = await GitDir.isGitDir(current);
@@ -32,7 +32,26 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
+    var args = useBuildRunner
+        // Build with build_runner.
+        // TODO Clean this up when better command line args exist.
+        ? [
+            'run',
+            'build_runner',
+            'build',
+            '--output',
+            tempDir.path,
+            // Force build with dart2js instead of dartdevc.
+            '--define',
+            '"build_web_compilers|entrypoint=compiler=dart2js"',
+            // Use checked mode and minify.
+            // TODO Add --no-source-maps flag when fix is published.
+            '--define',
+            '"build_web_compilers|entrypoint=dart2js_args=[\"--checked\", '
+            '\"--minify\"]"'
+          ]
+        // Build with pub.
+        : ['build', '--output', tempDir.path, targetDir, '--mode', mode];
 
     Process process = await Process.start('pub', args, runInShell: true);
 
@@ -50,14 +69,16 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       throw 'Error running pub ${args.join(' ')}';
     }
 
+    // TODO Avoid copying input files that appear in the output.
     Commit commit = await gitDir.updateBranchWithDirectoryContents(
         targetBranch, p.join(tempDir.path, targetDir), commitMessage);
 
     if (commit == null) {
       print('There was no change in branch. No commit created.');
     } else {
+      var command = useBuildRunner ? 'pub run build_runner' : 'pub build';
       print('Branch "$targetBranch" was updated '
-          'with "pub build" output from "$targetDir".');
+          'with "$command" output from "$targetDir".');
     }
   } finally {
     await tempDir.delete(recursive: true);

@@ -12,6 +12,7 @@ main(List<String> args) async {
     ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
     ..addOption('mode', defaultsTo: 'release', allowed: ['release', 'debug'])
     ..addOption(_messageFlag, abbr: 'm', defaultsTo: 'Built <$_directoryFlag>')
+    ..addFlag('use_build_runner')
     ..addFlag('help', abbr: 'h', negatable: false);
 
   var result = parser.parse(args);
@@ -39,7 +40,7 @@ main(List<String> args) async {
   }
 
   try {
-    await run(dir, branch, message, mode);
+    await run(dir, branch, message, mode, result['use_build_runner'] as bool);
   } catch (e, stack) {
     print(e);
     if (e is! String) {
