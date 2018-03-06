@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:git/git.dart';
 import 'package:glob/glob.dart';
 import 'package:io/io.dart';
+import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
 const _usePub = 'pub';
@@ -76,6 +77,12 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 
 Future<String> _runBuild(
     String tempDir, String targetDir, String config) async {
+  if (Platform.isWindows) {
+    print(ansi.red.wrap('Currently uses Unix shell commands `cp` and `mkdir`.'
+        ' Will likely fail on Windows.'
+        ' See https://github.com/kevmoo/peanut.dart/issues/11'));
+  }
+
   var args = [
     'run',
     'build_runner',
