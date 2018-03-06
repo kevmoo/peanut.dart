@@ -25,7 +25,12 @@ main(List<String> args) async {
             '`$_defaultConfigFile` exists in the current directory.')
     ..addOption(_messageFlag, abbr: 'm', defaultsTo: 'Built <$_directoryFlag>')
     ..addOption('build-tool',
-        abbr: 't', defaultsTo: 'pub', allowed: buildToolOptions)
+        abbr: 't',
+        defaultsTo: _buildToolDefault(),
+        allowed: buildToolOptions,
+        help:
+            'If `$_defaultConfigFile` exists in the current directory, defaults'
+            ' to "build". Otherwise, "pub".')
     ..addFlag('help', abbr: 'h', negatable: false);
 
   ArgResults result;
@@ -102,3 +107,6 @@ main(List<String> args) async {
     await ProcessManager.terminateStdIn();
   }
 }
+
+String _buildToolDefault() =>
+    FileSystemEntity.isFileSync(_defaultConfigFile) ? 'build' : 'pub';
