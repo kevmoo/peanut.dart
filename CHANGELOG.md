@@ -1,3 +1,10 @@
+## 1.1.0
+
+* Initial support for `build_runner` via `--build_tool` option.
+
+* Updated Dart SDK lower-bound to `2.0.0-dev.22`.
+  Using `Iterable.whereType<T>` – introduced in this release. 
+
 ## 1.0.0
 
 * Set exit code correctly on errors.

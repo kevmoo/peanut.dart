@@ -2,12 +2,25 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:git/git.dart';
+import 'package:glob/glob.dart';
 import 'package:io/io.dart';
 import 'package:path/path.dart' as p;
 
+const _usePub = 'pub';
+const _useBuild = 'build';
+
+const buildToolOptions = const [_usePub, _useBuild];
+
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
-    String mode) async {
+    String buildTool,
+    {String pubBuildMode, String buildRunnerConfig}) async {
   var current = p.current;
+
+  if (FileSystemEntity.typeSync(p.join(current, targetDir)) ==
+      FileSystemEntityType.NOT_FOUND) {
+    throw 'The `$targetDir` directory does not exist. '
+        'Try setting the `directory` flag.';
+  }
 
   var isGitDir = await GitDir.isGitDir(current);
 
@@ -28,11 +41,24 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   var secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
 
   // create a temp dir to dump 'pub build' output to
-  Directory tempDir =
+  var tempDir =
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    await _runPub(tempDir, targetDir, mode);
+    String command;
+    switch (buildTool) {
+      case _usePub:
+        assert(buildRunnerConfig == null);
+        command = await _runPub(tempDir, targetDir, pubBuildMode);
+        break;
+      case _useBuild:
+        assert(pubBuildMode == null);
+        command = await _runBuild(tempDir.path, targetDir, buildRunnerConfig);
+        break;
+      default:
+        throw new UnsupportedError(
+            'build-tool `$buildTool` is not implemented.');
+    }
 
     Commit commit = await gitDir.updateBranchWithDirectoryContents(
         targetBranch, p.join(tempDir.path, targetDir), commitMessage);
@@ -41,23 +67,137 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       print('There was no change in branch. No commit created.');
     } else {
       print('Branch "$targetBranch" was updated '
-          'with "pub build" output from "$targetDir".');
+          'with `$command` output from `$targetDir`.');
     }
   } finally {
     await tempDir.delete(recursive: true);
   }
 }
 
-Future _runPub(Directory tempDir, String targetDir, String mode) async {
-  var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
+Future<String> _runBuild(
+    String tempDir, String targetDir, String config) async {
+  var args = [
+    'run',
+    'build_runner',
+    'build',
+    '--assume-tty',
+    '--output',
+    tempDir
+  ];
+
+  if (config == null) {
+    args.addAll([
+      // Force build with dart2js instead of dartdevc.
+      '--define',
+      'build_web_compilers|entrypoint=compiler=dart2js',
+      // Match `pub build` defaults for dart2js.
+      '--define',
+      'build_web_compilers|entrypoint=dart2js_args=[\"--minify\",\"--no-source-maps\"]',
+    ]);
+  } else {
+    args.addAll(['--config', config]);
+  }
 
   var manager = new ProcessManager();
 
-  var process = await manager.spawn('pub', args, runInShell: true);
+  await _runProcess(manager, 'pub', args, workingDirectory: p.current);
+
+  // Verify `$tempDir/$targetDir` exists
+  var contentPath = p.join(tempDir, targetDir);
+  if (!FileSystemEntity.isDirectorySync(contentPath)) {
+    throw new StateError('Expected directory `$contentPath` was not created.');
+  }
+
+  var badFileGlob = new Glob('{.packages,**.dart,**.module}');
+
+  var packagesSymlinkPath = p.join(contentPath, 'packages');
+  switch (FileSystemEntity.typeSync(packagesSymlinkPath, followLinks: false)) {
+    case FileSystemEntityType.NOT_FOUND:
+      // no-op –nothing to do
+      break;
+    case FileSystemEntityType.LINK:
+      var packagesLink = new Link(packagesSymlinkPath);
+      assert(packagesLink.existsSync());
+      var packagesDirPath = packagesLink.targetSync();
+      assert(p.isRelative(packagesDirPath));
+      packagesDirPath = p.normalize(p.join(contentPath, packagesDirPath));
+      assert(FileSystemEntity.isDirectorySync(packagesDirPath));
+      assert(p.isWithin(tempDir, packagesDirPath));
+
+      packagesLink.deleteSync();
+
+      var firstExtraFile = true;
+      var initialFiles = new Directory(contentPath)
+          .listSync(recursive: true, followLinks: false);
+      for (var file in initialFiles.whereType<File>()) {
+        var relativePath = p.relative(file.path, from: contentPath);
+
+        if (badFileGlob.matches(relativePath)) {
+          if (firstExtraFile) {
+            print('Deleting extra files from output directory:');
+            firstExtraFile = false;
+          }
+          file.deleteSync();
+          print('  $relativePath');
+        }
+      }
+
+      var packagesDir = new Directory(packagesDirPath);
+
+      print('Populating contents...');
+
+      await for (var item in packagesDir.list(recursive: true)) {
+        if (item is File) {
+          var relativePath = p.relative(item.path, from: tempDir);
+
+          if (badFileGlob.matches(relativePath)) {
+            continue;
+          }
+
+          if (p.isWithin('packages/\$sdk', relativePath)) {
+            // TODO: required for DDC build – need to detect!
+            continue;
+          }
+
+          var destinationPath = p.join(contentPath, relativePath);
+
+          if (FileSystemEntity.typeSync(p.dirname(destinationPath),
+                  followLinks: false) ==
+              FileSystemEntityType.NOT_FOUND) {
+            await _runProcess(
+                manager, 'mkdir', ['-p', p.dirname(destinationPath)]);
+          }
+
+          stdout.write('.');
+          await _runProcess(manager, 'cp', ['-n', item.path, destinationPath]);
+        }
+      }
+      print('');
+
+      break;
+    default:
+      throw new StateError('Not sure what to do here...');
+  }
+
+  return args.join(' ');
+}
+
+Future _runProcess(ProcessManager manager, String proc, List<String> args,
+    {String workingDirectory}) async {
+  var process = await manager.spawn(proc, args,
+      runInShell: true, workingDirectory: workingDirectory);
 
   var procExitCode = await process.exitCode;
 
   if (procExitCode != 0) {
-    throw 'Error running pub ${args.join(' ')}';
+    throw 'Error running `$proc ${args.join(' ')}`.';
   }
+}
+
+Future<String> _runPub(Directory tempDir, String targetDir, String mode) async {
+  var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
+
+  await _runProcess(new ProcessManager(), 'pub', args);
+
+  return 'pub build';
 }
