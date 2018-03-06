@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:io/io.dart';
 import 'package:peanut/peanut.dart';
 
 const _directoryFlag = 'directory';
@@ -46,5 +47,7 @@ main(List<String> args) async {
       print(stack);
     }
     exitCode = 1;
+  } finally {
+    await ProcessManager.terminateStdIn();
   }
 }

@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:path/path.dart' as p;
 import 'package:git/git.dart';
+import 'package:io/io.dart';
+import 'package:path/path.dart' as p;
 
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     String mode) async {
@@ -51,15 +51,9 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 Future _runPub(Directory tempDir, String targetDir, String mode) async {
   var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
 
-  Process process = await Process.start('pub', args, runInShell: true);
+  var manager = new ProcessManager();
 
-  _getStrings(process.stdout).listen((line) {
-    stdout.writeln(line);
-  });
-
-  _getStrings(process.stderr).listen((line) {
-    stderr.writeln(line);
-  });
+  var process = await manager.spawn('pub', args, runInShell: true);
 
   var procExitCode = await process.exitCode;
 
@@ -67,6 +61,3 @@ Future _runPub(Directory tempDir, String targetDir, String mode) async {
     throw 'Error running pub ${args.join(' ')}';
   }
 }
-
-Stream<String> _getStrings(Stream<List<int>> std) =>
-    const LineSplitter().bind(SYSTEM_ENCODING.decoder.bind(std));
