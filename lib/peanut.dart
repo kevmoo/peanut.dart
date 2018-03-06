@@ -32,23 +32,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
-
-    Process process = await Process.start('pub', args, runInShell: true);
-
-    getStrings(process.stdout).listen((line) {
-      stdout.writeln(line);
-    });
-
-    getStrings(process.stderr).listen((line) {
-      stderr.writeln(line);
-    });
-
-    var procExitCode = await process.exitCode;
-
-    if (procExitCode != 0) {
-      throw 'Error running pub ${args.join(' ')}';
-    }
+    await _runPub(tempDir, targetDir, mode);
 
     Commit commit = await gitDir.updateBranchWithDirectoryContents(
         targetBranch, p.join(tempDir.path, targetDir), commitMessage);
@@ -64,5 +48,25 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   }
 }
 
-Stream<String> getStrings(Stream<List<int>> std) =>
+Future _runPub(Directory tempDir, String targetDir, String mode) async {
+  var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
+
+  Process process = await Process.start('pub', args, runInShell: true);
+
+  _getStrings(process.stdout).listen((line) {
+    stdout.writeln(line);
+  });
+
+  _getStrings(process.stderr).listen((line) {
+    stderr.writeln(line);
+  });
+
+  var procExitCode = await process.exitCode;
+
+  if (procExitCode != 0) {
+    throw 'Error running pub ${args.join(' ')}';
+  }
+}
+
+Stream<String> _getStrings(Stream<List<int>> std) =>
     const LineSplitter().bind(SYSTEM_ENCODING.decoder.bind(std));
