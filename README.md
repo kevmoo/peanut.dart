@@ -33,14 +33,18 @@ This is also useful if you want to undo a `peanut` run.
 
 ### Options
 
-```
+```console
 $ peanut --help
-```
 
+-d, --directory       (defaults to "web")
+-b, --branch          (defaults to "gh-pages")
+    --mode            The mode to run `pub build` in.
+                      [release (default), debug]
 
-```
--d, --directory    (defaults to "web")
--b, --branch       (defaults to "gh-pages")
--m, --message      (defaults to "Built <directory>")
+-c, --build-config    The configuration to use when running `build_runner`. If this option is not set, `release` is used if `build.release.yaml` exists in the current directory.
+-m, --message         (defaults to "Built <directory>")
+-t, --build-tool      If `build.release.yaml` exists in the current directory, defaults to "build". Otherwise, "pub".
+                      [pub (default), build]
+
 -h, --help
 ```
