@@ -15,11 +15,19 @@ main(List<String> args) async {
     ..addOption(_messageFlag, abbr: 'm', defaultsTo: 'Built <$_directoryFlag>')
     ..addFlag('help', abbr: 'h', negatable: false);
 
-  var result = parser.parse(args);
+  ArgResults result;
+  try {
+    result = parser.parse(args);
+  } on FormatException catch (e) {
+    stderr.writeln(e.message);
+    print('');
+    print(parser.usage);
+    exitCode = ExitCode.usage.code;
+    return;
+  }
 
   if (result['help'] == true) {
     print(parser.usage);
-    exitCode = 1;
     return;
   }
 
