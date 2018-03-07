@@ -2,6 +2,8 @@
 
 * Improve sub-process management.
 
+* Print error/warnings in red – where supported.
+
 ## 1.1.0
 
 * Initial support for `build_runner` via `--build_tool` option.

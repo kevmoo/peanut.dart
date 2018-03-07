@@ -11,6 +11,9 @@ const _useBuild = 'build';
 
 const buildToolOptions = const [_usePub, _useBuild];
 
+void printError(Object object) =>
+    stderr.writeln(ansi.red.wrap(object.toString()));
+
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     String buildTool,
     {String pubBuildMode, String buildRunnerConfig}) async {
@@ -77,9 +80,9 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 Future<String> _runBuild(
     String tempDir, String targetDir, String config) async {
   if (Platform.isWindows) {
-    print(ansi.red.wrap('Currently uses Unix shell commands `cp` and `mkdir`.'
+    printError('Currently uses Unix shell commands `cp` and `mkdir`.'
         ' Will likely fail on Windows.'
-        ' See https://github.com/kevmoo/peanut.dart/issues/11'));
+        ' See https://github.com/kevmoo/peanut.dart/issues/11');
   }
 
   var args = ['run', 'build_runner', 'build', '--output', tempDir];

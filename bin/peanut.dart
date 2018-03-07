@@ -37,7 +37,7 @@ main(List<String> args) async {
   try {
     result = parser.parse(args);
   } on FormatException catch (e) {
-    stderr.writeln(e.message);
+    printError(e.message);
     print('');
     print(parser.usage);
     exitCode = ExitCode.usage.code;
@@ -64,7 +64,7 @@ main(List<String> args) async {
   String buildRunnerConfig;
   if (buildTool == 'build') {
     if (result.wasParsed('mode')) {
-      stderr.writeln(
+      printError(
           'The `mode` flag is only supported when `build-tool` is "pub".');
       print('');
       print(parser.usage);
@@ -78,7 +78,7 @@ main(List<String> args) async {
     }
   } else {
     if (result.wasParsed('build-config')) {
-      stderr.writeln(
+      printError(
           'The `build-config` flag is only supported when `build-tool` is "build".');
       print('');
       print(parser.usage);
@@ -98,7 +98,7 @@ main(List<String> args) async {
     await run(dir, branch, message, buildTool,
         pubBuildMode: pubBuildMode, buildRunnerConfig: buildRunnerConfig);
   } catch (e, stack) {
-    print(e);
+    printError(e);
     if (e is! String) {
       print(stack);
     }
