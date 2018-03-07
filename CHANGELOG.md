@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Improve sub-process management.
+
 ## 1.1.0
 
 * Initial support for `build_runner` via `--build_tool` option.

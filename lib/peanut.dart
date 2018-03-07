@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:git/git.dart';
 import 'package:glob/glob.dart';
-import 'package:io/io.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
@@ -83,14 +82,7 @@ Future<String> _runBuild(
         ' See https://github.com/kevmoo/peanut.dart/issues/11'));
   }
 
-  var args = [
-    'run',
-    'build_runner',
-    'build',
-    '--assume-tty',
-    '--output',
-    tempDir
-  ];
+  var args = ['run', 'build_runner', 'build', '--output', tempDir];
 
   if (config == null) {
     args.addAll([
@@ -105,9 +97,7 @@ Future<String> _runBuild(
     args.addAll(['--config', config]);
   }
 
-  var manager = new ProcessManager();
-
-  await _runProcess(manager, 'pub', args, workingDirectory: p.current);
+  await _runProcess('pub', args, workingDirectory: p.current);
 
   // Verify `$tempDir/$targetDir` exists
   var contentPath = p.join(tempDir, targetDir);
@@ -171,12 +161,11 @@ Future<String> _runBuild(
           if (FileSystemEntity.typeSync(p.dirname(destinationPath),
                   followLinks: false) ==
               FileSystemEntityType.NOT_FOUND) {
-            await _runProcess(
-                manager, 'mkdir', ['-p', p.dirname(destinationPath)]);
+            await _runProcess('mkdir', ['-p', p.dirname(destinationPath)]);
           }
 
           stdout.write('.');
-          await _runProcess(manager, 'cp', ['-n', item.path, destinationPath]);
+          await _runProcess('cp', ['-n', item.path, destinationPath]);
         }
       }
       print('');
@@ -189,10 +178,12 @@ Future<String> _runBuild(
   return args.join(' ');
 }
 
-Future _runProcess(ProcessManager manager, String proc, List<String> args,
+Future _runProcess(String proc, List<String> args,
     {String workingDirectory}) async {
-  var process = await manager.spawn(proc, args,
-      runInShell: true, workingDirectory: workingDirectory);
+  var process = await Process.start(proc, args,
+      runInShell: true,
+      workingDirectory: workingDirectory,
+      mode: ProcessStartMode.INHERIT_STDIO);
 
   var procExitCode = await process.exitCode;
 
@@ -204,7 +195,7 @@ Future _runProcess(ProcessManager manager, String proc, List<String> args,
 Future<String> _runPub(Directory tempDir, String targetDir, String mode) async {
   var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
 
-  await _runProcess(new ProcessManager(), 'pub', args);
+  await _runProcess('pub', args);
 
   return 'pub build';
 }
