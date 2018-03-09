@@ -32,7 +32,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     throw 'Not a git directory: $current';
   }
 
-  GitDir gitDir = await GitDir.fromExisting(current);
+  GitDir gitDir = await GitDir.fromExisting(current, allowSubdirectory: true);
 
   // current branch cannot be targetBranch
 

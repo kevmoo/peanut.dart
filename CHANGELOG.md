@@ -2,6 +2,9 @@
 
 * Only warn if the `directory` does not exist. Build could still work.
 
+* Update dependency on `pkg:git`. Allows running `peanut` in a subdirectory of
+  a Git repository.
+
 ## 1.1.2
 
 * Support the latest `pkg:git`.
