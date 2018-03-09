@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   args: '>=0.13.0 <2.0.0'
-  git: ^0.4.3
+  git: '>=0.4.3 <0.6.0'
   glob: ^1.1.5
   io: ^0.3.2+1
   path: ^1.3.4

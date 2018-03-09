@@ -1,3 +1,7 @@
+## 1.1.2
+
+* Support the latest `pkg:git`.
+
 ## 1.1.1
 
 * Improve sub-process management.
