@@ -129,7 +129,8 @@ Future<String> _runBuild(
       var firstExtraFile = true;
       var initialFiles = new Directory(contentPath)
           .listSync(recursive: true, followLinks: false);
-      for (var file in initialFiles.whereType<File>()) {
+      // TODO: use whereType when github.com/dart-lang/sdk/issues/32463 is fixed
+      for (var file in initialFiles.where((i) => i is File)) {
         var relativePath = p.relative(file.path, from: contentPath);
 
         if (badFileGlob.matches(relativePath)) {
