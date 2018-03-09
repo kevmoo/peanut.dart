@@ -38,7 +38,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   var currentBranch = await gitDir.getCurrentBranch();
 
   if (currentBranch.branchName == targetBranch) {
-    throw 'Cannot update the current branch ${targetBranch}';
+    throw 'Cannot update the current branch $targetBranch';
   }
 
   var secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
