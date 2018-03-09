@@ -21,8 +21,9 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
 
   if (FileSystemEntity.typeSync(p.join(current, targetDir)) ==
       FileSystemEntityType.NOT_FOUND) {
-    throw 'The `$targetDir` directory does not exist. '
-        'Try setting the `directory` flag.';
+    stderr.writeln(ansi.yellow.wrap(
+        'The `$targetDir` directory does not exist. '
+        'This may cause the build to fail. Try setting the `directory` flag.'));
   }
 
   var isGitDir = await GitDir.isGitDir(current);

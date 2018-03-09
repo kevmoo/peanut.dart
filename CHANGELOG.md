@@ -1,3 +1,7 @@
+## 1.1.3
+
+* Only warn if the `directory` does not exist. Build could still work.
+
 ## 1.1.2
 
 * Support the latest `pkg:git`.
