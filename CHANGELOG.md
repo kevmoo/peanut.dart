@@ -1,3 +1,8 @@
+## 1.1.4
+
+* Added `**.dart.js.deps`, `**.dart.js.tar.gz`, `**.ng_placeholder` to the set 
+  of files to exclude.
+
 ## 1.1.3
 
 * Only warn if the `directory` does not exist. Build could still work.
