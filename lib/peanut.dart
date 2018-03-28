@@ -12,7 +12,7 @@ const _useBuild = 'build';
 const buildToolOptions = const [_usePub, _useBuild];
 
 void printError(Object object) =>
-    stderr.writeln(ansi.red.wrap(object.toString()));
+    print(ansi.red.wrap(object.toString()));
 
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     String buildTool,
