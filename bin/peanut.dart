@@ -50,8 +50,11 @@ main(List<String> args) async {
   }
 
   if (result.rest.isNotEmpty) {
+    printError(
+        "I don't understand the extra arguments: ${result.rest.join(', ')}");
+    print('');
     print(parser.usage);
-    exitCode = 1;
+    exitCode = ExitCode.usage.code;
     return;
   }
 

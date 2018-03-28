@@ -33,4 +33,16 @@ $_output''');
 
     await proc.shouldExit(64);
   });
+
+  test('extra args', () async {
+    var proc = await TestProcess
+        .start('dart', ['bin/peanut.dart', 'foo', 'bar', 'baz']);
+
+    var output = await proc.stdoutStream().join('\n');
+    expect(output, '''I don't understand the extra arguments: foo, bar, baz
+
+$_output''');
+
+    await proc.shouldExit(64);
+  });
 }
