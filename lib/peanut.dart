@@ -6,17 +6,15 @@ import 'package:glob/glob.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
-const _usePub = 'pub';
-const _useBuild = 'build';
+import 'src/enums.dart';
 
-const buildToolOptions = const [_usePub, _useBuild];
+export 'src/enums.dart';
 
-void printError(Object object) =>
-    print(ansi.red.wrap(object.toString()));
+void printError(Object object) => print(ansi.red.wrap(object.toString()));
 
 Future<Null> run(String targetDir, String targetBranch, String commitMessage,
-    String buildTool,
-    {String pubBuildMode, String buildRunnerConfig}) async {
+    BuildTool buildTool,
+    {PubBuildMode pubBuildMode, String buildRunnerConfig}) async {
   var current = p.current;
 
   if (FileSystemEntity.typeSync(p.join(current, targetDir)) ==
@@ -51,18 +49,16 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   try {
     String command;
     switch (buildTool) {
-      case _usePub:
+      case BuildTool.pub:
         assert(buildRunnerConfig == null);
         command = await _runPub(tempDir, targetDir, pubBuildMode);
         break;
-      case _useBuild:
+      case BuildTool.build:
         assert(pubBuildMode == null);
         command = await _runBuild(tempDir.path, targetDir, buildRunnerConfig);
         break;
-      default:
-        throw new UnsupportedError(
-            'build-tool `$buildTool` is not implemented.');
     }
+    assert(command != null);
 
     Commit commit = await gitDir.updateBranchWithDirectoryContents(
         targetBranch, p.join(tempDir.path, targetDir), commitMessage);
@@ -212,8 +208,16 @@ Future _runProcess(String proc, List<String> args,
   }
 }
 
-Future<String> _runPub(Directory tempDir, String targetDir, String mode) async {
-  var args = ['build', '--output', tempDir.path, targetDir, '--mode', mode];
+Future<String> _runPub(
+    Directory tempDir, String targetDir, PubBuildMode mode) async {
+  var args = [
+    'build',
+    '--output',
+    tempDir.path,
+    targetDir,
+    '--mode',
+    mode.toString().split('.')[1]
+  ];
 
   await _runProcess('pub', args);
 

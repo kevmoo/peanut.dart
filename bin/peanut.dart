@@ -1,41 +1,17 @@
 import 'dart:io';
 
-import 'package:args/args.dart';
 import 'package:io/io.dart';
 import 'package:peanut/peanut.dart';
 
-const _directoryFlag = 'directory';
-const _messageFlag = 'message';
+import 'options.dart';
 
 const _defaultConfig = 'release';
 final _defaultConfigFile = 'build.$_defaultConfig.yaml';
 
 main(List<String> args) async {
-  ArgParser parser = new ArgParser(allowTrailingOptions: false)
-    ..addOption(_directoryFlag, abbr: 'd', defaultsTo: 'web')
-    ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
-    ..addOption('mode',
-        defaultsTo: 'release',
-        allowed: ['release', 'debug'],
-        help: 'The mode to run `pub build` in.')
-    ..addOption('build-config',
-        abbr: 'c',
-        help: 'The configuration to use when running `build_runner`. '
-            'If this option is not set, `$_defaultConfig` is used if '
-            '`$_defaultConfigFile` exists in the current directory.')
-    ..addOption(_messageFlag, abbr: 'm', defaultsTo: 'Built <$_directoryFlag>')
-    ..addOption('build-tool',
-        abbr: 't',
-        defaultsTo: _buildToolDefault(),
-        allowed: buildToolOptions,
-        help:
-            'If `$_defaultConfigFile` exists in the current directory, defaults'
-            ' to "build". Otherwise, "pub".')
-    ..addFlag('help', abbr: 'h', negatable: false);
-
-  ArgResults result;
+  Options options;
   try {
-    result = parser.parse(args);
+    options = parseOptions(args);
   } on FormatException catch (e) {
     printError(e.message);
     print('');
@@ -44,29 +20,26 @@ main(List<String> args) async {
     return;
   }
 
-  if (result['help'] == true) {
+  if (options.help) {
     print(parser.usage);
     return;
   }
 
-  if (result.rest.isNotEmpty) {
+  if (options.rest.isNotEmpty) {
     printError(
-        "I don't understand the extra arguments: ${result.rest.join(', ')}");
+        "I don't understand the extra arguments: ${options.rest.join(', ')}");
     print('');
     print(parser.usage);
     exitCode = ExitCode.usage.code;
     return;
   }
 
-  var dir = result[_directoryFlag] as String;
-  var branch = result['branch'] as String;
-
-  var buildTool = result['build-tool'] as String;
-
-  String pubBuildMode;
+  var buildTool = options.buildTool ?? _buildToolDefault();
+  PubBuildMode mode;
   String buildRunnerConfig;
-  if (buildTool == 'build') {
-    if (result.wasParsed('mode')) {
+
+  if (buildTool == BuildTool.build) {
+    if (options.modeWasParsed) {
       printError(
           'The `mode` flag is only supported when `build-tool` is "pub".');
       print('');
@@ -74,13 +47,13 @@ main(List<String> args) async {
       exitCode = ExitCode.usage.code;
       return;
     }
-    buildRunnerConfig = result['build-config'] as String;
+    buildRunnerConfig = options.buildConfig;
     if (buildRunnerConfig == null &&
         FileSystemEntity.isFileSync(_defaultConfigFile)) {
       buildRunnerConfig = _defaultConfig;
     }
   } else {
-    if (result.wasParsed('build-config')) {
+    if (options.buildConfigWasParsed) {
       printError(
           'The `build-config` flag is only supported when `build-tool` is "build".');
       print('');
@@ -88,18 +61,18 @@ main(List<String> args) async {
       exitCode = ExitCode.usage.code;
       return;
     }
-    assert(buildTool == 'pub');
-    pubBuildMode = result['mode'] as String;
+    mode = options.mode;
+    assert(buildTool == BuildTool.pub);
   }
 
-  var message = result[_messageFlag] as String;
-  if (message == parser.getDefault(_messageFlag)) {
-    message = 'Built $dir';
+  var message = options.message;
+  if (message == defaultMessage) {
+    message = 'Built ${options.directory}';
   }
 
   try {
-    await run(dir, branch, message, buildTool,
-        pubBuildMode: pubBuildMode, buildRunnerConfig: buildRunnerConfig);
+    await run(options.directory, options.branch, message, buildTool,
+        pubBuildMode: mode, buildRunnerConfig: buildRunnerConfig);
   } catch (e, stack) {
     printError(e);
     if (e is! String) {
@@ -109,5 +82,6 @@ main(List<String> args) async {
   }
 }
 
-String _buildToolDefault() =>
-    FileSystemEntity.isFileSync(_defaultConfigFile) ? 'build' : 'pub';
+BuildTool _buildToolDefault() => FileSystemEntity.isFileSync(_defaultConfigFile)
+    ? BuildTool.build
+    : BuildTool.pub;

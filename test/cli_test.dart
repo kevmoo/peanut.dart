@@ -9,9 +9,9 @@ final _output = r'''-d, --directory       (defaults to "web")
 -c, --build-config    The configuration to use when running `build_runner`. If this option is not set, `release` is used if `build.release.yaml` exists in the current directory.
 -m, --message         (defaults to "Built <directory>")
 -t, --build-tool      If `build.release.yaml` exists in the current directory, defaults to "build". Otherwise, "pub".
-                      [pub (default), build]
+                      [pub, build]
 
--h, --help            ''';
+-h, --help            Prints usage information.''';
 
 void main() {
   test('help', () async {
