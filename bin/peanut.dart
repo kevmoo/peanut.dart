@@ -106,8 +106,6 @@ main(List<String> args) async {
       print(stack);
     }
     exitCode = 1;
-  } finally {
-    await ProcessManager.terminateStdIn();
   }
 }
 
