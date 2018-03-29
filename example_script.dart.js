@@ -84,7 +84,7 @@ c:function(a){if(typeof dartPrint=="function"){dartPrint(a)
 return}if(typeof console=="object"&&typeof console.log!="undefined"){console.log(a)
 return}if(typeof window=="object")return
 if(typeof print=="function"){print(a)
-return}throw"Unable to print message: "+String(a)}}],["","",,K,{"^":"",
+return}throw"Unable to print message: "+String(a)}}],["","",,X,{"^":"",
 b:function(){H.c("Hello!")
 return}},1]]
 setupProgram(dart,0,0)
@@ -157,5 +157,5 @@ return}if(typeof document.currentScript!='undefined'){a(document.currentScript)
 return}var z=document.scripts
 function onLoad(b){for(var x=0;x<z.length;++x)z[x].removeEventListener("load",onLoad,false)
 a(b.target)}for(var y=0;y<z.length;++y)z[y].addEventListener("load",onLoad,false)})(function(a){init.currentScript=a
-if(typeof dartMainRunner==="function")dartMainRunner(K.b,[])
-else K.b([])})})()
+if(typeof dartMainRunner==="function")dartMainRunner(X.b,[])
+else X.b([])})})()
