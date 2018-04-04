@@ -1,5 +1,8 @@
 ## 1.1.5
 
+* Run `pub` from the SDK invoking `peanut`. Also fixes the case where `pub` is
+  not in the user's PATH.
+
 * Send all output to `stdout`.
 
 * Improve exit codes and error messages on failure.

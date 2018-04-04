@@ -51,7 +51,7 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     switch (buildTool) {
       case BuildTool.pub:
         assert(buildRunnerConfig == null);
-        command = await _runPub(tempDir, targetDir, pubBuildMode);
+        command = await _runPubBuild(tempDir, targetDir, pubBuildMode);
         break;
       case BuildTool.build:
         assert(pubBuildMode == null);
@@ -97,7 +97,7 @@ Future<String> _runBuild(
     args.addAll(['--config', config]);
   }
 
-  await _runProcess('pub', args, workingDirectory: p.current);
+  await _runProcess(_pubPath, args, workingDirectory: p.current);
 
   // Verify `$tempDir/$targetDir` exists
   var contentPath = p.join(tempDir, targetDir);
@@ -208,7 +208,7 @@ Future _runProcess(String proc, List<String> args,
   }
 }
 
-Future<String> _runPub(
+Future<String> _runPubBuild(
     Directory tempDir, String targetDir, PubBuildMode mode) async {
   var args = [
     'build',
@@ -219,7 +219,19 @@ Future<String> _runPub(
     mode.toString().split('.')[1]
   ];
 
-  await _runProcess('pub', args);
+  await _runProcess(_pubPath, args);
 
   return 'pub build';
 }
+
+/// The path to the root directory of the SDK.
+final String _sdkDir = (() {
+  // The Dart executable is in "/path/to/sdk/bin/dart", so two levels up is
+  // "/path/to/sdk".
+  var aboveExecutable = p.dirname(p.dirname(Platform.resolvedExecutable));
+  assert(FileSystemEntity.isFileSync(p.join(aboveExecutable, 'version')));
+  return aboveExecutable;
+})();
+
+final String _pubPath =
+    p.join(_sdkDir, 'bin', Platform.isWindows ? 'pub.bat' : 'pub');
