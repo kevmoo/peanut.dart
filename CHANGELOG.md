@@ -1,3 +1,8 @@
+## 1.1.6
+
+* Moved non-executable file out of `/bin` so it's not activated during
+  `pub global activate`.
+
 ## 1.1.5
 
 * Run `pub` from the SDK invoking `peanut`. Also fixes the case where `pub` is

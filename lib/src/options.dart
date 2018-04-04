@@ -1,5 +1,6 @@
 import 'package:build_cli_annotations/build_cli_annotations.dart';
-import 'package:peanut/src/enums.dart';
+
+import 'enums.dart';
 
 part 'options.g.dart';
 
