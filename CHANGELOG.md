@@ -1,3 +1,9 @@
+## 1.1.5
+
+* Send all output to `stdout`.
+
+* Improve exit codes and error messages on failure.
+
 ## 1.1.4
 
 * Added `**.dart.js.deps`, `**.dart.js.tar.gz`, `**.ng_placeholder` to the set 
