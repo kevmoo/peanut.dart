@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:io/io.dart';
-import 'package:peanut/peanut.dart';
-import 'package:peanut/src/options.dart';
+import 'package:peanut/src/peanut.dart';
 
 const _defaultConfig = 'release';
 final _defaultConfigFile = 'build.$_defaultConfig.yaml';
