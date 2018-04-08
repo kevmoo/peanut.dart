@@ -6,9 +6,10 @@ import 'package:glob/glob.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
-import 'src/enums.dart';
+import 'enums.dart';
 
-export 'src/enums.dart';
+export 'enums.dart';
+export 'options.dart';
 
 void printError(Object object) => print(ansi.red.wrap(object.toString()));
 

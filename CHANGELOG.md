@@ -1,3 +1,8 @@
+## 2.0.0
+
+* The public library has been removed. This package is meant to be an executable
+  only.
+
 ## 1.1.6
 
 * Moved non-executable file out of `/bin` so it's not activated during
