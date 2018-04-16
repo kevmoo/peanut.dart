@@ -3,6 +3,8 @@
 * **BREAKING** Now *only* works with the latest `package:build_runner` and
   friends. 
 
+* Removed manual file management that likely caused problems on Windows.
+
 * The public library has been removed. This package is meant to be an executable
   only.
 

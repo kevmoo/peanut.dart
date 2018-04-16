@@ -50,8 +50,8 @@ Future<Null> run(Options options) async {
   try {
     var ranCommandSummary = await runBuildRunner(
         tempDir.path, options.directory, options.buildConfig, options.release);
-    var commit = await gitDir.updateBranchWithDirectoryContents(options.branch,
-        p.join(tempDir.path, options.directory), options.message);
+    var commit = await gitDir.updateBranchWithDirectoryContents(
+        options.branch, tempDir.path, options.message);
 
     if (commit == null) {
       print('There was no change in branch. No commit created.');
