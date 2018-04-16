@@ -7,25 +7,23 @@ import 'package:path/path.dart' as p;
 import 'utils.dart';
 
 Future<String> runBuildRunner(
-    String tempDir, String targetDir, String config) async {
+    String tempDir, String targetDir, String config, bool release) async {
   if (Platform.isWindows) {
     printError('Currently uses Unix shell commands `cp` and `mkdir`.'
         ' Will likely fail on Windows.'
         ' See https://github.com/kevmoo/peanut.dart/issues/11');
   }
 
-  var args = ['run', 'build_runner', 'build', '--output', tempDir];
+  var args = [
+    'run',
+    'build_runner',
+    'build',
+    '--output',
+    tempDir,
+    release ? '--release' : '--no-release'
+  ];
 
-  if (config == null) {
-    args.addAll([
-      // Force build with dart2js instead of dartdevc.
-      '--define',
-      'build_web_compilers|entrypoint=compiler=dart2js',
-      // Match `pub build` defaults for dart2js.
-      '--define',
-      'build_web_compilers|entrypoint=dart2js_args=[\"--minify\",\"--no-source-maps\"]',
-    ]);
-  } else {
+  if (config != null) {
     args.addAll(['--config', config]);
   }
 

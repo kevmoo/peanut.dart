@@ -1,5 +1,8 @@
 ## 2.0.0
 
+* **BREAKING** Now *only* works with the latest `package:build_runner` and
+  friends. 
+
 * The public library has been removed. This package is meant to be an executable
   only.
 

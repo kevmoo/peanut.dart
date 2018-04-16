@@ -5,23 +5,25 @@ import 'package:git/git.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
-import 'build_runner.dart';
-import 'enums.dart';
-import 'pub_build.dart';
+// ignore: implementation_imports
+import 'package:webdev/src/pubspec.dart';
 
-export 'enums.dart';
+import 'build_runner.dart';
+import 'options.dart';
+
+export 'package:webdev/src/pubspec.dart';
 export 'options.dart';
 export 'utils.dart' show printError;
 
-Future<Null> run(String targetDir, String targetBranch, String commitMessage,
-    BuildTool buildTool,
-    {PubBuildMode pubBuildMode, String buildRunnerConfig}) async {
+Future<Null> run(Options options) async {
+  await checkPubspecLock(requireBuildWebCompilers: true);
+
   var current = p.current;
 
-  if (FileSystemEntity.typeSync(p.join(current, targetDir)) ==
+  if (FileSystemEntity.typeSync(p.join(current, options.directory)) ==
       FileSystemEntityType.NOT_FOUND) {
     stderr.writeln(ansi.yellow.wrap(
-        'The `$targetDir` directory does not exist. '
+        'The `${options.directory}` directory does not exist. '
         'This may cause the build to fail. Try setting the `directory` flag.'));
   }
 
@@ -31,14 +33,12 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
     throw 'Not a git directory: $current';
   }
 
-  GitDir gitDir = await GitDir.fromExisting(current, allowSubdirectory: true);
+  var gitDir = await GitDir.fromExisting(current, allowSubdirectory: true);
 
   // current branch cannot be targetBranch
-
   var currentBranch = await gitDir.getCurrentBranch();
-
-  if (currentBranch.branchName == targetBranch) {
-    throw 'Cannot update the current branch $targetBranch';
+  if (currentBranch.branchName == options.branch) {
+    throw 'Cannot update the current branch `${options.branch}`.';
   }
 
   var secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
@@ -47,29 +47,17 @@ Future<Null> run(String targetDir, String targetBranch, String commitMessage,
   var tempDir =
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
-  Future<String> runCommand() async {
-    switch (buildTool) {
-      case BuildTool.pub:
-        assert(buildRunnerConfig == null);
-        return runPubBuild(tempDir, targetDir, pubBuildMode);
-      case BuildTool.build:
-        assert(pubBuildMode == null);
-        return runBuildRunner(tempDir.path, targetDir, buildRunnerConfig);
-    }
-
-    throw new UnsupportedError('Should never get here...');
-  }
-
   try {
-    var ranCommandSummary = await runCommand();
-    var commit = await gitDir.updateBranchWithDirectoryContents(
-        targetBranch, p.join(tempDir.path, targetDir), commitMessage);
+    var ranCommandSummary = await runBuildRunner(
+        tempDir.path, options.directory, options.buildConfig, options.release);
+    var commit = await gitDir.updateBranchWithDirectoryContents(options.branch,
+        p.join(tempDir.path, options.directory), options.message);
 
     if (commit == null) {
       print('There was no change in branch. No commit created.');
     } else {
-      print('Branch "$targetBranch" was updated '
-          'with `$ranCommandSummary` output from `$targetDir`.');
+      print('Branch "${options.branch}" was updated '
+          'with `$ranCommandSummary` output from `${options.directory}`.');
     }
   } finally {
     await tempDir.delete(recursive: true);

@@ -6,7 +6,6 @@ targets:
         generate_for:
         - example/**.dart
         options:
-          compiler: dart2js
           dart2js_args:
             # Align with the default configuration of dart2js in `pub build`
             - --show-package-warnings
