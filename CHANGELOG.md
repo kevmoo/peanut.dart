@@ -1,3 +1,7 @@
+## 2.0.1
+
+* Support the latest version of `package:build_web_compilers`.
+
 ## 2.0.0
 
 * **BREAKING** Now *only* works with the latest `package:build_runner` and
