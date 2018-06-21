@@ -3,7 +3,7 @@
 part of 'options.dart';
 
 // **************************************************************************
-// Generator: CliGenerator
+// CliGenerator
 // **************************************************************************
 
 Options _$parseOptionsResult(ArgResults result) {
