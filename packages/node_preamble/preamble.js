@@ -4,11 +4,13 @@ var self = Object.create(global);
 // for paths that contain characters that need to be escaped in URLs. Once
 // dart-lang/sdk#27979 is fixed, it should be possible to make it better.
 self.location = {
-  href: "file://" + (function() {
-    var cwd = process.cwd();
-    if (process.platform != "win32") return cwd;
-    return "/" + cwd.replace(/\\/g, "/");
-  })() + "/"
+  get href() {
+    return "file://" + (function() {
+      var cwd = process.cwd();
+      if (process.platform != "win32") return cwd;
+      return "/" + cwd.replace(/\\/g, "/");
+    })() + "/";
+  }
 };
 
 self.scheduleImmediate = setImmediate;
