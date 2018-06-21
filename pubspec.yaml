@@ -1,12 +1,12 @@
 name: peanut
-version: 2.0.2-dev
+version: 2.0.2
 description: >-
   Update your GitHub gh-pages branch with the compiled output of your Dart web
   app. Supports 'pub build' and the new 'pub run build_runner'.
 author: Kevin Moore <github@j832.com>
 homepage: https://github.com/kevmoo/peanut.dart
 environment:
-  sdk: '>=2.0.0-dev.48 <2.0.0'
+  sdk: '>=2.0.0-dev.56 <2.0.0'
 
 dependencies:
   args: '>=0.13.0 <2.0.0'

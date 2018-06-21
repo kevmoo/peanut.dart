@@ -21,7 +21,7 @@ Future<Null> run(Options options) async {
   var current = p.current;
 
   if (FileSystemEntity.typeSync(p.join(current, options.directory)) ==
-      FileSystemEntityType.NOT_FOUND) {
+      FileSystemEntityType.notFound) {
     stderr.writeln(ansi.yellow.wrap(
         'The `${options.directory}` directory does not exist. '
         'This may cause the build to fail. Try setting the `directory` flag.'));

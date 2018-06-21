@@ -1,3 +1,9 @@
+## 2.0.2
+
+* Require Dart `>=2.0.0-dev.56`.
+
+* Other updates to support running on Dart 2.
+
 ## 2.0.1
 
 * Support the latest version of `package:build_web_compilers`.

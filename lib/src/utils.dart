@@ -11,7 +11,7 @@ Future runProcess(String proc, List<String> args,
   var process = await Process.start(proc, args,
       runInShell: true,
       workingDirectory: workingDirectory,
-      mode: ProcessStartMode.INHERIT_STDIO);
+      mode: ProcessStartMode.inheritStdio);
 
   var procExitCode = await process.exitCode;
 
