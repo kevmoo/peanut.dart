@@ -1,3 +1,7 @@
+## 2.0.3
+
+* Updates to support latest `package:build_runner`.
+
 ## 2.0.2
 
 * Require Dart `>=2.0.0-dev.56`.
