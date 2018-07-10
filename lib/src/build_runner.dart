@@ -43,7 +43,7 @@ Future<String> runBuildRunner(
 
   if (deleteCount > 0) {
     print('\nDeleted count: $deleteCount\n'
-        '  Matching ${_globItems.map((e) => '"$e"') .join(', ')}');
+        '  Matching ${_globItems.map((e) => '"$e"').join(', ')}');
   }
 
   return args.join(' ');
