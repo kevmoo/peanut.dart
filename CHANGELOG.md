@@ -1,3 +1,7 @@
+## 2.0.4
+
+* Support Dart 2 stable. 
+
 ## 2.0.3
 
 * Updates to support latest `package:build_runner`.
