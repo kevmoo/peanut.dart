@@ -1,3 +1,7 @@
+## 2.0.6
+
+* Improve `--help` output.
+
 ## 2.0.5
 
 * Support the latest `package:build_runner`.

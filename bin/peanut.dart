@@ -1,6 +1,9 @@
+#!/usr/bin/env dart
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:io/io.dart';
+import 'package:io/ansi.dart';
 import 'package:peanut/src/peanut.dart';
 
 main(List<String> args) async {
@@ -10,13 +13,13 @@ main(List<String> args) async {
   } on FormatException catch (e) {
     printError(e.message);
     print('');
-    print(parser.usage);
+    _printUsage();
     exitCode = ExitCode.usage.code;
     return;
   }
 
   if (options.help) {
-    print(parser.usage);
+    _printUsage();
     return;
   }
 
@@ -24,7 +27,7 @@ main(List<String> args) async {
     printError(
         "I don't understand the extra arguments: ${options.rest.join(', ')}");
     print('');
-    print(parser.usage);
+    _printUsage();
     exitCode = ExitCode.usage.code;
     return;
   }
@@ -52,4 +55,16 @@ main(List<String> args) async {
       exitCode = 1;
     }
   }
+}
+
+
+String _indent(String input) =>
+    LineSplitter.split(input).map((l) => '  $l'.trimRight()).join('\n');
+
+void _printUsage() {
+  print('''
+Usage: peanut [<args>]
+
+${styleBold.wrap('Arguments:')}
+${_indent(parser.usage)}''');
 }
