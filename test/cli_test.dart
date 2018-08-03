@@ -1,12 +1,16 @@
 import 'package:test/test.dart';
 import 'package:test_process/test_process.dart';
 
-final _output = r'''-d, --directory       (defaults to "web")
--b, --branch          (defaults to "gh-pages")
--c, --build-config    The configuration to use when running `build_runner`.
-    --[no-]release    (defaults to on)
--m, --message         (defaults to "Built <directory>")
--h, --help            Prints usage information.''';
+final _output = r'''
+Usage: peanut [<args>]
+
+Arguments:
+  -d, --directory       (defaults to "web")
+  -b, --branch          (defaults to "gh-pages")
+  -c, --build-config    The configuration to use when running `build_runner`.
+      --[no-]release    (defaults to on)
+  -m, --message         (defaults to "Built <directory>")
+  -h, --help            Prints usage information.''';
 
 void main() {
   test('help', () async {
