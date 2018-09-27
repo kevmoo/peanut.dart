@@ -16,7 +16,8 @@ export 'options.dart';
 export 'utils.dart' show printError;
 
 Future<Null> run(Options options) async {
-  await checkPubspecLock(requireBuildWebCompilers: true);
+  await checkPubspecLock(await PubspecLock.read(),
+      requireBuildWebCompilers: true);
 
   var current = p.current;
 
@@ -41,7 +42,7 @@ Future<Null> run(Options options) async {
     throw 'Cannot update the current branch `${options.branch}`.';
   }
 
-  var secondsSinceEpoch = new DateTime.now().toUtc().millisecondsSinceEpoch;
+  var secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
 
   // create a temp dir to dump 'pub build' output to
   var tempDir =

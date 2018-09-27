@@ -6,17 +6,15 @@ part of 'options.dart';
 // CliGenerator
 // **************************************************************************
 
-Options _$parseOptionsResult(ArgResults result) {
-  return new Options(
-      directory: result['directory'] as String,
-      branch: result['branch'] as String,
-      buildConfig: result['build-config'] as String,
-      buildConfigWasParsed: result.wasParsed('build-config'),
-      release: result['release'] as bool,
-      message: result['message'] as String,
-      help: result['help'] as bool,
-      rest: result.rest);
-}
+Options _$parseOptionsResult(ArgResults result) => new Options(
+    directory: result['directory'] as String,
+    branch: result['branch'] as String,
+    buildConfig: result['build-config'] as String,
+    buildConfigWasParsed: result.wasParsed('build-config'),
+    release: result['release'] as bool,
+    message: result['message'] as String,
+    help: result['help'] as bool,
+    rest: result.rest);
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('directory', abbr: 'd', defaultsTo: 'web')

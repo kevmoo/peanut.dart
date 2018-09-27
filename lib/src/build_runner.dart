@@ -24,7 +24,7 @@ Future<String> runBuildRunner(
   await runProcess(pubPath, args, workingDirectory: p.current);
 
   var initialFiles =
-      new Directory(tempDir).listSync(recursive: true, followLinks: false);
+      Directory(tempDir).listSync(recursive: true, followLinks: false);
 
   var deleteCount = 0;
   // TODO: use whereType when github.com/dart-lang/sdk/issues/32463 is fixed
@@ -60,4 +60,4 @@ final _globItems = const [
   'packages/\$sdk/**'
 ];
 
-final _badFileGlob = new Glob('{${_globItems.join(',')}}');
+final _badFileGlob = Glob('{${_globItems.join(',')}}');
