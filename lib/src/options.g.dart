@@ -6,7 +6,7 @@ part of 'options.dart';
 // CliGenerator
 // **************************************************************************
 
-Options _$parseOptionsResult(ArgResults result) => new Options(
+Options _$parseOptionsResult(ArgResults result) => Options(
     directory: result['directory'] as String,
     branch: result['branch'] as String,
     buildConfig: result['build-config'] as String,
@@ -26,7 +26,7 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false);
 
-final _$parserForOptions = _$populateOptionsParser(new ArgParser());
+final _$parserForOptions = _$populateOptionsParser(ArgParser());
 
 Options parseOptions(List<String> args) {
   var result = _$parserForOptions.parse(args);
