@@ -1,3 +1,7 @@
+## 2.0.8
+
+- Support the latest `package:build_web_compilers` and friends.
+
 ## 2.0.7
 
 - Support the latest `package:build_runner` and friends.
