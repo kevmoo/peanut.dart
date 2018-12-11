@@ -2,11 +2,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:io/io.dart';
 import 'package:io/ansi.dart';
+import 'package:io/io.dart';
 import 'package:peanut/src/peanut.dart';
 
-main(List<String> args) async {
+void main(List<String> args) async {
   Options options;
   try {
     options = parseOptions(args);

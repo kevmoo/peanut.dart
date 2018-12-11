@@ -8,7 +8,7 @@ import 'utils.dart';
 
 Future<String> runBuildRunner(
     String tempDir, String targetDir, String config, bool release) async {
-  var args = [
+  final args = [
     'run',
     'build_runner',
     'build',
@@ -23,13 +23,13 @@ Future<String> runBuildRunner(
 
   await runProcess(pubPath, args, workingDirectory: p.current);
 
-  var initialFiles =
+  final initialFiles =
       Directory(tempDir).listSync(recursive: true, followLinks: false);
 
   var deleteCount = 0;
   // TODO: use whereType when github.com/dart-lang/sdk/issues/32463 is fixed
   for (var file in initialFiles.where((i) => i is File)) {
-    var relativePath = p.relative(file.path, from: tempDir);
+    final relativePath = p.relative(file.path, from: tempDir);
 
     if (_badFileGlob.matches(relativePath)) {
       if (deleteCount == 0) {

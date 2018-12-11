@@ -29,6 +29,6 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
 final _$parserForOptions = _$populateOptionsParser(ArgParser());
 
 Options parseOptions(List<String> args) {
-  var result = _$parserForOptions.parse(args);
+  final result = _$parserForOptions.parse(args);
   return _$parseOptionsResult(result);
 }

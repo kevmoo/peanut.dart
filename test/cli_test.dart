@@ -14,18 +14,18 @@ Arguments:
 
 void main() {
   test('help', () async {
-    var proc = await TestProcess.start('dart', ['bin/peanut.dart', '--help']);
+    final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--help']);
 
-    var output = await proc.stdoutStream().join('\n');
+    final output = await proc.stdoutStream().join('\n');
     expect(output, _output);
 
     await proc.shouldExit(0);
   });
 
   test('bad flag', () async {
-    var proc = await TestProcess.start('dart', ['bin/peanut.dart', '--bob']);
+    final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--bob']);
 
-    var output = await proc.stdoutStream().join('\n');
+    final output = await proc.stdoutStream().join('\n');
     expect(output, '''Could not find an option named "bob".
 
 $_output''');
@@ -34,10 +34,10 @@ $_output''');
   });
 
   test('extra args', () async {
-    var proc = await TestProcess.start(
+    final proc = await TestProcess.start(
         'dart', ['bin/peanut.dart', 'foo', 'bar', 'baz']);
 
-    var output = await proc.stdoutStream().join('\n');
+    final output = await proc.stdoutStream().join('\n');
     expect(output, '''I don't understand the extra arguments: foo, bar, baz
 
 $_output''');

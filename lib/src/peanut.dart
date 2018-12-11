@@ -19,7 +19,7 @@ Future<Null> run(Options options) async {
   await checkPubspecLock(await PubspecLock.read(),
       requireBuildWebCompilers: true);
 
-  var current = p.current;
+  final current = p.current;
 
   if (FileSystemEntity.typeSync(p.join(current, options.directory)) ==
       FileSystemEntityType.notFound) {
@@ -28,30 +28,30 @@ Future<Null> run(Options options) async {
         'This may cause the build to fail. Try setting the `directory` flag.'));
   }
 
-  var isGitDir = await GitDir.isGitDir(current);
+  final isGitDir = await GitDir.isGitDir(current);
 
   if (!isGitDir) {
     throw 'Not a git directory: $current';
   }
 
-  var gitDir = await GitDir.fromExisting(current, allowSubdirectory: true);
+  final gitDir = await GitDir.fromExisting(current, allowSubdirectory: true);
 
   // current branch cannot be targetBranch
-  var currentBranch = await gitDir.getCurrentBranch();
+  final currentBranch = await gitDir.getCurrentBranch();
   if (currentBranch.branchName == options.branch) {
     throw 'Cannot update the current branch `${options.branch}`.';
   }
 
-  var secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
+  final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
 
   // create a temp dir to dump 'pub build' output to
-  var tempDir =
+  final tempDir =
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    var ranCommandSummary = await runBuildRunner(
+    final ranCommandSummary = await runBuildRunner(
         tempDir.path, options.directory, options.buildConfig, options.release);
-    var commit = await gitDir.updateBranchWithDirectoryContents(
+    final commit = await gitDir.updateBranchWithDirectoryContents(
         options.branch, tempDir.path, options.message);
 
     if (commit == null) {
