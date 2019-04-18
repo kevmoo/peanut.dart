@@ -8,17 +8,21 @@ import 'utils.dart';
 
 Future<String> runBuildRunner(
   String tempDir,
-  String targetDir,
+  String pkgDirectory,
+  Map<String, String> targets,
   String config,
   bool release,
-  String workingDirectory,
 ) async {
+  final targetsValue = targets.entries
+      .map((e) => '${e.key}:${p.join(tempDir, e.value)}')
+      .join(',');
+
   final args = [
     'run',
     'build_runner',
     'build',
     '--output',
-    '$targetDir:$tempDir',
+    targetsValue,
     release ? '--release' : '--no-release'
   ];
 
@@ -26,23 +30,24 @@ Future<String> runBuildRunner(
     args.addAll(['--config', config]);
   }
 
-  await runProcess(pubPath, args, workingDirectory: workingDirectory);
-
-  final initialFiles =
-      Directory(tempDir).listSync(recursive: true, followLinks: false);
+  await runProcess(pubPath, args, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
-  // TODO: use whereType when github.com/dart-lang/sdk/issues/32463 is fixed
-  for (var file in initialFiles.where((i) => i is File)) {
-    final relativePath = p.relative(file.path, from: tempDir);
 
-    if (_badFileGlob.matches(relativePath)) {
-      if (deleteCount == 0) {
-        stdout.write('Deleting extra files from output directory');
+  for (var buildDir in targets.values.map((dir) => p.join(tempDir, dir))) {
+    for (var file in Directory(buildDir)
+        .listSync(recursive: true, followLinks: false)
+        .whereType<File>()) {
+      final relativePath = p.relative(file.path, from: buildDir);
+
+      if (_badFileGlob.matches(relativePath)) {
+        if (deleteCount == 0) {
+          stdout.write('Deleting extra files from output directory');
+        }
+        stdout.write('.');
+        file.deleteSync();
+        deleteCount++;
       }
-      stdout.write('.');
-      file.deleteSync();
-      deleteCount++;
     }
   }
 

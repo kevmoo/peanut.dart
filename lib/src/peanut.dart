@@ -4,36 +4,20 @@ import 'dart:io';
 import 'package:git/git.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
-// ignore: implementation_imports
-import 'package:webdev/src/pubspec.dart';
 
 import 'build_runner.dart';
+import 'helpers.dart';
 import 'options.dart';
 import 'peanut_exception.dart';
-
-export 'package:webdev/src/pubspec.dart';
+import 'webdev_pubspec.dart';
 
 export 'options.dart';
 export 'utils.dart' show printError;
+export 'webdev_pubspec.dart' show PackageException;
 
 Future<void> run({Options options, String workingDir}) async {
   options ??= const Options();
   workingDir ??= p.current;
-
-  try {
-    await checkPubspecLock(
-        await PubspecLock.read(p.join(workingDir, 'pubspec.lock')),
-        requireBuildWebCompilers: true);
-  } on FileSystemException catch (e) {
-    throw PeanutException('${e.message} ${e.path}');
-  }
-
-  if (FileSystemEntity.typeSync(p.join(workingDir, options.directory)) ==
-      FileSystemEntityType.notFound) {
-    stderr.writeln(ansi.yellow.wrap(
-        'The `${options.directory}` directory does not exist. '
-        'This may cause the build to fail. Try setting the `directory` flag.'));
-  }
 
   final isGitDir = await GitDir.isGitDir(workingDir);
 
@@ -45,9 +29,55 @@ Future<void> run({Options options, String workingDir}) async {
 
   // current branch cannot be targetBranch
   final currentBranch = await gitDir.getCurrentBranch();
+
   if (currentBranch.branchName == options.branch) {
     throw PeanutException(
-        'Cannot update the current branch `${options.branch}`.');
+        'Cannot update the current branch "${options.branch}".');
+  }
+
+  if (options.directories.isEmpty) {
+    throw PeanutException('At least one directory must be provided.');
+  }
+
+  // key: package dir; value: all dirs to build within that package
+  final targetDirs = targetDirectories(workingDir, options.directories);
+
+  for (var dir in options.directories) {
+    final fullPath = pkgNormalize(workingDir, dir);
+
+    if (p.equals(workingDir, dir)) {
+      throw PeanutException(
+          '"$dir" is the same as the working directory, which is not allowed.');
+    }
+
+    if (!p.isWithin(workingDir, fullPath)) {
+      throw PeanutException(
+          '"$dir" is not in the working directory "$workingDir".');
+    }
+  }
+
+  for (var entry in targetDirs.entries) {
+    final entryDir = pkgNormalize(workingDir, entry.key);
+    try {
+      await checkPubspecLock(
+          await PubspecLock.read(p.join(entryDir, 'pubspec.lock')),
+          requireBuildWebCompilers: true);
+    } on FileSystemException catch (e) {
+      throw PeanutException('${e.message} ${e.path}');
+    }
+
+    for (var dir in entry.value) {
+      final buildDirPath = p.join(entryDir, dir);
+      if (FileSystemEntity.typeSync(buildDirPath) ==
+          FileSystemEntityType.notFound) {
+        stderr.writeln(
+          ansi.yellow.wrap(
+            'The `$buildDirPath` directory does not exist. This may cause the '
+            'build to fail. Try setting the `directory` flag.',
+          ),
+        );
+      }
+    }
   }
 
   final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
@@ -59,12 +89,24 @@ Future<void> run({Options options, String workingDir}) async {
   var message = options.message;
 
   if (message == defaultMessage) {
-    message = 'Built ${options.directory}';
+    message = 'Built ${options.directories.join(', ')}';
   }
 
+  final outputDirMap = outputDirectoryMap(targetDirs);
+
+  final sourcePkg = targetDirs.keys.single;
+
+  final targets = Map<String, String>.fromEntries(
+      outputDirMap.entries.where((e) => p.isWithin(sourcePkg, e.key)));
+
   try {
-    final ranCommandSummary = await runBuildRunner(tempDir.path,
-        options.directory, options.buildConfig, options.release, workingDir);
+    final ranCommandSummary = await runBuildRunner(
+      tempDir.path,
+      workingDir,
+      targets,
+      options.buildConfig,
+      options.release,
+    );
 
     if (options.sourceBranchInfo) {
       final currentBranch = await gitDir.getCurrentBranch();
@@ -86,7 +128,7 @@ Commit: $commitInfo''';
       print('There was no change in branch. No commit created.');
     } else {
       print('Branch "${options.branch}" was updated '
-          'with `$ranCommandSummary` output from `${options.directory}`.');
+          'with `$ranCommandSummary` output from `${options.directories}`.');
     }
   } finally {
     await tempDir.delete(recursive: true);
