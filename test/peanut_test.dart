@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:git/git.dart';
 import 'package:peanut/src/options.dart';
 import 'package:peanut/src/peanut.dart';
+import 'package:peanut/src/peanut_exception.dart';
 import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 
@@ -10,13 +11,16 @@ TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
     .having((te) => te.name, 'name', name)
     .having((te) => te.type, 'type', type);
 
+Matcher _throwsPeanutException(message) => throwsA(
+    isA<PeanutException>().having((pe) => pe.message, 'message', message));
+
 void main() {
   test('no pub get', () async {
     await _simplePackage();
 
     await expectLater(
       run(Options(), workingDir: d.sandbox),
-      throwsA('Cannot open file ${d.sandbox}/pubspec.lock'),
+      _throwsPeanutException('Cannot open file ${d.sandbox}/pubspec.lock'),
     );
   });
 
@@ -30,7 +34,7 @@ void main() {
 
     await expectLater(
       run(Options(), workingDir: d.sandbox),
-      throwsA('Not a git directory: ${d.sandbox}'),
+      _throwsPeanutException('Not a git directory: ${d.sandbox}'),
     );
   });
 
