@@ -7,7 +7,12 @@ import 'package:path/path.dart' as p;
 import 'utils.dart';
 
 Future<String> runBuildRunner(
-    String tempDir, String targetDir, String config, bool release) async {
+  String tempDir,
+  String targetDir,
+  String config,
+  bool release,
+  String workingDirectory,
+) async {
   final args = [
     'run',
     'build_runner',
@@ -21,7 +26,7 @@ Future<String> runBuildRunner(
     args.addAll(['--config', config]);
   }
 
-  await runProcess(pubPath, args, workingDirectory: p.current);
+  await runProcess(pubPath, args, workingDirectory: workingDirectory);
 
   final initialFiles =
       Directory(tempDir).listSync(recursive: true, followLinks: false);

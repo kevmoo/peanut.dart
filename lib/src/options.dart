@@ -33,13 +33,14 @@ class Options {
 
   final List<String> rest;
 
-  Options(
-      {this.directory,
-      this.branch,
-      this.buildConfig,
-      this.buildConfigWasParsed,
-      this.release,
-      this.message,
-      this.help,
-      this.rest});
+  Options({
+    this.directory = 'web',
+    this.branch = 'gh-pages',
+    this.buildConfig,
+    this.buildConfigWasParsed,
+    this.release = true,
+    this.message = defaultMessage,
+    this.help,
+    this.rest,
+  });
 }
