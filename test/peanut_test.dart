@@ -11,6 +11,29 @@ TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
     .having((te) => te.type, 'type', type);
 
 void main() {
+  test('no pub get', () async {
+    await _simplePackage();
+
+    await expectLater(
+      run(Options(), workingDir: d.sandbox),
+      throwsA('Cannot open file ${d.sandbox}/pubspec.lock'),
+    );
+  });
+
+  test('not a git dir', () async {
+    await _simplePackage();
+
+    final proc = await Process.start(
+        'pub', ['get', '--offline', '--no-precompile'],
+        workingDirectory: d.sandbox);
+    expect(await proc.exitCode, 0);
+
+    await expectLater(
+      run(Options(), workingDir: d.sandbox),
+      throwsA('Not a git directory: ${d.sandbox}'),
+    );
+  });
+
   test('integration', () async {
     await _simplePackage();
 
