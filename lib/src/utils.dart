@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
+import 'package:peanut/src/peanut_exception.dart';
 
 void printError(Object object) => print(ansi.red.wrap(object.toString()));
 
@@ -16,7 +17,7 @@ Future runProcess(String proc, List<String> args,
   final procExitCode = await process.exitCode;
 
   if (procExitCode != 0) {
-    throw 'Error running `$proc ${args.join(' ')}`.';
+    throw PeanutException('Error running `$proc ${args.join(' ')}`.');
   }
 }
 

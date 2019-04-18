@@ -9,6 +9,7 @@ import 'package:webdev/src/pubspec.dart';
 
 import 'build_runner.dart';
 import 'options.dart';
+import 'peanut_exception.dart';
 
 export 'package:webdev/src/pubspec.dart';
 
@@ -23,7 +24,7 @@ Future<Null> run(Options options, {String workingDir}) async {
         await PubspecLock.read(p.join(workingDir, 'pubspec.lock')),
         requireBuildWebCompilers: true);
   } on FileSystemException catch (e) {
-    throw '${e.message} ${e.path}';
+    throw PeanutException('${e.message} ${e.path}');
   }
 
   if (FileSystemEntity.typeSync(p.join(workingDir, options.directory)) ==
@@ -36,7 +37,7 @@ Future<Null> run(Options options, {String workingDir}) async {
   final isGitDir = await GitDir.isGitDir(workingDir);
 
   if (!isGitDir) {
-    throw 'Not a git directory: $workingDir';
+    throw PeanutException('Not a git directory: $workingDir');
   }
 
   final gitDir = await GitDir.fromExisting(workingDir, allowSubdirectory: true);
@@ -44,7 +45,8 @@ Future<Null> run(Options options, {String workingDir}) async {
   // current branch cannot be targetBranch
   final currentBranch = await gitDir.getCurrentBranch();
   if (currentBranch.branchName == options.branch) {
-    throw 'Cannot update the current branch `${options.branch}`.';
+    throw PeanutException(
+        'Cannot update the current branch `${options.branch}`.');
   }
 
   final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;

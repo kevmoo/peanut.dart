@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:peanut/src/peanut.dart';
+import 'package:peanut/src/peanut_exception.dart';
 
 void main(List<String> args) async {
   Options options;
@@ -49,7 +50,7 @@ void main(List<String> args) async {
       exitCode = ExitCode.config.code;
     } else {
       printError(e);
-      if (e is! String) {
+      if (e is! PeanutException) {
         print(stack);
       }
       exitCode = 1;
