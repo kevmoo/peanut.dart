@@ -35,11 +35,19 @@ This is also useful if you want to undo a `peanut` run.
 
 ```console
 $ peanut --help
+Usage: peanut [<args>]
 
--d, --directory       (defaults to "web")
--b, --branch          (defaults to "gh-pages")
--c, --build-config    The configuration to use when running `build_runner`.
-    --[no-]release    (defaults to on)
--m, --message         (defaults to "Built <directory>")
--h, --help            Prints usage information.
+Arguments:
+  -d, --directory                  (defaults to "web")
+  -b, --branch                     (defaults to "gh-pages")
+  -c, --build-config               The configuration to use when running
+                                   `build_runner`.
+
+      --[no-]release               (defaults to on)
+  -m, --message                    (defaults to "Built <directory>")
+      --[no-]source-branch-info    Includes the name of the source branch and SHA
+                                   in the commit message
+                                   (defaults to on)
+
+  -h, --help                       Prints usage information.
 ```
