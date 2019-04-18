@@ -6,10 +6,11 @@ const _directoryFlag = 'directory';
 const _defaultBranch = 'gh-pages';
 const _defaultDirectory = 'web';
 const _defaultRelease = true;
+const _defaultIncludeSourceBranchInfo = true;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
-ArgParser get parser => _$parserForOptions;
+ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 
 @CliOptions()
 class Options {
@@ -20,7 +21,9 @@ class Options {
   final String branch;
 
   @CliOption(
-      abbr: 'c', help: 'The configuration to use when running `build_runner`.')
+    abbr: 'c',
+    help: 'The configuration to use when running `build_runner`.',
+  )
   final String buildConfig;
 
   final bool buildConfigWasParsed;
@@ -31,7 +34,19 @@ class Options {
   @CliOption(abbr: 'm', defaultsTo: defaultMessage)
   final String message;
 
-  @CliOption(abbr: 'h', negatable: false, help: 'Prints usage information.')
+  @CliOption(
+    negatable: true,
+    defaultsTo: _defaultIncludeSourceBranchInfo,
+    help:
+        'Includes the name of the source branch and SHA in the commit message',
+  )
+  final bool sourceBranchInfo;
+
+  @CliOption(
+    abbr: 'h',
+    negatable: false,
+    help: 'Prints usage information.',
+  )
   final bool help;
 
   final List<String> rest;
@@ -43,6 +58,7 @@ class Options {
     this.buildConfigWasParsed,
     this.release = _defaultRelease,
     this.message = defaultMessage,
+    this.sourceBranchInfo = _defaultIncludeSourceBranchInfo,
     this.help,
     this.rest,
   });

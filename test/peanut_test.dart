@@ -60,7 +60,11 @@ void main() {
     final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
     final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
-    expect(ghCommit.message, 'Built web');
+    expect(ghCommit.message, startsWith('''
+Built web
+
+Branch: master
+Commit: '''));
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
     expect(treeContents, hasLength(2));
@@ -77,6 +81,8 @@ dev_dependencies:
   build_runner: '>=0.8.10 <2.0.0'
   build_web_compilers: '>=0.3.6 <2.0.0'
 ''').create();
+
+  await d.file('.gitignore', '.dart_tool/').create();
 
   await d.dir(
     'web',
