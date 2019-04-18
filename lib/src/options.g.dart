@@ -7,7 +7,7 @@ part of 'options.dart';
 // **************************************************************************
 
 Options _$parseOptionsResult(ArgResults result) => Options(
-    directory: result['directory'] as String,
+    directories: _directoriesConvert(result['directories'] as String),
     branch: result['branch'] as String,
     buildConfig: result['build-config'] as String,
     buildConfigWasParsed: result.wasParsed('build-config'),
@@ -18,12 +18,12 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     rest: result.rest);
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
-  ..addOption('directory', abbr: 'd', defaultsTo: 'web')
+  ..addOption('directories', abbr: 'd', defaultsTo: 'web')
   ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
   ..addOption('build-config',
       abbr: 'c', help: 'The configuration to use when running `build_runner`.')
   ..addFlag('release', defaultsTo: true, negatable: true)
-  ..addOption('message', abbr: 'm', defaultsTo: 'Built <directory>')
+  ..addOption('message', abbr: 'm', defaultsTo: 'Built <directories>')
   ..addFlag('source-branch-info',
       help:
           'Includes the name of the source branch and SHA in the commit message',

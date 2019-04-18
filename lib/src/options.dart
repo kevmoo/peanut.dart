@@ -2,7 +2,7 @@ import 'package:build_cli_annotations/build_cli_annotations.dart';
 
 part 'options.g.dart';
 
-const _directoryFlag = 'directory';
+const _directoryFlag = 'directories';
 const _defaultBranch = 'gh-pages';
 const _defaultDirectory = 'web';
 const _defaultRelease = true;
@@ -12,10 +12,18 @@ const defaultMessage = 'Built <$_directoryFlag>';
 
 ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 
+List<String> _directoriesConvert(String input) =>
+    input.split(',').map((v) => v.trim()).toList();
+
 @CliOptions()
 class Options {
-  @CliOption(name: _directoryFlag, abbr: 'd', defaultsTo: _defaultDirectory)
-  final String directory;
+  @CliOption(
+    name: _directoryFlag,
+    abbr: 'd',
+    defaultsTo: _defaultDirectory,
+    convert: _directoriesConvert,
+  )
+  final List<String> directories;
 
   @CliOption(abbr: 'b', defaultsTo: _defaultBranch)
   final String branch;
@@ -52,7 +60,7 @@ class Options {
   final List<String> rest;
 
   const Options({
-    this.directory = _defaultDirectory,
+    this.directories = const [_defaultDirectory],
     this.branch = _defaultBranch,
     this.buildConfig,
     this.buildConfigWasParsed,

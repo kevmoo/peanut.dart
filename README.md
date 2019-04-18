@@ -38,13 +38,13 @@ $ peanut --help
 Usage: peanut [<args>]
 
 Arguments:
-  -d, --directory                  (defaults to "web")
+  -d, --directories                (defaults to "web")
   -b, --branch                     (defaults to "gh-pages")
   -c, --build-config               The configuration to use when running
                                    `build_runner`.
 
       --[no-]release               (defaults to on)
-  -m, --message                    (defaults to "Built <directory>")
+  -m, --message                    (defaults to "Built <directories>")
       --[no-]source-branch-info    Includes the name of the source branch and SHA
                                    in the commit message
                                    (defaults to on)
