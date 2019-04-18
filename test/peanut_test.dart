@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:git/git.dart';
-import 'package:peanut/src/options.dart';
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
 import 'package:test/test.dart';
@@ -19,7 +18,7 @@ void main() {
     await _simplePackage();
 
     await expectLater(
-      run(Options(), workingDir: d.sandbox),
+      run(workingDir: d.sandbox),
       _throwsPeanutException('Cannot open file ${d.sandbox}/pubspec.lock'),
     );
   });
@@ -33,7 +32,7 @@ void main() {
     expect(await proc.exitCode, 0);
 
     await expectLater(
-      run(Options(), workingDir: d.sandbox),
+      run(workingDir: d.sandbox),
       _throwsPeanutException('Not a git directory: ${d.sandbox}'),
     );
   });
@@ -53,7 +52,7 @@ void main() {
 
     expect(await gitDir.getBranchNames(), ['master']);
 
-    await run(Options(message: 'test commit message'), workingDir: d.sandbox);
+    await run(workingDir: d.sandbox);
 
     expect(
         await gitDir.getBranchNames(), unorderedEquals(['master', 'gh-pages']));
@@ -61,7 +60,7 @@ void main() {
     final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
     final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
-    expect(ghCommit.message, 'test commit message');
+    expect(ghCommit.message, 'Built web');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
     expect(treeContents, hasLength(2));

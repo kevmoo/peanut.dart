@@ -33,12 +33,8 @@ void main(List<String> args) async {
     return;
   }
 
-  if (options.message == defaultMessage) {
-    options.message = 'Built ${options.directory}';
-  }
-
   try {
-    await run(options);
+    await run(options: options);
   } catch (e, stack) {
     if (e is PackageException) {
       for (var detail in e.details) {

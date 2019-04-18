@@ -16,7 +16,8 @@ export 'package:webdev/src/pubspec.dart';
 export 'options.dart';
 export 'utils.dart' show printError;
 
-Future<Null> run(Options options, {String workingDir}) async {
+Future<Null> run({Options options, String workingDir}) async {
+  options ??= const Options();
   workingDir ??= p.current;
 
   try {
@@ -55,11 +56,17 @@ Future<Null> run(Options options, {String workingDir}) async {
   final tempDir =
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
+  var message = options.message;
+
+  if (message == defaultMessage) {
+    message = 'Built ${options.directory}';
+  }
+
   try {
     final ranCommandSummary = await runBuildRunner(tempDir.path,
         options.directory, options.buildConfig, options.release, workingDir);
     final commit = await gitDir.updateBranchWithDirectoryContents(
-        options.branch, tempDir.path, options.message);
+        options.branch, tempDir.path, message);
 
     if (commit == null) {
       print('There was no change in branch. No commit created.');
