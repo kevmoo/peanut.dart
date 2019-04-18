@@ -65,6 +65,20 @@ Future<Null> run({Options options, String workingDir}) async {
   try {
     final ranCommandSummary = await runBuildRunner(tempDir.path,
         options.directory, options.buildConfig, options.release, workingDir);
+
+    if (options.sourceBranchInfo) {
+      final currentBranch = await gitDir.getCurrentBranch();
+      var commitInfo = currentBranch.sha;
+      if (!await gitDir.isWorkingTreeClean()) {
+        commitInfo = '$commitInfo (dirty)';
+      }
+      message = '''
+$message
+
+Branch: ${currentBranch.branchName}
+Commit: $commitInfo''';
+    }
+
     final commit = await gitDir.updateBranchWithDirectoryContents(
         options.branch, tempDir.path, message);
 

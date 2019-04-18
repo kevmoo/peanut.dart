@@ -13,6 +13,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     buildConfigWasParsed: result.wasParsed('build-config'),
     release: result['release'] as bool,
     message: result['message'] as String,
+    sourceBranchInfo: result['source-branch-info'] as bool,
     help: result['help'] as bool,
     rest: result.rest);
 
@@ -23,6 +24,11 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       abbr: 'c', help: 'The configuration to use when running `build_runner`.')
   ..addFlag('release', defaultsTo: true, negatable: true)
   ..addOption('message', abbr: 'm', defaultsTo: 'Built <directory>')
+  ..addFlag('source-branch-info',
+      help:
+          'Includes the name of the source branch and SHA in the commit message',
+      defaultsTo: true,
+      negatable: true)
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false);
 
