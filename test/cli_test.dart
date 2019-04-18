@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:test/test.dart';
 import 'package:test_process/test_process.dart';
 
@@ -26,6 +27,12 @@ void main() {
     expect(output, _output);
 
     await proc.shouldExit(0);
+  });
+
+  test('readme', () {
+    final content = File('README.md').readAsStringSync();
+
+    expect(content, contains(_output));
   });
 
   test('bad flag', () async {
