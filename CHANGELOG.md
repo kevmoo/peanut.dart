@@ -1,3 +1,7 @@
+## 2.0.9
+
+- Require Dart SDK `>=2.2.0`.
+
 ## 2.0.8
 
 - Support the latest `package:build_web_compilers` and friends.
