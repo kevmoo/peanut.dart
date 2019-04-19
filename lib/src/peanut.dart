@@ -16,7 +16,7 @@ export 'package:webdev/src/pubspec.dart';
 export 'options.dart';
 export 'utils.dart' show printError;
 
-Future<Null> run({Options options, String workingDir}) async {
+Future<void> run({Options options, String workingDir}) async {
   options ??= const Options();
   workingDir ??= p.current;
 
