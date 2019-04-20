@@ -1,6 +1,7 @@
 ## 2.1.0
 
 - Added `--[no-]source-branch-info` flag.
+- Exclude `*.md` and `*.yaml` from output directory.
 - Require Dart SDK `>=2.2.0`.
 
 ## 2.0.8
