@@ -5,7 +5,6 @@ dart:
   - dev
 
 dart_task:
-  - test
   - dartanalyzer: --fatal-warnings --fatal-lints .
 
 matrix:
@@ -13,6 +12,8 @@ matrix:
     # Only validate formatting using the dev release
     - dart: dev
       dart_task: dartfmt
+    - dart: dev
+      dart_task: test
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
@@ -21,3 +22,4 @@ branches:
 cache:
  directories:
    - $HOME/.pub-cache
+   - .dart_tool/
