@@ -82,10 +82,6 @@ Future<void> run({Options options, String workingDir}) async {
 
   final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
 
-  // create a temp dir to dump 'pub build' output to
-  final tempDir =
-      await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
-
   var message = options.message;
 
   if (message == defaultMessage) {
@@ -94,19 +90,23 @@ Future<void> run({Options options, String workingDir}) async {
 
   final outputDirMap = outputDirectoryMap(targetDirs);
 
-  final sourcePkg = targetDirs.keys.single;
-
-  final targets = Map<String, String>.fromEntries(
-      outputDirMap.entries.where((e) => p.isWithin(sourcePkg, e.key)));
+  // create a temp dir to dump 'pub build' output to
+  final tempDir =
+      await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    final ranCommandSummary = await runBuildRunner(
-      tempDir.path,
-      workingDir,
-      targets,
-      options.buildConfig,
-      options.release,
-    );
+    for (var sourcePkg in targetDirs.keys) {
+      final targets = Map<String, String>.fromEntries(
+          outputDirMap.entries.where((e) => p.isWithin(sourcePkg, e.key)));
+
+      await runBuildRunner(
+        tempDir.path,
+        p.join(workingDir, sourcePkg),
+        targets,
+        options.buildConfig,
+        options.release,
+      );
+    }
 
     if (options.sourceBranchInfo) {
       final currentBranch = await gitDir.getCurrentBranch();
@@ -127,8 +127,8 @@ Commit: $commitInfo''';
     if (commit == null) {
       print('There was no change in branch. No commit created.');
     } else {
-      print('Branch "${options.branch}" was updated '
-          'with `$ranCommandSummary` output from `${options.directories}`.');
+      print('Branch "${options.branch}" was updated with output from '
+          '`${options.directories}`.');
     }
   } finally {
     await tempDir.delete(recursive: true);

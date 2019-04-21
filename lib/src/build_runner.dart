@@ -14,7 +14,7 @@ Future<String> runBuildRunner(
   bool release,
 ) async {
   final targetsValue = targets.entries
-      .map((e) => '${e.key}:${p.join(tempDir, e.value)}')
+      .map((e) => '${p.split(e.key).last}:${p.join(tempDir, e.value)}')
       .join(',');
 
   final args = [

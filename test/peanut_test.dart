@@ -97,6 +97,7 @@ void main() {
     await _simplePackage();
     await _pubGet();
     final gitDir = await _initGitDir();
+    final masterCommit = await gitDir.showRef();
 
     await _run();
 
@@ -110,7 +111,7 @@ void main() {
 Built web
 
 Branch: master
-Commit: '''));
+Commit: ${masterCommit.single.sha}'''));
 
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
   }, timeout: const Timeout.factor(2));
@@ -119,6 +120,7 @@ Commit: '''));
     await _simplePackage(buildDirs: {'example', 'web'});
     await _pubGet();
     final gitDir = await _initGitDir();
+    final masterCommit = await gitDir.showRef();
 
     await _run(options: const Options(directories: ['example', 'web']));
 
@@ -132,7 +134,7 @@ Commit: '''));
 Built example, web
 
 Branch: master
-Commit: '''));
+Commit: ${masterCommit.single.sha}'''));
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
@@ -145,46 +147,60 @@ Commit: '''));
       await _expectStandardTreeContents(gitDir, te.sha);
     }
   }, timeout: const Timeout.factor(2));
-}
 
-Future<void> _pubGet() async {
-  final proc = await Process.start(
-      'pub', ['get', '--offline', '--no-precompile'],
-      workingDirectory: d.sandbox);
-  expect(await proc.exitCode, 0);
-}
+  test('2 packages, 2 build dirs', () async {
+    const packages = {'pkg1', 'pkg2'};
+    for (var pkg in packages) {
+      await _simplePackage(
+        parent: pkg,
+        buildDirs: {'example', 'web'},
+      );
+      await _pubGet(parent: pkg);
+    }
 
-Future<GitDir> _initGitDir() async {
-  final gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
+    final gitDir = await _initGitDir();
+    final masterCommit = await gitDir.showRef();
 
-  await gitDir.runCommand(['add', '.']);
-  await gitDir.runCommand(['commit', '-m', 'dummy commit']);
+    await _run(
+        options: const Options(
+      directories: [
+        'pkg1/example',
+        'pkg1/web',
+        'pkg2/example',
+        'pkg2/web',
+      ],
+    ));
 
-  expect(await gitDir.getBranchNames(), ['master']);
-  return gitDir;
-}
+    expect(
+        await gitDir.getBranchNames(), unorderedEquals(['master', 'gh-pages']));
 
-Future<void> _simplePackage({
-  Set<String> buildDirs = const {'web'},
-}) async {
-  await d.file('pubspec.yaml', r'''
-name: peanut_test
+    final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
-dev_dependencies:
-  build_runner: '>=0.8.10 <2.0.0'
-  build_web_compilers: '>=0.3.6 <2.0.0'
-''').create();
+    final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+    expect(ghCommit.message, startsWith('''
+Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
-  await d.file('.gitignore', '.dart_tool/').create();
+Branch: master
+Commit: ${masterCommit.single.sha}'''));
 
-  for (var buildDir in buildDirs) {
-    await d
-        .dir(
-          buildDir,
-          _exampleFiles.entries.map((e) => d.file(e.key, e.value)),
-        )
-        .create();
-  }
+    final treeContents = await gitDir.lsTree(ghCommit.treeSha);
+
+    expect(
+      treeContents.map((te) => te.name),
+      unorderedEquals(packages),
+    );
+
+    final pkgTreeHashes = treeContents.map((te) => te.sha).toSet();
+    expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
+
+    final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
+    expect(
+        pkgContent.map((te) => te.name), unorderedEquals(['example', 'web']));
+
+    for (var te in pkgContent) {
+      await _expectStandardTreeContents(gitDir, te.sha);
+    }
+  }, timeout: const Timeout.factor(2));
 }
 
 Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
@@ -207,6 +223,53 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
   } catch (e) {
     await _logGitTree(gitDir, treeSha);
     rethrow;
+  }
+}
+
+Future<void> _pubGet({String parent}) async {
+  final proc = await Process.start(
+      'pub', ['get', '--offline', '--no-precompile'],
+      workingDirectory: p.join(d.sandbox, parent));
+  expect(await proc.exitCode, 0);
+}
+
+Future<GitDir> _initGitDir() async {
+  final gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
+
+  await gitDir.runCommand(['add', '.']);
+  await gitDir.runCommand(['commit', '-m', 'dummy commit']);
+
+  expect(await gitDir.getBranchNames(), ['master']);
+  return gitDir;
+}
+
+Future<void> _simplePackage({
+  Set<String> buildDirs = const {'web'},
+  String parent,
+}) async {
+  if (parent != null) {
+    assert(p.isRelative(parent));
+    parent = p.join(d.sandbox, parent);
+    await d.dir(parent).create();
+  }
+
+  await d.file('pubspec.yaml', r'''
+name: peanut_test
+
+dev_dependencies:
+  build_runner: '>=0.8.10 <2.0.0'
+  build_web_compilers: '>=0.3.6 <2.0.0'
+''').create(parent);
+
+  await d.file('.gitignore', '.dart_tool/').create(parent);
+
+  for (var buildDir in buildDirs) {
+    await d
+        .dir(
+          buildDir,
+          _exampleFiles.entries.map((e) => d.file(e.key, e.value)),
+        )
+        .create(parent);
   }
 }
 
