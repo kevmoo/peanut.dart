@@ -9,11 +9,11 @@ import 'build_runner.dart';
 import 'helpers.dart';
 import 'options.dart';
 import 'peanut_exception.dart';
-import 'webdev_pubspec.dart';
+import 'webdev.dart';
 
 export 'options.dart';
 export 'utils.dart' show printError;
-export 'webdev_pubspec.dart' show PackageException;
+export 'webdev.dart' show PackageException;
 
 Future<void> run({Options options, String workingDir}) async {
   options ??= const Options();
@@ -59,9 +59,7 @@ Future<void> run({Options options, String workingDir}) async {
   for (var entry in targetDirs.entries) {
     final entryDir = pkgNormalize(workingDir, entry.key);
     try {
-      await checkPubspecLock(
-          await PubspecLock.read(p.join(entryDir, 'pubspec.lock')),
-          requireBuildWebCompilers: true);
+      await checkPubspecLock(entryDir);
     } on FileSystemException catch (e) {
       throw PeanutException('${e.message} ${e.path}');
     }

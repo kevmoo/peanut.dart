@@ -24,7 +24,8 @@ void main() {
 
     await expectLater(
       _run(),
-      _throwsPeanutException('Cannot open file ${d.sandbox}/pubspec.lock'),
+      _throwsPeanutException(
+          'No pubspec.lock file found, please run "pub get" first.'),
     );
   });
 
