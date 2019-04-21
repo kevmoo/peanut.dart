@@ -203,26 +203,38 @@ Commit: ${masterCommit.single.sha}'''));
   }, timeout: const Timeout.factor(2));
 }
 
-Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
-  final treeContents = await gitDir.lsTree(treeSha);
+String _standardTreeContentSha;
 
-  try {
-    expect(treeContents, hasLength(2));
+Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
+  if (_standardTreeContentSha == null) {
+    final treeContents = await gitDir.lsTree(treeSha);
+
+    try {
+      expect(treeContents, hasLength(2));
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('example_script.dart.js', 'blob'),
+        ),
+      );
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('index.html', 'blob'),
+        ),
+      );
+
+      _standardTreeContentSha = treeSha;
+    } catch (e) {
+      await _logGitTree(gitDir, treeSha);
+      rethrow;
+    }
+  } else {
     expect(
-      treeContents,
-      contains(
-        _treeEntry('example_script.dart.js', 'blob'),
-      ),
+      treeSha,
+      _standardTreeContentSha,
+      reason: 'Standard directory content should be idential across tests.',
     );
-    expect(
-      treeContents,
-      contains(
-        _treeEntry('index.html', 'blob'),
-      ),
-    );
-  } catch (e) {
-    await _logGitTree(gitDir, treeSha);
-    rethrow;
   }
 }
 
