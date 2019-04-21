@@ -200,7 +200,7 @@ Commit: ${masterCommit.single.sha}'''));
     for (var te in pkgContent) {
       await _expectStandardTreeContents(gitDir, te.sha);
     }
-  }, timeout: const Timeout.factor(2));
+  }, timeout: const Timeout.factor(4));
 }
 
 String _standardTreeContentSha;
