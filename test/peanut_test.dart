@@ -141,10 +141,12 @@ Commit: ${masterCommit.single.sha}'''));
 
     expect(
       treeContents.map((te) => te.name),
-      unorderedEquals(['example', 'web']),
+      unorderedEquals(['example', 'web', 'index.html']),
     );
 
-    for (var te in treeContents) {
+    expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+
+    for (var te in treeContents.where((te) => te.type == 'tree')) {
       await _expectStandardTreeContents(gitDir, te.sha);
     }
   }, timeout: const Timeout.factor(2));
@@ -188,10 +190,15 @@ Commit: ${masterCommit.single.sha}'''));
 
     expect(
       treeContents.map((te) => te.name),
-      unorderedEquals(packages),
+      unorderedEquals(packages.followedBy(['index.html'])),
     );
 
-    final pkgTreeHashes = treeContents.map((te) => te.sha).toSet();
+    expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+
+    final pkgTreeHashes = treeContents
+        .where((te) => te.type == 'tree')
+        .map((te) => te.sha)
+        .toSet();
     expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
 
     final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);

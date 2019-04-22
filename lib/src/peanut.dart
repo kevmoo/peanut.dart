@@ -107,6 +107,26 @@ Future<void> run({Options options, String workingDir}) async {
       );
     }
 
+    if (outputDirMap.length == 1) {
+      // TODO(kevmoo): warn if there is no root `index.html` file!
+    } else {
+      // create root HTML file!
+      final links = <String, String>{};
+
+      for (var item in outputDirMap.values) {
+        final rootHtmlFilePath = p.join(tempDir.path, item, 'index.html');
+        if (FileSystemEntity.isFileSync(rootHtmlFilePath)) {
+          links[item] = item;
+        } else {
+          print('"$item" does not contain an "index.html" file. Skipping.');
+          // TODO(kevmoo): search for another file?
+        }
+      }
+
+      File(p.join(tempDir.path, 'index.html'))
+          .writeAsStringSync(_indexFile(links));
+    }
+
     if (options.sourceBranchInfo) {
       final currentBranch = await gitDir.getCurrentBranch();
       var commitInfo = currentBranch.sha;
@@ -133,3 +153,50 @@ Commit: $commitInfo''';
     await tempDir.delete(recursive: true);
   }
 }
+
+String _indexFile(Map<String, String> links) => '''
+<html>
+  <head>
+    <title>Examples</title>
+    <meta name="generator" content="https://pub.dartlang.org/packages/peanut">
+    <style>
+      #root {
+        display: flex;
+        max-width: 900px;
+        margin: 0 auto;
+        height: 100%;
+        max-height: 1000px;
+      }
+      #toc {
+        display: block;
+        align-self: center;
+        margin: 2ex;
+      }
+      iframe {
+        flex-grow: 1;
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgray;
+        align-self: stretch;
+      }
+    </style>
+  </head>
+<body>
+  <div id='root'>
+  <div id="toc">
+${links.entries.map(_linkForEntry).join('\n')}  
+  </div>
+  <iframe name='example_frame'></iframe>
+  </div>
+</body>
+</html>
+''';
+
+String _prettyName(String input) =>
+    input.split('_').where((e) => e.isNotEmpty).map((e) {
+      return e.substring(0, 1).toUpperCase() + e.substring(1);
+    }).join(' ');
+
+String _linkForEntry(MapEntry<String, String> entry) =>
+    '    <p><a href="${entry.key}/" target="example_frame">'
+    '${_prettyName(entry.value)}</a></p>';
