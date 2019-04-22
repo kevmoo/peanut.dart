@@ -47,13 +47,9 @@ Future _runPubDeps(String workingDirectory) async {
 Future<void> checkPubspecLock(String pkgDir) async {
   final pubspecLock = await _PubspecLock.read(pkgDir);
 
-  final issues = <PackageExceptionDetails>[];
-
-  final buildRunnerIssues = pubspecLock.checkPackage(
-      'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0'));
-
-  issues
-    ..addAll(buildRunnerIssues)
+  final issues = <PackageExceptionDetails>[]
+    ..addAll(pubspecLock.checkPackage(
+        'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0')))
     ..addAll(pubspecLock.checkPackage(
         'build_web_compilers', VersionConstraint.parse('>=1.2.0 <3.0.0')));
 

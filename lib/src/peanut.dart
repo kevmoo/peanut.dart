@@ -94,11 +94,12 @@ Future<void> run({Options options, String workingDir}) async {
 
   try {
     for (var sourcePkg in targetDirs.keys) {
-      final targets = Map<String, String>.fromEntries(
-          outputDirMap.entries.where((e) => p.isWithin(sourcePkg, e.key)));
+      final targets = Map<String, String>.fromEntries(outputDirMap.entries
+          .where((e) => p.isWithin(sourcePkg, e.key))
+          .map((e) =>
+              MapEntry(p.split(e.key).last, p.join(tempDir.path, e.value))));
 
       await runBuildRunner(
-        tempDir.path,
         p.join(workingDir, sourcePkg),
         targets,
         options.buildConfig,
