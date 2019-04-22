@@ -108,11 +108,11 @@ void main() {
     final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
     final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
-    expect(ghCommit.message, startsWith('''
+    expect(ghCommit.message, '''
 Built web
 
 Branch: master
-Commit: ${masterCommit.single.sha}'''));
+Commit: ${masterCommit.single.sha}''');
 
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
   }, timeout: const Timeout.factor(2));
@@ -131,11 +131,11 @@ Commit: ${masterCommit.single.sha}'''));
     final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
     final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
-    expect(ghCommit.message, startsWith('''
+    expect(ghCommit.message, '''
 Built example, web
 
 Branch: master
-Commit: ${masterCommit.single.sha}'''));
+Commit: ${masterCommit.single.sha}''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
@@ -180,11 +180,11 @@ Commit: ${masterCommit.single.sha}'''));
     final ghBranchRef = await gitDir.getBranchReference('gh-pages');
 
     final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
-    expect(ghCommit.message, startsWith('''
+    expect(ghCommit.message, '''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
 Branch: master
-Commit: ${masterCommit.single.sha}'''));
+Commit: ${masterCommit.single.sha}''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
