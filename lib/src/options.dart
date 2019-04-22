@@ -1,4 +1,5 @@
 import 'package:build_cli_annotations/build_cli_annotations.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'options.g.dart';
 
@@ -6,7 +7,7 @@ const _directoryFlag = 'directories';
 const _defaultBranch = 'gh-pages';
 const _defaultDirectory = 'web';
 const _defaultRelease = true;
-const _defaultIncludeSourceBranchInfo = true;
+const _defaultSourceBranchInfo = true;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
@@ -15,6 +16,14 @@ ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 List<String> _directoriesConvert(String input) =>
     input.split(',').map((v) => v.trim()).toList();
 
+Options decodeYaml(Map yaml) => _$OptionsFromJson(yaml);
+
+@JsonSerializable(
+  anyMap: true,
+  checked: true,
+  disallowUnrecognizedKeys: true,
+  includeIfNull: false,
+)
 @CliOptions()
 class Options {
   @CliOption(
@@ -34,6 +43,7 @@ class Options {
   )
   final String buildConfig;
 
+  @JsonKey(ignore: true)
   final bool buildConfigWasParsed;
 
   @CliOption(negatable: true, defaultsTo: _defaultRelease)
@@ -44,12 +54,13 @@ class Options {
 
   @CliOption(
     negatable: true,
-    defaultsTo: _defaultIncludeSourceBranchInfo,
+    defaultsTo: _defaultSourceBranchInfo,
     help:
         'Includes the name of the source branch and SHA in the commit message',
   )
   final bool sourceBranchInfo;
 
+  @JsonKey(ignore: true)
   @CliOption(
     abbr: 'h',
     negatable: false,
@@ -57,17 +68,23 @@ class Options {
   )
   final bool help;
 
+  @JsonKey(ignore: true)
   final List<String> rest;
 
   const Options({
     this.directories = const [_defaultDirectory],
-    this.branch = _defaultBranch,
+    String branch,
     this.buildConfig,
     this.buildConfigWasParsed,
-    this.release = _defaultRelease,
-    this.message = defaultMessage,
-    this.sourceBranchInfo = _defaultIncludeSourceBranchInfo,
-    this.help,
-    this.rest,
-  });
+    bool release,
+    String message,
+    bool sourceBranchInfo,
+    this.help = false,
+    this.rest = const [],
+  })  : branch = branch ?? _defaultBranch,
+        message = message ?? defaultMessage,
+        release = release ?? _defaultRelease,
+        sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo;
+
+  Map<String, dynamic> toJson() => _$OptionsToJson(this);
 }

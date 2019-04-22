@@ -1,6 +1,10 @@
 import 'dart:io';
+
 import 'package:test/test.dart';
 import 'package:test_process/test_process.dart';
+
+final _configPrefix =
+    'Command arguments were provided. Ignoring "peanut.yaml".';
 
 final _output = r'''
 Usage: peanut [<args>]
@@ -24,7 +28,9 @@ void main() {
     final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--help']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, _output);
+    expect(output, '''
+$_configPrefix
+$_output''');
 
     await proc.shouldExit(0);
   });
@@ -39,7 +45,9 @@ void main() {
     final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--bob']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''Could not find an option named "bob".
+    expect(output, '''
+$_configPrefix
+Could not find an option named "bob".
 
 $_output''');
 
@@ -51,7 +59,9 @@ $_output''');
         'dart', ['bin/peanut.dart', 'foo', 'bar', 'baz']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''I don't understand the extra arguments: foo, bar, baz
+    expect(output, '''
+$_configPrefix
+I don't understand the extra arguments: foo, bar, baz
 
 $_output''');
 

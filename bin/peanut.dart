@@ -6,11 +6,18 @@ import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
+import 'package:yaml/yaml.dart';
 
 void main(List<String> args) async {
   Options options;
   try {
-    options = parseOptions(args);
+    options = _getOptions(args);
+    // TODO: handle `CheckedFromJsonException` from `json_annotation`
+  } on YamlException catch (e) {
+    printError('Error decoding "$_peanutConfigFile"');
+    printError(e.span.message(e.message));
+    exitCode = ExitCode.usage.code;
+    return;
   } on FormatException catch (e) {
     printError(e.message);
     print('');
@@ -63,4 +70,27 @@ Usage: peanut [<args>]
 
 ${styleBold.wrap('Arguments:')}
 ${_indent(parser.usage)}''');
+}
+
+const _peanutConfigFile = 'peanut.yaml';
+
+Options _getOptions(List<String> args) {
+  final optionsFile = File(_peanutConfigFile);
+
+  if (optionsFile.existsSync()) {
+    if (args.isNotEmpty) {
+      print(yellow.wrap(
+        'Command arguments were provided. Ignoring "$_peanutConfigFile".',
+      ));
+    } else {
+      return decodeYaml(
+        loadYaml(
+          optionsFile.readAsStringSync(),
+          sourceUrl: _peanutConfigFile,
+        ) as Map,
+      );
+    }
+  }
+
+  return parseOptions(args);
 }

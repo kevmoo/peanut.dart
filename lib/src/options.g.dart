@@ -38,3 +38,48 @@ Options parseOptions(List<String> args) {
   final result = _$parserForOptions.parse(args);
   return _$parseOptionsResult(result);
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Options _$OptionsFromJson(Map json) {
+  return $checkedNew('Options', json, () {
+    $checkKeys(json, allowedKeys: const [
+      'directories',
+      'branch',
+      'buildConfig',
+      'release',
+      'message',
+      'sourceBranchInfo'
+    ]);
+    final val = Options(
+        directories: $checkedConvert(json, 'directories',
+            (v) => (v as List)?.map((e) => e as String)?.toList()),
+        branch: $checkedConvert(json, 'branch', (v) => v as String),
+        buildConfig: $checkedConvert(json, 'buildConfig', (v) => v as String),
+        release: $checkedConvert(json, 'release', (v) => v as bool),
+        message: $checkedConvert(json, 'message', (v) => v as String),
+        sourceBranchInfo:
+            $checkedConvert(json, 'sourceBranchInfo', (v) => v as bool));
+    return val;
+  });
+}
+
+Map<String, dynamic> _$OptionsToJson(Options instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('directories', instance.directories);
+  writeNotNull('branch', instance.branch);
+  writeNotNull('buildConfig', instance.buildConfig);
+  writeNotNull('release', instance.release);
+  writeNotNull('message', instance.message);
+  writeNotNull('sourceBranchInfo', instance.sourceBranchInfo);
+  return val;
+}
