@@ -1,3 +1,6 @@
+[![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dartlang.org/packages/peanut)
+[![Build Status](https://travis-ci.org/kevmoo/peanut.dart.svg?branch=master)](https://travis-ci.org/kevmoo/peanut.dart)
+
 Do you ever want to `pub run build_runner build` into another branch? This is your ticket.
 
 ### Install
