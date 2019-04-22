@@ -7,15 +7,13 @@ import 'package:path/path.dart' as p;
 import 'utils.dart';
 
 Future<String> runBuildRunner(
-  String tempDir,
   String pkgDirectory,
   Map<String, String> targets,
   String config,
   bool release,
 ) async {
-  final targetsValue = targets.entries
-      .map((e) => '${p.split(e.key).last}:${p.join(tempDir, e.value)}')
-      .join(',');
+  final targetsValue =
+      targets.entries.map((e) => '${e.key}:${e.value}').join(',');
 
   final args = [
     'run',
@@ -34,7 +32,7 @@ Future<String> runBuildRunner(
 
   var deleteCount = 0;
 
-  for (var buildDir in targets.values.map((dir) => p.join(tempDir, dir))) {
+  for (var buildDir in targets.values) {
     for (var file in Directory(buildDir)
         .listSync(recursive: true, followLinks: false)
         .whereType<File>()) {
