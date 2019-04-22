@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:glob/glob.dart';
+import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
 import 'utils.dart';
 
-Future<String> runBuildRunner(
+Future<void> runBuildRunner(
   String pkgDirectory,
   Map<String, String> targets,
   String config,
@@ -19,14 +20,21 @@ Future<String> runBuildRunner(
     'run',
     'build_runner',
     'build',
-    '--output',
-    targetsValue,
-    release ? '--release' : '--no-release'
+    release ? '--release' : '--no-release',
   ];
 
   if (config != null) {
     args.addAll(['--config', config]);
   }
+
+  args.addAll([
+    '--output',
+    targetsValue,
+  ]);
+
+  print(ansi.styleBold.wrap('''
+Command:     ${['pub'].followedBy(args).join(' ')}
+'''));
 
   await runProcess(pubPath, args, workingDirectory: pkgDirectory);
 
@@ -53,8 +61,6 @@ Future<String> runBuildRunner(
     print('\nDeleted count: $deleteCount\n'
         '  Matching ${_globItems.map((e) => '"$e"').join(', ')}');
   }
-
-  return args.join(' ');
 }
 
 const _globItems = {

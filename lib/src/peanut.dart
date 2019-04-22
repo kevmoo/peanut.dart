@@ -93,14 +93,21 @@ Future<void> run({Options options, String workingDir}) async {
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    for (var sourcePkg in targetDirs.keys) {
+    for (var sourcePkg in targetDirs.entries) {
       final targets = Map<String, String>.fromEntries(outputDirMap.entries
-          .where((e) => p.isWithin(sourcePkg, e.key))
-          .map((e) =>
-              MapEntry(p.split(e.key).last, p.join(tempDir.path, e.value))));
+          .where((e) => p.isWithin(sourcePkg.key, e.key))
+          .map((e) => MapEntry(
+              p.split(e.key).last, pkgNormalize(tempDir.path, e.value))));
+
+      final pkgPath = sourcePkg.key == '.' ? workingDir : sourcePkg.key;
+
+      print('');
+      print(ansi.styleBold.wrap('''
+Package:     $pkgPath
+Directories: ${sourcePkg.value.join(', ')}'''));
 
       await runBuildRunner(
-        p.join(workingDir, sourcePkg),
+        pkgNormalize(workingDir, sourcePkg.key),
         targets,
         options.buildConfig,
         options.release,
