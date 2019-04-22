@@ -56,6 +56,10 @@ Command:     ${['pub'].followedBy(args).join(' ')}
       }
     }
   }
+  if (deleteCount > 0) {
+    // Ensure we add a new line is added after printing `.` for deleted files
+    print('');
+  }
 }
 
 const _globItems = {
