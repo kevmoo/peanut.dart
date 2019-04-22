@@ -56,11 +56,6 @@ Command:     ${['pub'].followedBy(args).join(' ')}
       }
     }
   }
-
-  if (deleteCount > 0) {
-    print('\nDeleted count: $deleteCount\n'
-        '  Matching ${_globItems.map((e) => '"$e"').join(', ')}');
-  }
 }
 
 const _globItems = {
