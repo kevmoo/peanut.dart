@@ -2,6 +2,7 @@
 
 - Fix height of generated `index.html` page.
 - Include `package:peanut` version info in commit message.
+- Avoid creating commit messages with a first line longer than 72 characters.
 
 ## 3.0.0
 

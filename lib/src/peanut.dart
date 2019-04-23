@@ -86,6 +86,14 @@ Future<void> run({Options options, String workingDir}) async {
 
   if (message == defaultMessage) {
     message = 'Built ${options.directories.join(', ')}';
+    if (options.directories.length > 1 && message.length > 72) {
+      message = '''
+Built ${options.directories.length} directories
+
+Directories:
+  ${options.directories.join('\n  ')}
+''';
+    }
   }
 
   final outputDirMap = outputDirectoryMap(targetDirs);
