@@ -169,10 +169,11 @@ Commit: $commitInfo''';
         options.branch, tempDir.path, message);
 
     if (commit == null) {
-      print('There was no change in branch. No commit created.');
+      print(ansi.yellow
+          .wrap('There was no change in branch. No commit created.'));
     } else {
-      print('Branch "${options.branch}" was updated with output from '
-          '`${options.directories}`.');
+      print('Branch "${options.branch}" was updated with output from: '
+          '${options.directories.join(', ')}.');
     }
   } finally {
     await tempDir.delete(recursive: true);
