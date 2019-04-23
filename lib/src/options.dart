@@ -76,6 +76,13 @@ class Options {
   final bool help;
 
   @JsonKey(ignore: true)
+  @CliOption(
+    negatable: false,
+    help: 'Print the current version.',
+  )
+  final bool version;
+
+  @JsonKey(ignore: true)
   final List<String> rest;
 
   const Options({
@@ -88,6 +95,7 @@ class Options {
     bool sourceBranchInfo,
     this.postBuildDartScript,
     this.help = false,
+    this.version = false,
     this.rest = const [],
   })  : branch = branch ?? _defaultBranch,
         directories = directories ?? const [_defaultDirectory],

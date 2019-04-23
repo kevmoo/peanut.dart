@@ -16,6 +16,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     sourceBranchInfo: result['source-branch-info'] as bool,
     postBuildDartScript: result['post-build-dart-script'] as String,
     help: result['help'] as bool,
+    version: result['version'] as bool,
     rest: result.rest);
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
@@ -34,7 +35,8 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       help:
           'Optional Dart script to run after all builds have completed, but before files are committed to the repository.')
   ..addFlag('help',
-      abbr: 'h', help: 'Prints usage information.', negatable: false);
+      abbr: 'h', help: 'Prints usage information.', negatable: false)
+  ..addFlag('version', help: 'Print the current version.', negatable: false);
 
 final _$parserForOptions = _$populateOptionsParser(ArgParser());
 

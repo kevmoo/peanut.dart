@@ -43,6 +43,7 @@ Arguments:
                                    to the repository.
 
   -h, --help                       Prints usage information.
+      --version                    Print the current version.
 ```
 
 ## Configuration file
