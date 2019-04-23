@@ -9,11 +9,14 @@ dart_task:
 
 matrix:
   include:
-    # Only validate formatting using the dev release
     - dart: dev
       dart_task: dartfmt
     - dart: dev
-      dart_task: test
+      dart_task:
+        test: -x presubmit-only
+    - dart: dev
+      dart_task:
+        test: --run-skipped -t presubmit-only
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
