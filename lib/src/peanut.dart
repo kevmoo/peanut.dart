@@ -181,7 +181,8 @@ Commit: $commitInfo''';
 }
 
 String _indexFile(Map<String, String> links) => '''
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Examples</title>
     <meta name="generator" content="https://pub.dartlang.org/packages/peanut">
