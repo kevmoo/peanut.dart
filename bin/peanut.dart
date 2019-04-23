@@ -83,12 +83,18 @@ Options _getOptions(List<String> args) {
         'Command arguments were provided. Ignoring "$_peanutConfigFile".',
       ));
     } else {
-      return decodeYaml(
-        loadYaml(
-          optionsFile.readAsStringSync(),
-          sourceUrl: _peanutConfigFile,
-        ) as Map,
+      final yamlDoc = loadYamlDocument(
+        optionsFile.readAsStringSync(),
+        sourceUrl: _peanutConfigFile,
       );
+
+      final yamlContent = yamlDoc.contents;
+
+      if (yamlContent is YamlMap) {
+        return decodeYaml(yamlContent);
+      }
+
+      throw YamlException('Content was not a Map.', yamlDoc.span);
     }
   }
 
