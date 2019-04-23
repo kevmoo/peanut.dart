@@ -14,22 +14,11 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 
 import 'peanut_exception.dart';
-
-/// The path to the root directory of the SDK.
-final String _sdkDir = (() {
-  // The Dart executable is in "/path/to/sdk/bin/dart", so two levels up is
-  // "/path/to/sdk".
-  final aboveExecutable = p.dirname(p.dirname(Platform.resolvedExecutable));
-  assert(FileSystemEntity.isFileSync(p.join(aboveExecutable, 'version')));
-  return aboveExecutable;
-})();
-
-final String _pubPath =
-    p.join(_sdkDir, 'bin', Platform.isWindows ? 'pub.bat' : 'pub');
+import 'utils.dart';
 
 Future _runPubDeps(String workingDirectory) async {
   final result =
-      Process.runSync(_pubPath, ['deps'], workingDirectory: workingDirectory);
+      Process.runSync(pubPath, ['deps'], workingDirectory: workingDirectory);
 
   if (result.exitCode == 65 || result.exitCode == 66) {
     throw PeanutException((result.stderr as String).trim());
@@ -37,7 +26,7 @@ Future _runPubDeps(String workingDirectory) async {
 
   if (result.exitCode != 0) {
     throw ProcessException(
-        _pubPath,
+        pubPath,
         ['deps'],
         '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
         exitCode);
