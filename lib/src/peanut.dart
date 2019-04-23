@@ -143,13 +143,14 @@ Directories: ${sourcePkg.value.join(', ')}'''));
             'exist or is not a file.\n$postBuildScriptPath');
       }
 
-      print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath\n'));
+      print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath'));
 
       await runProcess(
         dartPath,
         [postBuildScriptPath, tempDir.path],
         workingDirectory: workingDir,
       );
+      print(ansi.styleBold.wrap('Post-build script: complete\n'));
     }
 
     if (options.sourceBranchInfo) {
