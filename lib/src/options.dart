@@ -72,7 +72,7 @@ class Options {
   final List<String> rest;
 
   const Options({
-    this.directories = const [_defaultDirectory],
+    List<String> directories,
     String branch,
     this.buildConfig,
     this.buildConfigWasParsed,
@@ -82,6 +82,7 @@ class Options {
     this.help = false,
     this.rest = const [],
   })  : branch = branch ?? _defaultBranch,
+        directories = directories ?? const [_defaultDirectory],
         message = message ?? defaultMessage,
         release = release ?? _defaultRelease,
         sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo;
