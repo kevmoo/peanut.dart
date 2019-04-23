@@ -9,6 +9,7 @@ import 'build_runner.dart';
 import 'helpers.dart';
 import 'options.dart';
 import 'peanut_exception.dart';
+import 'utils.dart';
 import 'webdev.dart';
 
 export 'options.dart';
@@ -132,6 +133,23 @@ Directories: ${sourcePkg.value.join(', ')}'''));
 
       File(p.join(tempDir.path, 'index.html'))
           .writeAsStringSync(_indexFile(links));
+    }
+
+    if (options.postBuildDartScript != null) {
+      final postBuildScriptPath =
+          pkgNormalize(workingDir, options.postBuildDartScript);
+      if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
+        throw PeanutException('The provided post-build Dart script does not '
+            'exist or is not a file.\n$postBuildScriptPath');
+      }
+
+      print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath\n'));
+
+      await runProcess(
+        dartPath,
+        [postBuildScriptPath, tempDir.path],
+        workingDirectory: workingDir,
+      );
     }
 
     if (options.sourceBranchInfo) {
