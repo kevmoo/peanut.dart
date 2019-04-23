@@ -3,9 +3,6 @@ import 'dart:io';
 import 'package:test/test.dart';
 import 'package:test_process/test_process.dart';
 
-final _configPrefix =
-    'Command arguments were provided. Ignoring "peanut.yaml".';
-
 final _output = r'''
 Usage: peanut [<args>]
 
@@ -25,7 +22,8 @@ Arguments:
                                    have completed, but before files are committed
                                    to the repository.
 
-  -h, --help                       Prints usage information.''';
+  -h, --help                       Prints usage information.
+      --version                    Print the current version.''';
 
 void main() {
   test('help', () async {
@@ -33,7 +31,6 @@ void main() {
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
-$_configPrefix
 $_output''');
 
     await proc.shouldExit(0);
@@ -50,7 +47,6 @@ $_output''');
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
-$_configPrefix
 Could not find an option named "bob".
 
 $_output''');
@@ -64,7 +60,6 @@ $_output''');
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
-$_configPrefix
 I don't understand the extra arguments: foo, bar, baz
 
 $_output''');

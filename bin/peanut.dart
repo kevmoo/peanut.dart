@@ -6,6 +6,7 @@ import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
+import 'package:peanut/src/version.dart';
 import 'package:yaml/yaml.dart';
 
 void main(List<String> args) async {
@@ -31,6 +32,11 @@ void main(List<String> args) async {
     return;
   }
 
+  if (options.version) {
+    print(packageVersion);
+    return;
+  }
+
   if (options.rest.isNotEmpty) {
     printError(
         "I don't understand the extra arguments: ${options.rest.join(', ')}");
@@ -38,6 +44,12 @@ void main(List<String> args) async {
     _printUsage();
     exitCode = ExitCode.usage.code;
     return;
+  }
+
+  if (_optionsFile.existsSync() && args.isNotEmpty) {
+    print(yellow.wrap(
+      'Command arguments were provided. Ignoring "$_peanutConfigFile".',
+    ));
   }
 
   try {
@@ -74,17 +86,13 @@ ${_indent(parser.usage)}''');
 
 const _peanutConfigFile = 'peanut.yaml';
 
-Options _getOptions(List<String> args) {
-  final optionsFile = File(_peanutConfigFile);
+final _optionsFile = File(_peanutConfigFile);
 
-  if (optionsFile.existsSync()) {
-    if (args.isNotEmpty) {
-      print(yellow.wrap(
-        'Command arguments were provided. Ignoring "$_peanutConfigFile".',
-      ));
-    } else {
+Options _getOptions(List<String> args) {
+  if (_optionsFile.existsSync()) {
+    if (args.isEmpty) {
       final yamlDoc = loadYamlDocument(
-        optionsFile.readAsStringSync(),
+        _optionsFile.readAsStringSync(),
         sourceUrl: _peanutConfigFile,
       );
 
