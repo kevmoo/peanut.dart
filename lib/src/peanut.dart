@@ -10,6 +10,7 @@ import 'helpers.dart';
 import 'options.dart';
 import 'peanut_exception.dart';
 import 'utils.dart';
+import 'version.dart';
 import 'webdev.dart';
 
 export 'options.dart';
@@ -163,7 +164,9 @@ Directories: ${sourcePkg.value.join(', ')}'''));
 $message
 
 Branch: ${currentBranch.branchName}
-Commit: $commitInfo''';
+Commit: $commitInfo
+
+package:peanut $packageVersion''';
     }
 
     final commit = await gitDir.updateBranchWithDirectoryContents(

@@ -4,6 +4,7 @@ import 'package:git/git.dart';
 import 'package:path/path.dart' as p;
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
+import 'package:peanut/src/version.dart';
 import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 
@@ -112,7 +113,9 @@ void main() {
 Built web
 
 Branch: master
-Commit: ${masterCommit.single.sha}''');
+Commit: ${masterCommit.single.sha}
+
+package:peanut $packageVersion''');
 
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
   }, timeout: const Timeout.factor(2));
@@ -135,7 +138,9 @@ Commit: ${masterCommit.single.sha}''');
 Built example, web
 
 Branch: master
-Commit: ${masterCommit.single.sha}''');
+Commit: ${masterCommit.single.sha}
+
+package:peanut $packageVersion''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
@@ -184,7 +189,9 @@ Commit: ${masterCommit.single.sha}''');
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
 Branch: master
-Commit: ${masterCommit.single.sha}''');
+Commit: ${masterCommit.single.sha}
+
+package:peanut $packageVersion''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
@@ -237,7 +244,9 @@ void main(List<String> args) {
 Built web
 
 Branch: master
-Commit: ${masterCommit.single.sha}''');
+Commit: ${masterCommit.single.sha}
+
+package:peanut $packageVersion''');
 
       final treeContents = await gitDir.lsTree(ghCommit.treeSha);
       expect(treeContents, hasLength(3));

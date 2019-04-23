@@ -1,6 +1,7 @@
 ## 3.0.1
 
 - Fix height of generated `index.html` page.
+- Include `package:peanut` version info in commit message.
 
 ## 3.0.0
 
