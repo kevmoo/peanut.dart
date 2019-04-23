@@ -1,40 +1,26 @@
 [![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dartlang.org/packages/peanut)
 [![Build Status](https://travis-ci.org/kevmoo/peanut.dart.svg?branch=master)](https://travis-ci.org/kevmoo/peanut.dart)
 
-Do you ever want to `pub run build_runner build` into another branch? This is your ticket.
+Do you ever want to `pub run build_runner build` into another branch? This is
+your ticket.
 
-### Install
+## Install
 
 ```
 $ pub global activate peanut
 ```
 
-### Run
+## Run
 
 ```
 $ cd ~/my_dart_proj/
 $ peanut
 ```
 
-This will build your project into a temporary directory, and then it will update the local `gh-pages` branch with its contents.
+This will build your project into a temporary directory, and then it will update
+the local `gh-pages` branch with its contents.
 
-### Git tricks
-
-The easiest way to push your `gh-pages` branch to github (without switching from your working branch) is:
-
-```
-$ git push origin --set-upstream gh-pages
-```
-
-To create (or update) your local `gh-pages` branch to match what's on the server.
-
-```
-$ git update-ref refs/heads/gh-pages origin/gh-pages
-```
-
-This is also useful if you want to undo a `peanut` run.
-
-### Options
+## Options
 
 ```console
 $ peanut --help
@@ -58,3 +44,34 @@ Arguments:
 
   -h, --help                       Prints usage information.
 ```
+
+## Configuration file
+
+You can also configure `peanut` with a configuration file. Convenient if you
+have one-off settings you'd rather not time you deploy.
+
+The `peanut.yaml` from this repository:
+
+```yaml
+# Configuration for https://pub.dartlang.org/packages/peanut
+directories:
+- example
+```
+
+## Git tricks
+
+The easiest way to push your `gh-pages` branch to github (without switching from
+your working branch) is:
+
+```console
+$ git push origin --set-upstream gh-pages
+```
+
+To create (or update) your local `gh-pages` branch to match what's on the
+server.
+
+```console
+$ git update-ref refs/heads/gh-pages origin/gh-pages
+```
+
+This is also useful if you want to undo a `peanut` run.

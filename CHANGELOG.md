@@ -2,6 +2,8 @@
 
 - **BREAKING** renamed `diretory` option to `directories`.
 - Added `--[no-]source-branch-info` flag.
+- Added `--post-build-dart-script` option.
+- Add support for `peanut.yaml` configuration.
 - Exclude `*.md` and `*.yaml` from output directory.
 - Require Dart SDK `>=2.2.0`.
 
