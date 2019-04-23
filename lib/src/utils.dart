@@ -17,9 +17,12 @@ Future runProcess(String proc, List<String> args,
   final procExitCode = await process.exitCode;
 
   if (procExitCode != 0) {
-    throw PeanutException('Error running `$proc ${args.join(' ')}`.');
+    throw PeanutException('Error running "$proc ${args.join(' ')}"\n'
+        'Exit code $procExitCode');
   }
 }
+
+final String dartPath = p.join(_sdkDir, 'bin', 'dart');
 
 final String pubPath =
     p.join(_sdkDir, 'bin', Platform.isWindows ? 'pub.bat' : 'pub');

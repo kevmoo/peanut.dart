@@ -14,6 +14,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     release: result['release'] as bool,
     message: result['message'] as String,
     sourceBranchInfo: result['source-branch-info'] as bool,
+    postBuildDartScript: result['post-build-dart-script'] as String,
     help: result['help'] as bool,
     rest: result.rest);
 
@@ -29,6 +30,9 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
           'Includes the name of the source branch and SHA in the commit message',
       defaultsTo: true,
       negatable: true)
+  ..addOption('post-build-dart-script',
+      help:
+          'Optional Dart script to run after all builds have completed, but before files are committed to the repository.')
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false);
 
@@ -48,21 +52,28 @@ Options _$OptionsFromJson(Map json) {
     $checkKeys(json, allowedKeys: const [
       'directories',
       'branch',
-      'buildConfig',
+      'build-config',
       'release',
       'message',
-      'sourceBranchInfo'
+      'source-branch-info',
+      'post-build-dart-script'
     ]);
     final val = Options(
         directories: $checkedConvert(json, 'directories',
             (v) => (v as List)?.map((e) => e as String)?.toList()),
         branch: $checkedConvert(json, 'branch', (v) => v as String),
-        buildConfig: $checkedConvert(json, 'buildConfig', (v) => v as String),
+        buildConfig: $checkedConvert(json, 'build-config', (v) => v as String),
         release: $checkedConvert(json, 'release', (v) => v as bool),
         message: $checkedConvert(json, 'message', (v) => v as String),
         sourceBranchInfo:
-            $checkedConvert(json, 'sourceBranchInfo', (v) => v as bool));
+            $checkedConvert(json, 'source-branch-info', (v) => v as bool),
+        postBuildDartScript: $checkedConvert(
+            json, 'post-build-dart-script', (v) => v as String));
     return val;
+  }, fieldKeyMap: const {
+    'buildConfig': 'build-config',
+    'sourceBranchInfo': 'source-branch-info',
+    'postBuildDartScript': 'post-build-dart-script'
   });
 }
 
@@ -77,9 +88,10 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
 
   writeNotNull('directories', instance.directories);
   writeNotNull('branch', instance.branch);
-  writeNotNull('buildConfig', instance.buildConfig);
+  writeNotNull('build-config', instance.buildConfig);
   writeNotNull('release', instance.release);
   writeNotNull('message', instance.message);
-  writeNotNull('sourceBranchInfo', instance.sourceBranchInfo);
+  writeNotNull('source-branch-info', instance.sourceBranchInfo);
+  writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   return val;
 }

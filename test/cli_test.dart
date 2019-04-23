@@ -21,6 +21,10 @@ Arguments:
                                    in the commit message
                                    (defaults to on)
 
+      --post-build-dart-script     Optional Dart script to run after all builds
+                                   have completed, but before files are committed
+                                   to the repository.
+
   -h, --help                       Prints usage information.''';
 
 void main() {

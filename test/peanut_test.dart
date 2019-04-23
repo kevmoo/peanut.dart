@@ -209,6 +209,92 @@ Commit: ${masterCommit.single.sha}''');
       await _expectStandardTreeContents(gitDir, te.sha);
     }
   }, timeout: const Timeout.factor(4));
+
+  group('post build script', () {
+    test('valid', () async {
+      await _simplePackage();
+      await d.file('post_build.dart', '''
+import 'dart:io';
+void main(List<String> args) {
+  File('\${args.single}/some_file.txt').writeAsStringSync('some file contents');
+}
+''').create();
+
+      await _pubGet();
+      final gitDir = await _initGitDir();
+      final masterCommit = await gitDir.showRef();
+
+      await _run(
+          options: const Options(postBuildDartScript: 'post_build.dart'));
+
+      expect(await gitDir.getBranchNames(),
+          unorderedEquals(['master', 'gh-pages']));
+
+      final ghBranchRef = await gitDir.getBranchReference('gh-pages');
+
+      final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+      expect(ghCommit.message, '''
+Built web
+
+Branch: master
+Commit: ${masterCommit.single.sha}''');
+
+      final treeContents = await gitDir.lsTree(ghCommit.treeSha);
+      expect(treeContents, hasLength(3));
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('example_script.dart.js', 'blob'),
+        ),
+      );
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('index.html', 'blob'),
+        ),
+      );
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('some_file.txt', 'blob'),
+        ),
+      );
+    });
+
+    test('missing', () async {
+      await _simplePackage();
+      await _pubGet();
+      await _initGitDir();
+
+      await expectLater(
+          _run(options: const Options(postBuildDartScript: 'post_build.dart')),
+          _throwsPeanutException(startsWith(
+              'The provided post-build Dart script does not exist or is not a file.')));
+    });
+
+    test('failed', () async {
+      await _simplePackage();
+      await d.file('post_build.dart', '''
+import 'dart:io';
+void main() {
+  print('sorry!');
+  exitCode = 123;
+}
+''').create();
+      await _pubGet();
+      await _initGitDir();
+
+      await expectLater(
+        _run(options: const Options(postBuildDartScript: 'post_build.dart')),
+        _throwsPeanutException(
+          allOf(
+            startsWith('Error running "'),
+            endsWith('\nExit code 123'),
+          ),
+        ),
+      );
+    });
+  }, timeout: const Timeout.factor(2));
 }
 
 String _standardTreeContentSha;

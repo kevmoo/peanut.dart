@@ -23,6 +23,7 @@ Options decodeYaml(Map yaml) => _$OptionsFromJson(yaml);
   checked: true,
   disallowUnrecognizedKeys: true,
   includeIfNull: false,
+  fieldRename: FieldRename.kebab,
 )
 @CliOptions()
 class Options {
@@ -60,6 +61,12 @@ class Options {
   )
   final bool sourceBranchInfo;
 
+  @CliOption(
+    help: 'Optional Dart script to run after all builds have completed, but '
+        'before files are committed to the repository.',
+  )
+  final String postBuildDartScript;
+
   @JsonKey(ignore: true)
   @CliOption(
     abbr: 'h',
@@ -79,6 +86,7 @@ class Options {
     bool release,
     String message,
     bool sourceBranchInfo,
+    this.postBuildDartScript,
     this.help = false,
     this.rest = const [],
   })  : branch = branch ?? _defaultBranch,
