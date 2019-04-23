@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Fix height of generated `index.html` page.
+
 ## 3.0.0
 
 - **BREAKING** renamed `diretory` option to `directories`.

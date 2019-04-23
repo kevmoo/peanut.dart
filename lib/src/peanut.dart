@@ -188,6 +188,7 @@ String _indexFile(Map<String, String> links) => '''
     <title>Examples</title>
     <meta name="generator" content="https://pub.dartlang.org/packages/peanut">
     <style>
+      html, body { height: 100%; }
       #root {
         display: flex;
         max-width: 900px;
