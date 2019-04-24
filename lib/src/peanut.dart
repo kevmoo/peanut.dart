@@ -104,7 +104,9 @@ Directories:
       await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
 
   try {
-    for (var sourcePkg in targetDirs.entries) {
+    final entriesList = targetDirs.entries.toList(growable: false);
+    for (var i = 0; i < entriesList.length; i++) {
+      final sourcePkg = entriesList[i];
       final targets = Map<String, String>.fromEntries(outputDirMap.entries
           .where((e) => p.isWithin(sourcePkg.key, e.key))
           .map((e) => MapEntry(
@@ -112,9 +114,12 @@ Directories:
 
       final pkgPath = sourcePkg.key == '.' ? workingDir : sourcePkg.key;
 
+      final countDetails =
+          targetDirs.length == 1 ? '' : ' (${i + 1} of ${entriesList.length})';
+
       print('');
       print(ansi.styleBold.wrap('''
-Package:     $pkgPath
+Package:     $pkgPath$countDetails
 Directories: ${sourcePkg.value.join(', ')}'''));
 
       await runBuildRunner(
