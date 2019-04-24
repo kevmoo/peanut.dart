@@ -246,8 +246,10 @@ ${links.entries.map(_linkForEntry).join('\n')}
 </html>
 ''';
 
+final _underscoreOrSlash = RegExp('_|/');
+
 String _prettyName(String input) =>
-    input.split('_').where((e) => e.isNotEmpty).map((e) {
+    input.split(_underscoreOrSlash).where((e) => e.isNotEmpty).map((e) {
       return e.substring(0, 1).toUpperCase() + e.substring(1);
     }).join(' ');
 
