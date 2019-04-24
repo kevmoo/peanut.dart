@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:git/git.dart';
@@ -180,12 +181,20 @@ package:peanut $packageVersion''';
     final commit = await gitDir.updateBranchWithDirectoryContents(
         options.branch, tempDir.path, message);
 
+    print('');
     if (commit == null) {
-      print(ansi.yellow
-          .wrap('There was no change in branch. No commit created.'));
+      print(ansi.wrapWith(
+        'No change in branch "${options.branch}". No commit created.\n',
+        [ansi.yellow, ansi.styleBold],
+      ));
     } else {
-      print('Branch "${options.branch}" was updated with output from: '
-          '${options.directories.join(', ')}.');
+      final indentedMessage =
+          LineSplitter.split(message).map((line) => '  $line\n').join();
+      final shortSha = commit.treeSha.substring(0, 10);
+      print(ansi.styleBold.wrap(
+        'Branch "${options.branch}" was updated with commit $shortSha',
+      ));
+      print(indentedMessage);
     }
   } finally {
     await tempDir.delete(recursive: true);
