@@ -48,7 +48,10 @@ Command:     ${['pub'].followedBy(args).join(' ')}
 
       if (_badFileGlob.matches(relativePath)) {
         if (deleteCount == 0) {
-          stdout.write('Deleting extra files from output directory');
+          print('');
+          stdout.write(
+            ansi.styleBold.wrap('Deleting extra files from output directory'),
+          );
         }
         stdout.write('.');
         file.deleteSync();
@@ -58,7 +61,7 @@ Command:     ${['pub'].followedBy(args).join(' ')}
   }
   if (deleteCount > 0) {
     // Ensure we add a new line is added after printing `.` for deleted files
-    print('');
+    print(ansi.styleBold.wrap('\nDeleted files: $deleteCount'));
   }
 }
 

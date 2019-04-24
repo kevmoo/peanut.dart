@@ -1,3 +1,7 @@
+## 3.0.2
+
+- Improve printed output while running.
+
 ## 3.0.1
 
 - Fix height of generated `index.html` page.
