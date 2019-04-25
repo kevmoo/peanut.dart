@@ -1,3 +1,8 @@
+## 3.0.3
+
+- Improve printed output while running.
+- Updated dependencies.
+
 ## 3.0.2
 
 - Improve printed output while running.

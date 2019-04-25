@@ -59,8 +59,12 @@ Future<void> run({Options options, String workingDir}) async {
     }
   }
 
+  String prettyPkgPath(String pkgPath) => pkgPath == '.' ? workingDir : pkgPath;
+
+  print(ansi.styleBold.wrap('Validating packages:'));
   for (var entry in targetDirs.entries) {
     final entryDir = pkgNormalize(workingDir, entry.key);
+    print(ansi.styleBold.wrap('  ${prettyPkgPath(entry.key)}'));
     try {
       await checkPubspecLock(entryDir);
     } on FileSystemException catch (e) {
@@ -112,7 +116,7 @@ Directories:
           .map((e) => MapEntry(
               p.split(e.key).last, pkgNormalize(tempDir.path, e.value))));
 
-      final pkgPath = sourcePkg.key == '.' ? workingDir : sourcePkg.key;
+      final pkgPath = prettyPkgPath(sourcePkg.key);
 
       final countDetails =
           targetDirs.length == 1 ? '' : ' (${i + 1} of ${entriesList.length})';
