@@ -31,7 +31,7 @@ Future<void> run({Options options, String workingDir}) async {
   final gitDir = await GitDir.fromExisting(workingDir, allowSubdirectory: true);
 
   // current branch cannot be targetBranch
-  final currentBranch = await gitDir.getCurrentBranch();
+  final currentBranch = await gitDir.currentBranch();
 
   if (currentBranch.branchName == options.branch) {
     throw PeanutException(
@@ -169,7 +169,7 @@ Directories: ${sourcePkg.value.join(', ')}'''));
     }
 
     if (options.sourceBranchInfo) {
-      final currentBranch = await gitDir.getCurrentBranch();
+      final currentBranch = await gitDir.currentBranch();
       var commitInfo = currentBranch.sha;
       if (!await gitDir.isWorkingTreeClean()) {
         commitInfo = '$commitInfo (dirty)';

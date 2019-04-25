@@ -103,12 +103,12 @@ void main() {
 
     await _run();
 
-    expect(
-        await gitDir.getBranchNames(), unorderedEquals(['master', 'gh-pages']));
+    expect((await gitDir.branches()).map((br) => br.branchName),
+        unorderedEquals(['master', 'gh-pages']));
 
-    final ghBranchRef = await gitDir.getBranchReference('gh-pages');
+    final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
     expect(ghCommit.message, '''
 Built web
 
@@ -128,12 +128,12 @@ package:peanut $packageVersion''');
 
     await _run(options: const Options(directories: ['example', 'web']));
 
-    expect(
-        await gitDir.getBranchNames(), unorderedEquals(['master', 'gh-pages']));
+    expect((await gitDir.branches()).map((br) => br.branchName),
+        unorderedEquals(['master', 'gh-pages']));
 
-    final ghBranchRef = await gitDir.getBranchReference('gh-pages');
+    final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
     expect(ghCommit.message, '''
 Built example, web
 
@@ -179,12 +179,12 @@ package:peanut $packageVersion''');
       ],
     ));
 
-    expect(
-        await gitDir.getBranchNames(), unorderedEquals(['master', 'gh-pages']));
+    expect((await gitDir.branches()).map((br) => br.branchName),
+        unorderedEquals(['master', 'gh-pages']));
 
-    final ghBranchRef = await gitDir.getBranchReference('gh-pages');
+    final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
     expect(ghCommit.message, '''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
@@ -234,12 +234,12 @@ void main(List<String> args) {
       await _run(
           options: const Options(postBuildDartScript: 'post_build.dart'));
 
-      expect(await gitDir.getBranchNames(),
+      expect((await gitDir.branches()).map((br) => br.branchName),
           unorderedEquals(['master', 'gh-pages']));
 
-      final ghBranchRef = await gitDir.getBranchReference('gh-pages');
+      final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-      final ghCommit = await gitDir.getCommit(ghBranchRef.sha);
+      final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
       expect(ghCommit.message, '''
 Built web
 
@@ -349,12 +349,12 @@ Future<void> _pubGet({String parent}) async {
 }
 
 Future<GitDir> _initGitDir() async {
-  final gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
+  final gitDir = await GitDir.init(d.sandbox, allowContent: true);
 
   await gitDir.runCommand(['add', '.']);
   await gitDir.runCommand(['commit', '-m', 'dummy commit']);
 
-  expect(await gitDir.getBranchNames(), ['master']);
+  expect((await gitDir.branches()).map((br) => br.branchName), ['master']);
   return gitDir;
 }
 
