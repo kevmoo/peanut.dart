@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:peanut/src/utils.dart';
 import 'package:test/test.dart';
 import 'package:test_process/test_process.dart';
 
@@ -27,7 +28,7 @@ Arguments:
 
 void main() {
   test('help', () async {
-    final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--help']);
+    final proc = await _runPeanut(['--help']);
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
@@ -43,7 +44,7 @@ $_output''');
   });
 
   test('bad flag', () async {
-    final proc = await TestProcess.start('dart', ['bin/peanut.dart', '--bob']);
+    final proc = await _runPeanut(['--bob']);
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
@@ -55,8 +56,7 @@ $_output''');
   });
 
   test('extra args', () async {
-    final proc = await TestProcess.start(
-        'dart', ['bin/peanut.dart', 'foo', 'bar', 'baz']);
+    final proc = await _runPeanut(['foo', 'bar', 'baz']);
 
     final output = await proc.stdoutStream().join('\n');
     expect(output, '''
@@ -67,3 +67,6 @@ $_output''');
     await proc.shouldExit(64);
   });
 }
+
+Future<TestProcess> _runPeanut(List<String> args) =>
+    TestProcess.start(dartPath, ['bin/peanut.dart']..addAll(args));
