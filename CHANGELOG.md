@@ -1,6 +1,7 @@
 ## 3.1.0
 
 - Support configuring builder options.
+- Require Dart SDK `>=2.3.0-dev.0.1 <3.0.0`.
 
 ## 3.0.3
 
