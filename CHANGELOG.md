@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Support configuring builder options.
+
 ## 3.0.3
 
 - Improve printed output while running.

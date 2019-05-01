@@ -15,6 +15,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     message: result['message'] as String,
     sourceBranchInfo: result['source-branch-info'] as bool,
     postBuildDartScript: result['post-build-dart-script'] as String,
+    builderOptions: _openBuildConfig(result['builder-options'] as String),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -34,6 +35,9 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('post-build-dart-script',
       help:
           'Optional Dart script to run after all builds have completed, but before files are committed to the repository.')
+  ..addOption('builder-options',
+      help:
+          'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.')
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
@@ -58,7 +62,8 @@ Options _$OptionsFromJson(Map json) {
       'release',
       'message',
       'source-branch-info',
-      'post-build-dart-script'
+      'post-build-dart-script',
+      'builder-options'
     ]);
     final val = Options(
         directories: $checkedConvert(json, 'directories',
@@ -69,13 +74,16 @@ Options _$OptionsFromJson(Map json) {
         message: $checkedConvert(json, 'message', (v) => v as String),
         sourceBranchInfo:
             $checkedConvert(json, 'source-branch-info', (v) => v as bool),
-        postBuildDartScript: $checkedConvert(
-            json, 'post-build-dart-script', (v) => v as String));
+        postBuildDartScript:
+            $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
+        builderOptions: $checkedConvert(json, 'builder-options',
+            (v) => v == null ? null : _mapCast(v as Map)));
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',
     'sourceBranchInfo': 'source-branch-info',
-    'postBuildDartScript': 'post-build-dart-script'
+    'postBuildDartScript': 'post-build-dart-script',
+    'builderOptions': 'builder-options'
   });
 }
 
@@ -95,5 +103,6 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('message', instance.message);
   writeNotNull('source-branch-info', instance.sourceBranchInfo);
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
+  writeNotNull('builder-options', instance.builderOptions);
   return val;
 }

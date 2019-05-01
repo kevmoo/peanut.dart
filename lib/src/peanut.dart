@@ -129,8 +129,7 @@ Directories: ${sourcePkg.value.join(', ')}'''));
       await runBuildRunner(
         pkgNormalize(workingDir, sourcePkg.key),
         targets,
-        options.buildConfig,
-        options.release,
+        options,
       );
     }
 

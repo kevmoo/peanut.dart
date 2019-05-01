@@ -1,5 +1,4 @@
 #!/usr/bin/env dart
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:io/ansi.dart';
@@ -8,6 +7,8 @@ import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
 import 'package:peanut/src/version.dart';
 import 'package:yaml/yaml.dart';
+
+const _formatExceptionHeader = 'FormatException: ';
 
 void main(List<String> args) async {
   Options options;
@@ -20,7 +21,11 @@ void main(List<String> args) async {
     exitCode = ExitCode.usage.code;
     return;
   } on FormatException catch (e) {
-    printError(e.message);
+    var message = e.toString();
+    if (message.startsWith(_formatExceptionHeader)) {
+      message = message.substring(_formatExceptionHeader.length);
+    }
+    printError(message.trim());
     print('');
     _printUsage();
     exitCode = ExitCode.usage.code;
@@ -73,15 +78,12 @@ void main(List<String> args) async {
   }
 }
 
-String _indent(String input) =>
-    LineSplitter.split(input).map((l) => '  $l'.trimRight()).join('\n');
-
 void _printUsage() {
   print('''
 Usage: peanut [<args>]
 
 ${styleBold.wrap('Arguments:')}
-${_indent(parser.usage)}''');
+${parser.usage}''');
 }
 
 const _peanutConfigFile = 'peanut.yaml';
