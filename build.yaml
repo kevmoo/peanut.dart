@@ -5,9 +5,3 @@ targets:
         # These are globs for the entrypoints you want to compile.
         generate_for:
         - example/**.dart
-        options:
-          dart2js_args:
-            # Align with the default configuration of dart2js in `pub build`
-            - --show-package-warnings
-            - --no-source-maps
-            - --minify

@@ -1,30 +1,37 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+import 'package:peanut/src/options.dart';
 import 'package:peanut/src/utils.dart';
 import 'package:test/test.dart';
+import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
 final _output = r'''
 Usage: peanut [<args>]
 
 Arguments:
-  -d, --directories                (defaults to "web")
-  -b, --branch                     (defaults to "gh-pages")
-  -c, --build-config               The configuration to use when running
-                                   `build_runner`.
+-d, --directories                (defaults to "web")
+-b, --branch                     (defaults to "gh-pages")
+-c, --build-config               The configuration to use when running
+                                 `build_runner`.
 
-      --[no-]release               (defaults to on)
-  -m, --message                    (defaults to "Built <directories>")
-      --[no-]source-branch-info    Includes the name of the source branch and SHA
-                                   in the commit message
-                                   (defaults to on)
+    --[no-]release               (defaults to on)
+-m, --message                    (defaults to "Built <directories>")
+    --[no-]source-branch-info    Includes the name of the source branch and SHA
+                                 in the commit message
+                                 (defaults to on)
 
-      --post-build-dart-script     Optional Dart script to run after all builds
-                                   have completed, but before files are committed
-                                   to the repository.
+    --post-build-dart-script     Optional Dart script to run after all builds
+                                 have completed, but before files are committed
+                                 to the repository.
 
-  -h, --help                       Prints usage information.
-      --version                    Print the current version.''';
+    --builder-options            Builder options YAML or a path to a file
+                                 containing builder options YAML.
+                                 See the README for details.
+
+-h, --help                       Prints usage information.
+    --version                    Print the current version.''';
 
 void main() {
   test('help', () async {
@@ -65,6 +72,64 @@ I don't understand the extra arguments: foo, bar, baz
 $_output''');
 
     await proc.shouldExit(64);
+  });
+
+  group('builder options', () {
+    test('not provided', () async {
+      expect(parseOptions([]).builderOptions, isNull);
+    });
+
+    void expectParseOptionsThrows(List<String> args, matcher) {
+      expect(
+        () => parseOptions(
+              args,
+            ),
+        throwsA(
+          isFormatException.having((e) => e.toString(), 'toString()', matcher),
+        ),
+      );
+    }
+
+    group('config file', () {
+      test('no file', () {
+        expectParseOptionsThrows([
+          '--builder-options',
+          p.join(d.sandbox, 'some_file.yaml'),
+        ], '''
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor valid YAML.''');
+      });
+
+      test('valid file', () async {
+        await d.file('some_file.yaml', '{"bob": {"jones":42}}').create();
+
+        final options = parseOptions([
+          '--builder-options',
+          p.join(d.sandbox, 'some_file.yaml'),
+        ]);
+
+        expect(options.builderOptions, hasLength(1));
+        expect(options.builderOptions, containsPair('bob', {'jones': 42}));
+      });
+
+      test('invalid file', () async {
+        await d.file('some_file.yaml', 'not good yaml').create();
+
+        expectParseOptionsThrows([
+          '--builder-options',
+          p.join(d.sandbox, 'some_file.yaml'),
+        ], '''
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor valid YAML.''');
+      });
+
+      test('invalid yaml shape', () async {
+        await d.file('some_file.yaml', '{"bob": "jones"}').create();
+
+        expectParseOptionsThrows([
+          '--builder-options',
+          p.join(d.sandbox, 'some_file.yaml'),
+        ], 'FormatException: The value for "bob" was not a Map.');
+      });
+    });
   });
 }
 

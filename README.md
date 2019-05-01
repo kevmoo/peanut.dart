@@ -27,23 +27,27 @@ $ peanut --help
 Usage: peanut [<args>]
 
 Arguments:
-  -d, --directories                (defaults to "web")
-  -b, --branch                     (defaults to "gh-pages")
-  -c, --build-config               The configuration to use when running
-                                   `build_runner`.
+-d, --directories                (defaults to "web")
+-b, --branch                     (defaults to "gh-pages")
+-c, --build-config               The configuration to use when running
+                                 `build_runner`.
 
-      --[no-]release               (defaults to on)
-  -m, --message                    (defaults to "Built <directories>")
-      --[no-]source-branch-info    Includes the name of the source branch and SHA
-                                   in the commit message
-                                   (defaults to on)
+    --[no-]release               (defaults to on)
+-m, --message                    (defaults to "Built <directories>")
+    --[no-]source-branch-info    Includes the name of the source branch and SHA
+                                 in the commit message
+                                 (defaults to on)
 
-      --post-build-dart-script     Optional Dart script to run after all builds
-                                   have completed, but before files are committed
-                                   to the repository.
+    --post-build-dart-script     Optional Dart script to run after all builds
+                                 have completed, but before files are committed
+                                 to the repository.
 
-  -h, --help                       Prints usage information.
-      --version                    Print the current version.
+    --builder-options            Builder options YAML or a path to a file
+                                 containing builder options YAML.
+                                 See the README for details.
+
+-h, --help                       Prints usage information.
+    --version                    Print the current version.
 ```
 
 ## Configuration file

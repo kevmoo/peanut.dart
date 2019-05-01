@@ -1,17 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:glob/glob.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
+import 'options.dart';
 import 'utils.dart';
 
 Future<void> runBuildRunner(
   String pkgDirectory,
   Map<String, String> targets,
-  String config,
-  bool release,
+  Options options,
 ) async {
   final targetsValue =
       targets.entries.map((e) => '${e.key}:${e.value}').join(',');
@@ -20,11 +21,25 @@ Future<void> runBuildRunner(
     'run',
     'build_runner',
     'build',
-    release ? '--release' : '--no-release',
+    options.release ? '--release' : '--no-release',
   ];
 
-  if (config != null) {
-    args.addAll(['--config', config]);
+  if (options.buildConfig != null) {
+    args.addAll(['--config', options.buildConfig]);
+  }
+
+  if (options.builderOptions != null) {
+    for (var option in options.builderOptions.entries) {
+      for (var optionEntry in option.value.entries) {
+        // --define=build_web_compilers:entrypoint=dart2js_args="[-O4]"
+        final argValue =
+            '${option.key}=${optionEntry.key}=${jsonEncode(optionEntry.value)}';
+        args.addAll([
+          '--define',
+          argValue,
+        ]);
+      }
+    }
   }
 
   args.addAll([

@@ -1,3 +1,9 @@
 # Configuration for https://pub.dartlang.org/packages/peanut
 directories:
 - example
+
+builder-options:
+  build_web_compilers|entrypoint:
+    dart2js_args:
+    - --minify
+    - --no-source-maps
