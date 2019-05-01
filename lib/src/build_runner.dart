@@ -17,41 +17,41 @@ Future<void> runBuildRunner(
   final targetsValue =
       targets.entries.map((e) => '${e.key}:${e.value}').join(',');
 
-  final args = [
-    'run',
-    'build_runner',
-    'build',
-    options.release ? '--release' : '--no-release',
+  final args = <List<String>>[
+    [
+      'pub',
+      'run',
+      'build_runner',
+      'build',
+      options.release ? '--release' : '--no-release',
+    ],
+    if (options.buildConfig != null) ['--config', options.buildConfig],
+    if (options.builderOptions != null)
+      for (var option in options.builderOptions.entries)
+        for (var optionEntry in option.value.entries)
+          [
+            '--define',
+            _defineValue(option.key, optionEntry.key, optionEntry.value),
+          ],
+    [
+      '--output',
+      targetsValue,
+    ]
   ];
 
-  if (options.buildConfig != null) {
-    args.addAll(['--config', options.buildConfig]);
-  }
-
-  if (options.builderOptions != null) {
-    for (var option in options.builderOptions.entries) {
-      for (var optionEntry in option.value.entries) {
-        // --define=build_web_compilers:entrypoint=dart2js_args="[-O4]"
-        final argValue =
-            '${option.key}=${optionEntry.key}=${jsonEncode(optionEntry.value)}';
-        args.addAll([
-          '--define',
-          argValue,
-        ]);
-      }
-    }
-  }
-
-  args.addAll([
-    '--output',
-    targetsValue,
-  ]);
+  final prettyArgs =
+      args.map((list) => list.join(' ')).join(' \\\n$_argsExtraLinePrefix');
 
   print(ansi.styleBold.wrap('''
-Command:     ${['pub'].followedBy(args).join(' ')}
+$_commandPrefix$prettyArgs
 '''));
 
-  await runProcess(pubPath, args, workingDirectory: pkgDirectory);
+  final flatArgs = args
+      .expand((list) => list)
+      .skip(1) // skip `pub`
+      .toList();
+
+  await runProcess(pubPath, flatArgs, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
 
@@ -79,6 +79,13 @@ Command:     ${['pub'].followedBy(args).join(' ')}
     print(ansi.styleBold.wrap('\nDeleted files: $deleteCount'));
   }
 }
+
+String _defineValue(String builder, String option, Object value) =>
+    '$builder=$option=${jsonEncode(value)}';
+
+const _commandPrefix = 'Command:     ';
+
+final _argsExtraLinePrefix = ' ' * (_commandPrefix.length + 2);
 
 const _globItems = {
   '**.dart',
