@@ -1,3 +1,6 @@
+@Timeout.factor(4)
+library peanut_test;
+
 import 'dart:io';
 
 import 'package:git/git.dart';
@@ -118,7 +121,7 @@ Commit: ${masterCommit.single.sha}
 package:peanut $packageVersion''');
 
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
-  }, timeout: const Timeout.factor(2));
+  });
 
   test('1 package, 2 build dirs', () async {
     await _simplePackage(buildDirs: {'example', 'web'});
@@ -154,7 +157,7 @@ package:peanut $packageVersion''');
     for (var te in treeContents.where((te) => te.type == 'tree')) {
       await _expectStandardTreeContents(gitDir, te.sha);
     }
-  }, timeout: const Timeout.factor(2));
+  });
 
   test('2 packages, 2 build dirs', () async {
     const packages = {'pkg1', 'pkg2'};
@@ -215,7 +218,7 @@ package:peanut $packageVersion''');
     for (var te in pkgContent) {
       await _expectStandardTreeContents(gitDir, te.sha);
     }
-  }, timeout: const Timeout.factor(4));
+  });
 
   group('post build script', () {
     test('valid', () async {
@@ -303,7 +306,7 @@ void main() {
         ),
       );
     });
-  }, timeout: const Timeout.factor(2));
+  });
 }
 
 String _standardTreeContentSha;
