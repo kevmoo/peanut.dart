@@ -17,51 +17,6 @@ const defaultMessage = 'Built <$_directoryFlag>';
 
 ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 
-List<String> _directoriesConvert(String input) =>
-    input.split(',').map((v) => v.trim()).toList();
-
-Map<String, Map<String, dynamic>> _openBuildConfig(String pathOrYamlMap) {
-  if (pathOrYamlMap == null) {
-    return null;
-  }
-
-  final stringContent = FileSystemEntity.isFileSync(pathOrYamlMap)
-      ? File(pathOrYamlMap).readAsStringSync()
-      : pathOrYamlMap;
-
-  try {
-    final node = loadYaml(stringContent, sourceUrl: pathOrYamlMap);
-
-    if (node is YamlMap) {
-      return _builderOptionsConvert(node);
-    }
-
-    throw FormatException(
-        '"$pathOrYamlMap" is neither a path to a YAML file nor valid YAML.');
-  } catch (e) {
-    print(red.wrap('Problem with --builder-options'));
-    rethrow;
-  }
-}
-
-Map<String, Map<String, dynamic>> _builderOptionsConvert(YamlMap map) =>
-    Map<String, Map<String, dynamic>>.fromEntries(
-      map.entries.map((e) {
-        final value = e.value;
-        if (value is YamlMap) {
-          return MapEntry(
-            e.key as String,
-            value.cast<String, dynamic>(),
-          );
-        }
-
-        throw FormatException('The value for "${e.key}" was not a Map.');
-      }),
-    );
-
-Map<String, Map<String, dynamic>> _mapCast(Map source) =>
-    _builderOptionsConvert(source as YamlMap);
-
 Options decodeYaml(Map yaml) => _$OptionsFromJson(yaml);
 
 @JsonSerializable(
@@ -161,3 +116,48 @@ See the README for details.''',
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
 }
+
+List<String> _directoriesConvert(String input) =>
+    input.split(',').map((v) => v.trim()).toList();
+
+Map<String, Map<String, dynamic>> _openBuildConfig(String pathOrYamlMap) {
+  if (pathOrYamlMap == null) {
+    return null;
+  }
+
+  final stringContent = FileSystemEntity.isFileSync(pathOrYamlMap)
+      ? File(pathOrYamlMap).readAsStringSync()
+      : pathOrYamlMap;
+
+  try {
+    final node = loadYaml(stringContent, sourceUrl: pathOrYamlMap);
+
+    if (node is YamlMap) {
+      return _builderOptionsConvert(node);
+    }
+
+    throw FormatException(
+        '"$pathOrYamlMap" is neither a path to a YAML file nor valid YAML.');
+  } catch (e) {
+    print(red.wrap('Problem with --builder-options'));
+    rethrow;
+  }
+}
+
+Map<String, Map<String, dynamic>> _builderOptionsConvert(YamlMap map) =>
+    Map<String, Map<String, dynamic>>.fromEntries(
+      map.entries.map((e) {
+        final value = e.value;
+        if (value is YamlMap) {
+          return MapEntry(
+            e.key as String,
+            value.cast<String, dynamic>(),
+          );
+        }
+
+        throw FormatException('The value for "${e.key}" was not a Map.');
+      }),
+    );
+
+Map<String, Map<String, dynamic>> _mapCast(Map source) =>
+    _builderOptionsConvert(source as YamlMap);
