@@ -1,12 +1,12 @@
 #!/usr/bin/env dart
 import 'dart:io';
 
+import 'package:checked_yaml/checked_yaml.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
 import 'package:peanut/src/version.dart';
-import 'package:yaml/yaml.dart';
 
 const _formatExceptionHeader = 'FormatException: ';
 
@@ -14,10 +14,9 @@ void main(List<String> args) async {
   Options options;
   try {
     options = _getOptions(args);
-    // TODO: handle `CheckedFromJsonException` from `json_annotation`
-  } on YamlException catch (e) {
+  } on ParsedYamlException catch (e) {
     printError('Error decoding "$_peanutConfigFile"');
-    printError(e.span.message(e.message));
+    printError(e.formattedMessage);
     exitCode = ExitCode.usage.code;
     return;
   } on FormatException catch (e) {
@@ -93,18 +92,13 @@ final _optionsFile = File(_peanutConfigFile);
 Options _getOptions(List<String> args) {
   if (_optionsFile.existsSync()) {
     if (args.isEmpty) {
-      final yamlDoc = loadYamlDocument(
+      return checkedYamlDecode(
         _optionsFile.readAsStringSync(),
+        decodeYaml,
         sourceUrl: _peanutConfigFile,
       );
-
-      final yamlContent = yamlDoc.contents;
-
-      if (yamlContent is YamlMap) {
-        return decodeYaml(yamlContent);
-      }
-
-      throw YamlException('Content was not a Map.', yamlDoc.span);
+    } else {
+      // We print a notice that the file is ignored because args above in main.
     }
   }
 

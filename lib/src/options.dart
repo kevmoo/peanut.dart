@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:build_cli_annotations/build_cli_annotations.dart';
-import 'package:io/ansi.dart';
+import 'package:checked_yaml/checked_yaml.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yaml/yaml.dart';
 
@@ -74,7 +74,7 @@ Builder options YAML or a path to a file containing builder options YAML.
 See the README for details.''',
     convert: _openBuildConfig,
   )
-  @JsonKey(fromJson: _mapCast)
+  @JsonKey(fromJson: _builderOptionsFromMap)
   final Map<String, Map<String, dynamic>> builderOptions;
 
   @JsonKey(ignore: true)
@@ -120,31 +120,40 @@ See the README for details.''',
 List<String> _directoriesConvert(String input) =>
     input.split(',').map((v) => v.trim()).toList();
 
-Map<String, Map<String, dynamic>> _openBuildConfig(String pathOrYamlMap) {
+Map<String, Map<String, dynamic>> _openBuildConfig(final String pathOrYamlMap) {
   if (pathOrYamlMap == null) {
     return null;
   }
 
-  final stringContent = FileSystemEntity.isFileSync(pathOrYamlMap)
-      ? File(pathOrYamlMap).readAsStringSync()
-      : pathOrYamlMap;
+  var yamlPath = pathOrYamlMap;
+  String stringContent;
+
+  if (FileSystemEntity.isFileSync(pathOrYamlMap)) {
+    stringContent = File(pathOrYamlMap).readAsStringSync();
+  } else {
+    stringContent = pathOrYamlMap;
+    yamlPath = null;
+  }
 
   try {
-    final node = loadYaml(stringContent, sourceUrl: pathOrYamlMap);
-
-    if (node is YamlMap) {
-      return _builderOptionsConvert(node);
+    return checkedYamlDecode(
+      stringContent,
+      _builderOptionsConvert,
+      sourceUrl: yamlPath,
+    );
+  } on ParsedYamlException catch (e) {
+    if (e.yamlNode != null && e.yamlNode is! YamlMap) {
+      throw FormatException(
+          '"$pathOrYamlMap" is neither a path to a YAML file nor a YAML map.');
     }
-
-    throw FormatException(
-        '"$pathOrYamlMap" is neither a path to a YAML file nor valid YAML.');
-  } catch (e) {
-    print(red.wrap('Problem with --builder-options'));
     rethrow;
   }
 }
 
-Map<String, Map<String, dynamic>> _builderOptionsConvert(YamlMap map) =>
+Map<String, Map<String, dynamic>> _builderOptionsFromMap(Map source) =>
+    _builderOptionsConvert(source as YamlMap);
+
+Map<String, Map<String, dynamic>> _builderOptionsConvert(Map map) =>
     Map<String, Map<String, dynamic>>.fromEntries(
       map.entries.map((e) {
         final value = e.value;
@@ -158,6 +167,3 @@ Map<String, Map<String, dynamic>> _builderOptionsConvert(YamlMap map) =>
         throw FormatException('The value for "${e.key}" was not a Map.');
       }),
     );
-
-Map<String, Map<String, dynamic>> _mapCast(Map source) =>
-    _builderOptionsConvert(source as YamlMap);
