@@ -77,7 +77,7 @@ Options _$OptionsFromJson(Map json) {
         postBuildDartScript:
             $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
         builderOptions: $checkedConvert(json, 'builder-options',
-            (v) => v == null ? null : _mapCast(v as Map)));
+            (v) => v == null ? null : _builderOptionsFromMap(v as Map)));
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',

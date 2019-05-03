@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:checked_yaml/checked_yaml.dart';
 import 'package:path/path.dart' as p;
 import 'package:peanut/src/options.dart';
 import 'package:peanut/src/utils.dart';
@@ -96,7 +97,7 @@ $_output''');
           '--builder-options',
           p.join(d.sandbox, 'some_file.yaml'),
         ], '''
-FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor valid YAML.''');
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''');
       });
 
       test('valid file', () async {
@@ -118,7 +119,7 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
           '--builder-options',
           p.join(d.sandbox, 'some_file.yaml'),
         ], '''
-FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor valid YAML.''');
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''');
       });
 
       test('invalid yaml shape', () async {
@@ -128,6 +129,30 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
           '--builder-options',
           p.join(d.sandbox, 'some_file.yaml'),
         ], 'FormatException: The value for "bob" was not a Map.');
+      });
+
+      test('invalid yaml format', () async {
+        await d.file('some_file.yaml', '{').create();
+
+        expect(
+          () => parseOptions(
+                [
+                  '--builder-options',
+                  p.join(d.sandbox, 'some_file.yaml'),
+                ],
+              ),
+          throwsA(
+            isA<ParsedYamlException>().having((e) {
+              printOnFailure(e.formattedMessage);
+              return e.formattedMessage;
+            }, 'formattedMessage', '''
+line 1, column 2 of ${p.join(d.sandbox, 'some_file.yaml')}: Expected node content.
+  ╷
+1 │ {
+  │  ^
+  ╵'''),
+          ),
+        );
       });
     });
   });

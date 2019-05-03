@@ -1,3 +1,7 @@
+## 3.1.1
+
+- Print a more helpful error when configuration is invalid.
+
 ## 3.1.0
 
 - Support configuring builder options.
