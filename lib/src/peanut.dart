@@ -165,7 +165,7 @@ Directories: ${sourcePkg.value.join(', ')}'''));
 
       await runProcess(
         dartPath,
-        [postBuildScriptPath, tempDir.path],
+        [postBuildScriptPath, tempDir.path, jsonEncode(outputDirMap)],
         workingDirectory: workingDir,
       );
       print(ansi.styleBold.wrap('Post-build script: complete\n'));

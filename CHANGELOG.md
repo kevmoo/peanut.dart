@@ -1,3 +1,9 @@
+## 3.2.0
+
+- If `post-build-dart-script` is provided, pass a second command line argument
+  after the build directory. A JSON map between the source directory relative
+  to the working directory and the corresponding build directory.
+
 ## 3.1.1
 
 - Print a more helpful error when configuration is invalid.
