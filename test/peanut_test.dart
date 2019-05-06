@@ -1,6 +1,7 @@
 @Timeout.factor(4)
 library peanut_test;
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:git/git.dart';
@@ -222,11 +223,13 @@ package:peanut $packageVersion''');
 
   group('post build script', () {
     test('valid', () async {
-      await _simplePackage();
+      const buildDirs = {'example', 'web'};
+      await _simplePackage(buildDirs: buildDirs);
       await d.file('post_build.dart', '''
 import 'dart:io';
 void main(List<String> args) {
-  File('\${args.single}/some_file.txt').writeAsStringSync('some file contents');
+  File('\${args[0]}/some_file.txt').writeAsStringSync('some file contents');
+  File('\${args[0]}/map.json').writeAsStringSync(args[1]);
 }
 ''').create();
 
@@ -235,7 +238,10 @@ void main(List<String> args) {
       final masterCommit = await gitDir.showRef();
 
       await _run(
-          options: const Options(postBuildDartScript: 'post_build.dart'));
+        options: Options(
+            directories: buildDirs.toList(),
+            postBuildDartScript: 'post_build.dart'),
+      );
 
       expect((await gitDir.branches()).map((br) => br.branchName),
           unorderedEquals(['master', 'gh-pages']));
@@ -244,7 +250,7 @@ void main(List<String> args) {
 
       final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
       expect(ghCommit.message, '''
-Built web
+Built example, web
 
 Branch: master
 Commit: ${masterCommit.single.sha}
@@ -252,25 +258,24 @@ Commit: ${masterCommit.single.sha}
 package:peanut $packageVersion''');
 
       final treeContents = await gitDir.lsTree(ghCommit.treeSha);
-      expect(treeContents, hasLength(3));
       expect(
         treeContents,
-        contains(
-          _treeEntry('example_script.dart.js', 'blob'),
-        ),
-      );
-      expect(
-        treeContents,
-        contains(
+        unorderedEquals([
+          _treeEntry('example', 'tree'),
           _treeEntry('index.html', 'blob'),
-        ),
-      );
-      expect(
-        treeContents,
-        contains(
+          _treeEntry('map.json', 'blob'),
           _treeEntry('some_file.txt', 'blob'),
-        ),
+          _treeEntry('web', 'tree'),
+        ]),
       );
+
+      final mapJsonSha =
+          treeContents.singleWhere((te) => te.name == 'map.json').sha;
+
+      final result = await gitDir.runCommand(['cat-file', '-p', mapJsonSha]);
+      final mapOutput =
+          jsonDecode(result.stdout as String) as Map<String, dynamic>;
+      expect(mapOutput, Map.fromIterable(buildDirs));
     });
 
     test('missing', () async {
