@@ -76,8 +76,8 @@ Options _$OptionsFromJson(Map json) {
             $checkedConvert(json, 'source-branch-info', (v) => v as bool),
         postBuildDartScript:
             $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
-        builderOptions: $checkedConvert(json, 'builder-options',
-            (v) => v == null ? null : _builderOptionsFromMap(v as Map)));
+        builderOptions: $checkedConvert(
+            json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)));
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',
