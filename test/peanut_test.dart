@@ -386,7 +386,7 @@ name: peanut_test
 
 dev_dependencies:
   build_runner: '>=0.8.10 <2.0.0'
-  build_web_compilers: '>=0.3.6 <2.0.0'
+  build_web_compilers: '>=1.0.0 <3.0.0'
 ''').create(parent);
 
   await d.file('.gitignore', '.dart_tool/').create(parent);
