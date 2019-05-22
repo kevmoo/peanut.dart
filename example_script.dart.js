@@ -41,7 +41,7 @@ u.push(s)}var s=u[0]
 s.$R=e
 s.$D=f
 var r=i
-if(typeof r=="number")r=r+x
+if(typeof r=="number")r+=x
 var q=h[0]
 s.$stubName=q
 var p=tearOff(u,j||0,r,c,q,d)
