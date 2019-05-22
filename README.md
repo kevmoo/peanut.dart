@@ -63,6 +63,20 @@ directories:
 - example
 ```
 
+## Examples
+
+- https://github.com/dart-lang/sample-pop_pop_win/
+  - Output: https://dart-lang.github.io/sample-pop_pop_win/
+  - No custom configuration.
+- https://github.com/kevmoo/pubviz
+  - Output: http://kevmoo.github.io/pubviz/
+  - Custom `peanut.yaml` file to specify `builder-options` and `example` as the
+    source directory.
+- https://github.com/flutter/samples/tree/master/web
+  - Output: https://flutter.github.io/samples/
+  - Custom `peanut.yaml` file to specify `builder-options`, multiple source
+    directories, and a custom post-build file.
+
 ## Git tricks
 
 The easiest way to push your `gh-pages` branch to github (without switching from

@@ -1,3 +1,7 @@
+## 3.2.1
+
+- Added examples to README.
+
 ## 3.2.0
 
 - If `post-build-dart-script` is provided, pass a second command line argument
