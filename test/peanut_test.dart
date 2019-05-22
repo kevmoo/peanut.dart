@@ -350,10 +350,15 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
 }
 
 Future<void> _pubGet({String parent}) async {
-  final proc = await Process.start(
-      'pub', ['get', '--offline', '--no-precompile'],
+  final proc = await Process.run('pub', ['get', '--offline', '--no-precompile'],
       workingDirectory: p.join(d.sandbox, parent));
-  expect(await proc.exitCode, 0);
+  expect(proc.exitCode, 0,
+      reason: [
+        'STDOUT:',
+        proc.stdout as String,
+        'STDERR:',
+        proc.stderr as String,
+      ].map((str) => str.trim()).join('\n'));
 }
 
 Future<GitDir> _initGitDir() async {
