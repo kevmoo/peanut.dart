@@ -214,7 +214,7 @@ String _indexFile(Map<String, String> links) => '''
 <html lang="en">
   <head>
     <title>Examples</title>
-    <meta name="generator" content="https://pub.dartlang.org/packages/peanut">
+    <meta name="generator" content="https://pub.dev/packages/peanut">
     <style>
       html, body { height: 100%; }
       #root {
