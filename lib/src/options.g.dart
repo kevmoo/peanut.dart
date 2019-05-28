@@ -8,14 +8,21 @@ part of 'options.dart';
 
 Options _$parseOptionsResult(ArgResults result) => Options(
     directories: _directoriesConvert(result['directories'] as String),
+    directoriesWasParsed: result.wasParsed('directories'),
     branch: result['branch'] as String,
+    branchWasParsed: result.wasParsed('branch'),
     buildConfig: result['build-config'] as String,
     buildConfigWasParsed: result.wasParsed('build-config'),
     release: result['release'] as bool,
+    releaseWasParsed: result.wasParsed('release'),
     message: result['message'] as String,
+    messageWasParsed: result.wasParsed('message'),
     sourceBranchInfo: result['source-branch-info'] as bool,
+    sourceBranchInfoWasParsed: result.wasParsed('source-branch-info'),
     postBuildDartScript: result['post-build-dart-script'] as String,
+    postBuildDartScriptWasParsed: result.wasParsed('post-build-dart-script'),
     builderOptions: _openBuildConfig(result['builder-options'] as String),
+    builderOptionsWasParsed: result.wasParsed('builder-options'),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);

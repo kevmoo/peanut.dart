@@ -36,8 +36,14 @@ class Options {
   )
   final List<String> directories;
 
+  @JsonKey(ignore: true)
+  final bool directoriesWasParsed;
+
   @CliOption(abbr: 'b', defaultsTo: _defaultBranch)
   final String branch;
+
+  @JsonKey(ignore: true)
+  final bool branchWasParsed;
 
   @CliOption(
     abbr: 'c',
@@ -51,8 +57,14 @@ class Options {
   @CliOption(negatable: true, defaultsTo: _defaultRelease)
   final bool release;
 
+  @JsonKey(ignore: true)
+  final bool releaseWasParsed;
+
   @CliOption(abbr: 'm', defaultsTo: defaultMessage)
   final String message;
+
+  @JsonKey(ignore: true)
+  final bool messageWasParsed;
 
   @CliOption(
     negatable: true,
@@ -62,11 +74,17 @@ class Options {
   )
   final bool sourceBranchInfo;
 
+  @JsonKey(ignore: true)
+  final bool sourceBranchInfoWasParsed;
+
   @CliOption(
     help: 'Optional Dart script to run after all builds have completed, but '
         'before files are committed to the repository.',
   )
   final String postBuildDartScript;
+
+  @JsonKey(ignore: true)
+  final bool postBuildDartScriptWasParsed;
 
   @CliOption(
     help: '''
@@ -76,6 +94,9 @@ See the README for details.''',
   )
   @JsonKey(fromJson: _builderOptionsFromMap)
   final Map<String, Map<String, dynamic>> builderOptions;
+
+  @JsonKey(ignore: true)
+  final bool builderOptionsWasParsed;
 
   @JsonKey(ignore: true)
   @CliOption(
@@ -97,14 +118,21 @@ See the README for details.''',
 
   const Options({
     List<String> directories,
+    this.directoriesWasParsed,
     String branch,
+    this.branchWasParsed,
     this.buildConfig,
     this.buildConfigWasParsed,
     bool release,
+    this.releaseWasParsed,
     String message,
+    this.messageWasParsed,
     bool sourceBranchInfo,
+    this.sourceBranchInfoWasParsed,
     this.postBuildDartScript,
+    this.postBuildDartScriptWasParsed,
     this.builderOptions,
+    this.builderOptionsWasParsed,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -115,6 +143,32 @@ See the README for details.''',
         sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo;
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
+
+  /// Assumes that `this` was generated via [ArgParser], so all of the
+  /// `wasParsed` fields are set (non-`null`).
+  Options merge(Options other) {
+    if (other == null) {
+      return this;
+    }
+
+    return Options(
+      branch: branchWasParsed ? branch : other.branch,
+      buildConfig: buildConfigWasParsed ? buildConfig : other.buildConfig,
+      builderOptions:
+          builderOptionsWasParsed ? builderOptions : other.builderOptions,
+      directories: directoriesWasParsed ? directories : other.directories,
+      help: help,
+      message: messageWasParsed ? message : other.message,
+      postBuildDartScript: postBuildDartScriptWasParsed
+          ? postBuildDartScript
+          : other.postBuildDartScript,
+      release: releaseWasParsed ? release : other.release,
+      rest: rest,
+      sourceBranchInfo:
+          sourceBranchInfoWasParsed ? sourceBranchInfo : other.sourceBranchInfo,
+      version: version,
+    );
+  }
 }
 
 List<String> _directoriesConvert(String input) =>
@@ -153,17 +207,18 @@ Map<String, Map<String, dynamic>> _openBuildConfig(final String pathOrYamlMap) {
 Map<String, Map<String, dynamic>> _builderOptionsFromMap(Map source) =>
     _builderOptionsConvert(source as YamlMap);
 
-Map<String, Map<String, dynamic>> _builderOptionsConvert(Map map) =>
-    Map<String, Map<String, dynamic>>.fromEntries(
-      map.entries.map((e) {
-        final value = e.value;
-        if (value is YamlMap) {
-          return MapEntry(
-            e.key as String,
-            value.cast<String, dynamic>(),
-          );
-        }
+Map<String, Map<String, dynamic>> _builderOptionsConvert(Map map) => map == null
+    ? null
+    : Map<String, Map<String, dynamic>>.fromEntries(
+        map.entries.map((e) {
+          final value = e.value;
+          if (value is YamlMap) {
+            return MapEntry(
+              e.key as String,
+              value.cast<String, dynamic>(),
+            );
+          }
 
-        throw FormatException('The value for "${e.key}" was not a Map.');
-      }),
-    );
+          throw FormatException('The value for "${e.key}" was not a Map.');
+        }),
+      );

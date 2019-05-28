@@ -50,12 +50,6 @@ void main(List<String> args) async {
     return;
   }
 
-  if (_optionsFile.existsSync() && args.isNotEmpty) {
-    print(yellow.wrap(
-      'Command arguments were provided. Ignoring "$_peanutConfigFile".',
-    ));
-  }
-
   try {
     await run(options: options);
   } catch (e, stack) {
@@ -90,17 +84,14 @@ const _peanutConfigFile = 'peanut.yaml';
 final _optionsFile = File(_peanutConfigFile);
 
 Options _getOptions(List<String> args) {
+  Options fromConfig;
   if (_optionsFile.existsSync()) {
-    if (args.isEmpty) {
-      return checkedYamlDecode(
-        _optionsFile.readAsStringSync(),
-        decodeYaml,
-        sourceUrl: _peanutConfigFile,
-      );
-    } else {
-      // We print a notice that the file is ignored because args above in main.
-    }
+    fromConfig = checkedYamlDecode(
+      _optionsFile.readAsStringSync(),
+      decodeYaml,
+      sourceUrl: _peanutConfigFile,
+    );
   }
 
-  return parseOptions(args);
+  return parseOptions(args).merge(fromConfig);
 }

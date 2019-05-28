@@ -1,3 +1,9 @@
+## 3.3.0
+
+- Parse command line arguments when a `peaunut.yaml` configuration file exists
+  and merge the values, with a preference for the command line arguments.
+  (Before, the configuration file values were ignored.)
+
 ## 3.2.1
 
 - Added examples to README.
