@@ -28,8 +28,14 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     rest: result.rest);
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
-  ..addOption('directories', abbr: 'd', defaultsTo: 'web')
-  ..addOption('branch', abbr: 'b', defaultsTo: 'gh-pages')
+  ..addOption('directories',
+      abbr: 'd',
+      help: 'The directories that should be built.',
+      defaultsTo: 'web')
+  ..addOption('branch',
+      abbr: 'b',
+      help: 'The git branch where the built content should be committed.',
+      defaultsTo: 'gh-pages')
   ..addOption('build-config',
       abbr: 'c', help: 'The configuration to use when running `build_runner`.')
   ..addFlag('release', defaultsTo: true, negatable: true)

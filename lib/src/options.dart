@@ -32,6 +32,7 @@ class Options {
     name: _directoryFlag,
     abbr: 'd',
     defaultsTo: _defaultDirectory,
+    help: 'The directories that should be built.',
     convert: _directoriesConvert,
   )
   final List<String> directories;
@@ -39,7 +40,11 @@ class Options {
   @JsonKey(ignore: true)
   final bool directoriesWasParsed;
 
-  @CliOption(abbr: 'b', defaultsTo: _defaultBranch)
+  @CliOption(
+    abbr: 'b',
+    help: 'The git branch where the built content should be committed.',
+    defaultsTo: _defaultBranch,
+  )
   final String branch;
 
   @JsonKey(ignore: true)

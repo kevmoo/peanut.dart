@@ -12,8 +12,13 @@ final _output = r'''
 Usage: peanut [<args>]
 
 Arguments:
--d, --directories                (defaults to "web")
--b, --branch                     (defaults to "gh-pages")
+-d, --directories                The directories that should be built.
+                                 (defaults to "web")
+
+-b, --branch                     The git branch where the built content should
+                                 be committed.
+                                 (defaults to "gh-pages")
+
 -c, --build-config               The configuration to use when running
                                  `build_runner`.
 
