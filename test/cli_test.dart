@@ -36,6 +36,7 @@ Arguments:
                                  containing builder options YAML.
                                  See the README for details.
 
+    --[no-]verbose               Print more details when running.
 -h, --help                       Prints usage information.
     --version                    Print the current version.''';
 

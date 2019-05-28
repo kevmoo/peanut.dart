@@ -3,6 +3,8 @@
 - Parse command line arguments when a `peaunut.yaml` configuration file exists
   and merge the values, with a preference for the command line arguments.
   (Before, the configuration file values were ignored.)
+- Added `verbose` option. For now, it prints out all of the files deleted in the
+  output directory.
 
 ## 3.2.1
 

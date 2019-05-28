@@ -23,6 +23,8 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     postBuildDartScriptWasParsed: result.wasParsed('post-build-dart-script'),
     builderOptions: _openBuildConfig(result['builder-options'] as String),
     builderOptionsWasParsed: result.wasParsed('builder-options'),
+    verbose: result['verbose'] as bool,
+    verboseWasParsed: result.wasParsed('verbose'),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -51,6 +53,8 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('builder-options',
       help:
           'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.')
+  ..addFlag('verbose',
+      help: 'Print more details when running.', defaultsTo: false)
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
@@ -76,7 +80,8 @@ Options _$OptionsFromJson(Map json) {
       'message',
       'source-branch-info',
       'post-build-dart-script',
-      'builder-options'
+      'builder-options',
+      'verbose'
     ]);
     final val = Options(
         directories: $checkedConvert(json, 'directories',
@@ -90,7 +95,8 @@ Options _$OptionsFromJson(Map json) {
         postBuildDartScript:
             $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
         builderOptions: $checkedConvert(
-            json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)));
+            json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
+        verbose: $checkedConvert(json, 'verbose', (v) => v as bool));
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',
@@ -117,5 +123,6 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('source-branch-info', instance.sourceBranchInfo);
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
+  writeNotNull('verbose', instance.verbose);
   return val;
 }
