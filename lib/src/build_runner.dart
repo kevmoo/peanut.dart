@@ -67,8 +67,15 @@ $_commandPrefix$prettyArgs
           stdout.write(
             ansi.styleBold.wrap('Deleting extra files from output directory'),
           );
+          if (options.verbose) {
+            print('');
+          }
         }
-        stdout.write('.');
+        if (options.verbose) {
+          print('  $relativePath');
+        } else {
+          stdout.write('.');
+        }
         file.deleteSync();
         deleteCount++;
       }

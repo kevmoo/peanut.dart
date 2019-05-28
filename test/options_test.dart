@@ -28,6 +28,7 @@ void main() {
       postBuildDartScript: 'some script',
       release: false,
       sourceBranchInfo: false,
+      verbose: true,
       version: true,
     );
 
@@ -47,6 +48,7 @@ void main() {
       'some script',
       '--no-release',
       '--no-source-branch-info',
+      '--verbose',
       '--version',
     ]);
     _checkDefault(allArgsOptions, allOptions, isTrue);
@@ -61,6 +63,7 @@ void main() {
       'message': 'other message',
       'post-build-dart-script': 'some script',
       'release': false,
+      'verbose': true,
       'source-branch-info': false,
     });
     _checkDefault(
@@ -113,6 +116,8 @@ void _checkDefault(
   expect(options.releaseWasParsed, parsedValue);
   expect(options.sourceBranchInfo, expected.sourceBranchInfo);
   expect(options.sourceBranchInfoWasParsed, parsedValue);
+  expect(options.verbose, expected.verbose);
+  expect(options.verboseWasParsed, parsedValue);
 
   expect(options.version, jsonSkippedDefault ?? expected.version);
 }

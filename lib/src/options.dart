@@ -11,6 +11,7 @@ const _directoryFlag = 'directories';
 const _defaultBranch = 'gh-pages';
 const _defaultDirectory = 'web';
 const _defaultRelease = true;
+const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 
 const defaultMessage = 'Built <$_directoryFlag>';
@@ -103,6 +104,16 @@ See the README for details.''',
   @JsonKey(ignore: true)
   final bool builderOptionsWasParsed;
 
+  @CliOption(
+    help: 'Print more details when running.',
+    defaultsTo: _defaultVerbose,
+  )
+  @JsonKey()
+  final bool verbose;
+
+  @JsonKey(ignore: true)
+  final bool verboseWasParsed;
+
   @JsonKey(ignore: true)
   @CliOption(
     abbr: 'h',
@@ -138,6 +149,8 @@ See the README for details.''',
     this.postBuildDartScriptWasParsed,
     this.builderOptions,
     this.builderOptionsWasParsed,
+    bool verbose,
+    this.verboseWasParsed,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -145,7 +158,8 @@ See the README for details.''',
         directories = directories ?? const [_defaultDirectory],
         message = message ?? defaultMessage,
         release = release ?? _defaultRelease,
-        sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo;
+        sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo,
+        verbose = verbose ?? _defaultVerbose;
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
 
@@ -172,6 +186,7 @@ See the README for details.''',
       sourceBranchInfo:
           sourceBranchInfoWasParsed ? sourceBranchInfo : other.sourceBranchInfo,
       version: version,
+      verbose: verboseWasParsed ? verbose : other.verbose,
     );
   }
 }
