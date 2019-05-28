@@ -1,4 +1,4 @@
-[![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dartlang.org/packages/peanut)
+[![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dev/packages/peanut)
 [![Build Status](https://travis-ci.org/kevmoo/peanut.dart.svg?branch=master)](https://travis-ci.org/kevmoo/peanut.dart)
 
 Do you ever want to `pub run build_runner build` into another branch? This is
@@ -58,7 +58,7 @@ have one-off settings you'd rather not time you deploy.
 The `peanut.yaml` from this repository:
 
 ```yaml
-# Configuration for https://pub.dartlang.org/packages/peanut
+# Configuration for https://pub.dev/packages/peanut
 directories:
 - example
 ```
