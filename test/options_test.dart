@@ -23,6 +23,7 @@ void main() {
         'some': {'options': 'value'}
       },
       directories: ['example'],
+      dryRun: true,
       help: true,
       message: 'other message',
       postBuildDartScript: 'some script',
@@ -41,6 +42,7 @@ void main() {
       'some: {options: value}',
       '--directories',
       'example',
+      '--dry-run',
       '--message',
       'other message',
       '--help',
@@ -106,6 +108,7 @@ void _checkDefault(
   expect(options.directories, expected.directories);
   expect(options.directoriesWasParsed, parsedValue);
 
+  expect(options.dryRun, jsonSkippedDefault ?? expected.dryRun);
   expect(options.help, jsonSkippedDefault ?? expected.help);
 
   expect(options.message, expected.message);

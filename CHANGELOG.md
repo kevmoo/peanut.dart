@@ -5,6 +5,8 @@
   (Before, the configuration file values were ignored.)
 - Added `verbose` option. For now, it prints out all of the files deleted in the
   output directory.
+- Added `--dry-run` command-line flag which verifies the configuration and
+  prints commands that would be executed, but does not do any work.
 
 ## 3.2.1
 

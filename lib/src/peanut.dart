@@ -85,21 +85,11 @@ Future<void> run({Options options, String workingDir}) async {
     }
   }
 
-  final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
-
-  var message = options.message;
-
-  if (message == defaultMessage) {
-    message = 'Built ${options.directories.join(', ')}';
-    if (options.directories.length > 1 && message.length > 72) {
-      message = '''
-Built ${options.directories.length} directories
-
-Directories:
-  ${options.directories.join('\n  ')}
-''';
-    }
+  if (options.dryRun) {
+    print(ansi.wrapWith('\n*** Dry run ***', [ansi.yellow, ansi.styleBold]));
   }
+
+  final secondsSinceEpoch = DateTime.now().toUtc().millisecondsSinceEpoch;
 
   final outputDirMap = outputDirectoryMap(targetDirs);
 
@@ -114,7 +104,9 @@ Directories:
       final targets = Map<String, String>.fromEntries(outputDirMap.entries
           .where((e) => p.isWithin(sourcePkg.key, e.key))
           .map((e) => MapEntry(
-              p.split(e.key).last, pkgNormalize(tempDir.path, e.value))));
+              p.split(e.key).last,
+              pkgNormalize(
+                  options.dryRun ? 'temp_dir' : tempDir.path, e.value))));
 
       final pkgPath = prettyPkgPath(sourcePkg.key);
 
@@ -131,6 +123,11 @@ Directories: ${sourcePkg.value.join(', ')}'''));
         targets,
         options,
       );
+    }
+
+    if (options.dryRun) {
+      print(ansi.wrapWith('*** Dry run ***\n', [ansi.yellow, ansi.styleBold]));
+      return;
     }
 
     if (outputDirMap.length == 1) {
@@ -169,6 +166,20 @@ Directories: ${sourcePkg.value.join(', ')}'''));
         workingDirectory: workingDir,
       );
       print(ansi.styleBold.wrap('Post-build script: complete\n'));
+    }
+
+    var message = options.message;
+
+    if (message == defaultMessage) {
+      message = 'Built ${options.directories.join(', ')}';
+      if (options.directories.length > 1 && message.length > 72) {
+        message = '''
+Built ${options.directories.length} directories
+
+Directories:
+  ${options.directories.join('\n  ')}
+''';
+      }
     }
 
     if (options.sourceBranchInfo) {
