@@ -25,6 +25,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     builderOptionsWasParsed: result.wasParsed('builder-options'),
     verbose: result['verbose'] as bool,
     verboseWasParsed: result.wasParsed('verbose'),
+    dryRun: result['dry-run'] as bool,
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -55,6 +56,11 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
           'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.')
   ..addFlag('verbose',
       help: 'Print more details when running.', defaultsTo: false)
+  ..addFlag('dry-run',
+      help:
+          'Verifies configuration and prints commands that would be executed, but does not do any work.',
+      defaultsTo: false,
+      negatable: false)
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);

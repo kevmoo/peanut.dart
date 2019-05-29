@@ -46,6 +46,10 @@ Future<void> runBuildRunner(
 $_commandPrefix$prettyArgs
 '''));
 
+  if (options.dryRun) {
+    return;
+  }
+
   final flatArgs = args
       .expand((list) => list)
       .skip(1) // skip `pub`

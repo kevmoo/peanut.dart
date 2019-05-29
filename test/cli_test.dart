@@ -37,6 +37,9 @@ Arguments:
                                  See the README for details.
 
     --[no-]verbose               Print more details when running.
+    --dry-run                    Verifies configuration and prints commands that
+                                 would be executed, but does not do any work.
+
 -h, --help                       Prints usage information.
     --version                    Print the current version.''';
 
