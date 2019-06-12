@@ -92,8 +92,8 @@ $_output''');
     void expectParseOptionsThrows(List<String> args, matcher) {
       expect(
         () => parseOptions(
-              args,
-            ),
+          args,
+        ),
         throwsA(
           isFormatException.having((e) => e.toString(), 'toString()', matcher),
         ),
@@ -145,11 +145,11 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
 
         expect(
           () => parseOptions(
-                [
-                  '--builder-options',
-                  p.join(d.sandbox, 'some_file.yaml'),
-                ],
-              ),
+            [
+              '--builder-options',
+              p.join(d.sandbox, 'some_file.yaml'),
+            ],
+          ),
           throwsA(
             isA<ParsedYamlException>().having((e) {
               printOnFailure(e.formattedMessage);
