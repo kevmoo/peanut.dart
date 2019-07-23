@@ -90,19 +90,20 @@ Options _$OptionsFromJson(Map json) {
       'verbose'
     ]);
     final val = Options(
-        directories: $checkedConvert(json, 'directories',
-            (v) => (v as List)?.map((e) => e as String)?.toList()),
-        branch: $checkedConvert(json, 'branch', (v) => v as String),
-        buildConfig: $checkedConvert(json, 'build-config', (v) => v as String),
-        release: $checkedConvert(json, 'release', (v) => v as bool),
-        message: $checkedConvert(json, 'message', (v) => v as String),
-        sourceBranchInfo:
-            $checkedConvert(json, 'source-branch-info', (v) => v as bool),
-        postBuildDartScript:
-            $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
-        builderOptions: $checkedConvert(
-            json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
-        verbose: $checkedConvert(json, 'verbose', (v) => v as bool));
+      directories: $checkedConvert(json, 'directories',
+          (v) => (v as List)?.map((e) => e as String)?.toList()),
+      branch: $checkedConvert(json, 'branch', (v) => v as String),
+      buildConfig: $checkedConvert(json, 'build-config', (v) => v as String),
+      release: $checkedConvert(json, 'release', (v) => v as bool),
+      message: $checkedConvert(json, 'message', (v) => v as String),
+      sourceBranchInfo:
+          $checkedConvert(json, 'source-branch-info', (v) => v as bool),
+      postBuildDartScript:
+          $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
+      builderOptions: $checkedConvert(
+          json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
+      verbose: $checkedConvert(json, 'verbose', (v) => v as bool),
+    );
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',
