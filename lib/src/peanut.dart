@@ -7,6 +7,7 @@ import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
 import 'build_runner.dart';
+import 'flutter.dart';
 import 'helpers.dart';
 import 'options.dart';
 import 'peanut_exception.dart';
@@ -118,11 +119,19 @@ Future<void> run({Options options, String workingDir}) async {
 Package:     $pkgPath$countDetails
 Directories: ${sourcePkg.value.join(', ')}'''));
 
-      await runBuildRunner(
-        pkgNormalize(workingDir, sourcePkg.key),
-        targets,
-        options,
-      );
+      if (isFlutterSdk()) {
+        await runFlutterBuild(
+          pkgNormalize(workingDir, sourcePkg.key),
+          tempDir.path,
+          options,
+        );
+      } else {
+        await runBuildRunner(
+          pkgNormalize(workingDir, sourcePkg.key),
+          targets,
+          options,
+        );
+      }
     }
 
     if (options.dryRun) {
@@ -196,7 +205,6 @@ Commit: $commitInfo
 
 package:peanut $packageVersion''';
     }
-
     final commit = await gitDir.updateBranchWithDirectoryContents(
         options.branch, tempDir.path, message);
 

@@ -17,8 +17,14 @@ import 'peanut_exception.dart';
 import 'utils.dart';
 
 Future _runPubDeps(String workingDirectory) async {
-  final result =
-      Process.runSync(pubPath, ['deps'], workingDirectory: workingDirectory);
+  ProcessResult result;
+  if (isFlutterSdk()) {
+    result = Process.runSync(flutterPath, ['packages', 'deps'],
+        workingDirectory: workingDirectory);
+  } else {
+    result =
+        Process.runSync(pubPath, ['deps'], workingDirectory: workingDirectory);
+  }
 
   if (result.exitCode == 65 || result.exitCode == 66) {
     throw PeanutException((result.stderr as String).trim());
@@ -26,7 +32,7 @@ Future _runPubDeps(String workingDirectory) async {
 
   if (result.exitCode != 0) {
     throw ProcessException(
-        pubPath,
+        isFlutterSdk() ? flutterPath : pubPath,
         ['deps'],
         '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
         exitCode);
@@ -36,11 +42,14 @@ Future _runPubDeps(String workingDirectory) async {
 Future<void> checkPubspecLock(String pkgDir) async {
   final pubspecLock = await _PubspecLock.read(pkgDir);
 
-  final issues = <PackageExceptionDetails>[]
-    ..addAll(pubspecLock.checkPackage(
-        'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0')))
-    ..addAll(pubspecLock.checkPackage(
-        'build_web_compilers', VersionConstraint.parse('>=1.2.0 <3.0.0')));
+  final issues = <PackageExceptionDetails>[];
+  if (!isFlutterSdk()) {
+    issues
+      ..addAll(pubspecLock.checkPackage(
+          'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0')))
+      ..addAll(pubspecLock.checkPackage(
+          'build_web_compilers', VersionConstraint.parse('>=1.2.0 <3.0.0')));
+  }
 
   if (issues.isNotEmpty) {
     throw PackageException(issues);
