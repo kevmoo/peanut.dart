@@ -2,6 +2,13 @@ import 'package:path/path.dart' as p;
 
 import 'peanut_exception.dart';
 
+/// Creates a Map where the keys are the relative package directory and the
+/// values are the subdirectories to build. For example, in a typical project
+/// this will be {'.': {'web'}} indicating that the root directory of the
+/// package will target the web/ directory for it's entrypoint.
+///
+/// See https://github.com/dart-lang/build/blob/master/build_config/README.md
+/// for more information on build targets
 Map<String, Set<String>> targetDirectories(
   String workingDir,
   Iterable<String> directories,
@@ -34,6 +41,10 @@ Map<String, Set<String>> targetDirectories(
   return targetDirs;
 }
 
+/// Creates a Map where the keys are the relative paths in the output directory
+/// and the values are relative paths to the target directories they were built
+/// from. For example, a project with two targets, 'example', and 'web' results
+/// in {'example': 'example', 'web': 'web'}
 Map<String, String> outputDirectoryMap(Map<String, Set<String>> input) {
   // Only one package, so use the build directory paths
   if (input.length == 1) {
