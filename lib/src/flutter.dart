@@ -9,23 +9,40 @@ import 'utils.dart';
 
 Future<void> runFlutterBuild(
   String pkgDirectory,
-  String outputDir,
+  Map<String, String> targets,
   Options options,
 ) async {
+  if (targets.entries.length != 1) {
+    // TODO(johnpryan): investigate how the flutter command builds test output
+    print('Warning: only 1 target (web) is supported for Flutter apps');
+    return;
+  }
+
   final args = <String>[
     'build',
     'web',
   ];
 
+  // Print the command to the console
   final prettyArgList = args.toList()..insert(0, 'flutter');
   final prettyArgs = prettyArgList.join(' ');
-
   print(ansi.styleBold.wrap('''
 $_commandPrefix$prettyArgs
 '''));
+
+  // Build the app
   await runProcess(flutterPath, args, workingDirectory: pkgDirectory);
-  final sourceDir = p.absolute('build/web');
+
+  // Create the subdirectory in the temp directory to copy the files to.
+  final outputDir = targets.values.first;
+  await Directory(outputDir).create(recursive: true);
+
+  // Copy the files
+  final sourceDir = p.absolute('$pkgDirectory/build/web');
   await copyFilesRecursive(sourceDir, outputDir);
+
+  // Delete the build/ directory created from running `flutter build web`
+  await Directory(sourceDir).delete(recursive: true);
 }
 
 Future copyFilesRecursive(String srcDir, String destDir) async {

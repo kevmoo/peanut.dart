@@ -122,7 +122,7 @@ Directories: ${sourcePkg.value.join(', ')}'''));
       if (isFlutterSdk()) {
         await runFlutterBuild(
           pkgNormalize(workingDir, sourcePkg.key),
-          tempDir.path,
+          targets,
           options,
         );
       } else {
