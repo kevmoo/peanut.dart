@@ -30,6 +30,9 @@ Future<void> runFlutterBuild(
 $_commandPrefix$prettyArgs
 '''));
 
+  // Run flutter clean to remove cached build output
+  await runProcess(flutterPath, ['clean'], workingDirectory: pkgDirectory);
+
   // Build the app
   await runProcess(flutterPath, args, workingDirectory: pkgDirectory);
 
