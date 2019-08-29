@@ -13,7 +13,7 @@ Future<void> runFlutterBuild(
   Options options,
 ) async {
   if (targets.entries.length != 1) {
-    // TODO(johnpryan): investigate how the flutter command builds test output
+    // TODO(johnpryan): investigate how the flutter command handles targets
     print('Warning: only 1 target (web) is supported for Flutter apps');
     return;
   }
