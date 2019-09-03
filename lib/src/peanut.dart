@@ -119,7 +119,7 @@ Future<void> run({Options options, String workingDir}) async {
 Package:     $pkgPath$countDetails
 Directories: ${sourcePkg.value.join(', ')}'''));
 
-      if (isFlutterSdk()) {
+      if (isFlutterSdk) {
         await runFlutterBuild(
           pkgNormalize(workingDir, sourcePkg.key),
           targets,

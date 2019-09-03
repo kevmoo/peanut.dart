@@ -18,7 +18,7 @@ import 'utils.dart';
 
 Future _runPubDeps(String workingDirectory) async {
   ProcessResult result;
-  if (isFlutterSdk()) {
+  if (isFlutterSdk) {
     result = Process.runSync(flutterPath, ['packages', 'deps'],
         workingDirectory: workingDirectory);
   } else {
@@ -32,7 +32,7 @@ Future _runPubDeps(String workingDirectory) async {
 
   if (result.exitCode != 0) {
     throw ProcessException(
-        isFlutterSdk() ? flutterPath : pubPath,
+        isFlutterSdk ? flutterPath : pubPath,
         ['deps'],
         '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
         exitCode);
@@ -43,7 +43,7 @@ Future<void> checkPubspecLock(String pkgDir) async {
   final pubspecLock = await _PubspecLock.read(pkgDir);
 
   final issues = <PackageExceptionDetails>[];
-  if (!isFlutterSdk()) {
+  if (!isFlutterSdk) {
     issues
       ..addAll(pubspecLock.checkPackage(
           'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0')))
