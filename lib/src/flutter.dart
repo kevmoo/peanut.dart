@@ -5,6 +5,7 @@ import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 
 import 'options.dart';
+import 'peanut_exception.dart';
 import 'utils.dart';
 
 Future<void> runFlutterBuild(
@@ -13,9 +14,7 @@ Future<void> runFlutterBuild(
   Options options,
 ) async {
   if (targets.entries.length != 1) {
-    // TODO(johnpryan): investigate how the flutter command handles targets
-    print('Warning: only 1 target (web) is supported for Flutter apps');
-    return;
+    throw PeanutException('only 1 target (web) is supported for Flutter apps');
   }
 
   final args = <String>[
