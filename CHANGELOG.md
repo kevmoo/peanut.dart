@@ -1,3 +1,9 @@
+## 3.4.0
+
+- Flutter apps are now built if peanut is enabled using `flutter pub global
+  activate`. Running `flutter pub global run peanut:peanut` will use the flutter
+  CLI instead of `build_runner`
+
 ## 3.3.0
 
 - Parse command line arguments when a `peaunut.yaml` configuration file exists

@@ -35,3 +35,30 @@ final String _sdkDir = (() {
   assert(FileSystemEntity.isFileSync(p.join(aboveExecutable, 'version')));
   return aboveExecutable;
 })();
+
+final bool isFlutterSdk = (() {
+  final depth = 7;
+  final components = p.split(Platform.resolvedExecutable);
+  if (components.length < depth) {
+    return false;
+  }
+
+  // Assume that the Flutter SDK is installed in a directory named 'flutter'
+  return components[components.length - depth] == 'flutter';
+})();
+
+final String flutterPath = p.join(
+    _flutterSdkDir, 'bin', Platform.isWindows ? 'flutter.bat' : 'flutter');
+
+/// The path to the root directory of the Flutter SDK.
+String _flutterSdkDir = (() {
+  assert(isFlutterSdk);
+  // The Flutter executable is in
+  // "/path/to/flutter/sdk/bin/cache/dart-sdk/bin/dart", so 5 levels up is
+  // "/path/to/flutter/sdk".
+  var dir = Platform.resolvedExecutable;
+  for (var i = 0; i < 5; i++) {
+    dir = p.dirname(dir);
+  }
+  return dir;
+})();

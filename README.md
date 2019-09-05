@@ -20,6 +20,22 @@ $ peanut
 This will build your project into a temporary directory, and then it will update
 the local `gh-pages` branch with its contents.
 
+## Flutter
+
+Flutter apps can be built by running peanut with the Flutter SDK.
+
+Installing: 
+
+```
+$ flutter pub global activate peanut
+```
+
+Running:
+
+```
+$ flutter pub global run peanut:peanut
+```
+
 ## Options
 
 ```console
