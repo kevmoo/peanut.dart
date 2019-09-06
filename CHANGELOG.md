@@ -1,3 +1,7 @@
+## 3.4.1
+
+- Fix `--version`.
+
 ## 3.4.0
 
 - Flutter apps are now built if peanut is enabled using `flutter pub global
