@@ -31,6 +31,14 @@ Future _runPubDeps(String workingDirectory) async {
   }
 
   if (result.exitCode != 0) {
+    if ((result.stderr as String)
+        .contains('The Flutter SDK is not available.')) {
+      throw PeanutException(
+        '`pub` failed.\n'
+        'This appears to be a Flutter project.\n'
+        'Try running `flutter pub global run peanut`.',
+      );
+    }
     throw ProcessException(
         isFlutterSdk ? flutterPath : pubPath,
         ['deps'],
