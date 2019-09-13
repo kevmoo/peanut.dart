@@ -44,7 +44,11 @@ final bool isFlutterSdk = (() {
   }
 
   // Assume that the Flutter SDK is installed in a directory named 'flutter'
-  return components[components.length - depth] == 'flutter';
+  final flutterIndex = components.lastIndexOf('flutter');
+
+  // TODO(kevmoo: This is off on my installation of Flutter.
+  // Need to investigate
+  return flutterIndex > components.length - depth;
 })();
 
 final String flutterPath = p.join(

@@ -1,3 +1,8 @@
+## 3.4.2
+
+- Fixes for running with Flutter.
+- Provide a helpful message when using the Dart SDK with a Flutter package.
+
 ## 3.4.1
 
 - Fix `--version`.
