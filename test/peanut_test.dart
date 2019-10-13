@@ -219,7 +219,7 @@ package:peanut $packageVersion''');
     for (var te in pkgContent) {
       await _expectStandardTreeContents(gitDir, te.sha);
     }
-  });
+  }, timeout: const Timeout.factor(2));
 
   group('post build script', () {
     test('valid', () async {
