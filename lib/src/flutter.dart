@@ -20,6 +20,7 @@ Future<void> runFlutterBuild(
   final args = <String>[
     'build',
     'web',
+    if (options.skia) '--dart-define=FLUTTER_WEB_USE_SKIA=true',
   ];
 
   // Print the command to the console

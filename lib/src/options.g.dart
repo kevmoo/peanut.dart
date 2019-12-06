@@ -26,6 +26,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     verbose: result['verbose'] as bool,
     verboseWasParsed: result.wasParsed('verbose'),
     dryRun: result['dry-run'] as bool,
+    skia: result['skia'] as bool,
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -59,6 +60,10 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addFlag('dry-run',
       help:
           'Verifies configuration and prints commands that would be executed, but does not do any work.',
+      defaultsTo: false,
+      negatable: false)
+  ..addFlag('skia',
+      help: 'Builds Flutter web apps with CanvasKit.',
       defaultsTo: false,
       negatable: false)
   ..addFlag('help',
