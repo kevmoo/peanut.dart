@@ -14,7 +14,7 @@ const _defaultRelease = true;
 const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
-const _defaultSkia = false;
+const _defaultCanvasKit = false;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
@@ -127,11 +127,11 @@ See the README for details.''',
 
   @CliOption(
     negatable: false,
-    defaultsTo: _defaultSkia,
+    defaultsTo: _defaultCanvasKit,
     help: 'Builds Flutter web apps with CanvasKit.',
   )
   @JsonKey(ignore: true)
-  final bool skia;
+  final bool canvasKit;
 
   @JsonKey(ignore: true)
   @CliOption(
@@ -171,7 +171,7 @@ See the README for details.''',
     bool verbose,
     this.verboseWasParsed,
     bool dryRun,
-    bool skia,
+    bool canvasKit,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -182,7 +182,7 @@ See the README for details.''',
         sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo,
         verbose = verbose ?? _defaultVerbose,
         dryRun = dryRun ?? _defaultDryRun,
-        skia = skia ?? _defaultSkia;
+        canvasKit = canvasKit ?? _defaultCanvasKit;
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
 
@@ -200,7 +200,7 @@ See the README for details.''',
           builderOptionsWasParsed ? builderOptions : other.builderOptions,
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
-      skia: skia,
+      canvasKit: canvasKit,
       help: help,
       message: messageWasParsed ? message : other.message,
       postBuildDartScript: postBuildDartScriptWasParsed

@@ -40,7 +40,7 @@ Arguments:
     --dry-run                    Verifies configuration and prints commands that
                                  would be executed, but does not do any work.
 
-    --skia                       Builds Flutter web apps with CanvasKit.
+    --canvas-kit                 Builds Flutter web apps with CanvasKit.
 -h, --help                       Prints usage information.
     --version                    Print the current version.''';
 
