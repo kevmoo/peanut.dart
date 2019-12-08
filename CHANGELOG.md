@@ -1,3 +1,7 @@
+## 3.5.0
+
+- Added `--canvas-kit ` flag for Flutter web.
+
 ## 3.4.2
 
 - Fixes for running with Flutter.
