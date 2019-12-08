@@ -169,4 +169,7 @@ line 1, column 2 of ${p.join(d.sandbox, 'some_file.yaml')}: Expected node conten
 }
 
 Future<TestProcess> _runPeanut(List<String> args) =>
-    TestProcess.start(dartPath, ['bin/peanut.dart']..addAll(args));
+    TestProcess.start(dartPath, [
+      'bin/peanut.dart',
+      ...args,
+    ]);

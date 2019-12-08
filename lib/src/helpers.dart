@@ -64,9 +64,10 @@ Map<String, String> outputDirectoryMap(Map<String, Set<String>> input) {
   final sharedRootSegments = <String>[];
   final firstKeyPathSegments = p.split(input.keys.first);
   for (var i = 0; i < firstKeyPathSegments.length; i++) {
-    final testSharedRoot = p.joinAll(<String>[]
-      ..addAll(sharedRootSegments)
-      ..add(firstKeyPathSegments[i]));
+    final testSharedRoot = p.joinAll([
+      ...sharedRootSegments,
+      firstKeyPathSegments[i],
+    ]);
 
     if (input.keys.every((pkgPath) => p.isWithin(testSharedRoot, pkgPath))) {
       sharedRootSegments.add(firstKeyPathSegments[i]);
