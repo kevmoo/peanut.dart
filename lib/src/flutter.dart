@@ -42,13 +42,13 @@ $_commandPrefix$prettyArgs
 
   // Copy the files
   final sourceDir = p.absolute('$pkgDirectory/build/web');
-  await copyFilesRecursive(sourceDir, outputDir);
+  await _copyFilesRecursive(sourceDir, outputDir);
 
   // Delete the build/ directory created from running `flutter build web`
   await Directory(sourceDir).delete(recursive: true);
 }
 
-Future copyFilesRecursive(String srcDir, String destDir) async {
+Future<void> _copyFilesRecursive(String srcDir, String destDir) async {
   final parent = Directory(srcDir);
   await for (var entity in parent.list(recursive: true)) {
     final relativePath = p.relative(entity.path, from: parent.path);
@@ -56,7 +56,7 @@ Future copyFilesRecursive(String srcDir, String destDir) async {
     if (entity is File) {
       await entity.copy(newPath);
     } else if (entity is Directory) {
-      final newPathUri = Uri.parse(newPath);
+      final newPathUri = Uri.file(newPath);
       final dir = Directory.fromUri(newPathUri);
       await dir.create(recursive: true);
       assert(await dir.exists());
