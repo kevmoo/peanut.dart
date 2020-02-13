@@ -16,7 +16,7 @@ void main() {
   });
 
   test('all options', () {
-    final allOptions = const Options(
+    const allOptions = Options(
       branch: 'other-branch',
       buildConfig: 'some config',
       builderOptions: {
@@ -93,7 +93,7 @@ void main() {
   });
 }
 
-final _defaultOptions = const Options();
+const _defaultOptions = Options();
 
 void _checkDefault(
   Options options,

@@ -286,7 +286,9 @@ package:peanut $packageVersion''');
       await expectLater(
           _run(options: const Options(postBuildDartScript: 'post_build.dart')),
           _throwsPeanutException(startsWith(
-              'The provided post-build Dart script does not exist or is not a file.')));
+            'The provided post-build Dart script does not exist '
+            'or is not a file.',
+          )));
     });
 
     test('failed', () async {

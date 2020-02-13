@@ -10,7 +10,7 @@ import 'package:peanut/src/version.dart';
 
 const _formatExceptionHeader = 'FormatException: ';
 
-void main(List<String> args) async {
+Future<void> main(List<String> args) async {
   Options options;
   try {
     options = _getOptions(args);

@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
-final _output = r'''
+const _output = r'''
 Usage: peanut [<args>]
 
 Arguments:
@@ -49,8 +49,7 @@ void main() {
     final proc = await _runPeanut(['--help']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''
-$_output''');
+    expect(output, _output);
 
     await proc.shouldExit(0);
   });

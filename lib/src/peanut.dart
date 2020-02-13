@@ -270,10 +270,11 @@ ${links.entries.map(_linkForEntry).join('\n')}
 
 final _underscoreOrSlash = RegExp('_|/');
 
-String _prettyName(String input) =>
-    input.split(_underscoreOrSlash).where((e) => e.isNotEmpty).map((e) {
-      return e.substring(0, 1).toUpperCase() + e.substring(1);
-    }).join(' ');
+String _prettyName(String input) => input
+    .split(_underscoreOrSlash)
+    .where((e) => e.isNotEmpty)
+    .map((e) => e.substring(0, 1).toUpperCase() + e.substring(1))
+    .join(' ');
 
 String _linkForEntry(MapEntry<String, String> entry) =>
     '    <p><a href="${entry.key}/" target="example_frame">'

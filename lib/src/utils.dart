@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
-import 'package:peanut/src/peanut_exception.dart';
+import 'peanut_exception.dart';
 
 void printError(Object object) => print(ansi.red.wrap(object.toString()));
 
@@ -37,7 +37,7 @@ final String _sdkDir = (() {
 })();
 
 final bool isFlutterSdk = (() {
-  final depth = 7;
+  const depth = 7;
   final components = p.split(Platform.resolvedExecutable);
   if (components.length < depth) {
     return false;
