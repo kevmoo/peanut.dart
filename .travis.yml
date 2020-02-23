@@ -1,22 +1,11 @@
 language: dart
 
 dart:
-  - 2.3.0
-  - dev
+  - 2.8.0-dev.10.0
+  - 2.8.0-dev.9.0
 
 dart_task:
-  - dartanalyzer: --fatal-warnings --fatal-lints .
-
-matrix:
-  include:
-    - dart: dev
-      dart_task: dartfmt
-    - dart: dev
-      dart_task:
-        test: -x presubmit-only
-    - dart: dev
-      dart_task:
-        test: --run-skipped -t presubmit-only
+  - test: test/silly_test.dart
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
