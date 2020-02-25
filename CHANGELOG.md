@@ -1,6 +1,6 @@
 ## 3.5.1-dev
 
-- Require Dart SDK `>=2.6.0 <3.0.0`.
+- Update Dart SDK requirement `>=2.6.0 <3.0.0`.
 
 ## 3.5.0
 
