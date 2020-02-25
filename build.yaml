@@ -9,6 +9,6 @@ targets:
           - lines_longer_than_80_chars
           - prefer_expression_function_bodies
       build_web_compilers|entrypoint:
-        # These are globs for the entrypoints you want to compile.
+        # These are globs for the entry points you want to compile.
         generate_for:
         - example/**.dart
