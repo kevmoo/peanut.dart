@@ -5,7 +5,7 @@ import 'peanut_exception.dart';
 /// Creates a Map where the keys are the relative package directory and the
 /// values are the subdirectories to build. For example, in a typical project
 /// this will be {'.': {'web'}} indicating that the root directory of the
-/// package will target the web/ directory for it's entrypoint.
+/// package will target the web/ directory for it's entry point.
 ///
 /// See https://github.com/dart-lang/build/blob/master/build_config/README.md
 /// for more information on build targets
