@@ -1,3 +1,7 @@
+## 3.5.1-dev
+
+- Require Dart SDK `>=2.6.0 <3.0.0`.
+
 ## 3.5.0
 
 - Added `--canvas-kit ` flag for Flutter web.
