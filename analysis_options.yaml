@@ -1,7 +1,9 @@
 include: package:pedantic/analysis_options.yaml
+
 analyzer:
   strong-mode:
     implicit-casts: false
+
 linter:
   rules:
     - always_declare_return_types
@@ -45,10 +47,10 @@ linter:
     - join_return_with_assignment
     - library_names
     - library_prefixes
-    # Need to ignore in build_cli
-    #- lines_longer_than_80_chars
+    - lines_longer_than_80_chars
     - list_remove_unrelated_type
     - literal_only_boolean_expressions
+    - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
     - no_duplicate_case_values
     - no_runtimeType_toString
@@ -68,8 +70,7 @@ linter:
     - prefer_const_declarations
     - prefer_contains
     - prefer_equal_for_default_values
-    # Need to ignore in build_cli!
-    #- prefer_expression_function_bodies
+    - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_locals
     - prefer_function_declarations_over_variables
@@ -85,6 +86,7 @@ linter:
     - prefer_single_quotes
     - prefer_typing_uninitialized_variables
     - prefer_void_to_null
+    - provide_deprecation_message
     - recursive_getters
     - slash_for_doc_comments
     - sort_pub_dependencies
@@ -107,5 +109,6 @@ linter:
     - unrelated_type_equality_checks
     - use_function_type_syntax_for_parameters
     - use_rethrow_when_possible
+    - use_string_buffers
     - valid_regexps
     - void_checks

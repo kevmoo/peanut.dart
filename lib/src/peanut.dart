@@ -277,5 +277,5 @@ String _prettyName(String input) => input
     .join(' ');
 
 String _linkForEntry(MapEntry<String, String> entry) =>
-    '    <p><a href="${entry.key}/" target="example_frame">'
-    '${_prettyName(entry.value)}</a></p>';
+    '    <p><a href="${entry.key}/" '
+    'target="example_frame">${_prettyName(entry.value)}</a></p>';
