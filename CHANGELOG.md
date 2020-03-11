@@ -1,5 +1,6 @@
 ## 3.5.1-dev
 
+- Added `.dart_tool/**` to the default exclude set.
 - Require Dart SDK `>=2.6.0 <3.0.0`.
 
 ## 3.5.0
