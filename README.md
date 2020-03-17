@@ -45,32 +45,25 @@ Usage: peanut [<args>]
 Arguments:
 -d, --directories                The directories that should be built.
                                  (defaults to "web")
-
 -b, --branch                     The git branch where the built content should
                                  be committed.
                                  (defaults to "gh-pages")
-
 -c, --build-config               The configuration to use when running
                                  `build_runner`.
-
     --[no-]release               (defaults to on)
 -m, --message                    (defaults to "Built <directories>")
     --[no-]source-branch-info    Includes the name of the source branch and SHA
                                  in the commit message
                                  (defaults to on)
-
     --post-build-dart-script     Optional Dart script to run after all builds
                                  have completed, but before files are committed
                                  to the repository.
-
     --builder-options            Builder options YAML or a path to a file
                                  containing builder options YAML.
                                  See the README for details.
-
     --[no-]verbose               Print more details when running.
     --dry-run                    Verifies configuration and prints commands that
                                  would be executed, but does not do any work.
-
     --canvas-kit                 Builds Flutter web apps with CanvasKit.
 -h, --help                       Prints usage information.
     --version                    Print the current version.
