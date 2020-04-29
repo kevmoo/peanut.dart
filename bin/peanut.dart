@@ -1,4 +1,5 @@
 #!/usr/bin/env dart
+
 import 'dart:io';
 
 import 'package:checked_yaml/checked_yaml.dart';
