@@ -56,17 +56,13 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('builder-options',
       help:
           'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.')
-  ..addFlag('verbose',
-      help: 'Print more details when running.', defaultsTo: false)
+  ..addFlag('verbose', help: 'Print more details when running.')
   ..addFlag('dry-run',
       help:
           'Verifies configuration and prints commands that would be executed, but does not do any work.',
-      defaultsTo: false,
       negatable: false)
   ..addFlag('canvas-kit',
-      help: 'Builds Flutter web apps with CanvasKit.',
-      defaultsTo: false,
-      negatable: false)
+      help: 'Builds Flutter web apps with CanvasKit.', negatable: false)
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
