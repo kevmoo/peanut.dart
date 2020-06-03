@@ -62,7 +62,7 @@ class Options {
   @JsonKey(ignore: true)
   final bool buildConfigWasParsed;
 
-  @CliOption(negatable: true, defaultsTo: _defaultRelease)
+  @CliOption(defaultsTo: _defaultRelease)
   final bool release;
 
   @JsonKey(ignore: true)
@@ -75,7 +75,6 @@ class Options {
   final bool messageWasParsed;
 
   @CliOption(
-    negatable: true,
     defaultsTo: _defaultSourceBranchInfo,
     help:
         'Includes the name of the source branch and SHA in the commit message',

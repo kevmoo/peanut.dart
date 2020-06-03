@@ -44,13 +44,12 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       defaultsTo: 'gh-pages')
   ..addOption('build-config',
       abbr: 'c', help: 'The configuration to use when running `build_runner`.')
-  ..addFlag('release', defaultsTo: true, negatable: true)
+  ..addFlag('release', defaultsTo: true)
   ..addOption('message', abbr: 'm', defaultsTo: 'Built <directories>')
   ..addFlag('source-branch-info',
       help:
           'Includes the name of the source branch and SHA in the commit message',
-      defaultsTo: true,
-      negatable: true)
+      defaultsTo: true)
   ..addOption('post-build-dart-script',
       help:
           'Optional Dart script to run after all builds have completed, but before files are committed to the repository.')
