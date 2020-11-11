@@ -214,7 +214,9 @@ package:peanut $packageVersion''');
 
     final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
     expect(
-        pkgContent.map((te) => te.name), unorderedEquals(['example', 'web']));
+      pkgContent.map((te) => te.name),
+      unorderedEquals(['example', 'web']),
+    );
 
     for (var te in pkgContent) {
       await _expectStandardTreeContents(gitDir, te.sha);
@@ -284,11 +286,12 @@ package:peanut $packageVersion''');
       await _initGitDir();
 
       await expectLater(
-          _run(options: const Options(postBuildDartScript: 'post_build.dart')),
-          _throwsPeanutException(startsWith(
-            'The provided post-build Dart script does not exist '
-            'or is not a file.',
-          )));
+        _run(options: const Options(postBuildDartScript: 'post_build.dart')),
+        _throwsPeanutException(startsWith(
+          'The provided post-build Dart script does not exist '
+          'or is not a file.',
+        )),
+      );
     });
 
     test('failed', () async {
@@ -352,15 +355,21 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
 }
 
 Future<void> _pubGet({String parent}) async {
-  final proc = await Process.run('pub', ['get', '--offline', '--no-precompile'],
-      workingDirectory: p.join(d.sandbox, parent));
-  expect(proc.exitCode, 0,
-      reason: [
-        'STDOUT:',
-        proc.stdout as String,
-        'STDERR:',
-        proc.stderr as String,
-      ].map((str) => str.trim()).join('\n'));
+  final proc = await Process.run(
+    'pub',
+    ['get', '--offline', '--no-precompile'],
+    workingDirectory: p.join(d.sandbox, parent),
+  );
+  expect(
+    proc.exitCode,
+    0,
+    reason: [
+      'STDOUT:',
+      proc.stdout as String,
+      'STDERR:',
+      proc.stderr as String,
+    ].map((str) => str.trim()).join('\n'),
+  );
 }
 
 Future<GitDir> _initGitDir() async {
@@ -386,6 +395,9 @@ Future<void> _simplePackage({
   await d.file('pubspec.yaml', r'''
 name: peanut_test
 
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
 dev_dependencies:
   build_runner: '>=0.8.10 <2.0.0'
   build_web_compilers: '>=1.0.0 <3.0.0'
@@ -403,10 +415,12 @@ dev_dependencies:
   }
 }
 
-final _exampleFiles = Map.fromEntries(Directory('example')
-    .listSync()
-    .cast<File>()
-    .map((f) => MapEntry(p.basename(f.path), f.readAsStringSync())));
+final _exampleFiles = Map.fromEntries(
+  Directory('example')
+      .listSync()
+      .cast<File>()
+      .map((f) => MapEntry(p.basename(f.path), f.readAsStringSync())),
+);
 
 Future _logGitTree(GitDir gitDir, String sha, {int depth = 0}) async {
   final treeContents = await gitDir.lsTree(sha);
