@@ -91,10 +91,10 @@ void main() {
 
     await expectLater(
       _run(
-        options: const Options(branch: 'master'),
+        options: const Options(branch: 'main'),
       ),
       _throwsPeanutException(
-        'Cannot update the current branch "master".',
+        'Cannot update the current branch "main".',
       ),
     );
   });
@@ -103,12 +103,12 @@ void main() {
     await _simplePackage();
     await _pubGet();
     final gitDir = await _initGitDir();
-    final masterCommit = await gitDir.showRef();
+    final primaryCommit = await gitDir.showRef();
 
     await _run();
 
     expect((await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['master', 'gh-pages']));
+        unorderedEquals(['main', 'gh-pages']));
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
@@ -116,8 +116,8 @@ void main() {
     expect(ghCommit.message, '''
 Built web
 
-Branch: master
-Commit: ${masterCommit.single.sha}
+Branch: main
+Commit: ${primaryCommit.single.sha}
 
 package:peanut $packageVersion''');
 
@@ -128,12 +128,14 @@ package:peanut $packageVersion''');
     await _simplePackage(buildDirs: {'example', 'web'});
     await _pubGet();
     final gitDir = await _initGitDir();
-    final masterCommit = await gitDir.showRef();
+    final primaryCommit = await gitDir.showRef();
 
     await _run(options: const Options(directories: ['example', 'web']));
 
-    expect((await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['master', 'gh-pages']));
+    expect(
+      (await gitDir.branches()).map((br) => br.branchName),
+      unorderedEquals(['main', 'gh-pages']),
+    );
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
@@ -141,8 +143,8 @@ package:peanut $packageVersion''');
     expect(ghCommit.message, '''
 Built example, web
 
-Branch: master
-Commit: ${masterCommit.single.sha}
+Branch: main
+Commit: ${primaryCommit.single.sha}
 
 package:peanut $packageVersion''');
 
@@ -171,7 +173,7 @@ package:peanut $packageVersion''');
     }
 
     final gitDir = await _initGitDir();
-    final masterCommit = await gitDir.showRef();
+    final primaryCommit = await gitDir.showRef();
 
     await _run(
         options: const Options(
@@ -184,7 +186,7 @@ package:peanut $packageVersion''');
     ));
 
     expect((await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['master', 'gh-pages']));
+        unorderedEquals(['main', 'gh-pages']));
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
@@ -192,8 +194,8 @@ package:peanut $packageVersion''');
     expect(ghCommit.message, '''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
-Branch: master
-Commit: ${masterCommit.single.sha}
+Branch: main
+Commit: ${primaryCommit.single.sha}
 
 package:peanut $packageVersion''');
 
@@ -237,7 +239,7 @@ void main(List<String> args) {
 
       await _pubGet();
       final gitDir = await _initGitDir();
-      final masterCommit = await gitDir.showRef();
+      final primaryCommit = await gitDir.showRef();
 
       await _run(
         options: Options(
@@ -246,7 +248,7 @@ void main(List<String> args) {
       );
 
       expect((await gitDir.branches()).map((br) => br.branchName),
-          unorderedEquals(['master', 'gh-pages']));
+          unorderedEquals(['main', 'gh-pages']));
 
       final ghBranchRef = await gitDir.branchReference('gh-pages');
 
@@ -254,8 +256,8 @@ void main(List<String> args) {
       expect(ghCommit.message, '''
 Built example, web
 
-Branch: master
-Commit: ${masterCommit.single.sha}
+Branch: main
+Commit: ${primaryCommit.single.sha}
 
 package:peanut $packageVersion''');
 
@@ -326,7 +328,7 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
     final treeContents = await gitDir.lsTree(treeSha);
 
     try {
-      expect(treeContents, hasLength(2));
+      expect(treeContents, hasLength(3));
       expect(
         treeContents,
         contains(
@@ -339,6 +341,12 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
           _treeEntry('index.html', 'blob'),
         ),
       );
+      expect(
+        treeContents,
+        contains(
+          _treeEntry('packages', 'tree'),
+        ),
+      );
 
       _standardTreeContentSha = treeSha;
     } catch (e) {
@@ -349,7 +357,7 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
     expect(
       treeSha,
       _standardTreeContentSha,
-      reason: 'Standard directory content should be idential across tests.',
+      reason: 'Standard directory content should be identical across tests.',
     );
   }
 }
@@ -373,12 +381,19 @@ Future<void> _pubGet({String parent}) async {
 }
 
 Future<GitDir> _initGitDir() async {
-  final gitDir = await GitDir.init(d.sandbox, allowContent: true);
+  final gitDir = await GitDir.init(
+    d.sandbox,
+    allowContent: true,
+    initialBranch: 'main',
+  );
 
   await gitDir.runCommand(['add', '.']);
   await gitDir.runCommand(['commit', '-m', 'dummy commit']);
 
-  expect((await gitDir.branches()).map((br) => br.branchName), ['master']);
+  expect(
+    (await gitDir.branches()).map((br) => br.branchName),
+    ['main'],
+  );
   return gitDir;
 }
 
