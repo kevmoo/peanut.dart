@@ -84,7 +84,7 @@ void main() {
     );
   });
 
-  test('targetting current branch', () async {
+  test('targeting current branch', () async {
     await _simplePackage();
     await _pubGet();
     await _initGitDir();
