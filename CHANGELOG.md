@@ -1,6 +1,9 @@
-## 3.5.2-dev
+## 3.6.0
 
 - Require Dart 2.10.5
+- `canvas-kit` is now a supported configuration in `peanut.yaml`.
+- The `canvas-kit` option now passes `--web-renderer canvaskit` to `build web`.
+  (Previously it used `--dart-define=FLUTTER_WEB_USE_SKIA=true`.)
 
 ## 3.5.1
 

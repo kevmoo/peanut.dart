@@ -29,6 +29,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     verboseWasParsed: result.wasParsed('verbose'),
     dryRun: result['dry-run'] as bool,
     canvasKit: result['canvas-kit'] as bool,
+    canvasKitWasParsed: result.wasParsed('canvas-kit'),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -89,7 +90,8 @@ Options _$OptionsFromJson(Map json) {
       'source-branch-info',
       'post-build-dart-script',
       'builder-options',
-      'verbose'
+      'verbose',
+      'canvas-kit'
     ]);
     final val = Options(
       directories: $checkedConvert(json, 'directories',
@@ -105,13 +107,15 @@ Options _$OptionsFromJson(Map json) {
       builderOptions: $checkedConvert(
           json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
       verbose: $checkedConvert(json, 'verbose', (v) => v as bool),
+      canvasKit: $checkedConvert(json, 'canvas-kit', (v) => v as bool),
     );
     return val;
   }, fieldKeyMap: const {
     'buildConfig': 'build-config',
     'sourceBranchInfo': 'source-branch-info',
     'postBuildDartScript': 'post-build-dart-script',
-    'builderOptions': 'builder-options'
+    'builderOptions': 'builder-options',
+    'canvasKit': 'canvas-kit'
   });
 }
 
@@ -133,5 +137,6 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
   writeNotNull('verbose', instance.verbose);
+  writeNotNull('canvas-kit', instance.canvasKit);
   return val;
 }

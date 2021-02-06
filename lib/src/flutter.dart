@@ -20,7 +20,7 @@ Future<void> runFlutterBuild(
   final args = <String>[
     'build',
     'web',
-    if (options.canvasKit) '--dart-define=FLUTTER_WEB_USE_SKIA=true',
+    if (options.canvasKit) ...['--web-renderer', 'canvaskit'],
   ];
 
   // Print the command to the console
@@ -29,9 +29,6 @@ Future<void> runFlutterBuild(
   print(ansi.styleBold.wrap('''
 $_commandPrefix$prettyArgs
 '''));
-
-  // Run flutter clean to remove cached build output
-  await runProcess(flutterPath, ['clean'], workingDirectory: pkgDirectory);
 
   // Build the app
   await runProcess(flutterPath, args, workingDirectory: pkgDirectory);
