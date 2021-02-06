@@ -62,7 +62,13 @@ class Options {
   @JsonKey(ignore: true)
   final bool buildConfigWasParsed;
 
-  @CliOption(defaultsTo: _defaultRelease)
+  @CliOption(
+    defaultsTo: _defaultRelease,
+    help: '''
+Flutter: enabled passes `--release`, otherwise passes `--profile`.
+  Other: enabled passes `--release`, otherwise passes `--no-release`.
+''',
+  )
   final bool release;
 
   @JsonKey(ignore: true)

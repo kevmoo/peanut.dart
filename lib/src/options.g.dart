@@ -45,7 +45,10 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       defaultsTo: 'gh-pages')
   ..addOption('build-config',
       abbr: 'c', help: 'The configuration to use when running `build_runner`.')
-  ..addFlag('release', defaultsTo: true)
+  ..addFlag('release',
+      help:
+          'Flutter: enabled passes `--release`, otherwise passes `--profile`.\n  Other: enabled passes `--release`, otherwise passes `--no-release`.\n',
+      defaultsTo: true)
   ..addOption('message', abbr: 'm', defaultsTo: 'Built <directories>')
   ..addFlag('source-branch-info',
       help:

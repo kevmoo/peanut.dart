@@ -50,7 +50,11 @@ Arguments:
                                  (defaults to "gh-pages")
 -c, --build-config               The configuration to use when running
                                  `build_runner`.
-    --[no-]release               (defaults to on)
+    --[no-]release               Flutter: enabled passes `--release`, otherwise
+                                 passes `--profile`.
+                                 Other: enabled passes `--release`, otherwise
+                                 passes `--no-release`.
+                                 (defaults to on)
 -m, --message                    (defaults to "Built <directories>")
     --[no-]source-branch-info    Includes the name of the source branch and SHA
                                  in the commit message
