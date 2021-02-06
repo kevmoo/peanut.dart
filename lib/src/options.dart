@@ -129,8 +129,10 @@ See the README for details.''',
     defaultsTo: _defaultCanvasKit,
     help: 'Builds Flutter web apps with CanvasKit.',
   )
-  @JsonKey(ignore: true)
   final bool canvasKit;
+
+  @JsonKey(ignore: true)
+  final bool canvasKitWasParsed;
 
   @JsonKey(ignore: true)
   @CliOption(
@@ -171,6 +173,7 @@ See the README for details.''',
     this.verboseWasParsed,
     bool dryRun,
     bool canvasKit,
+    this.canvasKitWasParsed,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -199,7 +202,7 @@ See the README for details.''',
           builderOptionsWasParsed ? builderOptions : other.builderOptions,
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
-      canvasKit: canvasKit,
+      canvasKit: canvasKitWasParsed ? canvasKit : other.canvasKit,
       help: help,
       message: messageWasParsed ? message : other.message,
       postBuildDartScript: postBuildDartScriptWasParsed
