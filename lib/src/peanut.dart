@@ -222,6 +222,11 @@ package:peanut $packageVersion''';
         'Branch "${options.branch}" was updated with commit $shortSha',
       ));
       print(indentedMessage);
+      if (options.branch == 'gh-pages') {
+        print('To push your gh-pages branch to github '
+            '(without switching from your working branch), run:\n'
+            '  git push origin --set-upstream gh-pages');
+      }
     }
   } finally {
     await tempDir.delete(recursive: true);
