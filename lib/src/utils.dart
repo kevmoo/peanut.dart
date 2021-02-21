@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:io/ansi.dart' as ansi;
+import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'peanut_exception.dart';
 
@@ -37,19 +38,46 @@ final String _sdkDir = (() {
 })();
 
 final bool isFlutterSdk = (() {
-  const depth = 7;
   final components = p.split(Platform.resolvedExecutable);
-  if (components.length < depth) {
+  return isFlutterSdkHeuristic(components);
+})();
+
+@visibleForTesting
+bool isFlutterSdkHeuristic(List<String> path) {
+  // This represents the directory depth from /path/to/flutter to
+  // /path/to/flutter/sdk/bin/cache/dart-sdk/bin/dart.
+  const depth = 7;
+
+  if (path.length < depth) {
     return false;
   }
 
   // Assume that the Flutter SDK is installed in a directory named 'flutter'
-  final flutterIndex = components.lastIndexOf('flutter');
+  final flutterIndex = path.lastIndexOf('flutter');
 
-  // TODO(kevmoo: This is off on my installation of Flutter.
-  // Need to investigate
-  return flutterIndex > components.length - depth;
-})();
+  if (flutterIndex > path.length - depth) {
+    return true;
+  }
+
+  // If no 'flutter' is found, try FVM to support that version management
+  // package. FVM places Flutter SDK in `~/fvm/versions/**`.
+  final fvmIndex = path.lastIndexOf('fvm');
+
+  // fvm puts another 2 levels to the depth, with something like
+  // /path/to/fvm/versions/stable.
+  const fvmDepth = depth + 2;
+
+  if (fvmIndex > path.length - fvmDepth) {
+    final versionsIndex = path.indexOf('versions', fvmIndex);
+    if (versionsIndex == fvmIndex + 1) {
+      // Path contains `fvm/versions`.
+      return true;
+    }
+  }
+
+  // No evidence of running from Flutter SDK.
+  return false;
+}
 
 final String flutterPath = p.join(
     _flutterSdkDir, 'bin', Platform.isWindows ? 'flutter.bat' : 'flutter');
