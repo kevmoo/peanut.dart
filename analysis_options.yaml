@@ -19,6 +19,7 @@ linter:
     - avoid_single_cascade_in_expression_statements
     - avoid_unused_constructor_parameters
     - avoid_void_async
+    - avoid_dynamic_calls
     - await_only_futures
     - camel_case_types
     - cancel_subscriptions
