@@ -1,3 +1,9 @@
+## 3.7.0
+
+- Support [Flutter Version Manager (FVM)](https://github.com/leoafarias/fvm)
+  installations.
+- Improve help text.
+
 ## 3.6.0
 
 - Require Dart 2.10.5
