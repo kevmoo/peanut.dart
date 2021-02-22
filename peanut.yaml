@@ -2,6 +2,8 @@
 directories:
 - example
 
+post-build-dart-script: tool/clean_output.dart
+
 builder-options:
   build_web_compilers|entrypoint:
     dart2js_args:
