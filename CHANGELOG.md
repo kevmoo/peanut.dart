@@ -1,3 +1,7 @@
+## 3.7.1
+
+- `html` is now a supported configuration in `peanut.yaml`.
+
 ## 3.7.0
 
 - Support [Flutter Version Manager (FVM)](https://github.com/leoafarias/fvm)
