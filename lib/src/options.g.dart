@@ -30,6 +30,8 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     dryRun: result['dry-run'] as bool,
     canvasKit: result['canvas-kit'] as bool,
     canvasKitWasParsed: result.wasParsed('canvas-kit'),
+    html: result['html'] as bool,
+    htmlWasParsed: result.wasParsed('html'),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -67,6 +69,8 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       negatable: false)
   ..addFlag('canvas-kit',
       help: 'Builds Flutter web apps with CanvasKit.', negatable: false)
+  ..addFlag('html',
+      help: 'Builds Flutter web apps with HTML.', negatable: false)
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
@@ -94,7 +98,8 @@ Options _$OptionsFromJson(Map json) {
       'post-build-dart-script',
       'builder-options',
       'verbose',
-      'canvas-kit'
+      'canvas-kit',
+      'html'
     ]);
     final val = Options(
       directories: $checkedConvert(json, 'directories',
@@ -111,6 +116,7 @@ Options _$OptionsFromJson(Map json) {
           json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
       verbose: $checkedConvert(json, 'verbose', (v) => v as bool),
       canvasKit: $checkedConvert(json, 'canvas-kit', (v) => v as bool),
+      html: $checkedConvert(json, 'html', (v) => v as bool),
     );
     return val;
   }, fieldKeyMap: const {
@@ -141,5 +147,6 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('builder-options', instance.builderOptions);
   writeNotNull('verbose', instance.verbose);
   writeNotNull('canvas-kit', instance.canvasKit);
+  writeNotNull('html', instance.html);
   return val;
 }

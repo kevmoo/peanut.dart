@@ -15,6 +15,7 @@ const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
 const _defaultCanvasKit = false;
+const _defaultHTML = false;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
@@ -140,6 +141,16 @@ See the README for details.''',
   @JsonKey(ignore: true)
   final bool canvasKitWasParsed;
 
+  @CliOption(
+    negatable: false,
+    defaultsTo: _defaultHTML,
+    help: 'Builds Flutter web apps with HTML.',
+  )
+  final bool html;
+
+  @JsonKey(ignore: true)
+  final bool htmlWasParsed;
+
   @JsonKey(ignore: true)
   @CliOption(
     abbr: 'h',
@@ -180,6 +191,8 @@ See the README for details.''',
     bool dryRun,
     bool canvasKit,
     this.canvasKitWasParsed,
+    bool html,
+    this.htmlWasParsed,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -190,7 +203,8 @@ See the README for details.''',
         sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo,
         verbose = verbose ?? _defaultVerbose,
         dryRun = dryRun ?? _defaultDryRun,
-        canvasKit = canvasKit ?? _defaultCanvasKit;
+        canvasKit = canvasKit ?? _defaultCanvasKit,
+        html = html ?? _defaultHTML;
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
 
@@ -209,6 +223,7 @@ See the README for details.''',
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
       canvasKit: canvasKitWasParsed ? canvasKit : other.canvasKit,
+      html: htmlWasParsed ? html : other.html,
       help: help,
       message: messageWasParsed ? message : other.message,
       postBuildDartScript: postBuildDartScriptWasParsed

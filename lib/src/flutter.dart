@@ -21,6 +21,7 @@ Future<void> runFlutterBuild(
     'build',
     'web',
     if (options.canvasKit) ...['--web-renderer', 'canvaskit'],
+    if (options.html) ...['--web-renderer', 'html'],
     options.release ? '--release' : '--profile',
   ];
 
