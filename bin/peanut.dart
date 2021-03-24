@@ -85,12 +85,12 @@ const _peanutConfigFile = 'peanut.yaml';
 final _optionsFile = File(_peanutConfigFile);
 
 Options _getOptions(List<String> args) {
-  Options fromConfig;
+  Options? fromConfig;
   if (_optionsFile.existsSync()) {
     fromConfig = checkedYamlDecode(
       _optionsFile.readAsStringSync(),
       decodeYaml,
-      sourceUrl: _peanutConfigFile,
+      sourceUrl: Uri.parse(_peanutConfigFile),
     );
   }
 

@@ -6,10 +6,10 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'peanut_exception.dart';
 
-void printError(Object object) => print(ansi.red.wrap(object.toString()));
+void printError(Object? object) => print(ansi.red.wrap(object.toString()));
 
 Future runProcess(String proc, List<String> args,
-    {String workingDirectory}) async {
+    {String? workingDirectory}) async {
   final process = await Process.start(proc, args,
       runInShell: true,
       workingDirectory: workingDirectory,

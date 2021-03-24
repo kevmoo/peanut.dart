@@ -65,7 +65,7 @@ Future<void> checkPubspecLock(String pkgDir) async {
 }
 
 class _PubspecLock {
-  final YamlMap _packages;
+  final YamlMap? _packages;
 
   _PubspecLock(this._packages);
 
@@ -82,14 +82,14 @@ class _PubspecLock {
 
   List<PackageExceptionDetails> checkPackage(
       String pkgName, VersionConstraint constraint,
-      {String forArgument, bool requireDirect}) {
+      {String? forArgument, bool? requireDirect}) {
     requireDirect ??= true;
     final issues = <PackageExceptionDetails>[];
     final missingDetails =
         PackageExceptionDetails.missingDep(pkgName, constraint);
 
     final pkgDataMap =
-        (_packages == null) ? null : _packages[pkgName] as YamlMap;
+        (_packages == null) ? null : _packages![pkgName] as YamlMap;
     if (pkgDataMap == null) {
       issues.add(missingDetails);
     } else {
@@ -123,14 +123,14 @@ class _PubspecLock {
 class PackageException implements Exception {
   final List<PackageExceptionDetails> details;
 
-  final String unsupportedArgument;
+  final String? unsupportedArgument;
 
   PackageException(this.details, {this.unsupportedArgument});
 }
 
 class PackageExceptionDetails {
   final String error;
-  final String description;
+  final String? description;
 
   const PackageExceptionDetails._(
     this.error, {

@@ -9,11 +9,11 @@ part of 'options.dart';
 // **************************************************************************
 
 Options _$parseOptionsResult(ArgResults result) => Options(
-    directories: _directoriesConvert(result['directories'] as String),
+    directories: _directoriesConvert(result['directories'] as String?),
     directoriesWasParsed: result.wasParsed('directories'),
     branch: result['branch'] as String,
     branchWasParsed: result.wasParsed('branch'),
-    buildConfig: result['build-config'] as String,
+    buildConfig: result['build-config'] as String?,
     buildConfigWasParsed: result.wasParsed('build-config'),
     release: result['release'] as bool,
     releaseWasParsed: result.wasParsed('release'),
@@ -21,9 +21,9 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     messageWasParsed: result.wasParsed('message'),
     sourceBranchInfo: result['source-branch-info'] as bool,
     sourceBranchInfoWasParsed: result.wasParsed('source-branch-info'),
-    postBuildDartScript: result['post-build-dart-script'] as String,
+    postBuildDartScript: result['post-build-dart-script'] as String?,
     postBuildDartScriptWasParsed: result.wasParsed('post-build-dart-script'),
-    builderOptions: _openBuildConfig(result['builder-options'] as String),
+    builderOptions: _openBuildConfig(result['builder-options'] as String?),
     builderOptionsWasParsed: result.wasParsed('builder-options'),
     verbose: result['verbose'] as bool,
     verboseWasParsed: result.wasParsed('verbose'),
@@ -37,8 +37,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('directories',
       abbr: 'd',
-      help: 'The directories that should be built.',
-      defaultsTo: 'web')
+      help: 'The directories that should be built.\n(defaults to "web")')
   ..addOption('branch',
       abbr: 'b',
       help: 'The git branch where the built content should be committed.',
@@ -98,19 +97,24 @@ Options _$OptionsFromJson(Map json) {
     ]);
     final val = Options(
       directories: $checkedConvert(json, 'directories',
-          (v) => (v as List)?.map((e) => e as String)?.toList()),
-      branch: $checkedConvert(json, 'branch', (v) => v as String),
-      buildConfig: $checkedConvert(json, 'build-config', (v) => v as String),
-      release: $checkedConvert(json, 'release', (v) => v as bool),
-      message: $checkedConvert(json, 'message', (v) => v as String),
+              (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()) ??
+          ['web'],
+      branch:
+          $checkedConvert(json, 'branch', (v) => v as String?) ?? 'gh-pages',
+      buildConfig: $checkedConvert(json, 'build-config', (v) => v as String?),
+      release: $checkedConvert(json, 'release', (v) => v as bool?) ?? true,
+      message: $checkedConvert(json, 'message', (v) => v as String?) ??
+          'Built <directories>',
       sourceBranchInfo:
-          $checkedConvert(json, 'source-branch-info', (v) => v as bool),
+          $checkedConvert(json, 'source-branch-info', (v) => v as bool?) ??
+              true,
       postBuildDartScript:
-          $checkedConvert(json, 'post-build-dart-script', (v) => v as String),
+          $checkedConvert(json, 'post-build-dart-script', (v) => v as String?),
       builderOptions: $checkedConvert(
-          json, 'builder-options', (v) => _builderOptionsFromMap(v as Map)),
-      verbose: $checkedConvert(json, 'verbose', (v) => v as bool),
-      canvasKit: $checkedConvert(json, 'canvas-kit', (v) => v as bool),
+          json, 'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
+      verbose: $checkedConvert(json, 'verbose', (v) => v as bool?) ?? false,
+      canvasKit:
+          $checkedConvert(json, 'canvas-kit', (v) => v as bool?) ?? false,
     );
     return val;
   }, fieldKeyMap: const {
@@ -123,7 +127,10 @@ Options _$OptionsFromJson(Map json) {
 }
 
 Map<String, dynamic> _$OptionsToJson(Options instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'directories': instance.directories,
+    'branch': instance.branch,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -131,15 +138,13 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
     }
   }
 
-  writeNotNull('directories', instance.directories);
-  writeNotNull('branch', instance.branch);
   writeNotNull('build-config', instance.buildConfig);
-  writeNotNull('release', instance.release);
-  writeNotNull('message', instance.message);
-  writeNotNull('source-branch-info', instance.sourceBranchInfo);
+  val['release'] = instance.release;
+  val['message'] = instance.message;
+  val['source-branch-info'] = instance.sourceBranchInfo;
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
-  writeNotNull('verbose', instance.verbose);
-  writeNotNull('canvas-kit', instance.canvasKit);
+  val['verbose'] = instance.verbose;
+  val['canvas-kit'] = instance.canvasKit;
   return val;
 }

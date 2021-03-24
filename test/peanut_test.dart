@@ -19,8 +19,8 @@ TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
 Matcher _throwsPeanutException(message) => throwsA(
     isA<PeanutException>().having((pe) => pe.message, 'message', message));
 
-Future<void> _run({Options options}) =>
-    run(workingDir: d.sandbox, options: options);
+Future<void> _run({Options? options}) =>
+    run(workingDirectory: d.sandbox, options: options ?? const Options());
 
 void main() {
   test('no pub get', () async {
@@ -112,7 +112,7 @@ void main() {
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
     expect(ghCommit.message, '''
 Built web
 
@@ -139,7 +139,7 @@ package:peanut $packageVersion''');
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
     expect(ghCommit.message, '''
 Built example, web
 
@@ -190,7 +190,7 @@ package:peanut $packageVersion''');
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
     expect(ghCommit.message, '''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
@@ -252,7 +252,7 @@ void main(List<String> args) {
 
       final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-      final ghCommit = await gitDir.commitFromRevision(ghBranchRef.sha);
+      final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
       expect(ghCommit.message, '''
 Built example, web
 
@@ -321,14 +321,14 @@ void main() {
   });
 }
 
-String _standardTreeContentSha;
+String? _standardTreeContentSha;
 
 Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
   if (_standardTreeContentSha == null) {
     final treeContents = await gitDir.lsTree(treeSha);
 
     try {
-      expect(treeContents, hasLength(3));
+      expect(treeContents, hasLength(2));
       expect(
         treeContents,
         contains(
@@ -339,12 +339,6 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
         treeContents,
         contains(
           _treeEntry('index.html', 'blob'),
-        ),
-      );
-      expect(
-        treeContents,
-        contains(
-          _treeEntry('packages', 'tree'),
         ),
       );
 
@@ -362,7 +356,7 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
   }
 }
 
-Future<void> _pubGet({String parent}) async {
+Future<void> _pubGet({String? parent}) async {
   final proc = await Process.run(
     'pub',
     ['get', '--offline', '--no-precompile'],
@@ -399,7 +393,7 @@ Future<GitDir> _initGitDir() async {
 
 Future<void> _simplePackage({
   Set<String> buildDirs = const {'web'},
-  String parent,
+  String? parent,
 }) async {
   if (parent != null) {
     assert(p.isRelative(parent));
