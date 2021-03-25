@@ -6,13 +6,13 @@ your ticket.
 
 ## Install
 
-```
+```console
 $ pub global activate peanut
 ```
 
 ## Run
 
-```
+```console
 $ cd ~/my_dart_proj/
 $ peanut
 ```
@@ -26,15 +26,18 @@ Flutter apps can be built by running peanut with the Flutter SDK.
 
 Installing: 
 
-```
+```console
 $ flutter pub global activate peanut
 ```
 
 Running:
 
-```
+```console
 $ flutter pub global run peanut:peanut
 ```
+
+Read me about `peanut` in
+[this article](https://medium.com/@kevmoo/show-off-your-flutter-dart-web-app-with-peanut-c0307f2b733c).
 
 ## Options
 
