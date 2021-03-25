@@ -20,7 +20,8 @@ Future<void> runFlutterBuild(
   final args = <String>[
     'build',
     'web',
-    if (options.canvasKit) ...['--web-renderer', 'canvaskit'],
+    '--web-renderer',
+    options.webRendererString,
     options.release ? '--release' : '--profile',
   ];
 

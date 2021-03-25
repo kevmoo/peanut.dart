@@ -8,6 +8,14 @@ part of 'options.dart';
 // CliGenerator
 // **************************************************************************
 
+T _$enumValueHelper<T>(Map<T, String> enumValues, String source) => enumValues
+    .entries
+    .singleWhere((e) => e.value == source,
+        orElse: () =>
+            throw ArgumentError('`$source` is not one of the supported values: '
+                '${enumValues.values.join(', ')}'))
+    .key;
+
 Options _$parseOptionsResult(ArgResults result) => Options(
     directories: _directoriesConvert(result['directories'] as String?),
     directoriesWasParsed: result.wasParsed('directories'),
@@ -28,11 +36,17 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     verbose: result['verbose'] as bool,
     verboseWasParsed: result.wasParsed('verbose'),
     dryRun: result['dry-run'] as bool,
-    canvasKit: result['canvas-kit'] as bool,
-    canvasKitWasParsed: result.wasParsed('canvas-kit'),
+    webRenderer: _$enumValueHelper(
+        _$WebRendererEnumMapBuildCli, result['web-renderer'] as String),
+    webRendererWasParsed: result.wasParsed('web-renderer'),
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
+
+const _$WebRendererEnumMapBuildCli = <WebRenderer, String>{
+  WebRenderer.canvaskit: 'canvaskit',
+  WebRenderer.html: 'html'
+};
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption('directories',
@@ -64,8 +78,20 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
       help:
           'Verifies configuration and prints commands that would be executed, but does not do any work.',
       negatable: false)
-  ..addFlag('canvas-kit',
-      help: 'Builds Flutter web apps with CanvasKit.', negatable: false)
+  ..addOption('web-renderer',
+      help:
+          'The renderer implementation to use when building for the web. Flutter web only.',
+      defaultsTo: 'html',
+      allowed: [
+        'canvaskit',
+        'html'
+      ],
+      allowedHelp: <String, String>{
+        'canvaskit':
+            'This renderer uses WebGL and WebAssembly to render graphics.',
+        'html':
+            'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, and WebGL.'
+      })
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
@@ -93,7 +119,7 @@ Options _$OptionsFromJson(Map json) {
       'post-build-dart-script',
       'builder-options',
       'verbose',
-      'canvas-kit'
+      'web-renderer'
     ]);
     final val = Options(
       directories: $checkedConvert(json, 'directories',
@@ -113,8 +139,9 @@ Options _$OptionsFromJson(Map json) {
       builderOptions: $checkedConvert(
           json, 'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
       verbose: $checkedConvert(json, 'verbose', (v) => v as bool?) ?? false,
-      canvasKit:
-          $checkedConvert(json, 'canvas-kit', (v) => v as bool?) ?? false,
+      webRenderer: $checkedConvert(json, 'web-renderer',
+              (v) => _$enumDecodeNullable(_$WebRendererEnumMap, v)) ??
+          WebRenderer.html,
     );
     return val;
   }, fieldKeyMap: const {
@@ -122,7 +149,7 @@ Options _$OptionsFromJson(Map json) {
     'sourceBranchInfo': 'source-branch-info',
     'postBuildDartScript': 'post-build-dart-script',
     'builderOptions': 'builder-options',
-    'canvasKit': 'canvas-kit'
+    'webRenderer': 'web-renderer'
   });
 }
 
@@ -145,6 +172,48 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
-  val['canvas-kit'] = instance.canvasKit;
+  val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer];
   return val;
 }
+
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
+  }
+
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
+}
+
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$WebRendererEnumMap = {
+  WebRenderer.canvaskit: 'canvaskit',
+  WebRenderer.html: 'html',
+};

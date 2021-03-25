@@ -1,6 +1,9 @@
 ## 4.0.0-dev
 
 - Migrate implementation to null-safety.
+- **DROPPED** `canvas-kit` option. Replaced it with...
+- **ADDED** `web-renderer` option. Aligns with the (current) defaults in the
+  Flutter CLI.
 
 ## 3.7.0
 

@@ -14,13 +14,18 @@ const _defaultRelease = true;
 const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
-const _defaultCanvasKit = false;
+const _defaultWebRenderer = WebRenderer.html;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
 ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 
 Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
+
+enum WebRenderer {
+  canvaskit,
+  html,
+}
 
 @JsonSerializable(
   anyMap: true,
@@ -137,15 +142,22 @@ See the README for details.''',
   final bool dryRun;
 
   @CliOption(
-    negatable: false,
-    defaultsTo: _defaultCanvasKit,
-    help: 'Builds Flutter web apps with CanvasKit.',
-  )
-  @JsonKey(defaultValue: _defaultCanvasKit)
-  final bool canvasKit;
-
+      defaultsTo: _defaultWebRenderer,
+      help: 'The renderer implementation to use when building for the web. '
+          'Flutter web only.',
+      allowedHelp: {
+        WebRenderer.canvaskit:
+            'This renderer uses WebGL and WebAssembly to render graphics.',
+        WebRenderer.html:
+            'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
+                'and WebGL.',
+      })
+  @JsonKey(defaultValue: _defaultWebRenderer)
+  final WebRenderer webRenderer;
   @JsonKey(ignore: true)
-  final bool canvasKitWasParsed;
+  final bool webRendererWasParsed;
+
+  String get webRendererString => _$WebRendererEnumMap[webRenderer]!;
 
   @JsonKey(ignore: true)
   @CliOption(
@@ -185,8 +197,8 @@ See the README for details.''',
     this.verbose = _defaultVerbose,
     this.verboseWasParsed = false,
     this.dryRun = _defaultDryRun,
-    this.canvasKit = _defaultCanvasKit,
-    this.canvasKitWasParsed = false,
+    this.webRenderer = _defaultWebRenderer,
+    this.webRendererWasParsed = false,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -208,7 +220,7 @@ See the README for details.''',
           builderOptionsWasParsed ? builderOptions : other.builderOptions,
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
-      canvasKit: canvasKitWasParsed ? canvasKit : other.canvasKit,
+      webRenderer: webRendererWasParsed ? webRenderer : other.webRenderer,
       help: help,
       message: messageWasParsed ? message : other.message,
       postBuildDartScript: postBuildDartScriptWasParsed
