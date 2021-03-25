@@ -1,4 +1,4 @@
-## 4.0.0-dev
+## 4.0.0
 
 - Migrate implementation to null-safety.
 - **DROPPED** `canvas-kit` option. Replaced it with...
