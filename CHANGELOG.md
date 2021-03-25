@@ -1,3 +1,7 @@
+## 4.0.0-dev
+
+- Migrate implementation to null-safety.
+
 ## 3.7.0
 
 - Support [Flutter Version Manager (FVM)](https://github.com/leoafarias/fvm)

@@ -149,7 +149,7 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
           ),
           throwsA(
             isA<ParsedYamlException>().having((e) {
-              printOnFailure(e.formattedMessage);
+              printOnFailure(e.formattedMessage ?? '');
               return e.formattedMessage;
             }, 'formattedMessage', '''
 line 1, column 2 of ${p.join(d.sandbox, 'some_file.yaml')}: Expected node content.

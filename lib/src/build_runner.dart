@@ -25,9 +25,9 @@ Future<void> runBuildRunner(
       'build',
       options.release ? '--release' : '--no-release',
     ],
-    if (options.buildConfig != null) ['--config', options.buildConfig],
+    if (options.buildConfig != null) ['--config', options.buildConfig!],
     if (options.builderOptions != null)
-      for (var option in options.builderOptions.entries)
+      for (var option in options.builderOptions!.entries)
         for (var optionEntry in option.value.entries)
           [
             '--define',
@@ -91,7 +91,7 @@ $_commandPrefix$prettyArgs
   }
 }
 
-String _defineValue(String builder, String option, Object value) =>
+String _defineValue(String builder, String option, Object? value) =>
     '$builder=$option=${jsonEncode(value)}';
 
 const _commandPrefix = 'Command:     ';

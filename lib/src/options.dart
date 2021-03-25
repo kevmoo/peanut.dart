@@ -20,7 +20,7 @@ const defaultMessage = 'Built <$_directoryFlag>';
 
 ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
 
-Options decodeYaml(Map yaml) => _$OptionsFromJson(yaml);
+Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
 
 @JsonSerializable(
   anyMap: true,
@@ -34,10 +34,12 @@ class Options {
   @CliOption(
     name: _directoryFlag,
     abbr: 'd',
-    defaultsTo: _defaultDirectory,
-    help: 'The directories that should be built.',
+    help: r'''
+The directories that should be built.
+(defaults to "web")''',
     convert: _directoriesConvert,
   )
+  @JsonKey(defaultValue: [_defaultDirectory])
   final List<String> directories;
 
   @JsonKey(ignore: true)
@@ -48,6 +50,7 @@ class Options {
     help: 'The git branch where the built content should be committed.',
     defaultsTo: _defaultBranch,
   )
+  @JsonKey(defaultValue: _defaultBranch)
   final String branch;
 
   @JsonKey(ignore: true)
@@ -57,7 +60,7 @@ class Options {
     abbr: 'c',
     help: 'The configuration to use when running `build_runner`.',
   )
-  final String buildConfig;
+  final String? buildConfig;
 
   @JsonKey(ignore: true)
   final bool buildConfigWasParsed;
@@ -69,12 +72,14 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   Other: enabled passes `--release`, otherwise passes `--no-release`.
 ''',
   )
+  @JsonKey(defaultValue: _defaultRelease)
   final bool release;
 
   @JsonKey(ignore: true)
   final bool releaseWasParsed;
 
   @CliOption(abbr: 'm', defaultsTo: defaultMessage)
+  @JsonKey(defaultValue: defaultMessage)
   final String message;
 
   @JsonKey(ignore: true)
@@ -85,6 +90,7 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
     help:
         'Includes the name of the source branch and SHA in the commit message',
   )
+  @JsonKey(defaultValue: _defaultSourceBranchInfo)
   final bool sourceBranchInfo;
 
   @JsonKey(ignore: true)
@@ -94,7 +100,7 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
     help: 'Optional Dart script to run after all builds have completed, but '
         'before files are committed to the repository.',
   )
-  final String postBuildDartScript;
+  final String? postBuildDartScript;
 
   @JsonKey(ignore: true)
   final bool postBuildDartScriptWasParsed;
@@ -106,7 +112,7 @@ See the README for details.''',
     convert: _openBuildConfig,
   )
   @JsonKey(fromJson: _builderOptionsFromMap)
-  final Map<String, Map<String, dynamic>> builderOptions;
+  final Map<String, Map<String, dynamic>>? builderOptions;
 
   @JsonKey(ignore: true)
   final bool builderOptionsWasParsed;
@@ -115,7 +121,7 @@ See the README for details.''',
     help: 'Print more details when running.',
     defaultsTo: _defaultVerbose,
   )
-  @JsonKey()
+  @JsonKey(defaultValue: _defaultVerbose)
   final bool verbose;
 
   @JsonKey(ignore: true)
@@ -135,6 +141,7 @@ See the README for details.''',
     defaultsTo: _defaultCanvasKit,
     help: 'Builds Flutter web apps with CanvasKit.',
   )
+  @JsonKey(defaultValue: _defaultCanvasKit)
   final bool canvasKit;
 
   @JsonKey(ignore: true)
@@ -159,44 +166,37 @@ See the README for details.''',
   final List<String> rest;
 
   const Options({
-    List<String> directories,
-    this.directoriesWasParsed,
-    String branch,
-    this.branchWasParsed,
+    this.directories = const [_defaultDirectory],
+    this.directoriesWasParsed = false,
+    this.branch = _defaultBranch,
+    this.branchWasParsed = false,
     this.buildConfig,
-    this.buildConfigWasParsed,
-    bool release,
-    this.releaseWasParsed,
-    String message,
-    this.messageWasParsed,
-    bool sourceBranchInfo,
-    this.sourceBranchInfoWasParsed,
+    this.buildConfigWasParsed = false,
+    this.release = _defaultRelease,
+    this.releaseWasParsed = false,
+    this.message = defaultMessage,
+    this.messageWasParsed = false,
+    this.sourceBranchInfo = _defaultSourceBranchInfo,
+    this.sourceBranchInfoWasParsed = false,
     this.postBuildDartScript,
-    this.postBuildDartScriptWasParsed,
+    this.postBuildDartScriptWasParsed = false,
     this.builderOptions,
-    this.builderOptionsWasParsed,
-    bool verbose,
-    this.verboseWasParsed,
-    bool dryRun,
-    bool canvasKit,
-    this.canvasKitWasParsed,
+    this.builderOptionsWasParsed = false,
+    this.verbose = _defaultVerbose,
+    this.verboseWasParsed = false,
+    this.dryRun = _defaultDryRun,
+    this.canvasKit = _defaultCanvasKit,
+    this.canvasKitWasParsed = false,
     this.help = false,
     this.version = false,
     this.rest = const [],
-  })  : branch = branch ?? _defaultBranch,
-        directories = directories ?? const [_defaultDirectory],
-        message = message ?? defaultMessage,
-        release = release ?? _defaultRelease,
-        sourceBranchInfo = sourceBranchInfo ?? _defaultSourceBranchInfo,
-        verbose = verbose ?? _defaultVerbose,
-        dryRun = dryRun ?? _defaultDryRun,
-        canvasKit = canvasKit ?? _defaultCanvasKit;
+  });
 
   Map<String, dynamic> toJson() => _$OptionsToJson(this);
 
   /// Assumes that `this` was generated via [ArgParser], so all of the
   /// `wasParsed` fields are set (non-`null`).
-  Options merge(Options other) {
+  Options merge(Options? other) {
     if (other == null) {
       return this;
     }
@@ -224,15 +224,16 @@ See the README for details.''',
   }
 }
 
-List<String> _directoriesConvert(String input) =>
-    input.split(',').map((v) => v.trim()).toList();
+List<String> _directoriesConvert(String? input) => input == null
+    ? [_defaultDirectory]
+    : input.split(',').map((v) => v.trim()).toList();
 
-Map<String, Map<String, dynamic>> _openBuildConfig(final String pathOrYamlMap) {
+Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
   if (pathOrYamlMap == null) {
     return null;
   }
 
-  var yamlPath = pathOrYamlMap;
+  String? yamlPath = pathOrYamlMap;
   String stringContent;
 
   if (FileSystemEntity.isFileSync(pathOrYamlMap)) {
@@ -246,7 +247,7 @@ Map<String, Map<String, dynamic>> _openBuildConfig(final String pathOrYamlMap) {
     return checkedYamlDecode(
       stringContent,
       _builderOptionsConvert,
-      sourceUrl: yamlPath,
+      sourceUrl: yamlPath == null ? null : Uri.parse(yamlPath),
     );
   } on ParsedYamlException catch (e) {
     if (e.yamlNode != null && e.yamlNode is! YamlMap) {
@@ -257,21 +258,22 @@ Map<String, Map<String, dynamic>> _openBuildConfig(final String pathOrYamlMap) {
   }
 }
 
-Map<String, Map<String, dynamic>> _builderOptionsFromMap(Map source) =>
-    _builderOptionsConvert(source as YamlMap);
+Map<String, Map<String, dynamic>>? _builderOptionsFromMap(Map? source) =>
+    _builderOptionsConvert(source as YamlMap?);
 
-Map<String, Map<String, dynamic>> _builderOptionsConvert(Map map) => map == null
-    ? null
-    : Map<String, Map<String, dynamic>>.fromEntries(
-        map.entries.map((e) {
-          final value = e.value;
-          if (value is YamlMap) {
-            return MapEntry(
-              e.key as String,
-              value.cast<String, dynamic>(),
-            );
-          }
+Map<String, Map<String, dynamic>>? _builderOptionsConvert(Map? map) =>
+    map == null
+        ? null
+        : Map<String, Map<String, dynamic>>.fromEntries(
+            map.entries.map((e) {
+              final value = e.value;
+              if (value is YamlMap) {
+                return MapEntry(
+                  e.key as String,
+                  value.cast<String, dynamic>(),
+                );
+              }
 
-          throw FormatException('The value for "${e.key}" was not a Map.');
-        }),
-      );
+              throw FormatException('The value for "${e.key}" was not a Map.');
+            }),
+          );

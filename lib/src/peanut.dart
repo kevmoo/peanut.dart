@@ -19,9 +19,11 @@ export 'options.dart';
 export 'utils.dart' show printError;
 export 'webdev.dart' show PackageException;
 
-Future<void> run({Options options, String workingDir}) async {
-  options ??= const Options();
-  workingDir ??= p.current;
+Future<void> run({
+  Options options = const Options(),
+  String? workingDirectory,
+}) async {
+  final workingDir = workingDirectory ?? p.current;
 
   final isGitDir = await GitDir.isGitDir(workingDir);
 
@@ -161,7 +163,7 @@ Directories: ${sourcePkg.value.join(', ')}'''));
 
     if (options.postBuildDartScript != null) {
       final postBuildScriptPath =
-          pkgNormalize(workingDir, options.postBuildDartScript);
+          pkgNormalize(workingDir, options.postBuildDartScript!);
       if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
         throw PeanutException('The provided post-build Dart script does not '
             'exist or is not a file.\n$postBuildScriptPath');

@@ -6,13 +6,20 @@ void main() {
   final emptyArgsOptions = parseOptions([]);
   final emptyFileOptions = decodeYaml({});
 
-  test('defaults', () {
+  test('empty args', () {
     _checkDefault(emptyArgsOptions, _defaultOptions, isFalse);
+  });
 
+  test('empty file', () {
     _checkDefault(emptyFileOptions, _defaultOptions, isNull);
+  });
 
+  test('merged', () {
     _checkDefault(
-        emptyArgsOptions.merge(emptyFileOptions), _defaultOptions, isNull);
+      emptyArgsOptions.merge(emptyFileOptions),
+      _defaultOptions,
+      isNull,
+    );
   });
 
   test('all options', () {
@@ -55,7 +62,7 @@ void main() {
       '--verbose',
       '--version',
     ]);
-    _checkDefault(allArgsOptions, allOptions, isTrue);
+    _checkDefault(allArgsOptions, allOptions, isTrue, wasParsed: true);
 
     final allFileOptions = decodeYaml({
       'branch': 'other-branch',
@@ -99,30 +106,31 @@ void _checkDefault(
   Options options,
   Options expected,
   Matcher parsedValue, {
-  bool jsonSkippedDefault,
+  bool? jsonSkippedDefault,
+  bool wasParsed = false,
 }) {
   expect(options.branch, expected.branch);
-  expect(options.branchWasParsed, parsedValue);
+  expect(options.branchWasParsed, wasParsed);
   expect(options.buildConfig, expected.buildConfig);
-  expect(options.buildConfigWasParsed, parsedValue);
+  expect(options.buildConfigWasParsed, wasParsed);
   expect(options.builderOptions, expected.builderOptions);
-  expect(options.builderOptionsWasParsed, parsedValue);
+  expect(options.builderOptionsWasParsed, wasParsed);
   expect(options.directories, expected.directories);
-  expect(options.directoriesWasParsed, parsedValue);
+  expect(options.directoriesWasParsed, wasParsed);
 
   expect(options.dryRun, jsonSkippedDefault ?? expected.dryRun);
   expect(options.help, jsonSkippedDefault ?? expected.help);
 
   expect(options.message, expected.message);
-  expect(options.messageWasParsed, parsedValue);
+  expect(options.messageWasParsed, wasParsed);
   expect(options.postBuildDartScript, expected.postBuildDartScript);
-  expect(options.postBuildDartScriptWasParsed, parsedValue);
+  expect(options.postBuildDartScriptWasParsed, wasParsed);
   expect(options.release, expected.release);
-  expect(options.releaseWasParsed, parsedValue);
+  expect(options.releaseWasParsed, wasParsed);
   expect(options.sourceBranchInfo, expected.sourceBranchInfo);
-  expect(options.sourceBranchInfoWasParsed, parsedValue);
+  expect(options.sourceBranchInfoWasParsed, wasParsed);
   expect(options.verbose, expected.verbose);
-  expect(options.verboseWasParsed, parsedValue);
+  expect(options.verboseWasParsed, wasParsed);
 
   expect(options.version, jsonSkippedDefault ?? expected.version);
 }
