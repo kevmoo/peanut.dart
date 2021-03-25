@@ -71,7 +71,14 @@ Arguments:
     --[no-]verbose               Print more details when running.
     --dry-run                    Verifies configuration and prints commands that
                                  would be executed, but does not do any work.
-    --canvas-kit                 Builds Flutter web apps with CanvasKit.
+    --web-renderer               The renderer implementation to use when
+                                 building for the web. Flutter web only.
+
+          [canvaskit]            This renderer uses WebGL and WebAssembly to
+                                 render graphics.
+          [html] (default)       This renderer uses a combination of HTML, CSS,
+                                 SVG, 2D Canvas, and WebGL.
+
 -h, --help                       Prints usage information.
     --version                    Print the current version.
 ```
