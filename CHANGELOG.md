@@ -1,3 +1,7 @@
+## 4.0.1
+
+- Fixed a bad cast.
+
 ## 4.0.0
 
 - Migrate implementation to null-safety.
