@@ -176,17 +176,20 @@ package:peanut $packageVersion''');
     final primaryCommit = await gitDir.showRef();
 
     await _run(
-        options: const Options(
-      directories: [
-        'pkg1/example',
-        'pkg1/web',
-        'pkg2/example',
-        'pkg2/web',
-      ],
-    ));
+      options: const Options(
+        directories: [
+          'pkg1/example',
+          'pkg1/web',
+          'pkg2/example',
+          'pkg2/web',
+        ],
+      ),
+    );
 
-    expect((await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['main', 'gh-pages']));
+    expect(
+      (await gitDir.branches()).map((br) => br.branchName),
+      unorderedEquals(['main', 'gh-pages']),
+    );
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
@@ -405,11 +408,11 @@ Future<void> _simplePackage({
 name: peanut_test
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dev_dependencies:
-  build_runner: '>=0.8.10 <2.0.0'
-  build_web_compilers: '>=1.0.0 <3.0.0'
+  build_runner: ^2.0.0
+  build_web_compilers: ^3.0.0
 ''').create(parent);
 
   await d.file('.gitignore', '.dart_tool/').create(parent);
