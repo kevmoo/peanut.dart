@@ -54,9 +54,9 @@ Future<void> checkPubspecLock(String pkgDir) async {
   if (!isFlutterSdk) {
     issues
       ..addAll(pubspecLock.checkPackage(
-          'build_runner', VersionConstraint.parse('>=1.3.0 <2.0.0')))
+          'build_runner', VersionConstraint.parse('>=1.3.0 <3.0.0')))
       ..addAll(pubspecLock.checkPackage(
-          'build_web_compilers', VersionConstraint.parse('>=1.2.0 <3.0.0')));
+          'build_web_compilers', VersionConstraint.parse('>=1.2.0 <4.0.0')));
   }
 
   if (issues.isNotEmpty) {
@@ -126,6 +126,13 @@ class PackageException implements Exception {
   final String? unsupportedArgument;
 
   PackageException(this.details, {this.unsupportedArgument});
+
+  @override
+  String toString() => <String>[
+        'PackageException',
+        ...details.map((e) => e.toString()),
+        if (unsupportedArgument != null) unsupportedArgument!,
+      ].join('\n');
 }
 
 class PackageExceptionDetails {
