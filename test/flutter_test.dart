@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:peanut/src/utils.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('detecting Flutter SDK', () {
