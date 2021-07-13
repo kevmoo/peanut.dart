@@ -224,12 +224,10 @@
           "abstract": false
         },
         "children": [
-          "field/125830184",
-          "field/180845508",
           "field/302220255",
-          "field/435101137",
-          "field/709451133",
-          "field/1061931090"
+          "field/525672864",
+          "field/588058281",
+          "field/636292115"
         ]
       },
       "143626168": {
@@ -994,18 +992,6 @@
         "code": "",
         "type": "int"
       },
-      "125830184": {
-        "id": "field/125830184",
-        "kind": "field",
-        "name": "_self",
-        "size": 0,
-        "outputUnit": "outputUnit/669725655",
-        "parent": "class/138211367",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "dynamic"
-      },
       "140571055": {
         "id": "field/140571055",
         "kind": "field",
@@ -1029,18 +1015,6 @@
         "inferredType": "[exact=JSUInt31]",
         "code": "",
         "type": "int"
-      },
-      "180845508": {
-        "id": "field/180845508",
-        "kind": "field",
-        "name": "_target",
-        "size": 0,
-        "outputUnit": "outputUnit/669725655",
-        "parent": "class/138211367",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "dynamic"
       },
       "190358771": {
         "id": "field/190358771",
@@ -1210,18 +1184,6 @@
         "code": "",
         "type": "Object?"
       },
-      "435101137": {
-        "id": "field/435101137",
-        "kind": "field",
-        "name": "selfFieldNameCache",
-        "size": 0,
-        "outputUnit": "outputUnit/669725655",
-        "parent": "class/138211367",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
       "449743822": {
         "id": "field/449743822",
         "kind": "field",
@@ -1306,6 +1268,18 @@
         "code": "",
         "type": "Object?"
       },
+      "525672864": {
+        "id": "field/525672864",
+        "kind": "field",
+        "name": "_interceptor",
+        "size": 0,
+        "outputUnit": "outputUnit/669725655",
+        "parent": "class/138211367",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "dynamic"
+      },
       "558782121": {
         "id": "field/558782121",
         "kind": "field",
@@ -1329,6 +1303,30 @@
         "inferredType": "[subclass=JSPositiveInt]",
         "code": "",
         "type": "int"
+      },
+      "588058281": {
+        "id": "field/588058281",
+        "kind": "field",
+        "name": "_interceptorFieldNameCache",
+        "size": 0,
+        "outputUnit": "outputUnit/669725655",
+        "parent": "class/138211367",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
+      "636292115": {
+        "id": "field/636292115",
+        "kind": "field",
+        "name": "_receiverFieldNameCache",
+        "size": 0,
+        "outputUnit": "outputUnit/669725655",
+        "parent": "class/138211367",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "String?"
       },
       "639918601": {
         "id": "field/639918601",
@@ -1365,18 +1363,6 @@
         "inferredType": "Value([exact=JSString], value: \"Intercepted function with no arguments.\")",
         "code": "",
         "type": "dynamic"
-      },
-      "709451133": {
-        "id": "field/709451133",
-        "kind": "field",
-        "name": "receiverFieldNameCache",
-        "size": 0,
-        "outputUnit": "outputUnit/669725655",
-        "parent": "class/138211367",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "String?"
       },
       "726821079": {
         "id": "field/726821079",
@@ -1629,18 +1615,6 @@
         "inferredType": "[exact=JSString]",
         "code": "",
         "type": "String"
-      },
-      "1061931090": {
-        "id": "field/1061931090",
-        "kind": "field",
-        "name": "_name",
-        "size": 0,
-        "outputUnit": "outputUnit/669725655",
-        "parent": "class/138211367",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "String"
       }
     },
     "constant": {},
@@ -1748,7 +1722,7 @@
       "id": "outputUnit/669725655",
       "kind": "outputUnit",
       "name": "main",
-      "size": 6504,
+      "size": 6115,
       "filename": "example_script.dart.js",
       "imports": []
     }
@@ -1758,11 +1732,11 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/228987140",
-    "size": 6504,
-    "dart2jsVersion": "2.14.0-32.0.dev",
-    "compilationMoment": "2021-04-25 13:39:11.309825",
-    "compilationDuration": 446433,
-    "toJsonDuration": 3000,
+    "size": 6115,
+    "dart2jsVersion": "2.14.0-293.0.dev",
+    "compilationMoment": "2021-07-13 12:20:45.119520",
+    "compilationDuration": 431808,
+    "toJsonDuration": 2000,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
     "isRuntimeTypeUsed": false,
