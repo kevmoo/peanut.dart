@@ -19,7 +19,7 @@ Future<void> runBuildRunner(
 
   final args = <List<String>>[
     [
-      'pub',
+      'dart',
       'run',
       'build_runner',
       'build',
@@ -52,10 +52,10 @@ $_commandPrefix$prettyArgs
 
   final flatArgs = args
       .expand((list) => list)
-      .skip(1) // skip `pub`
+      .skip(1) // skip `dart`
       .toList();
 
-  await runProcess(pubPath, flatArgs, workingDirectory: pkgDirectory);
+  await runProcess(dartPath, flatArgs, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
 
