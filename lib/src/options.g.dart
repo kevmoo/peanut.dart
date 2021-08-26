@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: lines_longer_than_80_chars, prefer_expression_function_bodies
+// ignore_for_file: lines_longer_than_80_chars
 
 part of 'options.dart';
 
@@ -107,51 +107,62 @@ Options parseOptions(List<String> args) {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Options _$OptionsFromJson(Map json) {
-  return $checkedNew('Options', json, () {
-    $checkKeys(json, allowedKeys: const [
-      'directories',
-      'branch',
-      'build-config',
-      'release',
-      'message',
-      'source-branch-info',
-      'post-build-dart-script',
-      'builder-options',
-      'verbose',
-      'web-renderer'
-    ]);
-    final val = Options(
-      directories: $checkedConvert(json, 'directories',
-              (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()) ??
-          ['web'],
-      branch:
-          $checkedConvert(json, 'branch', (v) => v as String?) ?? 'gh-pages',
-      buildConfig: $checkedConvert(json, 'build-config', (v) => v as String?),
-      release: $checkedConvert(json, 'release', (v) => v as bool?) ?? true,
-      message: $checkedConvert(json, 'message', (v) => v as String?) ??
-          'Built <directories>',
-      sourceBranchInfo:
-          $checkedConvert(json, 'source-branch-info', (v) => v as bool?) ??
-              true,
-      postBuildDartScript:
-          $checkedConvert(json, 'post-build-dart-script', (v) => v as String?),
-      builderOptions: $checkedConvert(
-          json, 'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
-      verbose: $checkedConvert(json, 'verbose', (v) => v as bool?) ?? false,
-      webRenderer: $checkedConvert(json, 'web-renderer',
-              (v) => _$enumDecodeNullable(_$WebRendererEnumMap, v)) ??
-          WebRenderer.html,
+Options _$OptionsFromJson(Map json) => $checkedCreate(
+      'Options',
+      json,
+      ($checkedConvert) {
+        $checkKeys(
+          json,
+          allowedKeys: const [
+            'directories',
+            'branch',
+            'build-config',
+            'release',
+            'message',
+            'source-branch-info',
+            'post-build-dart-script',
+            'builder-options',
+            'verbose',
+            'web-renderer'
+          ],
+        );
+        final val = Options(
+          directories: $checkedConvert(
+              'directories',
+              (v) =>
+                  (v as List<dynamic>?)?.map((e) => e as String).toList() ??
+                  const [_defaultDirectory]),
+          branch:
+              $checkedConvert('branch', (v) => v as String? ?? _defaultBranch),
+          buildConfig: $checkedConvert('build-config', (v) => v as String?),
+          release:
+              $checkedConvert('release', (v) => v as bool? ?? _defaultRelease),
+          message:
+              $checkedConvert('message', (v) => v as String? ?? defaultMessage),
+          sourceBranchInfo: $checkedConvert('source-branch-info',
+              (v) => v as bool? ?? _defaultSourceBranchInfo),
+          postBuildDartScript:
+              $checkedConvert('post-build-dart-script', (v) => v as String?),
+          builderOptions: $checkedConvert(
+              'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
+          verbose:
+              $checkedConvert('verbose', (v) => v as bool? ?? _defaultVerbose),
+          webRenderer: $checkedConvert(
+              'web-renderer',
+              (v) =>
+                  _$enumDecodeNullable(_$WebRendererEnumMap, v) ??
+                  _defaultWebRenderer),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'buildConfig': 'build-config',
+        'sourceBranchInfo': 'source-branch-info',
+        'postBuildDartScript': 'post-build-dart-script',
+        'builderOptions': 'builder-options',
+        'webRenderer': 'web-renderer'
+      },
     );
-    return val;
-  }, fieldKeyMap: const {
-    'buildConfig': 'build-config',
-    'sourceBranchInfo': 'source-branch-info',
-    'postBuildDartScript': 'post-build-dart-script',
-    'builderOptions': 'builder-options',
-    'webRenderer': 'web-renderer'
-  });
-}
 
 Map<String, dynamic> _$OptionsToJson(Options instance) {
   final val = <String, dynamic>{

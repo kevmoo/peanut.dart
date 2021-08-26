@@ -21,7 +21,7 @@ Future<void> runFlutterBuild(
     'build',
     'web',
     '--web-renderer',
-    options.webRendererString,
+    options.webRendererString(),
     options.release ? '--release' : '--profile',
   ];
 
