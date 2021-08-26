@@ -44,7 +44,6 @@ The directories that should be built.
 (defaults to "web")''',
     convert: _directoriesConvert,
   )
-  @JsonKey(defaultValue: [_defaultDirectory])
   final List<String> directories;
 
   @JsonKey(ignore: true)
@@ -55,7 +54,6 @@ The directories that should be built.
     help: 'The git branch where the built content should be committed.',
     defaultsTo: _defaultBranch,
   )
-  @JsonKey(defaultValue: _defaultBranch)
   final String branch;
 
   @JsonKey(ignore: true)
@@ -77,14 +75,12 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   Other: enabled passes `--release`, otherwise passes `--no-release`.
 ''',
   )
-  @JsonKey(defaultValue: _defaultRelease)
   final bool release;
 
   @JsonKey(ignore: true)
   final bool releaseWasParsed;
 
   @CliOption(abbr: 'm', defaultsTo: defaultMessage)
-  @JsonKey(defaultValue: defaultMessage)
   final String message;
 
   @JsonKey(ignore: true)
@@ -95,7 +91,6 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
     help:
         'Includes the name of the source branch and SHA in the commit message',
   )
-  @JsonKey(defaultValue: _defaultSourceBranchInfo)
   final bool sourceBranchInfo;
 
   @JsonKey(ignore: true)
@@ -126,7 +121,6 @@ See the README for details.''',
     help: 'Print more details when running.',
     defaultsTo: _defaultVerbose,
   )
-  @JsonKey(defaultValue: _defaultVerbose)
   final bool verbose;
 
   @JsonKey(ignore: true)
@@ -152,12 +146,11 @@ See the README for details.''',
             'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
                 'and WebGL.',
       })
-  @JsonKey(defaultValue: _defaultWebRenderer)
   final WebRenderer webRenderer;
   @JsonKey(ignore: true)
   final bool webRendererWasParsed;
 
-  String get webRendererString => _$WebRendererEnumMap[webRenderer]!;
+  String webRendererString() => _$WebRendererEnumMap[webRenderer]!;
 
   @JsonKey(ignore: true)
   @CliOption(
