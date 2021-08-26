@@ -1,5 +1,6 @@
 ## 4.0.2-dev
 
+- Drop usage of `pub` command. Move to using `dart run`, `dart pub`, etc.
 - Require Dart 2.14.0-216.0.dev
 
 ## 4.0.1

@@ -16,15 +16,12 @@ import 'package:yaml/yaml.dart';
 import 'peanut_exception.dart';
 import 'utils.dart';
 
+const _args = ['pub', 'deps'];
 Future _runPubDeps(String workingDirectory) async {
-  ProcessResult result;
-  if (isFlutterSdk) {
-    result = Process.runSync(flutterPath, ['packages', 'deps'],
-        workingDirectory: workingDirectory);
-  } else {
-    result =
-        Process.runSync(pubPath, ['deps'], workingDirectory: workingDirectory);
-  }
+  final processName = isFlutterSdk ? flutterPath : dartPath;
+
+  final result =
+      Process.runSync(processName, _args, workingDirectory: workingDirectory);
 
   if (result.exitCode == 65 || result.exitCode == 66) {
     throw PeanutException((result.stderr as String).trim());
@@ -40,10 +37,11 @@ Future _runPubDeps(String workingDirectory) async {
       );
     }
     throw ProcessException(
-        isFlutterSdk ? flutterPath : pubPath,
-        ['deps'],
-        '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
-        exitCode);
+      processName,
+      _args,
+      '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
+      exitCode,
+    );
   }
 }
 
@@ -54,7 +52,9 @@ Future<void> checkPubspecLock(String pkgDir) async {
   if (!isFlutterSdk) {
     issues
       ..addAll(pubspecLock.checkPackage(
-          'build_runner', VersionConstraint.parse('>=1.3.0 <3.0.0')))
+        'build_runner',
+        VersionConstraint.parse('>=1.3.0 <3.0.0'),
+      ))
       ..addAll(pubspecLock.checkPackage(
           'build_web_compilers', VersionConstraint.parse('>=1.2.0 <4.0.0')));
   }
