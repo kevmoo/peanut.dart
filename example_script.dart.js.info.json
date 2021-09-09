@@ -15,7 +15,7 @@
         "id": "library/238986171",
         "kind": "library",
         "name": "dart2js._js_primitives",
-        "size": 273,
+        "size": 264,
         "children": [
           "function/864228238"
         ],
@@ -25,7 +25,7 @@
         "id": "library/302512608",
         "kind": "library",
         "name": "<unnamed>",
-        "size": 39,
+        "size": 30,
         "children": [
           "function/228987140"
         ],
@@ -46,7 +46,7 @@
         "id": "library/579882441",
         "kind": "library",
         "name": "rti",
-        "size": 157,
+        "size": 130,
         "children": [
           "class/121755874",
           "class/214521760",
@@ -61,7 +61,7 @@
         "id": "library/631335891",
         "kind": "library",
         "name": "dart.core",
-        "size": 148,
+        "size": 123,
         "children": [
           "class/36312556",
           "class/56472591",
@@ -365,7 +365,7 @@
         "id": "class/627219877",
         "kind": "class",
         "name": "Object",
-        "size": 106,
+        "size": 81,
         "outputUnit": "outputUnit/669725655",
         "parent": "library/631335891",
         "modifiers": {
@@ -601,7 +601,7 @@
         "id": "function/228987140",
         "kind": "function",
         "name": "main",
-        "size": 39,
+        "size": 30,
         "outputUnit": "outputUnit/669725655",
         "parent": "library/302512608",
         "children": [],
@@ -616,7 +616,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "E:function(){H.q(\"Hello!\")\nreturn null}",
+        "code": "E(){H.q(\"Hello!\")\nreturn null}",
         "type": "void Function()"
       },
       "399195151": {
@@ -651,7 +651,7 @@
         "id": "function/481740897",
         "kind": "function",
         "name": "objectAssign",
-        "size": 87,
+        "size": 78,
         "outputUnit": "outputUnit/669725655",
         "parent": "class/1070435853",
         "children": [],
@@ -677,7 +677,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "I:function(a,b){var u,t,s=Object.keys(b),r=s.length\nfor(u=0;u<r;++u){t=s[u]\na[t]=b[t]}}",
+        "code": "I(a,b){var u,t,s=Object.keys(b),r=s.length\nfor(u=0;u<r;++u){t=s[u]\na[t]=b[t]}}",
         "type": "void Function(Object?,Object?)"
       },
       "550544609": {
@@ -706,7 +706,7 @@
         "id": "function/592658352",
         "kind": "function",
         "name": "addErasedTypes",
-        "size": 35,
+        "size": 26,
         "outputUnit": "outputUnit/669725655",
         "parent": "class/769860706",
         "children": [],
@@ -732,7 +732,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "F:function(a,b){return H.I(a.eT,b)}",
+        "code": "F(a,b){return H.I(a.eT,b)}",
         "type": "void Function(Object?,Object?)"
       },
       "606513838": {
@@ -767,7 +767,7 @@
         "id": "function/656417734",
         "kind": "function",
         "name": "addRules",
-        "size": 35,
+        "size": 26,
         "outputUnit": "outputUnit/669725655",
         "parent": "class/769860706",
         "children": [],
@@ -793,7 +793,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "x:function(a,b){return H.I(a.tR,b)}",
+        "code": "x(a,b){return H.I(a.tR,b)}",
         "type": "void Function(Object?,Object?)"
       },
       "822673760": {
@@ -861,7 +861,7 @@
         "id": "function/864228238",
         "kind": "function",
         "name": "printString",
-        "size": 273,
+        "size": 264,
         "outputUnit": "outputUnit/669725655",
         "parent": "library/238986171",
         "children": [],
@@ -882,7 +882,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "q:function(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof window==\"object\")return\nif(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
+        "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof window==\"object\")return\nif(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
         "type": "void Function(String)"
       },
       "893622437": {
@@ -1722,7 +1722,7 @@
       "id": "outputUnit/669725655",
       "kind": "outputUnit",
       "name": "main",
-      "size": 6115,
+      "size": 5986,
       "filename": "example_script.dart.js",
       "imports": []
     }
@@ -1732,10 +1732,10 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/228987140",
-    "size": 6115,
-    "dart2jsVersion": "2.14.0-293.0.dev",
-    "compilationMoment": "2021-07-13 12:20:45.119520",
-    "compilationDuration": 431808,
+    "size": 5986,
+    "dart2jsVersion": "2.15.0-82.0.dev",
+    "compilationMoment": "2021-09-09 12:03:53.263461",
+    "compilationDuration": 438476,
     "toJsonDuration": 2000,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
