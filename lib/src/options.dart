@@ -18,7 +18,8 @@ const _defaultWebRenderer = WebRenderer.html;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
-ArgParser get parser => _$populateOptionsParser(ArgParser(usageLineLength: 80));
+String get parserUsage =>
+    _$populateOptionsParser(ArgParser(usageLineLength: 80)).usage;
 
 Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
 
