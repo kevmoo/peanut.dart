@@ -79,7 +79,7 @@ void _printUsage() {
 Usage: peanut [<args>]
 
 ${styleBold.wrap('Arguments:')}
-${parser.usage}''');
+$parserUsage''');
 }
 
 const _peanutConfigFile = 'peanut.yaml';
