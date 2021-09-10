@@ -88,6 +88,17 @@ $_output''');
     await proc.shouldExit(64);
   });
 
+  test('flutter options for build_runner', () async {
+    final proc = await _runPeanut(['--web-renderer', 'canvaskit']);
+
+    final output = await proc.stdoutStream().join('\n');
+    expect(output, endsWith('''
+The follow options are not supported with a build_runner build:
+ - web-renderer'''));
+
+    await proc.shouldExit(64);
+  });
+
   group('builder options', () {
     test('not provided', () async {
       expect(parseOptions([]).builderOptions, isNull);

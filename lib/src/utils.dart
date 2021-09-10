@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:io/ansi.dart' as ansi;
+import 'package:io/io.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
+
 import 'peanut_exception.dart';
 
 void printError(Object? object) => print(ansi.red.wrap(object.toString()));
@@ -94,3 +96,14 @@ String _flutterSdkDir = (() {
   }
   return dir;
 })();
+
+void checkValidOptions(String name, Set<String> config) {
+  if (config.isNotEmpty) {
+    throw PeanutException(
+      '''
+The follow options are not supported with a $name build:
+ - ${config.join('\n - ')}''',
+      exitCode: ExitCode.usage.code,
+    );
+  }
+}

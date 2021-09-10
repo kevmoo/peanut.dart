@@ -64,10 +64,12 @@ Future<void> main(List<String> args) async {
       exitCode = ExitCode.config.code;
     } else {
       printError(e);
-      if (e is! PeanutException) {
+      if (e is PeanutException) {
+        exitCode = e.exitCode;
+      } else {
         print(stack);
+        exitCode = 1;
       }
-      exitCode = 1;
     }
   }
 }

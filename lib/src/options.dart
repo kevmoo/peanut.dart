@@ -263,6 +263,18 @@ Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
   }
 }
 
+extension OptionsExtension on Options {
+  static const _defaults = Options();
+  Set<String> get buildRunnerConfigUsed => {
+        if (buildConfig != _defaults.buildConfig) 'build-config',
+        if (builderOptions != _defaults.builderOptions) 'builder-options',
+      };
+
+  Set<String> get flutterConfigUsed => {
+        if (webRenderer != _defaults.webRenderer) 'web-renderer',
+      };
+}
+
 Map<String, Map<String, dynamic>>? _builderOptionsFromMap(Map? source) =>
     _builderOptionsConvert(source as YamlMap?);
 

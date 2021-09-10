@@ -14,6 +14,8 @@ Future<void> runBuildRunner(
   Map<String, String> targets,
   Options options,
 ) async {
+  checkValidOptions('build_runner', options.flutterConfigUsed);
+
   final targetsValue =
       targets.entries.map((e) => '${e.key}:${e.value}').join(',');
 
