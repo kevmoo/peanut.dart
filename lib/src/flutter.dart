@@ -17,6 +17,8 @@ Future<void> runFlutterBuild(
     throw PeanutException('only 1 target (web) is supported for Flutter apps');
   }
 
+  checkValidOptions('Flutter', options.buildRunnerConfigUsed);
+
   final args = <String>[
     'build',
     'web',
