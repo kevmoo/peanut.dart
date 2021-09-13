@@ -45,6 +45,11 @@ Arguments:
           [html] (default)       This renderer uses a combination of HTML, CSS,
                                  SVG, 2D Canvas, and WebGL.
 
+    --extra-args                 Extra arguments to provide to the target CLI
+                                 within a single string.
+                                 Examples:
+                                 --extra-args "--dart-define TEST_VAR=123"
+                                 --extra-args "--dart-define --base-href=/base/"
 -h, --help                       Prints usage information.
     --version                    Print the current version.''';
 

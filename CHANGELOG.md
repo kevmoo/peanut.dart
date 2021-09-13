@@ -1,8 +1,9 @@
-## 4.1.0-dev
+## 4.1.0
 
 - Drop usage of `pub` command. Move to using `dart run`, `dart pub`, etc.
 - Fail if configuration is provided that is not supported by the package's
   platform.
+- Added `--extra-args` option.
 - Require Dart 2.14.0
 
 ## 4.0.1

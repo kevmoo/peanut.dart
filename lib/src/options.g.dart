@@ -39,6 +39,8 @@ Options _$parseOptionsResult(ArgResults result) => Options(
     webRenderer: _$enumValueHelper(
         _$WebRendererEnumMapBuildCli, result['web-renderer'] as String),
     webRendererWasParsed: result.wasParsed('web-renderer'),
+    extraArgsWasParsed: result.wasParsed('extra-args'),
+    extraArgs: result['extra-args'] as String?,
     help: result['help'] as bool,
     version: result['version'] as bool,
     rest: result.rest);
@@ -92,6 +94,9 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
         'html':
             'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, and WebGL.'
       })
+  ..addOption('extra-args',
+      help:
+          'Extra arguments to provide to the target CLI within a single string.\nExamples:\n--extra-args "--dart-define TEST_VAR=123"\n--extra-args "--dart-define --base-href=/base/"')
   ..addFlag('help',
       abbr: 'h', help: 'Prints usage information.', negatable: false)
   ..addFlag('version', help: 'Print the current version.', negatable: false);
@@ -123,7 +128,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
             'post-build-dart-script',
             'builder-options',
             'verbose',
-            'web-renderer'
+            'web-renderer',
+            'extra-args'
           ],
         );
         final val = Options(
@@ -152,6 +158,7 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
               (v) =>
                   _$enumDecodeNullable(_$WebRendererEnumMap, v) ??
                   _defaultWebRenderer),
+          extraArgs: $checkedConvert('extra-args', (v) => v as String?),
         );
         return val;
       },
@@ -160,7 +167,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
         'sourceBranchInfo': 'source-branch-info',
         'postBuildDartScript': 'post-build-dart-script',
         'builderOptions': 'builder-options',
-        'webRenderer': 'web-renderer'
+        'webRenderer': 'web-renderer',
+        'extraArgs': 'extra-args'
       },
     );
 
@@ -184,6 +192,7 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
   val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer];
+  writeNotNull('extra-args', instance.extraArgs);
   return val;
 }
 

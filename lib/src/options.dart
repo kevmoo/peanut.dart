@@ -153,6 +153,15 @@ See the README for details.''',
 
   String webRendererString() => _$WebRendererEnumMap[webRenderer]!;
 
+  @CliOption(
+    help:
+        'Extra arguments to provide to the target CLI within a single string.\n'
+        'Examples:\n'
+        '--extra-args "--dart-define TEST_VAR=123"\n'
+        '--extra-args "--dart-define --base-href=/base/"',
+  )
+  final String? extraArgs;
+
   @JsonKey(ignore: true)
   @CliOption(
     abbr: 'h',
@@ -167,6 +176,9 @@ See the README for details.''',
     help: 'Print the current version.',
   )
   final bool version;
+
+  @JsonKey(ignore: true)
+  final bool extraArgsWasParsed;
 
   @JsonKey(ignore: true)
   final List<String> rest;
@@ -193,6 +205,8 @@ See the README for details.''',
     this.dryRun = _defaultDryRun,
     this.webRenderer = _defaultWebRenderer,
     this.webRendererWasParsed = false,
+    this.extraArgsWasParsed = false,
+    this.extraArgs,
     this.help = false,
     this.version = false,
     this.rest = const [],
@@ -214,6 +228,7 @@ See the README for details.''',
           builderOptionsWasParsed ? builderOptions : other.builderOptions,
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
+      extraArgs: extraArgsWasParsed ? extraArgs : other.extraArgs,
       webRenderer: webRendererWasParsed ? webRenderer : other.webRenderer,
       help: help,
       message: messageWasParsed ? message : other.message,
@@ -228,6 +243,8 @@ See the README for details.''',
       verbose: verboseWasParsed ? verbose : other.verbose,
     );
   }
+
+  List<String>? splitExtraArgs() => extraArgs?.split(' ');
 }
 
 List<String> _directoriesConvert(String? input) => input == null
