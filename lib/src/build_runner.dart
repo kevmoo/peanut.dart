@@ -19,6 +19,10 @@ Future<void> runBuildRunner(
   final targetsValue =
       targets.entries.map((e) => '${e.key}:${e.value}').join(',');
 
+  final extraArgs = options.splitExtraArgs();
+
+  final extraArgsList = extraArgs == null ? null : [extraArgs];
+
   final args = <List<String>>[
     [
       'dart',
@@ -35,6 +39,7 @@ Future<void> runBuildRunner(
             '--define',
             _defineValue(option.key, optionEntry.key, optionEntry.value),
           ],
+    ...?extraArgsList,
     [
       '--output',
       targetsValue,

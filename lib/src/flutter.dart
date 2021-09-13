@@ -25,6 +25,7 @@ Future<void> runFlutterBuild(
     '--web-renderer',
     options.webRendererString(),
     options.release ? '--release' : '--profile',
+    ...?options.splitExtraArgs()
   ];
 
   // Print the command to the console
