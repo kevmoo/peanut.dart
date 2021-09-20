@@ -30,7 +30,11 @@ void main() {
     await expectLater(
       _run(),
       _throwsPeanutException(
-          'No pubspec.lock file found, please run "pub get" first.'),
+        anyOf(
+          'No pubspec.lock file found, please run "pub get" first.',
+          'No pubspec.lock file found, please run "dart pub get" first.',
+        ),
+      ),
     );
   });
 
