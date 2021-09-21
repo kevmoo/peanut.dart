@@ -616,7 +616,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "E(){H.q(\"Hello!\")\nreturn null}",
+        "code": "E(){A.q(\"Hello!\")\nreturn null}",
         "type": "void Function()"
       },
       "399195151": {
@@ -732,7 +732,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "F(a,b){return H.I(a.eT,b)}",
+        "code": "F(a,b){return A.I(a.eT,b)}",
         "type": "void Function(Object?,Object?)"
       },
       "606513838": {
@@ -793,7 +793,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "x(a,b){return H.I(a.tR,b)}",
+        "code": "x(a,b){return A.I(a.tR,b)}",
         "type": "void Function(Object?,Object?)"
       },
       "822673760": {
@@ -1722,7 +1722,7 @@
       "id": "outputUnit/669725655",
       "kind": "outputUnit",
       "name": "main",
-      "size": 5986,
+      "size": 5974,
       "filename": "example_script.dart.js",
       "imports": []
     }
@@ -1732,11 +1732,11 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/228987140",
-    "size": 5986,
-    "dart2jsVersion": "2.15.0-82.0.dev",
-    "compilationMoment": "2021-09-13 16:18:27.862060",
-    "compilationDuration": 420977,
-    "toJsonDuration": 2000,
+    "size": 5974,
+    "dart2jsVersion": "2.15.0-116.0.dev",
+    "compilationMoment": "2021-09-21 08:31:00.379676",
+    "compilationDuration": 502963,
+    "toJsonDuration": 3000,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
     "isRuntimeTypeUsed": false,
