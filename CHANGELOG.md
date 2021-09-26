@@ -1,3 +1,7 @@
+## 4.1.1
+
+- Improve `README.md`.
+
 ## 4.1.0
 
 - Drop usage of `pub` command. Move to using `dart run`, `dart pub`, etc.
