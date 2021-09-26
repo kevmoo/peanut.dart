@@ -1,42 +1,37 @@
 [![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dev/packages/peanut)
 [![CI](https://github.com/kevmoo/peanut.dart/workflows/CI/badge.svg?branch=master)](https://github.com/kevmoo/peanut.dart/actions?query=workflow%3ACI+branch%3Amaster)
 
-Do you ever want to `pub run build_runner build` into another branch? This is
-your ticket.
+Run `flutter build web` or `dart pub run build_runner build` and put the output
+in another branch. An easy way to update [gh-pages](https://pages.github.com/).
 
 ## Install
 
 ```console
-$ pub global activate peanut
+$ dart pub global activate peanut
 ```
 
-## Run
-
-```console
-$ cd ~/my_dart_proj/
-$ peanut
-```
-
-This will build your project into a temporary directory, and then it will update
-the local `gh-pages` branch with its contents.
-
-## Flutter
-
-Flutter apps can be built by running peanut with the Flutter SDK.
-
-Installing: 
+_or_
 
 ```console
 $ flutter pub global activate peanut
 ```
 
-Running:
+## Run
 
 ```console
-$ flutter pub global run peanut:peanut
+$ peanut
 ```
 
-Read me about `peanut` in
+_or_
+
+```console
+$ flutter pub global run peanut
+```
+
+This will build your project into a temporary directory, and then it will update
+the local `gh-pages` branch with the build output.
+
+Read more about `peanut` in
 [this article](https://medium.com/@kevmoo/show-off-your-flutter-dart-web-app-with-peanut-c0307f2b733c).
 
 ## Options
@@ -90,15 +85,15 @@ Arguments:
 
 ## Configuration file
 
-You can also configure `peanut` with a configuration file. Convenient if you
-have one-off settings you'd rather not time you deploy.
+`peanut` also supports a configuration file. Convenient if you have one-off
+settings you'd rather not type every time you deploy.
 
 The `peanut.yaml` from this repository:
 
 ```yaml
 # Configuration for https://pub.dev/packages/peanut
 directories:
-- example
+  - example
 ```
 
 ## Examples
@@ -114,6 +109,7 @@ directories:
   - Output: https://flutter.github.io/samples/
   - Custom `peanut.yaml` file to specify `builder-options`, multiple source
     directories, and a custom post-build file.
+- https://github.com/kevmoo/vote.dart/tree/master/vote_demo
 
 ## Git tricks
 

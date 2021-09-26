@@ -1,5 +1,5 @@
 name: peanut
-version: 4.1.0
+version: 4.1.1
 description: >-
   Update your GitHub gh-pages branch with the compiled output of your Dart web
   app. Supports 'pub build' and the new 'pub run build_runner'.
