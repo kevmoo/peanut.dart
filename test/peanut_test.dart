@@ -17,7 +17,8 @@ TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
     .having((te) => te.type, 'type', type);
 
 Matcher _throwsPeanutException(message) => throwsA(
-    isA<PeanutException>().having((pe) => pe.message, 'message', message));
+      isA<PeanutException>().having((pe) => pe.message, 'message', message),
+    );
 
 Future<void> _run({Options? options}) =>
     run(workingDirectory: d.sandbox, options: options ?? const Options());
@@ -111,19 +112,24 @@ void main() {
 
     await _run();
 
-    expect((await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['main', 'gh-pages']));
+    expect(
+      (await gitDir.branches()).map((br) => br.branchName),
+      unorderedEquals(['main', 'gh-pages']),
+    );
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    expect(
+      ghCommit.message,
+      '''
 Built web
 
 Branch: main
 Commit: ${primaryCommit.single.sha}
 
-package:peanut $packageVersion''');
+package:peanut $packageVersion''',
+    );
 
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
   });
@@ -144,13 +150,16 @@ package:peanut $packageVersion''');
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    expect(
+      ghCommit.message,
+      '''
 Built example, web
 
 Branch: main
 Commit: ${primaryCommit.single.sha}
 
-package:peanut $packageVersion''');
+package:peanut $packageVersion''',
+    );
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
@@ -166,83 +175,93 @@ package:peanut $packageVersion''');
     }
   });
 
-  test('2 packages, 2 build dirs', () async {
-    const packages = {'pkg1', 'pkg2'};
-    for (var pkg in packages) {
-      await _simplePackage(
-        parent: pkg,
-        buildDirs: {'example', 'web'},
+  test(
+    '2 packages, 2 build dirs',
+    () async {
+      const packages = {'pkg1', 'pkg2'};
+      for (var pkg in packages) {
+        await _simplePackage(
+          parent: pkg,
+          buildDirs: {'example', 'web'},
+        );
+        await _pubGet(parent: pkg);
+      }
+
+      final gitDir = await _initGitDir();
+      final primaryCommit = await gitDir.showRef();
+
+      await _run(
+        options: const Options(
+          directories: [
+            'pkg1/example',
+            'pkg1/web',
+            'pkg2/example',
+            'pkg2/web',
+          ],
+        ),
       );
-      await _pubGet(parent: pkg);
-    }
 
-    final gitDir = await _initGitDir();
-    final primaryCommit = await gitDir.showRef();
+      expect(
+        (await gitDir.branches()).map((br) => br.branchName),
+        unorderedEquals(['main', 'gh-pages']),
+      );
 
-    await _run(
-      options: const Options(
-        directories: [
-          'pkg1/example',
-          'pkg1/web',
-          'pkg2/example',
-          'pkg2/web',
-        ],
-      ),
-    );
+      final ghBranchRef = await gitDir.branchReference('gh-pages');
 
-    expect(
-      (await gitDir.branches()).map((br) => br.branchName),
-      unorderedEquals(['main', 'gh-pages']),
-    );
-
-    final ghBranchRef = await gitDir.branchReference('gh-pages');
-
-    final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+      final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
+      expect(
+        ghCommit.message,
+        '''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
 Branch: main
 Commit: ${primaryCommit.single.sha}
 
-package:peanut $packageVersion''');
+package:peanut $packageVersion''',
+      );
 
-    final treeContents = await gitDir.lsTree(ghCommit.treeSha);
+      final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
-    expect(
-      treeContents.map((te) => te.name),
-      unorderedEquals(packages.followedBy(['index.html'])),
-    );
+      expect(
+        treeContents.map((te) => te.name),
+        unorderedEquals(packages.followedBy(['index.html'])),
+      );
 
-    expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+      expect(treeContents, contains(_treeEntry('index.html', 'blob')));
 
-    final pkgTreeHashes = treeContents
-        .where((te) => te.type == 'tree')
-        .map((te) => te.sha)
-        .toSet();
-    expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
+      final pkgTreeHashes = treeContents
+          .where((te) => te.type == 'tree')
+          .map((te) => te.sha)
+          .toSet();
+      expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
 
-    final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
-    expect(
-      pkgContent.map((te) => te.name),
-      unorderedEquals(['example', 'web']),
-    );
+      final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
+      expect(
+        pkgContent.map((te) => te.name),
+        unorderedEquals(['example', 'web']),
+      );
 
-    for (var te in pkgContent) {
-      await _expectStandardTreeContents(gitDir, te.sha);
-    }
-  }, timeout: const Timeout.factor(2));
+      for (var te in pkgContent) {
+        await _expectStandardTreeContents(gitDir, te.sha);
+      }
+    },
+    timeout: const Timeout.factor(2),
+  );
 
   group('post build script', () {
     test('valid', () async {
       const buildDirs = {'example', 'web'};
       await _simplePackage(buildDirs: buildDirs);
-      await d.file('post_build.dart', '''
+      await d.file(
+        'post_build.dart',
+        '''
 import 'dart:io';
 void main(List<String> args) {
   File('\${args[0]}/some_file.txt').writeAsStringSync('some file contents');
   File('\${args[0]}/map.json').writeAsStringSync(args[1]);
 }
-''').create();
+''',
+      ).create();
 
       await _pubGet();
       final gitDir = await _initGitDir();
@@ -250,23 +269,29 @@ void main(List<String> args) {
 
       await _run(
         options: Options(
-            directories: buildDirs.toList(),
-            postBuildDartScript: 'post_build.dart'),
+          directories: buildDirs.toList(),
+          postBuildDartScript: 'post_build.dart',
+        ),
       );
 
-      expect((await gitDir.branches()).map((br) => br.branchName),
-          unorderedEquals(['main', 'gh-pages']));
+      expect(
+        (await gitDir.branches()).map((br) => br.branchName),
+        unorderedEquals(['main', 'gh-pages']),
+      );
 
       final ghBranchRef = await gitDir.branchReference('gh-pages');
 
       final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-      expect(ghCommit.message, '''
+      expect(
+        ghCommit.message,
+        '''
 Built example, web
 
 Branch: main
 Commit: ${primaryCommit.single.sha}
 
-package:peanut $packageVersion''');
+package:peanut $packageVersion''',
+      );
 
       final treeContents = await gitDir.lsTree(ghCommit.treeSha);
       expect(
@@ -296,22 +321,27 @@ package:peanut $packageVersion''');
 
       await expectLater(
         _run(options: const Options(postBuildDartScript: 'post_build.dart')),
-        _throwsPeanutException(startsWith(
-          'The provided post-build Dart script does not exist '
-          'or is not a file.',
-        )),
+        _throwsPeanutException(
+          startsWith(
+            'The provided post-build Dart script does not exist '
+            'or is not a file.',
+          ),
+        ),
       );
     });
 
     test('failed', () async {
       await _simplePackage();
-      await d.file('post_build.dart', '''
+      await d.file(
+        'post_build.dart',
+        '''
 import 'dart:io';
 void main() {
   print('sorry!');
   exitCode = 123;
 }
-''').create();
+''',
+      ).create();
       await _pubGet();
       await _initGitDir();
 
@@ -408,7 +438,9 @@ Future<void> _simplePackage({
     await d.dir(parent).create();
   }
 
-  await d.file('pubspec.yaml', r'''
+  await d.file(
+    'pubspec.yaml',
+    r'''
 name: peanut_test
 
 environment:
@@ -417,7 +449,8 @@ environment:
 dev_dependencies:
   build_runner: ^2.0.0
   build_web_compilers: ^3.0.0
-''').create(parent);
+''',
+  ).create(parent);
 
   await d.file('.gitignore', '.dart_tool/').create(parent);
 

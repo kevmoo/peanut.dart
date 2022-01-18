@@ -73,10 +73,13 @@ void main() {
     final proc = await _runPeanut(['--bob']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''
+    expect(
+      output,
+      '''
 Could not find an option named "bob".
 
-$_output''');
+$_output''',
+    );
 
     await proc.shouldExit(64);
   });
@@ -85,10 +88,13 @@ $_output''');
     final proc = await _runPeanut(['foo', 'bar', 'baz']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''
+    expect(
+      output,
+      '''
 I don't understand the extra arguments: foo, bar, baz
 
-$_output''');
+$_output''',
+    );
 
     await proc.shouldExit(64);
   });
@@ -97,9 +103,14 @@ $_output''');
     final proc = await _runPeanut(['--web-renderer', 'canvaskit']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, endsWith('''
+    expect(
+      output,
+      endsWith(
+        '''
 The follow options are not supported with a build_runner build:
- - web-renderer'''));
+ - web-renderer''',
+      ),
+    );
 
     await proc.shouldExit(64);
   });
@@ -122,11 +133,14 @@ The follow options are not supported with a build_runner build:
 
     group('config file', () {
       test('no file', () {
-        expectParseOptionsThrows([
-          '--builder-options',
-          p.join(d.sandbox, 'some_file.yaml'),
-        ], '''
-FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''');
+        expectParseOptionsThrows(
+          [
+            '--builder-options',
+            p.join(d.sandbox, 'some_file.yaml'),
+          ],
+          '''
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''',
+        );
       });
 
       test('valid file', () async {
@@ -144,20 +158,26 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
       test('invalid file', () async {
         await d.file('some_file.yaml', 'not good yaml').create();
 
-        expectParseOptionsThrows([
-          '--builder-options',
-          p.join(d.sandbox, 'some_file.yaml'),
-        ], '''
-FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''');
+        expectParseOptionsThrows(
+          [
+            '--builder-options',
+            p.join(d.sandbox, 'some_file.yaml'),
+          ],
+          '''
+FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a YAML file nor a YAML map.''',
+        );
       });
 
       test('invalid yaml shape', () async {
         await d.file('some_file.yaml', '{"bob": "jones"}').create();
 
-        expectParseOptionsThrows([
-          '--builder-options',
-          p.join(d.sandbox, 'some_file.yaml'),
-        ], 'FormatException: The value for "bob" was not a Map.');
+        expectParseOptionsThrows(
+          [
+            '--builder-options',
+            p.join(d.sandbox, 'some_file.yaml'),
+          ],
+          'FormatException: The value for "bob" was not a Map.',
+        );
       });
 
       test('invalid yaml format', () async {
@@ -171,15 +191,19 @@ FormatException: "${p.join(d.sandbox, 'some_file.yaml')}" is neither a path to a
             ],
           ),
           throwsA(
-            isA<ParsedYamlException>().having((e) {
-              printOnFailure(e.formattedMessage ?? '');
-              return e.formattedMessage;
-            }, 'formattedMessage', '''
+            isA<ParsedYamlException>().having(
+              (e) {
+                printOnFailure(e.formattedMessage ?? '');
+                return e.formattedMessage;
+              },
+              'formattedMessage',
+              '''
 line 1, column 2 of ${p.join(d.sandbox, 'some_file.yaml')}: Expected node content.
   ╷
 1 │ {
   │  ^
-  ╵'''),
+  ╵''',
+            ),
           ),
         );
       });

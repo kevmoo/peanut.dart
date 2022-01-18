@@ -51,12 +51,18 @@ Future<void> checkPubspecLock(String pkgDir) async {
   final issues = <PackageExceptionDetails>[];
   if (!isFlutterSdk) {
     issues
-      ..addAll(pubspecLock.checkPackage(
-        'build_runner',
-        VersionConstraint.parse('>=1.3.0 <3.0.0'),
-      ))
-      ..addAll(pubspecLock.checkPackage(
-          'build_web_compilers', VersionConstraint.parse('>=1.2.0 <4.0.0')));
+      ..addAll(
+        pubspecLock.checkPackage(
+          'build_runner',
+          VersionConstraint.parse('>=1.3.0 <3.0.0'),
+        ),
+      )
+      ..addAll(
+        pubspecLock.checkPackage(
+          'build_web_compilers',
+          VersionConstraint.parse('>=1.2.0 <4.0.0'),
+        ),
+      );
   }
 
   if (issues.isNotEmpty) {
@@ -81,8 +87,11 @@ class _PubspecLock {
   }
 
   List<PackageExceptionDetails> checkPackage(
-      String pkgName, VersionConstraint constraint,
-      {String? forArgument, bool? requireDirect}) {
+    String pkgName,
+    VersionConstraint constraint, {
+    String? forArgument,
+    bool? requireDirect,
+  }) {
     requireDirect ??= true;
     final issues = <PackageExceptionDetails>[];
     final missingDetails =
@@ -150,7 +159,9 @@ class PackageExceptionDetails {
   );
 
   static PackageExceptionDetails missingDep(
-          String pkgName, VersionConstraint constraint) =>
+    String pkgName,
+    VersionConstraint constraint,
+  ) =>
       PackageExceptionDetails._(
         'You must have a dependency on `$pkgName` in `pubspec.yaml`.',
         description: '''

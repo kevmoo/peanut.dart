@@ -38,7 +38,8 @@ Future<void> run({
 
   if (currentBranch.branchName == options.branch) {
     throw PeanutException(
-        'Cannot update the current branch "${options.branch}".');
+      'Cannot update the current branch "${options.branch}".',
+    );
   }
 
   if (options.directories.isEmpty) {
@@ -53,12 +54,14 @@ Future<void> run({
 
     if (p.equals(workingDir, dir)) {
       throw PeanutException(
-          '"$dir" is the same as the working directory, which is not allowed.');
+        '"$dir" is the same as the working directory, which is not allowed.',
+      );
     }
 
     if (!p.isWithin(workingDir, fullPath)) {
       throw PeanutException(
-          '"$dir" is not in the working directory "$workingDir".');
+        '"$dir" is not in the working directory "$workingDir".',
+      );
     }
   }
 
@@ -104,12 +107,17 @@ Future<void> run({
     final entriesList = targetDirs.entries.toList(growable: false);
     for (var i = 0; i < entriesList.length; i++) {
       final sourcePkg = entriesList[i];
-      final targets = Map<String, String>.fromEntries(outputDirMap.entries
-          .where((e) => p.isWithin(sourcePkg.key, e.key))
-          .map((e) => MapEntry(
-              p.split(e.key).last,
-              pkgNormalize(
-                  options.dryRun ? 'temp_dir' : tempDir.path, e.value))));
+      final targets = Map<String, String>.fromEntries(
+        outputDirMap.entries.where((e) => p.isWithin(sourcePkg.key, e.key)).map(
+              (e) => MapEntry(
+                p.split(e.key).last,
+                pkgNormalize(
+                  options.dryRun ? 'temp_dir' : tempDir.path,
+                  e.value,
+                ),
+              ),
+            ),
+      );
 
       final pkgPath = prettyPkgPath(sourcePkg.key);
 
@@ -117,9 +125,13 @@ Future<void> run({
           targetDirs.length == 1 ? '' : ' (${i + 1} of ${entriesList.length})';
 
       print('');
-      print(ansi.styleBold.wrap('''
+      print(
+        ansi.styleBold.wrap(
+          '''
 Package:     $pkgPath$countDetails
-Directories: ${sourcePkg.value.join(', ')}'''));
+Directories: ${sourcePkg.value.join(', ')}''',
+        ),
+      );
 
       if (isFlutterSdk) {
         await runFlutterBuild(
@@ -165,8 +177,10 @@ Directories: ${sourcePkg.value.join(', ')}'''));
       final postBuildScriptPath =
           pkgNormalize(workingDir, options.postBuildDartScript!);
       if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
-        throw PeanutException('The provided post-build Dart script does not '
-            'exist or is not a file.\n$postBuildScriptPath');
+        throw PeanutException(
+          'The provided post-build Dart script does not '
+          'exist or is not a file.\n$postBuildScriptPath',
+        );
       }
 
       print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath'));
@@ -208,26 +222,35 @@ Commit: $commitInfo
 package:peanut $packageVersion''';
     }
     final commit = await gitDir.updateBranchWithDirectoryContents(
-        options.branch, tempDir.path, message);
+      options.branch,
+      tempDir.path,
+      message,
+    );
 
     print('');
     if (commit == null) {
-      print(ansi.wrapWith(
-        'No change in branch "${options.branch}". No commit created.\n',
-        [ansi.yellow, ansi.styleBold],
-      ));
+      print(
+        ansi.wrapWith(
+          'No change in branch "${options.branch}". No commit created.\n',
+          [ansi.yellow, ansi.styleBold],
+        ),
+      );
     } else {
       final indentedMessage =
           LineSplitter.split(message).map((line) => '  $line\n').join();
       final shortSha = commit.treeSha.substring(0, 10);
-      print(ansi.styleBold.wrap(
-        'Branch "${options.branch}" was updated with commit $shortSha',
-      ));
+      print(
+        ansi.styleBold.wrap(
+          'Branch "${options.branch}" was updated with commit $shortSha',
+        ),
+      );
       print(indentedMessage);
       if (options.branch == 'gh-pages') {
-        print('To push your gh-pages branch to github '
-            '(without switching from your working branch), run:\n'
-            '  git push origin --set-upstream gh-pages');
+        print(
+          'To push your gh-pages branch to github '
+          '(without switching from your working branch), run:\n'
+          '  git push origin --set-upstream gh-pages',
+        );
       }
     }
   } finally {

@@ -21,12 +21,14 @@ Map<String, Set<String>> targetDirectories(
 
     if (p.equals(workingDir, dir)) {
       throw PeanutException(
-          '"$dir" is the same as the working directory, which is not allowed.');
+        '"$dir" is the same as the working directory, which is not allowed.',
+      );
     }
 
     if (!p.isWithin(workingDir, fullPath)) {
       throw PeanutException(
-          '"$dir" is not in the working directory "$workingDir".');
+        '"$dir" is not in the working directory "$workingDir".',
+      );
     }
 
     final pkgDir = p.relative(p.dirname(fullPath), from: workingDir);
@@ -50,8 +52,9 @@ Map<String, String> outputDirectoryMap(Map<String, Set<String>> input) {
   if (input.length == 1) {
     final entry = input.entries.single;
 
-    final output = Map<String, String>.fromEntries(entry.value
-        .map((path) => MapEntry(pkgNormalize(entry.key, path), path)));
+    final output = Map<String, String>.fromEntries(
+      entry.value.map((path) => MapEntry(pkgNormalize(entry.key, path), path)),
+    );
 
     // Only one build directory, so put it at the root!
     if (output.length == 1) {
@@ -82,8 +85,10 @@ Map<String, String> outputDirectoryMap(Map<String, Set<String>> input) {
     if (sharedRoot.isEmpty) {
       return path;
     }
-    assert(p.isWithin(sharedRoot, path),
-        'Expected `$path` to be within `$sharedRoot`.');
+    assert(
+      p.isWithin(sharedRoot, path),
+      'Expected `$path` to be within `$sharedRoot`.',
+    );
     return p.relative(path, from: sharedRoot);
   }
 
@@ -103,17 +108,22 @@ Map<String, String> outputDirectoryMap(Map<String, Set<String>> input) {
   })) {
     return Map.fromEntries(
       input.entries.map(
-        (entry) => MapEntry(pkgNormalize(entry.key, entry.value.single),
-            minimalOutputPath(entry.key)),
+        (entry) => MapEntry(
+          pkgNormalize(entry.key, entry.value.single),
+          minimalOutputPath(entry.key),
+        ),
       ),
     );
   }
 
   return Map.fromEntries(
-      input.entries.expand((entry) => entry.value.map((path) {
-            final pkgPath = pkgNormalize(entry.key, path);
-            return MapEntry(pkgPath, minimalOutputPath(pkgPath));
-          })));
+    input.entries.expand(
+      (entry) => entry.value.map((path) {
+        final pkgPath = pkgNormalize(entry.key, path);
+        return MapEntry(pkgPath, minimalOutputPath(pkgPath));
+      }),
+    ),
+  );
 }
 
 String pkgNormalize(String pkgDir, String buildDir) =>

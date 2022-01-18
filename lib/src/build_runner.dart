@@ -49,9 +49,13 @@ Future<void> runBuildRunner(
   final prettyArgs =
       args.map((list) => list.join(' ')).join(' \\\n$_argsExtraLinePrefix');
 
-  print(ansi.styleBold.wrap('''
+  print(
+    ansi.styleBold.wrap(
+      '''
 $_commandPrefix$prettyArgs
-'''));
+''',
+    ),
+  );
 
   if (options.dryRun) {
     return;

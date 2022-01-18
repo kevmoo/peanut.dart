@@ -10,18 +10,26 @@ import 'peanut_exception.dart';
 
 void printError(Object? object) => print(ansi.red.wrap(object.toString()));
 
-Future runProcess(String proc, List<String> args,
-    {String? workingDirectory}) async {
-  final process = await Process.start(proc, args,
-      runInShell: true,
-      workingDirectory: workingDirectory,
-      mode: ProcessStartMode.inheritStdio);
+Future runProcess(
+  String proc,
+  List<String> args, {
+  String? workingDirectory,
+}) async {
+  final process = await Process.start(
+    proc,
+    args,
+    runInShell: true,
+    workingDirectory: workingDirectory,
+    mode: ProcessStartMode.inheritStdio,
+  );
 
   final procExitCode = await process.exitCode;
 
   if (procExitCode != 0) {
-    throw PeanutException('Error running "$proc ${args.join(' ')}"\n'
-        'Exit code $procExitCode');
+    throw PeanutException(
+      'Error running "$proc ${args.join(' ')}"\n'
+      'Exit code $procExitCode',
+    );
   }
 }
 
@@ -82,7 +90,10 @@ bool isFlutterSdkHeuristic(List<String> path) {
 }
 
 final String flutterPath = p.join(
-    _flutterSdkDir, 'bin', Platform.isWindows ? 'flutter.bat' : 'flutter');
+  _flutterSdkDir,
+  'bin',
+  Platform.isWindows ? 'flutter.bat' : 'flutter',
+);
 
 /// The path to the root directory of the Flutter SDK.
 String _flutterSdkDir = (() {

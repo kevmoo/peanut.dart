@@ -44,7 +44,8 @@ Future<void> main(List<String> args) async {
 
   if (options.rest.isNotEmpty) {
     printError(
-        "I don't understand the extra arguments: ${options.rest.join(', ')}");
+      "I don't understand the extra arguments: ${options.rest.join(', ')}",
+    );
     print('');
     _printUsage();
     exitCode = ExitCode.usage.code;
@@ -75,11 +76,13 @@ Future<void> main(List<String> args) async {
 }
 
 void _printUsage() {
-  print('''
+  print(
+    '''
 Usage: peanut [<args>]
 
 ${styleBold.wrap('Arguments:')}
-$parserUsage''');
+$parserUsage''',
+  );
 }
 
 const _peanutConfigFile = 'peanut.yaml';

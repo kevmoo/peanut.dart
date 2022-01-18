@@ -137,16 +137,17 @@ See the README for details.''',
   final bool dryRun;
 
   @CliOption(
-      defaultsTo: _defaultWebRenderer,
-      help: 'The renderer implementation to use when building for the web. '
-          'Flutter web only.',
-      allowedHelp: {
-        WebRenderer.canvaskit:
-            'This renderer uses WebGL and WebAssembly to render graphics.',
-        WebRenderer.html:
-            'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
-                'and WebGL.',
-      })
+    defaultsTo: _defaultWebRenderer,
+    help: 'The renderer implementation to use when building for the web. '
+        'Flutter web only.',
+    allowedHelp: {
+      WebRenderer.canvaskit:
+          'This renderer uses WebGL and WebAssembly to render graphics.',
+      WebRenderer.html:
+          'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
+              'and WebGL.',
+    },
+  )
   final WebRenderer webRenderer;
   @JsonKey(ignore: true)
   final bool webRendererWasParsed;
@@ -275,7 +276,8 @@ Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
   } on ParsedYamlException catch (e) {
     if (e.yamlNode != null && e.yamlNode is! YamlMap) {
       throw FormatException(
-          '"$pathOrYamlMap" is neither a path to a YAML file nor a YAML map.');
+        '"$pathOrYamlMap" is neither a path to a YAML file nor a YAML map.',
+      );
     }
     rethrow;
   }
