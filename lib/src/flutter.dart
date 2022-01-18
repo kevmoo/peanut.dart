@@ -31,9 +31,13 @@ Future<void> runFlutterBuild(
   // Print the command to the console
   final prettyArgList = args.toList()..insert(0, 'flutter');
   final prettyArgs = prettyArgList.join(' ');
-  print(ansi.styleBold.wrap('''
+  print(
+    ansi.styleBold.wrap(
+      '''
 $_commandPrefix$prettyArgs
-'''));
+''',
+    ),
+  );
 
   // Build the app
   await runProcess(flutterPath, args, workingDirectory: pkgDirectory);
