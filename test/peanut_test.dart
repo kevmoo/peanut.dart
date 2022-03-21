@@ -8,6 +8,7 @@ import 'package:git/git.dart';
 import 'package:path/path.dart' as p;
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
+import 'package:peanut/src/utils.dart';
 import 'package:peanut/src/version.dart';
 import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
@@ -395,8 +396,8 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
 
 Future<void> _pubGet({String? parent}) async {
   final proc = await Process.run(
-    'pub',
-    ['get', '--offline', '--no-precompile'],
+    dartPath,
+    ['pub', 'get', '--offline', '--no-precompile'],
     workingDirectory: p.join(d.sandbox, parent),
   );
   expect(
