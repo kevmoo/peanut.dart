@@ -49,9 +49,6 @@ $_commandPrefix$prettyArgs
   // Copy the files
   final sourceDir = p.absolute('$pkgDirectory/build/web');
   await _copyFilesRecursive(sourceDir, outputDir);
-
-  // Delete the build/ directory created from running `flutter build web`
-  await Directory(sourceDir).delete(recursive: true);
 }
 
 Future<void> _copyFilesRecursive(String srcDir, String destDir) async {
