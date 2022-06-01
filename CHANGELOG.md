@@ -1,6 +1,7 @@
-## 4.2.0-dev
+## 4.2.0
 
 - Require Dart 2.17.0
+- Stop deleting output directory after Flutter builds.
 
 ## 4.1.1
 
