@@ -230,7 +230,7 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
-  val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer];
+  val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer]!;
   writeNotNull('extra-args', instance.extraArgs);
   return val;
 }
