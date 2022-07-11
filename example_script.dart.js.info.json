@@ -7,7 +7,7 @@
         "name": "_foreign_helper",
         "size": 0,
         "children": [
-          "class/JS_CONST.JS_CONST"
+          "class/dart:_foreign_helper::JS_CONST"
         ],
         "canonicalUri": "dart:_foreign_helper"
       },
@@ -17,7 +17,7 @@
         "name": "_interceptors",
         "size": 0,
         "children": [
-          "class/ArrayIterator.ArrayIterator"
+          "class/dart:_interceptors::ArrayIterator"
         ],
         "canonicalUri": "dart:_interceptors"
       },
@@ -27,9 +27,9 @@
         "name": "dart._internal",
         "size": 0,
         "children": [
-          "class/LateError.LateError",
-          "field/printToZone.printToZone",
-          "function/printToConsole.printToConsole"
+          "class/dart:_internal::LateError",
+          "field/dart:_internal::printToZone",
+          "function/dart:_internal::printToConsole"
         ],
         "canonicalUri": "dart:_internal"
       },
@@ -39,9 +39,9 @@
         "name": "_js_helper",
         "size": 0,
         "children": [
-          "class/BoundClosure.BoundClosure",
-          "class/Closure.Closure",
-          "class/RuntimeError.RuntimeError"
+          "class/dart:_js_helper::BoundClosure",
+          "class/dart:_js_helper::Closure",
+          "class/dart:_js_helper::RuntimeError"
         ],
         "canonicalUri": "dart:_js_helper"
       },
@@ -51,7 +51,7 @@
         "name": "dart2js._js_primitives",
         "size": 264,
         "children": [
-          "function/printString.printString"
+          "function/dart:_js_primitives::printString"
         ],
         "canonicalUri": "dart:_js_primitives"
       },
@@ -61,7 +61,7 @@
         "name": "<unnamed>",
         "size": 0,
         "children": [
-          "class/RtiUniverseFieldNames.RtiUniverseFieldNames"
+          "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames"
         ],
         "canonicalUri": "dart:_js_shared_embedded_names"
       },
@@ -71,12 +71,12 @@
         "name": "rti",
         "size": 130,
         "children": [
-          "class/Rti.Rti",
-          "class/_Error._Error",
-          "class/_FunctionParameters._FunctionParameters",
-          "class/_Type._Type",
-          "class/_Universe._Universe",
-          "class/_Utils._Utils"
+          "class/dart:_rti::Rti",
+          "class/dart:_rti::_Error",
+          "class/dart:_rti::_FunctionParameters",
+          "class/dart:_rti::_Type",
+          "class/dart:_rti::_Universe",
+          "class/dart:_rti::_Utils"
         ],
         "canonicalUri": "dart:_rti"
       },
@@ -86,7 +86,7 @@
         "name": "dart.collection",
         "size": 0,
         "children": [
-          "field/_toStringVisiting._toStringVisiting"
+          "field/dart:collection::_toStringVisiting"
         ],
         "canonicalUri": "dart:collection"
       },
@@ -96,21 +96,21 @@
         "name": "dart.core",
         "size": 126,
         "children": [
-          "class/ArgumentError.ArgumentError",
-          "class/AssertionError.AssertionError",
-          "class/ConcurrentModificationError.ConcurrentModificationError",
-          "class/CyclicInitializationError.CyclicInitializationError",
-          "class/IndexError.IndexError",
-          "class/Null.Null",
-          "class/Object.Object",
-          "class/RangeError.RangeError",
-          "class/StateError.StateError",
-          "class/StringBuffer.StringBuffer",
-          "class/UnsupportedError.UnsupportedError",
-          "class/_Enum._Enum",
-          "classType/String.String",
-          "classType/num.num",
-          "function/print.print"
+          "class/dart:core::ArgumentError",
+          "class/dart:core::AssertionError",
+          "class/dart:core::ConcurrentModificationError",
+          "class/dart:core::CyclicInitializationError",
+          "class/dart:core::IndexError",
+          "class/dart:core::Null",
+          "class/dart:core::Object",
+          "class/dart:core::RangeError",
+          "class/dart:core::StateError",
+          "class/dart:core::StringBuffer",
+          "class/dart:core::UnsupportedError",
+          "class/dart:core::_Enum",
+          "classType/dart:core::String",
+          "classType/dart:core::num",
+          "function/dart:core::print"
         ],
         "canonicalUri": "dart:core"
       },
@@ -120,136 +120,14 @@
         "name": "<unnamed>",
         "size": 30,
         "children": [
-          "function/main.main"
+          "function/org-dartlang-app:///example/example_script.dart::main"
         ],
         "canonicalUri": "org-dartlang-app:///example/example_script.dart"
       }
     },
     "class": {
-      "ArgumentError.ArgumentError": {
-        "id": "class/ArgumentError.ArgumentError",
-        "kind": "class",
-        "name": "ArgumentError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_hasValue._hasValue._hasValue",
-          "field/invalidValue.invalidValue.invalidValue",
-          "field/message.message.message%1",
-          "field/name.name.name"
-        ]
-      },
-      "ArrayIterator.ArrayIterator": {
-        "id": "class/ArrayIterator.ArrayIterator",
-        "kind": "class",
-        "name": "ArrayIterator",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_interceptors::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_current._current._current",
-          "field/_index._index._index",
-          "field/_iterable._iterable._iterable",
-          "field/_length._length._length"
-        ]
-      },
-      "AssertionError.AssertionError": {
-        "id": "class/AssertionError.AssertionError",
-        "kind": "class",
-        "name": "AssertionError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/message.message.message%0"
-        ]
-      },
-      "BoundClosure.BoundClosure": {
-        "id": "class/BoundClosure.BoundClosure",
-        "kind": "class",
-        "name": "BoundClosure",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_helper::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_interceptor._interceptor._interceptor",
-          "field/_interceptorFieldNameCache._interceptorFieldNameCache._interceptorFieldNameCache",
-          "field/_receiver._receiver._receiver",
-          "field/_receiverFieldNameCache._receiverFieldNameCache._receiverFieldNameCache"
-        ]
-      },
-      "Closure.Closure": {
-        "id": "class/Closure.Closure",
-        "kind": "class",
-        "name": "Closure",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_helper::",
-        "modifiers": {
-          "abstract": true
-        },
-        "children": [
-          "field/functionCounter.functionCounter.functionCounter"
-        ]
-      },
-      "ConcurrentModificationError.ConcurrentModificationError": {
-        "id": "class/ConcurrentModificationError.ConcurrentModificationError",
-        "kind": "class",
-        "name": "ConcurrentModificationError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/modifiedObject.modifiedObject.modifiedObject"
-        ]
-      },
-      "CyclicInitializationError.CyclicInitializationError": {
-        "id": "class/CyclicInitializationError.CyclicInitializationError",
-        "kind": "class",
-        "name": "CyclicInitializationError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/variableName.variableName.variableName"
-        ]
-      },
-      "IndexError.IndexError": {
-        "id": "class/IndexError.IndexError",
-        "kind": "class",
-        "name": "IndexError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/indexable.indexable.indexable",
-          "field/length.length.length"
-        ]
-      },
-      "JS_CONST.JS_CONST": {
-        "id": "class/JS_CONST.JS_CONST",
+      "dart:_foreign_helper::JS_CONST": {
+        "id": "class/dart:_foreign_helper::JS_CONST",
         "kind": "class",
         "name": "JS_CONST",
         "size": 0,
@@ -259,11 +137,28 @@
           "abstract": false
         },
         "children": [
-          "field/code.code.code"
+          "field/dart:_foreign_helper::JS_CONST.code"
         ]
       },
-      "LateError.LateError": {
-        "id": "class/LateError.LateError",
+      "dart:_interceptors::ArrayIterator": {
+        "id": "class/dart:_interceptors::ArrayIterator",
+        "kind": "class",
+        "name": "ArrayIterator",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_interceptors::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_interceptors::ArrayIterator._current",
+          "field/dart:_interceptors::ArrayIterator._index",
+          "field/dart:_interceptors::ArrayIterator._iterable",
+          "field/dart:_interceptors::ArrayIterator._length"
+        ]
+      },
+      "dart:_internal::LateError": {
+        "id": "class/dart:_internal::LateError",
         "kind": "class",
         "name": "LateError",
         "size": 0,
@@ -273,11 +168,254 @@
           "abstract": false
         },
         "children": [
-          "field/_message._message._message"
+          "field/dart:_internal::LateError._message"
         ]
       },
-      "Null.Null": {
-        "id": "class/Null.Null",
+      "dart:_js_helper::BoundClosure": {
+        "id": "class/dart:_js_helper::BoundClosure",
+        "kind": "class",
+        "name": "BoundClosure",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_helper::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_js_helper::BoundClosure._interceptor",
+          "field/dart:_js_helper::BoundClosure._interceptorFieldNameCache",
+          "field/dart:_js_helper::BoundClosure._receiver",
+          "field/dart:_js_helper::BoundClosure._receiverFieldNameCache"
+        ]
+      },
+      "dart:_js_helper::Closure": {
+        "id": "class/dart:_js_helper::Closure",
+        "kind": "class",
+        "name": "Closure",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_helper::",
+        "modifiers": {
+          "abstract": true
+        },
+        "children": [
+          "field/dart:_js_helper::Closure.functionCounter"
+        ]
+      },
+      "dart:_js_helper::RuntimeError": {
+        "id": "class/dart:_js_helper::RuntimeError",
+        "kind": "class",
+        "name": "RuntimeError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_helper::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_js_helper::RuntimeError.message"
+        ]
+      },
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames": {
+        "id": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
+        "kind": "class",
+        "name": "RtiUniverseFieldNames",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_shared_embedded_names::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes",
+          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache",
+          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray",
+          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances",
+          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules"
+        ]
+      },
+      "dart:_rti::Rti": {
+        "id": "class/dart:_rti::Rti",
+        "kind": "class",
+        "name": "Rti",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_rti::Rti._as",
+          "field/dart:_rti::Rti._bindCache",
+          "field/dart:_rti::Rti._cachedRuntimeType",
+          "field/dart:_rti::Rti._canonicalRecipe",
+          "field/dart:_rti::Rti._evalCache",
+          "field/dart:_rti::Rti._is",
+          "field/dart:_rti::Rti._kind",
+          "field/dart:_rti::Rti._precomputed1",
+          "field/dart:_rti::Rti._precomputed2",
+          "field/dart:_rti::Rti._precomputed3",
+          "field/dart:_rti::Rti._precomputed4",
+          "field/dart:_rti::Rti._primary",
+          "field/dart:_rti::Rti._rest",
+          "field/dart:_rti::Rti._specializedTestResource"
+        ]
+      },
+      "dart:_rti::_Error": {
+        "id": "class/dart:_rti::_Error",
+        "kind": "class",
+        "name": "_Error",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_rti::_Error._message"
+        ]
+      },
+      "dart:_rti::_FunctionParameters": {
+        "id": "class/dart:_rti::_FunctionParameters",
+        "kind": "class",
+        "name": "_FunctionParameters",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_rti::_FunctionParameters._named",
+          "field/dart:_rti::_FunctionParameters._optionalPositional",
+          "field/dart:_rti::_FunctionParameters._requiredPositional"
+        ]
+      },
+      "dart:_rti::_Type": {
+        "id": "class/dart:_rti::_Type",
+        "kind": "class",
+        "name": "_Type",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_rti::_Type._rti"
+        ]
+      },
+      "dart:_rti::_Universe": {
+        "id": "class/dart:_rti::_Universe",
+        "kind": "class",
+        "name": "_Universe",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "function/dart:_rti::_Universe.addErasedTypes",
+          "function/dart:_rti::_Universe.addRules",
+          "function/dart:_rti::_Universe.erasedTypes",
+          "function/dart:_rti::_Universe.typeRules"
+        ]
+      },
+      "dart:_rti::_Utils": {
+        "id": "class/dart:_rti::_Utils",
+        "kind": "class",
+        "name": "_Utils",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_rti::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "function/dart:_rti::_Utils.arrayAt",
+          "function/dart:_rti::_Utils.arrayLength",
+          "function/dart:_rti::_Utils.asString",
+          "function/dart:_rti::_Utils.objectAssign",
+          "function/dart:_rti::_Utils.objectKeys"
+        ]
+      },
+      "dart:core::ArgumentError": {
+        "id": "class/dart:core::ArgumentError",
+        "kind": "class",
+        "name": "ArgumentError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:core::ArgumentError._hasValue",
+          "field/dart:core::ArgumentError.invalidValue",
+          "field/dart:core::ArgumentError.message",
+          "field/dart:core::ArgumentError.name"
+        ]
+      },
+      "dart:core::AssertionError": {
+        "id": "class/dart:core::AssertionError",
+        "kind": "class",
+        "name": "AssertionError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:core::AssertionError.message"
+        ]
+      },
+      "dart:core::ConcurrentModificationError": {
+        "id": "class/dart:core::ConcurrentModificationError",
+        "kind": "class",
+        "name": "ConcurrentModificationError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:core::ConcurrentModificationError.modifiedObject"
+        ]
+      },
+      "dart:core::CyclicInitializationError": {
+        "id": "class/dart:core::CyclicInitializationError",
+        "kind": "class",
+        "name": "CyclicInitializationError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:core::CyclicInitializationError.variableName"
+        ]
+      },
+      "dart:core::IndexError": {
+        "id": "class/dart:core::IndexError",
+        "kind": "class",
+        "name": "IndexError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:core::IndexError.indexable",
+          "field/dart:core::IndexError.length"
+        ]
+      },
+      "dart:core::Null": {
+        "id": "class/dart:core::Null",
         "kind": "class",
         "name": "Null",
         "size": 42,
@@ -288,8 +426,8 @@
         },
         "children": []
       },
-      "Object.Object": {
-        "id": "class/Object.Object",
+      "dart:core::Object": {
+        "id": "class/dart:core::Object",
         "kind": "class",
         "name": "Object",
         "size": 84,
@@ -300,8 +438,8 @@
         },
         "children": []
       },
-      "RangeError.RangeError": {
-        "id": "class/RangeError.RangeError",
+      "dart:core::RangeError": {
+        "id": "class/dart:core::RangeError",
         "kind": "class",
         "name": "RangeError",
         "size": 0,
@@ -311,71 +449,12 @@
           "abstract": false
         },
         "children": [
-          "field/end.end.end",
-          "field/start.start.start"
+          "field/dart:core::RangeError.end",
+          "field/dart:core::RangeError.start"
         ]
       },
-      "Rti.Rti": {
-        "id": "class/Rti.Rti",
-        "kind": "class",
-        "name": "Rti",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_as._as._as",
-          "field/_bindCache._bindCache._bindCache",
-          "field/_cachedRuntimeType._cachedRuntimeType._cachedRuntimeType",
-          "field/_canonicalRecipe._canonicalRecipe._canonicalRecipe",
-          "field/_evalCache._evalCache._evalCache",
-          "field/_is._is._is",
-          "field/_kind._kind._kind",
-          "field/_precomputed1._precomputed1._precomputed1",
-          "field/_precomputed2._precomputed2._precomputed2",
-          "field/_precomputed3._precomputed3._precomputed3",
-          "field/_precomputed4._precomputed4._precomputed4",
-          "field/_primary._primary._primary",
-          "field/_rest._rest._rest",
-          "field/_specializedTestResource._specializedTestResource._specializedTestResource"
-        ]
-      },
-      "RtiUniverseFieldNames.RtiUniverseFieldNames": {
-        "id": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
-        "kind": "class",
-        "name": "RtiUniverseFieldNames",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_shared_embedded_names::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/erasedTypes.erasedTypes.erasedTypes",
-          "field/evalCache.evalCache.evalCache",
-          "field/sharedEmptyArray.sharedEmptyArray.sharedEmptyArray",
-          "field/typeParameterVariances.typeParameterVariances.typeParameterVariances",
-          "field/typeRules.typeRules.typeRules"
-        ]
-      },
-      "RuntimeError.RuntimeError": {
-        "id": "class/RuntimeError.RuntimeError",
-        "kind": "class",
-        "name": "RuntimeError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_helper::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/message.message.message"
-        ]
-      },
-      "StateError.StateError": {
-        "id": "class/StateError.StateError",
+      "dart:core::StateError": {
+        "id": "class/dart:core::StateError",
         "kind": "class",
         "name": "StateError",
         "size": 0,
@@ -385,11 +464,11 @@
           "abstract": false
         },
         "children": [
-          "field/message.message.message%3"
+          "field/dart:core::StateError.message"
         ]
       },
-      "StringBuffer.StringBuffer": {
-        "id": "class/StringBuffer.StringBuffer",
+      "dart:core::StringBuffer": {
+        "id": "class/dart:core::StringBuffer",
         "kind": "class",
         "name": "StringBuffer",
         "size": 0,
@@ -399,11 +478,11 @@
           "abstract": false
         },
         "children": [
-          "field/_contents._contents._contents"
+          "field/dart:core::StringBuffer._contents"
         ]
       },
-      "UnsupportedError.UnsupportedError": {
-        "id": "class/UnsupportedError.UnsupportedError",
+      "dart:core::UnsupportedError": {
+        "id": "class/dart:core::UnsupportedError",
         "kind": "class",
         "name": "UnsupportedError",
         "size": 0,
@@ -413,11 +492,11 @@
           "abstract": false
         },
         "children": [
-          "field/message.message.message%2"
+          "field/dart:core::UnsupportedError.message"
         ]
       },
-      "_Enum._Enum": {
-        "id": "class/_Enum._Enum",
+      "dart:core::_Enum": {
+        "id": "class/dart:core::_Enum",
         "kind": "class",
         "name": "_Enum",
         "size": 0,
@@ -427,101 +506,22 @@
           "abstract": true
         },
         "children": [
-          "field/_name._name._name",
-          "field/index.index.index"
-        ]
-      },
-      "_Error._Error": {
-        "id": "class/_Error._Error",
-        "kind": "class",
-        "name": "_Error",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_message._message._message%0"
-        ]
-      },
-      "_FunctionParameters._FunctionParameters": {
-        "id": "class/_FunctionParameters._FunctionParameters",
-        "kind": "class",
-        "name": "_FunctionParameters",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_named._named._named",
-          "field/_optionalPositional._optionalPositional._optionalPositional",
-          "field/_requiredPositional._requiredPositional._requiredPositional"
-        ]
-      },
-      "_Type._Type": {
-        "id": "class/_Type._Type",
-        "kind": "class",
-        "name": "_Type",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/_rti._rti._rti"
-        ]
-      },
-      "_Universe._Universe": {
-        "id": "class/_Universe._Universe",
-        "kind": "class",
-        "name": "_Universe",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "function/addErasedTypes.addErasedTypes.addErasedTypes",
-          "function/addRules.addRules.addRules",
-          "function/erasedTypes.erasedTypes.erasedTypes",
-          "function/typeRules.typeRules.typeRules"
-        ]
-      },
-      "_Utils._Utils": {
-        "id": "class/_Utils._Utils",
-        "kind": "class",
-        "name": "_Utils",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_rti::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "function/arrayAt.arrayAt.arrayAt",
-          "function/arrayLength.arrayLength.arrayLength",
-          "function/asString.asString.asString",
-          "function/objectAssign.objectAssign.objectAssign",
-          "function/objectKeys.objectKeys.objectKeys"
+          "field/dart:core::_Enum._name",
+          "field/dart:core::_Enum.index"
         ]
       }
     },
     "classType": {
-      "String.String": {
-        "id": "classType/String.String",
+      "dart:core::String": {
+        "id": "classType/dart:core::String",
         "kind": "classType",
         "name": "String",
         "size": 0,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:core::"
       },
-      "num.num": {
-        "id": "classType/num.num",
+      "dart:core::num": {
+        "id": "classType/dart:core::num",
         "kind": "classType",
         "name": "num",
         "size": 0,
@@ -530,341 +530,8 @@
       }
     },
     "function": {
-      "addErasedTypes.addErasedTypes.addErasedTypes": {
-        "id": "function/addErasedTypes.addErasedTypes.addErasedTypes",
-        "kind": "function",
-        "name": "addErasedTypes",
-        "size": 26,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Universe._Universe",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [
-          {
-            "name": "universe",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          },
-          {
-            "name": "types",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 0,
-        "code": "F(a,b){return A.I(a.eT,b)}",
-        "type": "void Function(Object?,Object?)",
-        "functionKind": 0
-      },
-      "addRules.addRules.addRules": {
-        "id": "function/addRules.addRules.addRules",
-        "kind": "function",
-        "name": "addRules",
-        "size": 26,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Universe._Universe",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [
-          {
-            "name": "universe",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          },
-          {
-            "name": "rules",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 0,
-        "code": "x(a,b){return A.I(a.tR,b)}",
-        "type": "void Function(Object?,Object?)",
-        "functionKind": 0
-      },
-      "arrayAt.arrayAt.arrayAt": {
-        "id": "function/arrayAt.arrayAt.arrayAt",
-        "kind": "function",
-        "name": "arrayAt",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Utils._Utils",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "Object?",
-        "inferredReturnType": "[null|subclass=Object]",
-        "parameters": [
-          {
-            "name": "array",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          },
-          {
-            "name": "i",
-            "type": "[subclass=JSInt]",
-            "declaredType": "int"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes nothing)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "Object? Function(Object?,int)",
-        "functionKind": 0
-      },
-      "arrayLength.arrayLength.arrayLength": {
-        "id": "function/arrayLength.arrayLength.arrayLength",
-        "kind": "function",
-        "name": "arrayLength",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Utils._Utils",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "int",
-        "inferredReturnType": "[subclass=JSInt]",
-        "parameters": [
-          {
-            "name": "array",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes nothing)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "int Function(Object?)",
-        "functionKind": 0
-      },
-      "asString.asString.asString": {
-        "id": "function/asString.asString.asString",
-        "kind": "function",
-        "name": "asString",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Utils._Utils",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "String",
-        "inferredReturnType": "[exact=JSString]",
-        "parameters": [
-          {
-            "name": "o",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads nothing; writes nothing)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "String Function(Object?)",
-        "functionKind": 0
-      },
-      "erasedTypes.erasedTypes.erasedTypes": {
-        "id": "function/erasedTypes.erasedTypes.erasedTypes",
-        "kind": "function",
-        "name": "erasedTypes",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Universe._Universe",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "Object",
-        "inferredReturnType": "[null|subclass=Object]",
-        "parameters": [
-          {
-            "name": "universe",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes nothing)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "Object Function(Object?)",
-        "functionKind": 0
-      },
-      "main.main": {
-        "id": "function/main.main",
-        "kind": "function",
-        "name": "main",
-        "size": 30,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/org-dartlang-app:///example/example_script.dart::",
-        "children": [],
-        "modifiers": {
-          "static": false,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 0,
-        "code": "E(){A.q(\"Hello!\")\nreturn null}",
-        "type": "void Function()",
-        "functionKind": 0
-      },
-      "objectAssign.objectAssign.objectAssign": {
-        "id": "function/objectAssign.objectAssign.objectAssign",
-        "kind": "function",
-        "name": "objectAssign",
-        "size": 78,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Utils._Utils",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [
-          {
-            "name": "o",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          },
-          {
-            "name": "other",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 0,
-        "code": "I(a,b){var u,t,s=Object.keys(b),r=s.length\nfor(u=0;u<r;++u){t=s[u]\na[t]=b[t]}}",
-        "type": "void Function(Object?,Object?)",
-        "functionKind": 0
-      },
-      "objectKeys.objectKeys.objectKeys": {
-        "id": "function/objectKeys.objectKeys.objectKeys",
-        "kind": "function",
-        "name": "objectKeys",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Utils._Utils",
-        "children": [],
-        "modifiers": {
-          "static": true,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "JSArray<dynamic>",
-        "inferredReturnType": "[subclass=JSArray]",
-        "parameters": [
-          {
-            "name": "o",
-            "type": "[null|subclass=Object]",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "JSArray<dynamic> Function(Object?)",
-        "functionKind": 0
-      },
-      "print.print": {
-        "id": "function/print.print",
-        "kind": "function",
-        "name": "print",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "children": [],
-        "modifiers": {
-          "static": false,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [
-          {
-            "name": "object",
-            "type": "Value([exact=JSString], value: \"Hello!\")",
-            "declaredType": "Object?"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 1,
-        "code": "",
-        "type": "void Function(Object?)",
-        "functionKind": 0
-      },
-      "printString.printString": {
-        "id": "function/printString.printString",
-        "kind": "function",
-        "name": "printString",
-        "size": 264,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_primitives::",
-        "children": [],
-        "modifiers": {
-          "static": false,
-          "const": false,
-          "factory": false,
-          "external": false
-        },
-        "returnType": "void",
-        "inferredReturnType": "[null]",
-        "parameters": [
-          {
-            "name": "string",
-            "type": "[exact=JSString]",
-            "declaredType": "String"
-          }
-        ],
-        "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 0,
-        "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof window==\"object\")return\nif(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
-        "type": "void Function(String)",
-        "functionKind": 0
-      },
-      "printToConsole.printToConsole": {
-        "id": "function/printToConsole.printToConsole",
+      "dart:_internal::printToConsole": {
+        "id": "function/dart:_internal::printToConsole",
         "kind": "function",
         "name": "printToConsole",
         "size": 0,
@@ -892,13 +559,110 @@
         "type": "void Function(String)",
         "functionKind": 0
       },
-      "typeRules.typeRules.typeRules": {
-        "id": "function/typeRules.typeRules.typeRules",
+      "dart:_js_primitives::printString": {
+        "id": "function/dart:_js_primitives::printString",
         "kind": "function",
-        "name": "typeRules",
+        "name": "printString",
+        "size": 264,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_primitives::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [
+          {
+            "name": "string",
+            "type": "[exact=JSString]",
+            "declaredType": "String"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 0,
+        "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof window==\"object\")return\nif(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
+        "type": "void Function(String)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Universe.addErasedTypes": {
+        "id": "function/dart:_rti::_Universe.addErasedTypes",
+        "kind": "function",
+        "name": "addErasedTypes",
+        "size": 26,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Universe",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [
+          {
+            "name": "universe",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          },
+          {
+            "name": "types",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 0,
+        "code": "F(a,b){return A.I(a.eT,b)}",
+        "type": "void Function(Object?,Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Universe.addRules": {
+        "id": "function/dart:_rti::_Universe.addRules",
+        "kind": "function",
+        "name": "addRules",
+        "size": 26,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Universe",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [
+          {
+            "name": "universe",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          },
+          {
+            "name": "rules",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 0,
+        "code": "x(a,b){return A.I(a.tR,b)}",
+        "type": "void Function(Object?,Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Universe.erasedTypes": {
+        "id": "function/dart:_rti::_Universe.erasedTypes",
+        "kind": "function",
+        "name": "erasedTypes",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/_Universe._Universe",
+        "parent": "class/dart:_rti::_Universe",
         "children": [],
         "modifiers": {
           "static": true,
@@ -920,588 +684,320 @@
         "code": "",
         "type": "Object Function(Object?)",
         "functionKind": 0
+      },
+      "dart:_rti::_Universe.typeRules": {
+        "id": "function/dart:_rti::_Universe.typeRules",
+        "kind": "function",
+        "name": "typeRules",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Universe",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "Object",
+        "inferredReturnType": "[null|subclass=Object]",
+        "parameters": [
+          {
+            "name": "universe",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes nothing)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "Object Function(Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Utils.arrayAt": {
+        "id": "function/dart:_rti::_Utils.arrayAt",
+        "kind": "function",
+        "name": "arrayAt",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Utils",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "Object?",
+        "inferredReturnType": "[null|subclass=Object]",
+        "parameters": [
+          {
+            "name": "array",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          },
+          {
+            "name": "i",
+            "type": "[subclass=JSInt]",
+            "declaredType": "int"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes nothing)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "Object? Function(Object?,int)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Utils.arrayLength": {
+        "id": "function/dart:_rti::_Utils.arrayLength",
+        "kind": "function",
+        "name": "arrayLength",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Utils",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "int",
+        "inferredReturnType": "[subclass=JSInt]",
+        "parameters": [
+          {
+            "name": "array",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes nothing)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "int Function(Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Utils.asString": {
+        "id": "function/dart:_rti::_Utils.asString",
+        "kind": "function",
+        "name": "asString",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Utils",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "String",
+        "inferredReturnType": "[exact=JSString]",
+        "parameters": [
+          {
+            "name": "o",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads nothing; writes nothing)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "String Function(Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Utils.objectAssign": {
+        "id": "function/dart:_rti::_Utils.objectAssign",
+        "kind": "function",
+        "name": "objectAssign",
+        "size": 78,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Utils",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [
+          {
+            "name": "o",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          },
+          {
+            "name": "other",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 0,
+        "code": "I(a,b){var u,t,s=Object.keys(b),r=s.length\nfor(u=0;u<r;++u){t=s[u]\na[t]=b[t]}}",
+        "type": "void Function(Object?,Object?)",
+        "functionKind": 0
+      },
+      "dart:_rti::_Utils.objectKeys": {
+        "id": "function/dart:_rti::_Utils.objectKeys",
+        "kind": "function",
+        "name": "objectKeys",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Utils",
+        "children": [],
+        "modifiers": {
+          "static": true,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "JSArray<dynamic>",
+        "inferredReturnType": "[subclass=JSArray]",
+        "parameters": [
+          {
+            "name": "o",
+            "type": "[null|subclass=Object]",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "JSArray<dynamic> Function(Object?)",
+        "functionKind": 0
+      },
+      "dart:core::print": {
+        "id": "function/dart:core::print",
+        "kind": "function",
+        "name": "print",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:core::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [
+          {
+            "name": "object",
+            "type": "Value([exact=JSString], value: \"Hello!\")",
+            "declaredType": "Object?"
+          }
+        ],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "void Function(Object?)",
+        "functionKind": 0
+      },
+      "org-dartlang-app:///example/example_script.dart::main": {
+        "id": "function/org-dartlang-app:///example/example_script.dart::main",
+        "kind": "function",
+        "name": "main",
+        "size": 30,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/org-dartlang-app:///example/example_script.dart::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void",
+        "inferredReturnType": "[null]",
+        "parameters": [],
+        "sideEffects": "SideEffects(reads anything; writes anything)",
+        "inlinedCount": 0,
+        "code": "E(){A.q(\"Hello!\")\nreturn null}",
+        "type": "void Function()",
+        "functionKind": 0
       }
     },
     "typedef": {},
     "field": {
-      "_as._as._as": {
-        "id": "field/_as._as._as",
-        "kind": "field",
-        "name": "_as",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_bindCache._bindCache._bindCache": {
-        "id": "field/_bindCache._bindCache._bindCache",
-        "kind": "field",
-        "name": "_bindCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_cachedRuntimeType._cachedRuntimeType._cachedRuntimeType": {
-        "id": "field/_cachedRuntimeType._cachedRuntimeType._cachedRuntimeType",
-        "kind": "field",
-        "name": "_cachedRuntimeType",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|exact=_Type]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_canonicalRecipe._canonicalRecipe._canonicalRecipe": {
-        "id": "field/_canonicalRecipe._canonicalRecipe._canonicalRecipe",
-        "kind": "field",
-        "name": "_canonicalRecipe",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_contents._contents._contents": {
-        "id": "field/_contents._contents._contents",
-        "kind": "field",
-        "name": "_contents",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/StringBuffer.StringBuffer",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "_current._current._current": {
-        "id": "field/_current._current._current",
-        "kind": "field",
-        "name": "_current",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArrayIterator.ArrayIterator",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "ArrayIterator.E?"
-      },
-      "_evalCache._evalCache._evalCache": {
-        "id": "field/_evalCache._evalCache._evalCache",
-        "kind": "field",
-        "name": "_evalCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_hasValue._hasValue._hasValue": {
-        "id": "field/_hasValue._hasValue._hasValue",
-        "kind": "field",
-        "name": "_hasValue",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArgumentError.ArgumentError",
-        "children": [],
-        "inferredType": "[exact=JSBool]",
-        "code": "",
-        "type": "bool"
-      },
-      "_index._index._index": {
-        "id": "field/_index._index._index",
-        "kind": "field",
-        "name": "_index",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArrayIterator.ArrayIterator",
-        "children": [],
-        "inferredType": "[subclass=JSPositiveInt]",
-        "code": "",
-        "type": "int"
-      },
-      "_interceptor._interceptor._interceptor": {
-        "id": "field/_interceptor._interceptor._interceptor",
-        "kind": "field",
-        "name": "_interceptor",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/BoundClosure.BoundClosure",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "dynamic"
-      },
-      "_interceptorFieldNameCache._interceptorFieldNameCache._interceptorFieldNameCache": {
-        "id": "field/_interceptorFieldNameCache._interceptorFieldNameCache._interceptorFieldNameCache",
-        "kind": "field",
-        "name": "_interceptorFieldNameCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/BoundClosure.BoundClosure",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
-      "_is._is._is": {
-        "id": "field/_is._is._is",
-        "kind": "field",
-        "name": "_is",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_iterable._iterable._iterable": {
-        "id": "field/_iterable._iterable._iterable",
-        "kind": "field",
-        "name": "_iterable",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArrayIterator.ArrayIterator",
-        "children": [],
-        "inferredType": "[subclass=JSArray]",
-        "code": "",
-        "type": "JSArray<ArrayIterator.E>"
-      },
-      "_kind._kind._kind": {
-        "id": "field/_kind._kind._kind",
-        "kind": "field",
-        "name": "_kind",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[exact=JSUInt31]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_length._length._length": {
-        "id": "field/_length._length._length",
-        "kind": "field",
-        "name": "_length",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArrayIterator.ArrayIterator",
-        "children": [],
-        "inferredType": "[subclass=JSUInt32]",
-        "code": "",
-        "type": "int"
-      },
-      "_message._message._message": {
-        "id": "field/_message._message._message",
-        "kind": "field",
-        "name": "_message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/LateError.LateError",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
-      "_message._message._message%0": {
-        "id": "field/_message._message._message%0",
-        "kind": "field",
-        "name": "_message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Error._Error",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "_name._name._name": {
-        "id": "field/_name._name._name",
-        "kind": "field",
-        "name": "_name",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Enum._Enum",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "_named._named._named": {
-        "id": "field/_named._named._named",
-        "kind": "field",
-        "name": "_named",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_FunctionParameters._FunctionParameters",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_optionalPositional._optionalPositional._optionalPositional": {
-        "id": "field/_optionalPositional._optionalPositional._optionalPositional",
-        "kind": "field",
-        "name": "_optionalPositional",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_FunctionParameters._FunctionParameters",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_precomputed1._precomputed1._precomputed1": {
-        "id": "field/_precomputed1._precomputed1._precomputed1",
-        "kind": "field",
-        "name": "_precomputed1",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_precomputed2._precomputed2._precomputed2": {
-        "id": "field/_precomputed2._precomputed2._precomputed2",
-        "kind": "field",
-        "name": "_precomputed2",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_precomputed3._precomputed3._precomputed3": {
-        "id": "field/_precomputed3._precomputed3._precomputed3",
-        "kind": "field",
-        "name": "_precomputed3",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_precomputed4._precomputed4._precomputed4": {
-        "id": "field/_precomputed4._precomputed4._precomputed4",
-        "kind": "field",
-        "name": "_precomputed4",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_primary._primary._primary": {
-        "id": "field/_primary._primary._primary",
-        "kind": "field",
-        "name": "_primary",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "Union(null, [exact=JSString], [exact=Rti], [subclass=JSInt])",
-        "code": "",
-        "type": "Object?"
-      },
-      "_receiver._receiver._receiver": {
-        "id": "field/_receiver._receiver._receiver",
-        "kind": "field",
-        "name": "_receiver",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/BoundClosure.BoundClosure",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "dynamic"
-      },
-      "_receiverFieldNameCache._receiverFieldNameCache._receiverFieldNameCache": {
-        "id": "field/_receiverFieldNameCache._receiverFieldNameCache._receiverFieldNameCache",
-        "kind": "field",
-        "name": "_receiverFieldNameCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/BoundClosure.BoundClosure",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
-      "_requiredPositional._requiredPositional._requiredPositional": {
-        "id": "field/_requiredPositional._requiredPositional._requiredPositional",
-        "kind": "field",
-        "name": "_requiredPositional",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_FunctionParameters._FunctionParameters",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_rest._rest._rest": {
-        "id": "field/_rest._rest._rest",
-        "kind": "field",
-        "name": "_rest",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_rti._rti._rti": {
-        "id": "field/_rti._rti._rti",
-        "kind": "field",
-        "name": "_rti",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Type._Type",
-        "children": [],
-        "inferredType": "[null|exact=Rti]",
-        "code": "",
-        "type": "Rti"
-      },
-      "_specializedTestResource._specializedTestResource._specializedTestResource": {
-        "id": "field/_specializedTestResource._specializedTestResource._specializedTestResource",
-        "kind": "field",
-        "name": "_specializedTestResource",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Rti.Rti",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "Object?"
-      },
-      "_toStringVisiting._toStringVisiting": {
-        "id": "field/_toStringVisiting._toStringVisiting",
-        "kind": "field",
-        "name": "_toStringVisiting",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:collection::",
-        "children": [],
-        "inferredType": "Container([exact=JSExtendableArray], element: [subclass=JSArray], length: null)",
-        "code": "",
-        "type": "List<Object>"
-      },
-      "code.code.code": {
-        "id": "field/code.code.code",
+      "dart:_foreign_helper::JS_CONST.code": {
+        "id": "field/dart:_foreign_helper::JS_CONST.code",
         "kind": "field",
         "name": "code",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/JS_CONST.JS_CONST",
+        "parent": "class/dart:_foreign_helper::JS_CONST",
         "children": [],
         "inferredType": "Value([exact=JSString], value: \"function getTagFallback(o) {\n  var s = Object.prototype.toString.call(o);\n  return s.substring(8, s.length - 1);\n}\")",
         "code": "",
         "type": "String"
       },
-      "end.end.end": {
-        "id": "field/end.end.end",
+      "dart:_interceptors::ArrayIterator._current": {
+        "id": "field/dart:_interceptors::ArrayIterator._current",
         "kind": "field",
-        "name": "end",
+        "name": "_current",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/RangeError.RangeError",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "num?"
-      },
-      "erasedTypes.erasedTypes.erasedTypes": {
-        "id": "field/erasedTypes.erasedTypes.erasedTypes",
-        "kind": "field",
-        "name": "erasedTypes",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"eT\")",
-        "code": "",
-        "type": "String"
-      },
-      "evalCache.evalCache.evalCache": {
-        "id": "field/evalCache.evalCache.evalCache",
-        "kind": "field",
-        "name": "evalCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"eC\")",
-        "code": "",
-        "type": "String"
-      },
-      "functionCounter.functionCounter.functionCounter": {
-        "id": "field/functionCounter.functionCounter.functionCounter",
-        "kind": "field",
-        "name": "functionCounter",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/Closure.Closure",
-        "children": [],
-        "inferredType": "[null|subclass=JSInt]",
-        "code": "",
-        "type": "int"
-      },
-      "index.index.index": {
-        "id": "field/index.index.index",
-        "kind": "field",
-        "name": "index",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/_Enum._Enum",
-        "children": [],
-        "inferredType": "[exact=JSUInt31]",
-        "code": "",
-        "type": "int"
-      },
-      "indexable.indexable.indexable": {
-        "id": "field/indexable.indexable.indexable",
-        "kind": "field",
-        "name": "indexable",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/IndexError.IndexError",
-        "children": [],
-        "inferredType": "[subclass=Object]",
-        "code": "",
-        "type": "dynamic"
-      },
-      "invalidValue.invalidValue.invalidValue": {
-        "id": "field/invalidValue.invalidValue.invalidValue",
-        "kind": "field",
-        "name": "invalidValue",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArgumentError.ArgumentError",
+        "parent": "class/dart:_interceptors::ArrayIterator",
         "children": [],
         "inferredType": "[null|subclass=Object]",
         "code": "",
-        "type": "dynamic"
+        "type": "ArrayIterator.E?"
       },
-      "length.length.length": {
-        "id": "field/length.length.length",
+      "dart:_interceptors::ArrayIterator._index": {
+        "id": "field/dart:_interceptors::ArrayIterator._index",
         "kind": "field",
-        "name": "length",
+        "name": "_index",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/IndexError.IndexError",
+        "parent": "class/dart:_interceptors::ArrayIterator",
         "children": [],
-        "inferredType": "[subclass=JSInt]",
+        "inferredType": "[subclass=JSPositiveInt]",
         "code": "",
         "type": "int"
       },
-      "message.message.message": {
-        "id": "field/message.message.message",
+      "dart:_interceptors::ArrayIterator._iterable": {
+        "id": "field/dart:_interceptors::ArrayIterator._iterable",
         "kind": "field",
-        "name": "message",
+        "name": "_iterable",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/RuntimeError.RuntimeError",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"Intercepted function with no arguments.\")",
-        "code": "",
-        "type": "dynamic"
-      },
-      "message.message.message%0": {
-        "id": "field/message.message.message%0",
-        "kind": "field",
-        "name": "message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/AssertionError.AssertionError",
-        "children": [],
-        "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "message.message.message%1": {
-        "id": "field/message.message.message%1",
-        "kind": "field",
-        "name": "message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ArgumentError.ArgumentError",
-        "children": [],
-        "inferredType": "[null|exact=JSString]",
-        "code": "",
-        "type": "dynamic"
-      },
-      "message.message.message%2": {
-        "id": "field/message.message.message%2",
-        "kind": "field",
-        "name": "message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/UnsupportedError.UnsupportedError",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
-      "message.message.message%3": {
-        "id": "field/message.message.message%3",
-        "kind": "field",
-        "name": "message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/StateError.StateError",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "modifiedObject.modifiedObject.modifiedObject": {
-        "id": "field/modifiedObject.modifiedObject.modifiedObject",
-        "kind": "field",
-        "name": "modifiedObject",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/ConcurrentModificationError.ConcurrentModificationError",
+        "parent": "class/dart:_interceptors::ArrayIterator",
         "children": [],
         "inferredType": "[subclass=JSArray]",
         "code": "",
-        "type": "Object?"
+        "type": "JSArray<ArrayIterator.E>"
       },
-      "name.name.name": {
-        "id": "field/name.name.name",
+      "dart:_interceptors::ArrayIterator._length": {
+        "id": "field/dart:_interceptors::ArrayIterator._length",
         "kind": "field",
-        "name": "name",
+        "name": "_length",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/ArgumentError.ArgumentError",
+        "parent": "class/dart:_interceptors::ArrayIterator",
         "children": [],
-        "inferredType": "[null|exact=JSString]",
+        "inferredType": "[subclass=JSUInt32]",
+        "code": "",
+        "type": "int"
+      },
+      "dart:_internal::LateError._message": {
+        "id": "field/dart:_internal::LateError._message",
+        "kind": "field",
+        "name": "_message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_internal::LateError",
+        "children": [],
+        "inferredType": "[exact=JSString]",
         "code": "",
         "type": "String?"
       },
-      "printToZone.printToZone": {
-        "id": "field/printToZone.printToZone",
+      "dart:_internal::printToZone": {
+        "id": "field/dart:_internal::printToZone",
         "kind": "field",
         "name": "printToZone",
         "size": 0,
@@ -1512,154 +1008,658 @@
         "code": "",
         "type": "void Function(String)?"
       },
-      "sharedEmptyArray.sharedEmptyArray.sharedEmptyArray": {
-        "id": "field/sharedEmptyArray.sharedEmptyArray.sharedEmptyArray",
+      "dart:_js_helper::BoundClosure._interceptor": {
+        "id": "field/dart:_js_helper::BoundClosure._interceptor",
+        "kind": "field",
+        "name": "_interceptor",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::BoundClosure",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:_js_helper::BoundClosure._interceptorFieldNameCache": {
+        "id": "field/dart:_js_helper::BoundClosure._interceptorFieldNameCache",
+        "kind": "field",
+        "name": "_interceptorFieldNameCache",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::BoundClosure",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
+      "dart:_js_helper::BoundClosure._receiver": {
+        "id": "field/dart:_js_helper::BoundClosure._receiver",
+        "kind": "field",
+        "name": "_receiver",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::BoundClosure",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:_js_helper::BoundClosure._receiverFieldNameCache": {
+        "id": "field/dart:_js_helper::BoundClosure._receiverFieldNameCache",
+        "kind": "field",
+        "name": "_receiverFieldNameCache",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::BoundClosure",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
+      "dart:_js_helper::Closure.functionCounter": {
+        "id": "field/dart:_js_helper::Closure.functionCounter",
+        "kind": "field",
+        "name": "functionCounter",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::Closure",
+        "children": [],
+        "inferredType": "[null|subclass=JSInt]",
+        "code": "",
+        "type": "int"
+      },
+      "dart:_js_helper::RuntimeError.message": {
+        "id": "field/dart:_js_helper::RuntimeError.message",
+        "kind": "field",
+        "name": "message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::RuntimeError",
+        "children": [],
+        "inferredType": "Value([exact=JSString], value: \"Intercepted function with no arguments.\")",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes": {
+        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes",
+        "kind": "field",
+        "name": "erasedTypes",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
+        "children": [],
+        "inferredType": "Value([exact=JSString], value: \"eT\")",
+        "code": "",
+        "type": "String"
+      },
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache": {
+        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache",
+        "kind": "field",
+        "name": "evalCache",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
+        "children": [],
+        "inferredType": "Value([exact=JSString], value: \"eC\")",
+        "code": "",
+        "type": "String"
+      },
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray": {
+        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray",
         "kind": "field",
         "name": "sharedEmptyArray",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
+        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
         "children": [],
         "inferredType": "Value([exact=JSString], value: \"sEA\")",
         "code": "",
         "type": "String"
       },
-      "start.start.start": {
-        "id": "field/start.start.start",
-        "kind": "field",
-        "name": "start",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/RangeError.RangeError",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "num?"
-      },
-      "typeParameterVariances.typeParameterVariances.typeParameterVariances": {
-        "id": "field/typeParameterVariances.typeParameterVariances.typeParameterVariances",
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances": {
+        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances",
         "kind": "field",
         "name": "typeParameterVariances",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
+        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
         "children": [],
         "inferredType": "Value([exact=JSString], value: \"tPV\")",
         "code": "",
         "type": "String"
       },
-      "typeRules.typeRules.typeRules": {
-        "id": "field/typeRules.typeRules.typeRules",
+      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules": {
+        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules",
         "kind": "field",
         "name": "typeRules",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/RtiUniverseFieldNames.RtiUniverseFieldNames",
+        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
         "children": [],
         "inferredType": "Value([exact=JSString], value: \"tR\")",
         "code": "",
         "type": "String"
       },
-      "variableName.variableName.variableName": {
-        "id": "field/variableName.variableName.variableName",
+      "dart:_rti::Rti._as": {
+        "id": "field/dart:_rti::Rti._as",
+        "kind": "field",
+        "name": "_as",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._bindCache": {
+        "id": "field/dart:_rti::Rti._bindCache",
+        "kind": "field",
+        "name": "_bindCache",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._cachedRuntimeType": {
+        "id": "field/dart:_rti::Rti._cachedRuntimeType",
+        "kind": "field",
+        "name": "_cachedRuntimeType",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|exact=_Type]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._canonicalRecipe": {
+        "id": "field/dart:_rti::Rti._canonicalRecipe",
+        "kind": "field",
+        "name": "_canonicalRecipe",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._evalCache": {
+        "id": "field/dart:_rti::Rti._evalCache",
+        "kind": "field",
+        "name": "_evalCache",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._is": {
+        "id": "field/dart:_rti::Rti._is",
+        "kind": "field",
+        "name": "_is",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._kind": {
+        "id": "field/dart:_rti::Rti._kind",
+        "kind": "field",
+        "name": "_kind",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[exact=JSUInt31]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._precomputed1": {
+        "id": "field/dart:_rti::Rti._precomputed1",
+        "kind": "field",
+        "name": "_precomputed1",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._precomputed2": {
+        "id": "field/dart:_rti::Rti._precomputed2",
+        "kind": "field",
+        "name": "_precomputed2",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._precomputed3": {
+        "id": "field/dart:_rti::Rti._precomputed3",
+        "kind": "field",
+        "name": "_precomputed3",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._precomputed4": {
+        "id": "field/dart:_rti::Rti._precomputed4",
+        "kind": "field",
+        "name": "_precomputed4",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._primary": {
+        "id": "field/dart:_rti::Rti._primary",
+        "kind": "field",
+        "name": "_primary",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "Union(null, [exact=JSString], [exact=Rti], [subclass=JSInt])",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._rest": {
+        "id": "field/dart:_rti::Rti._rest",
+        "kind": "field",
+        "name": "_rest",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._specializedTestResource": {
+        "id": "field/dart:_rti::Rti._specializedTestResource",
+        "kind": "field",
+        "name": "_specializedTestResource",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::_Error._message": {
+        "id": "field/dart:_rti::_Error._message",
+        "kind": "field",
+        "name": "_message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Error",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:_rti::_FunctionParameters._named": {
+        "id": "field/dart:_rti::_FunctionParameters._named",
+        "kind": "field",
+        "name": "_named",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_FunctionParameters",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::_FunctionParameters._optionalPositional": {
+        "id": "field/dart:_rti::_FunctionParameters._optionalPositional",
+        "kind": "field",
+        "name": "_optionalPositional",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_FunctionParameters",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::_FunctionParameters._requiredPositional": {
+        "id": "field/dart:_rti::_FunctionParameters._requiredPositional",
+        "kind": "field",
+        "name": "_requiredPositional",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_FunctionParameters",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::_Type._rti": {
+        "id": "field/dart:_rti::_Type._rti",
+        "kind": "field",
+        "name": "_rti",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::_Type",
+        "children": [],
+        "inferredType": "[null|exact=Rti]",
+        "code": "",
+        "type": "Rti"
+      },
+      "dart:collection::_toStringVisiting": {
+        "id": "field/dart:collection::_toStringVisiting",
+        "kind": "field",
+        "name": "_toStringVisiting",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:collection::",
+        "children": [],
+        "inferredType": "Container([exact=JSExtendableArray], element: [subclass=JSArray], length: null)",
+        "code": "",
+        "type": "List<Object>"
+      },
+      "dart:core::ArgumentError._hasValue": {
+        "id": "field/dart:core::ArgumentError._hasValue",
+        "kind": "field",
+        "name": "_hasValue",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::ArgumentError",
+        "children": [],
+        "inferredType": "[exact=JSBool]",
+        "code": "",
+        "type": "bool"
+      },
+      "dart:core::ArgumentError.invalidValue": {
+        "id": "field/dart:core::ArgumentError.invalidValue",
+        "kind": "field",
+        "name": "invalidValue",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::ArgumentError",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:core::ArgumentError.message": {
+        "id": "field/dart:core::ArgumentError.message",
+        "kind": "field",
+        "name": "message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::ArgumentError",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:core::ArgumentError.name": {
+        "id": "field/dart:core::ArgumentError.name",
+        "kind": "field",
+        "name": "name",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::ArgumentError",
+        "children": [],
+        "inferredType": "[null|exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
+      "dart:core::AssertionError.message": {
+        "id": "field/dart:core::AssertionError.message",
+        "kind": "field",
+        "name": "message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::AssertionError",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:core::ConcurrentModificationError.modifiedObject": {
+        "id": "field/dart:core::ConcurrentModificationError.modifiedObject",
+        "kind": "field",
+        "name": "modifiedObject",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::ConcurrentModificationError",
+        "children": [],
+        "inferredType": "[subclass=JSArray]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:core::CyclicInitializationError.variableName": {
+        "id": "field/dart:core::CyclicInitializationError.variableName",
         "kind": "field",
         "name": "variableName",
         "size": 0,
         "outputUnit": "outputUnit/main",
-        "parent": "class/CyclicInitializationError.CyclicInitializationError",
+        "parent": "class/dart:core::CyclicInitializationError",
         "children": [],
         "inferredType": "[exact=JSString]",
         "code": "",
         "type": "String?"
+      },
+      "dart:core::IndexError.indexable": {
+        "id": "field/dart:core::IndexError.indexable",
+        "kind": "field",
+        "name": "indexable",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::IndexError",
+        "children": [],
+        "inferredType": "[subclass=Object]",
+        "code": "",
+        "type": "dynamic"
+      },
+      "dart:core::IndexError.length": {
+        "id": "field/dart:core::IndexError.length",
+        "kind": "field",
+        "name": "length",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::IndexError",
+        "children": [],
+        "inferredType": "[subclass=JSInt]",
+        "code": "",
+        "type": "int"
+      },
+      "dart:core::RangeError.end": {
+        "id": "field/dart:core::RangeError.end",
+        "kind": "field",
+        "name": "end",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::RangeError",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "num?"
+      },
+      "dart:core::RangeError.start": {
+        "id": "field/dart:core::RangeError.start",
+        "kind": "field",
+        "name": "start",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::RangeError",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "num?"
+      },
+      "dart:core::StateError.message": {
+        "id": "field/dart:core::StateError.message",
+        "kind": "field",
+        "name": "message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::StateError",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:core::StringBuffer._contents": {
+        "id": "field/dart:core::StringBuffer._contents",
+        "kind": "field",
+        "name": "_contents",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::StringBuffer",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:core::UnsupportedError.message": {
+        "id": "field/dart:core::UnsupportedError.message",
+        "kind": "field",
+        "name": "message",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::UnsupportedError",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
+      "dart:core::_Enum._name": {
+        "id": "field/dart:core::_Enum._name",
+        "kind": "field",
+        "name": "_name",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::_Enum",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:core::_Enum.index": {
+        "id": "field/dart:core::_Enum.index",
+        "kind": "field",
+        "name": "index",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:core::_Enum",
+        "children": [],
+        "inferredType": "[exact=JSUInt31]",
+        "code": "",
+        "type": "int"
       }
     },
     "constant": {},
     "closure": {}
   },
   "holding": {
-    "function/addErasedTypes.addErasedTypes.addErasedTypes": [
+    "function/dart:_rti::_Universe.addErasedTypes": [
       {
-        "id": "function/erasedTypes.erasedTypes.erasedTypes",
+        "id": "function/dart:_rti::_Universe.erasedTypes",
         "mask": null
       },
       {
-        "id": "function/erasedTypes.erasedTypes.erasedTypes",
+        "id": "function/dart:_rti::_Universe.erasedTypes",
         "mask": "inlined"
       },
       {
-        "id": "function/objectAssign.objectAssign.objectAssign",
+        "id": "function/dart:_rti::_Utils.objectAssign",
         "mask": null
       }
     ],
-    "function/addRules.addRules.addRules": [
+    "function/dart:_rti::_Universe.addRules": [
       {
-        "id": "function/objectAssign.objectAssign.objectAssign",
+        "id": "function/dart:_rti::_Universe.typeRules",
         "mask": null
       },
       {
-        "id": "function/typeRules.typeRules.typeRules",
-        "mask": null
-      },
-      {
-        "id": "function/typeRules.typeRules.typeRules",
-        "mask": "inlined"
-      }
-    ],
-    "function/main.main": [
-      {
-        "id": "function/print.print",
-        "mask": null
-      },
-      {
-        "id": "function/print.print",
+        "id": "function/dart:_rti::_Universe.typeRules",
         "mask": "inlined"
       },
       {
-        "id": "function/printString.printString",
-        "mask": null
-      },
-      {
-        "id": "function/printToConsole.printToConsole",
+        "id": "function/dart:_rti::_Utils.objectAssign",
         "mask": null
       }
     ],
-    "function/objectAssign.objectAssign.objectAssign": [
+    "function/dart:_rti::_Utils.objectAssign": [
       {
-        "id": "function/arrayAt.arrayAt.arrayAt",
+        "id": "function/dart:_rti::_Utils.arrayAt",
         "mask": null
       },
       {
-        "id": "function/arrayAt.arrayAt.arrayAt",
+        "id": "function/dart:_rti::_Utils.arrayAt",
         "mask": "inlined"
       },
       {
-        "id": "function/arrayLength.arrayLength.arrayLength",
+        "id": "function/dart:_rti::_Utils.arrayLength",
         "mask": null
       },
       {
-        "id": "function/arrayLength.arrayLength.arrayLength",
+        "id": "function/dart:_rti::_Utils.arrayLength",
         "mask": "inlined"
       },
       {
-        "id": "function/asString.asString.asString",
+        "id": "function/dart:_rti::_Utils.asString",
         "mask": null
       },
       {
-        "id": "function/asString.asString.asString",
+        "id": "function/dart:_rti::_Utils.asString",
         "mask": "inlined"
       },
       {
-        "id": "function/objectKeys.objectKeys.objectKeys",
+        "id": "function/dart:_rti::_Utils.objectKeys",
         "mask": null
       },
       {
-        "id": "function/objectKeys.objectKeys.objectKeys",
+        "id": "function/dart:_rti::_Utils.objectKeys",
         "mask": "inlined"
       }
     ],
-    "function/print.print": [
+    "function/dart:core::print": [
       {
-        "id": "function/printToConsole.printToConsole",
+        "id": "function/dart:_internal::printToConsole",
+        "mask": "inlined"
+      }
+    ],
+    "function/org-dartlang-app:///example/example_script.dart::main": [
+      {
+        "id": "function/dart:_internal::printToConsole",
+        "mask": null
+      },
+      {
+        "id": "function/dart:_js_primitives::printString",
+        "mask": null
+      },
+      {
+        "id": "function/dart:core::print",
+        "mask": null
+      },
+      {
+        "id": "function/dart:core::print",
         "mask": "inlined"
       }
     ]
@@ -1679,11 +1679,11 @@
   "deferredFiles": {},
   "dump_minor_version": 1,
   "program": {
-    "entrypoint": "function/main.main",
+    "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
     "size": 5504,
-    "dart2jsVersion": "2.18.0-159.0.dev",
-    "compilationMoment": "2022-06-02 10:32:51.553475",
-    "compilationDuration": 197321,
+    "dart2jsVersion": "2.18.0-263.0.dev",
+    "compilationMoment": "2022-07-10 20:20:16.288379",
+    "compilationDuration": 189899,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
