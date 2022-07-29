@@ -14,7 +14,7 @@ const _defaultRelease = true;
 const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
-const _defaultWebRenderer = WebRenderer.html;
+const _defaultWebRenderer = WebRenderer.auto;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
@@ -26,6 +26,7 @@ Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
 enum WebRenderer {
   canvaskit,
   html,
+  auto,
 }
 
 @JsonSerializable(
@@ -146,6 +147,9 @@ See the README for details.''',
       WebRenderer.html:
           'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
               'and WebGL.',
+      WebRenderer.auto:
+          'Use the HTML renderer on mobile devices, and CanvasKit on desktop '
+              'devices.'
     },
   )
   final WebRenderer webRenderer;

@@ -69,9 +69,11 @@ Arguments:
     --web-renderer               The renderer implementation to use when
                                  building for the web. Flutter web only.
 
+          [auto] (default)       Use the HTML renderer on mobile devices, and
+                                 CanvasKit on desktop devices.
           [canvaskit]            This renderer uses WebGL and WebAssembly to
                                  render graphics.
-          [html] (default)       This renderer uses a combination of HTML, CSS,
+          [html]                 This renderer uses a combination of HTML, CSS,
                                  SVG, 2D Canvas, and WebGL.
 
     --extra-args                 Extra arguments to provide to the target CLI
