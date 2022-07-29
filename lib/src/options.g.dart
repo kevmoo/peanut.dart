@@ -53,7 +53,8 @@ Options _$parseOptionsResult(ArgResults result) => Options(
 
 const _$WebRendererEnumMapBuildCli = <WebRenderer, String>{
   WebRenderer.canvaskit: 'canvaskit',
-  WebRenderer.html: 'html'
+  WebRenderer.html: 'html',
+  WebRenderer.auto: 'auto'
 };
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
@@ -114,13 +115,15 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
     'web-renderer',
     help:
         'The renderer implementation to use when building for the web. Flutter web only.',
-    defaultsTo: 'html',
-    allowed: ['canvaskit', 'html'],
+    defaultsTo: 'auto',
+    allowed: ['canvaskit', 'html', 'auto'],
     allowedHelp: <String, String>{
       'canvaskit':
           'This renderer uses WebGL and WebAssembly to render graphics.',
       'html':
-          'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, and WebGL.'
+          'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, and WebGL.',
+      'auto':
+          'Use the HTML renderer on mobile devices, and CanvasKit on desktop devices.'
     },
   )
   ..addOption(
@@ -238,4 +241,5 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
 const _$WebRendererEnumMap = {
   WebRenderer.canvaskit: 'canvaskit',
   WebRenderer.html: 'html',
+  WebRenderer.auto: 'auto',
 };
