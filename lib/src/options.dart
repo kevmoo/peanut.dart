@@ -48,7 +48,7 @@ The directories that should be built.
   )
   final List<String> directories;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool directoriesWasParsed;
 
   @CliOption(
@@ -58,7 +58,7 @@ The directories that should be built.
   )
   final String branch;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool branchWasParsed;
 
   @CliOption(
@@ -67,7 +67,7 @@ The directories that should be built.
   )
   final String? buildConfig;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool buildConfigWasParsed;
 
   @CliOption(
@@ -79,13 +79,13 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   )
   final bool release;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool releaseWasParsed;
 
   @CliOption(abbr: 'm', defaultsTo: defaultMessage)
   final String message;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool messageWasParsed;
 
   @CliOption(
@@ -95,7 +95,7 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   )
   final bool sourceBranchInfo;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool sourceBranchInfoWasParsed;
 
   @CliOption(
@@ -104,7 +104,7 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   )
   final String? postBuildDartScript;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool postBuildDartScriptWasParsed;
 
   @CliOption(
@@ -116,7 +116,7 @@ See the README for details.''',
   @JsonKey(fromJson: _builderOptionsFromMap)
   final Map<String, Map<String, dynamic>>? builderOptions;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool builderOptionsWasParsed;
 
   @CliOption(
@@ -125,7 +125,7 @@ See the README for details.''',
   )
   final bool verbose;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool verboseWasParsed;
 
   @CliOption(
@@ -134,7 +134,7 @@ See the README for details.''',
     help: 'Verifies configuration and prints commands that would be executed, '
         'but does not do any work.',
   )
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool dryRun;
 
   @CliOption(
@@ -153,7 +153,7 @@ See the README for details.''',
     },
   )
   final WebRenderer webRenderer;
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool webRendererWasParsed;
 
   String webRendererString() => _$WebRendererEnumMap[webRenderer]!;
@@ -167,7 +167,7 @@ See the README for details.''',
   )
   final String? extraArgs;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   @CliOption(
     abbr: 'h',
     negatable: false,
@@ -175,17 +175,17 @@ See the README for details.''',
   )
   final bool help;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   @CliOption(
     negatable: false,
     help: 'Print the current version.',
   )
   final bool version;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final bool extraArgsWasParsed;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final List<String> rest;
 
   const Options({
