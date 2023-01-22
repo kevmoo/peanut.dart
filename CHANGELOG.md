@@ -1,3 +1,7 @@
+## 4.3.1-dev
+
+- Require Dart 2.18.0
+
 ## 4.3.0
 
 - Added `auto` option to `--web-renderer`. This is now the default.
