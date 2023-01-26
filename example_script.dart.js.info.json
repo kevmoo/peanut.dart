@@ -1,4 +1,22 @@
 {
+  "dump_version": 5,
+  "dump_minor_version": 1,
+  "program": {
+    "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
+    "size": 5467,
+    "ramUsage": "164.750 MB",
+    "dart2jsVersion": "3.0.0-163.0.dev",
+    "compilationMoment": "2023-01-26 11:53:45.203832",
+    "compilationDuration": 255580,
+    "toJsonDuration": 0,
+    "dumpInfoDuration": 0,
+    "noSuchMethodEnabled": false,
+    "isRuntimeTypeUsed": false,
+    "isIsolateInUse": false,
+    "isFunctionApplyUsed": false,
+    "isMirrorsUsed": false,
+    "minified": true
+  },
   "elements": {
     "library": {
       "dart:_foreign_helper::": {
@@ -41,7 +59,9 @@
         "children": [
           "class/dart:_js_helper::BoundClosure",
           "class/dart:_js_helper::Closure",
-          "class/dart:_js_helper::RuntimeError"
+          "class/dart:_js_helper::RuntimeError",
+          "class/dart:_js_helper::StringMatch",
+          "class/dart:_js_helper::_CyclicInitializationError"
         ],
         "canonicalUri": "dart:_js_helper"
       },
@@ -99,7 +119,6 @@
           "class/dart:core::ArgumentError",
           "class/dart:core::AssertionError",
           "class/dart:core::ConcurrentModificationError",
-          "class/dart:core::CyclicInitializationError",
           "class/dart:core::IndexError",
           "class/dart:core::Null",
           "class/dart:core::Object",
@@ -138,7 +157,8 @@
         },
         "children": [
           "field/dart:_foreign_helper::JS_CONST.code"
-        ]
+        ],
+        "supers": []
       },
       "dart:_interceptors::ArrayIterator": {
         "id": "class/dart:_interceptors::ArrayIterator",
@@ -155,7 +175,8 @@
           "field/dart:_interceptors::ArrayIterator._index",
           "field/dart:_interceptors::ArrayIterator._iterable",
           "field/dart:_interceptors::ArrayIterator._length"
-        ]
+        ],
+        "supers": []
       },
       "dart:_internal::LateError": {
         "id": "class/dart:_internal::LateError",
@@ -169,7 +190,8 @@
         },
         "children": [
           "field/dart:_internal::LateError._message"
-        ]
+        ],
+        "supers": []
       },
       "dart:_js_helper::BoundClosure": {
         "id": "class/dart:_js_helper::BoundClosure",
@@ -186,7 +208,8 @@
           "field/dart:_js_helper::BoundClosure._interceptorFieldNameCache",
           "field/dart:_js_helper::BoundClosure._receiver",
           "field/dart:_js_helper::BoundClosure._receiverFieldNameCache"
-        ]
+        ],
+        "supers": []
       },
       "dart:_js_helper::Closure": {
         "id": "class/dart:_js_helper::Closure",
@@ -200,7 +223,8 @@
         },
         "children": [
           "field/dart:_js_helper::Closure.functionCounter"
-        ]
+        ],
+        "supers": []
       },
       "dart:_js_helper::RuntimeError": {
         "id": "class/dart:_js_helper::RuntimeError",
@@ -214,7 +238,40 @@
         },
         "children": [
           "field/dart:_js_helper::RuntimeError.message"
-        ]
+        ],
+        "supers": []
+      },
+      "dart:_js_helper::StringMatch": {
+        "id": "class/dart:_js_helper::StringMatch",
+        "kind": "class",
+        "name": "StringMatch",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_helper::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_js_helper::StringMatch.input",
+          "field/dart:_js_helper::StringMatch.pattern",
+          "field/dart:_js_helper::StringMatch.start"
+        ],
+        "supers": []
+      },
+      "dart:_js_helper::_CyclicInitializationError": {
+        "id": "class/dart:_js_helper::_CyclicInitializationError",
+        "kind": "class",
+        "name": "_CyclicInitializationError",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_helper::",
+        "modifiers": {
+          "abstract": false
+        },
+        "children": [
+          "field/dart:_js_helper::_CyclicInitializationError.variableName"
+        ],
+        "supers": []
       },
       "dart:_js_shared_embedded_names::RtiUniverseFieldNames": {
         "id": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
@@ -232,7 +289,8 @@
           "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray",
           "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances",
           "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::Rti": {
         "id": "class/dart:_rti::Rti",
@@ -259,7 +317,8 @@
           "field/dart:_rti::Rti._primary",
           "field/dart:_rti::Rti._rest",
           "field/dart:_rti::Rti._specializedTestResource"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::_Error": {
         "id": "class/dart:_rti::_Error",
@@ -273,7 +332,8 @@
         },
         "children": [
           "field/dart:_rti::_Error._message"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::_FunctionParameters": {
         "id": "class/dart:_rti::_FunctionParameters",
@@ -289,7 +349,8 @@
           "field/dart:_rti::_FunctionParameters._named",
           "field/dart:_rti::_FunctionParameters._optionalPositional",
           "field/dart:_rti::_FunctionParameters._requiredPositional"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::_Type": {
         "id": "class/dart:_rti::_Type",
@@ -303,7 +364,8 @@
         },
         "children": [
           "field/dart:_rti::_Type._rti"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::_Universe": {
         "id": "class/dart:_rti::_Universe",
@@ -320,7 +382,8 @@
           "function/dart:_rti::_Universe.addRules",
           "function/dart:_rti::_Universe.erasedTypes",
           "function/dart:_rti::_Universe.typeRules"
-        ]
+        ],
+        "supers": []
       },
       "dart:_rti::_Utils": {
         "id": "class/dart:_rti::_Utils",
@@ -338,7 +401,8 @@
           "function/dart:_rti::_Utils.asString",
           "function/dart:_rti::_Utils.objectAssign",
           "function/dart:_rti::_Utils.objectKeys"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::ArgumentError": {
         "id": "class/dart:core::ArgumentError",
@@ -355,7 +419,8 @@
           "field/dart:core::ArgumentError.invalidValue",
           "field/dart:core::ArgumentError.message",
           "field/dart:core::ArgumentError.name"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::AssertionError": {
         "id": "class/dart:core::AssertionError",
@@ -369,7 +434,8 @@
         },
         "children": [
           "field/dart:core::AssertionError.message"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::ConcurrentModificationError": {
         "id": "class/dart:core::ConcurrentModificationError",
@@ -383,21 +449,8 @@
         },
         "children": [
           "field/dart:core::ConcurrentModificationError.modifiedObject"
-        ]
-      },
-      "dart:core::CyclicInitializationError": {
-        "id": "class/dart:core::CyclicInitializationError",
-        "kind": "class",
-        "name": "CyclicInitializationError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/dart:core::CyclicInitializationError.variableName"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::IndexError": {
         "id": "class/dart:core::IndexError",
@@ -412,6 +465,10 @@
         "children": [
           "field/dart:core::IndexError.indexable",
           "field/dart:core::IndexError.length"
+        ],
+        "supers": [
+          "class/dart:core::ArgumentError",
+          "class/dart:core::RangeError"
         ]
       },
       "dart:core::Null": {
@@ -424,7 +481,8 @@
         "modifiers": {
           "abstract": false
         },
-        "children": []
+        "children": [],
+        "supers": []
       },
       "dart:core::Object": {
         "id": "class/dart:core::Object",
@@ -436,7 +494,8 @@
         "modifiers": {
           "abstract": false
         },
-        "children": []
+        "children": [],
+        "supers": []
       },
       "dart:core::RangeError": {
         "id": "class/dart:core::RangeError",
@@ -451,6 +510,9 @@
         "children": [
           "field/dart:core::RangeError.end",
           "field/dart:core::RangeError.start"
+        ],
+        "supers": [
+          "class/dart:core::ArgumentError"
         ]
       },
       "dart:core::StateError": {
@@ -465,7 +527,8 @@
         },
         "children": [
           "field/dart:core::StateError.message"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::StringBuffer": {
         "id": "class/dart:core::StringBuffer",
@@ -479,7 +542,8 @@
         },
         "children": [
           "field/dart:core::StringBuffer._contents"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::UnsupportedError": {
         "id": "class/dart:core::UnsupportedError",
@@ -493,7 +557,8 @@
         },
         "children": [
           "field/dart:core::UnsupportedError.message"
-        ]
+        ],
+        "supers": []
       },
       "dart:core::_Enum": {
         "id": "class/dart:core::_Enum",
@@ -508,7 +573,8 @@
         "children": [
           "field/dart:core::_Enum._name",
           "field/dart:core::_Enum.index"
-        ]
+        ],
+        "supers": []
       }
     },
     "classType": {
@@ -1080,6 +1146,54 @@
         "code": "",
         "type": "dynamic"
       },
+      "dart:_js_helper::StringMatch.input": {
+        "id": "field/dart:_js_helper::StringMatch.input",
+        "kind": "field",
+        "name": "input",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::StringMatch",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:_js_helper::StringMatch.pattern": {
+        "id": "field/dart:_js_helper::StringMatch.pattern",
+        "kind": "field",
+        "name": "pattern",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::StringMatch",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String"
+      },
+      "dart:_js_helper::StringMatch.start": {
+        "id": "field/dart:_js_helper::StringMatch.start",
+        "kind": "field",
+        "name": "start",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::StringMatch",
+        "children": [],
+        "inferredType": "[subclass=JSPositiveInt]",
+        "code": "",
+        "type": "int"
+      },
+      "dart:_js_helper::_CyclicInitializationError.variableName": {
+        "id": "field/dart:_js_helper::_CyclicInitializationError.variableName",
+        "kind": "field",
+        "name": "variableName",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_js_helper::_CyclicInitializationError",
+        "children": [],
+        "inferredType": "[exact=JSString]",
+        "code": "",
+        "type": "String?"
+      },
       "dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes": {
         "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes",
         "kind": "field",
@@ -1452,18 +1566,6 @@
         "code": "",
         "type": "Object?"
       },
-      "dart:core::CyclicInitializationError.variableName": {
-        "id": "field/dart:core::CyclicInitializationError.variableName",
-        "kind": "field",
-        "name": "variableName",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:core::CyclicInitializationError",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String?"
-      },
       "dart:core::IndexError.indexable": {
         "id": "field/dart:core::IndexError.indexable",
         "kind": "field",
@@ -1474,7 +1576,7 @@
         "children": [],
         "inferredType": "[subclass=Object]",
         "code": "",
-        "type": "dynamic"
+        "type": "Object?"
       },
       "dart:core::IndexError.length": {
         "id": "field/dart:core::IndexError.length",
@@ -1496,7 +1598,7 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::RangeError",
         "children": [],
-        "inferredType": "[null]",
+        "inferredType": "[null|subclass=JSInt]",
         "code": "",
         "type": "num?"
       },
@@ -1508,7 +1610,7 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::RangeError",
         "children": [],
-        "inferredType": "[null]",
+        "inferredType": "[null|subclass=JSInt]",
         "code": "",
         "type": "num?"
       },
@@ -1580,63 +1682,55 @@
     "function/dart:_rti::_Universe.addErasedTypes": [
       {
         "id": "function/dart:_rti::_Universe.erasedTypes",
-        "mask": null
-      },
-      {
-        "id": "function/dart:_rti::_Universe.erasedTypes",
         "mask": "inlined"
       },
       {
-        "id": "function/dart:_rti::_Utils.objectAssign",
-        "mask": null
+        "id": "function/dart:_rti::_Universe.erasedTypes"
+      },
+      {
+        "id": "function/dart:_rti::_Utils.objectAssign"
       }
     ],
     "function/dart:_rti::_Universe.addRules": [
       {
         "id": "function/dart:_rti::_Universe.typeRules",
-        "mask": null
-      },
-      {
-        "id": "function/dart:_rti::_Universe.typeRules",
         "mask": "inlined"
       },
       {
-        "id": "function/dart:_rti::_Utils.objectAssign",
-        "mask": null
+        "id": "function/dart:_rti::_Universe.typeRules"
+      },
+      {
+        "id": "function/dart:_rti::_Utils.objectAssign"
       }
     ],
     "function/dart:_rti::_Utils.objectAssign": [
       {
         "id": "function/dart:_rti::_Utils.arrayAt",
-        "mask": null
-      },
-      {
-        "id": "function/dart:_rti::_Utils.arrayAt",
         "mask": "inlined"
       },
       {
-        "id": "function/dart:_rti::_Utils.arrayLength",
-        "mask": null
+        "id": "function/dart:_rti::_Utils.arrayAt"
       },
       {
         "id": "function/dart:_rti::_Utils.arrayLength",
         "mask": "inlined"
       },
       {
-        "id": "function/dart:_rti::_Utils.asString",
-        "mask": null
+        "id": "function/dart:_rti::_Utils.arrayLength"
       },
       {
         "id": "function/dart:_rti::_Utils.asString",
         "mask": "inlined"
       },
       {
-        "id": "function/dart:_rti::_Utils.objectKeys",
-        "mask": null
+        "id": "function/dart:_rti::_Utils.asString"
       },
       {
         "id": "function/dart:_rti::_Utils.objectKeys",
         "mask": "inlined"
+      },
+      {
+        "id": "function/dart:_rti::_Utils.objectKeys"
       }
     ],
     "function/dart:core::print": [
@@ -1647,20 +1741,17 @@
     ],
     "function/org-dartlang-app:///example/example_script.dart::main": [
       {
-        "id": "function/dart:_internal::printToConsole",
-        "mask": null
+        "id": "function/dart:_internal::printToConsole"
       },
       {
-        "id": "function/dart:_js_primitives::printString",
-        "mask": null
-      },
-      {
-        "id": "function/dart:core::print",
-        "mask": null
+        "id": "function/dart:_js_primitives::printString"
       },
       {
         "id": "function/dart:core::print",
         "mask": "inlined"
+      },
+      {
+        "id": "function/dart:core::print"
       }
     ]
   },
@@ -1670,27 +1761,10 @@
       "id": "outputUnit/main",
       "kind": "outputUnit",
       "name": "main",
-      "size": 5504,
+      "size": 5467,
       "filename": "example_script.dart.js",
       "imports": []
     }
   ],
-  "dump_version": 5,
-  "deferredFiles": {},
-  "dump_minor_version": 1,
-  "program": {
-    "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
-    "size": 5504,
-    "dart2jsVersion": "2.18.0-263.0.dev",
-    "compilationMoment": "2022-07-10 20:20:16.288379",
-    "compilationDuration": 189899,
-    "toJsonDuration": 0,
-    "dumpInfoDuration": 0,
-    "noSuchMethodEnabled": false,
-    "isRuntimeTypeUsed": false,
-    "isIsolateInUse": false,
-    "isFunctionApplyUsed": false,
-    "isMirrorsUsed": false,
-    "minified": true
-  }
+  "deferredFiles": {}
 }
