@@ -449,7 +449,7 @@ environment:
 
 dev_dependencies:
   build_runner: ^2.0.0
-  build_web_compilers: ^3.0.0
+  build_web_compilers: '>=3.0.0 <5.0.0'
 ''',
   ).create(parent);
 
