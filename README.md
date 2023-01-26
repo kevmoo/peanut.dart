@@ -130,3 +130,8 @@ $ git update-ref refs/heads/gh-pages origin/gh-pages
 ```
 
 This is also useful if you want to undo a `peanut` run.
+
+## Publishing automation
+
+For information about our publishing automation and release process, see
+https://github.com/dart-lang/ecosystem/wiki/Publishing-automation.
