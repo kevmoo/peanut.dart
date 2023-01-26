@@ -1,6 +1,7 @@
 ## 4.3.1-dev
 
 - Require Dart 2.18.0
+- Widen supported `package:build_web_compilers` supported version range.
 
 ## 4.3.0
 
