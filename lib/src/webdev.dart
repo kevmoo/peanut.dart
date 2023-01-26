@@ -60,7 +60,7 @@ Future<void> checkPubspecLock(String pkgDir) async {
       ..addAll(
         pubspecLock.checkPackage(
           'build_web_compilers',
-          VersionConstraint.parse('>=1.2.0 <4.0.0'),
+          VersionConstraint.parse('>=1.2.0 <5.0.0'),
         ),
       );
   }
