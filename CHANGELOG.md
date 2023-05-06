@@ -1,3 +1,7 @@
+## 4.3.2-dev
+
+- Require Dart 2.19.0
+
 ## 4.3.1
 
 - Require Dart 2.18.0
