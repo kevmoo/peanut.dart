@@ -133,15 +133,17 @@ Directories: ${sourcePkg.value.join(', ')}''',
         ),
       );
 
-      if (isFlutterSdk) {
+      final pkgDir = pkgNormalize(workingDir, sourcePkg.key);
+
+      if (await isFlutterPackage(pkgDir)) {
         await runFlutterBuild(
-          pkgNormalize(workingDir, sourcePkg.key),
+          pkgDir,
           targets,
           options,
         );
       } else {
         await runBuildRunner(
-          pkgNormalize(workingDir, sourcePkg.key),
+          pkgDir,
           targets,
           options,
         );

@@ -1,6 +1,6 @@
-## 4.3.2-dev
+## 5.0.0
 
-- Require Dart 2.19.0
+- Now chooses the "mode" (`build_runner` or Flutter) based on if the detected package is a Flutter package.
 
 ## 4.3.1
 
