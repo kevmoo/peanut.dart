@@ -18,10 +18,8 @@ import 'utils.dart';
 
 const _args = ['pub', 'deps'];
 Future _runPubDeps(String workingDirectory) async {
-  final processName = isFlutterSdk ? flutterPath : dartPath;
-
   final result =
-      Process.runSync(processName, _args, workingDirectory: workingDirectory);
+      Process.runSync(dartPath, _args, workingDirectory: workingDirectory);
 
   if (result.exitCode == 65 || result.exitCode == 66) {
     throw PeanutException((result.stderr as String).trim());
@@ -37,7 +35,7 @@ Future _runPubDeps(String workingDirectory) async {
       );
     }
     throw ProcessException(
-      processName,
+      dartPath,
       _args,
       '***OUT***\n${result.stdout}\n***ERR***\n${result.stderr}\n***',
       exitCode,
@@ -45,11 +43,16 @@ Future _runPubDeps(String workingDirectory) async {
   }
 }
 
+Future<bool> isFlutterPackage(String pkgDir) async {
+  final pubspecLock = await _PubspecLock.read(pkgDir);
+  return pubspecLock.isFlutter;
+}
+
 Future<void> checkPubspecLock(String pkgDir) async {
   final pubspecLock = await _PubspecLock.read(pkgDir);
 
   final issues = <PackageExceptionDetails>[];
-  if (!isFlutterSdk) {
+  if (!pubspecLock.isFlutter) {
     issues
       ..addAll(
         pubspecLock.checkPackage(
@@ -84,6 +87,13 @@ class _PubspecLock {
 
     final packages = pubspecLock['packages'] as YamlMap;
     return _PubspecLock(packages);
+  }
+
+  bool get isFlutter {
+    final flutterDataMap =
+        (_packages == null) ? null : _packages!['flutter'] as YamlMap?;
+
+    return flutterDataMap != null;
   }
 
   List<PackageExceptionDetails> checkPackage(

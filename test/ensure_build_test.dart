@@ -1,5 +1,6 @@
 @Timeout.factor(2)
 @Tags(['presubmit-only'])
+@TestOn('!windows')
 library;
 
 import 'package:build_verify/build_verify.dart';

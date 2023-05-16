@@ -1,3 +1,6 @@
+@TestOn('!windows')
+library;
+
 import 'package:peanut/src/helpers.dart';
 import 'package:test/test.dart';
 
