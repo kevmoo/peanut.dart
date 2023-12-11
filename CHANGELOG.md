@@ -1,3 +1,7 @@
+## 5.0.1-wip
+
+- Require Dart 3.0
+
 ## 5.0.0
 
 - Now chooses the "mode" (`build_runner` or Flutter) based on if the detected package is a Flutter package.
