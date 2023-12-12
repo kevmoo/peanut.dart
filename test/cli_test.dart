@@ -128,7 +128,7 @@ The follow options are not supported with a build_runner build:
       expect(parseOptions([]).builderOptions, isNull);
     });
 
-    void expectParseOptionsThrows(List<String> args, matcher) {
+    void expectParseOptionsThrows(List<String> args, Object matcher) {
       expect(
         () => parseOptions(
           args,

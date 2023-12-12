@@ -90,8 +90,7 @@ class _PubspecLock {
   }
 
   bool get isFlutter {
-    final flutterDataMap =
-        (_packages == null) ? null : _packages!['flutter'] as YamlMap?;
+    final flutterDataMap = _packages?['flutter'] as YamlMap?;
 
     return flutterDataMap != null;
   }
@@ -107,8 +106,7 @@ class _PubspecLock {
     final missingDetails =
         PackageExceptionDetails.missingDep(pkgName, constraint);
 
-    final pkgDataMap =
-        (_packages == null) ? null : _packages![pkgName] as YamlMap?;
+    final pkgDataMap = _packages?[pkgName] as YamlMap?;
     if (pkgDataMap == null) {
       issues.add(missingDetails);
     } else {

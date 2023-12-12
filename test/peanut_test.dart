@@ -17,7 +17,7 @@ TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
     .having((te) => te.name, 'name', name)
     .having((te) => te.type, 'type', type);
 
-Matcher _throwsPeanutException(message) => throwsA(
+Matcher _throwsPeanutException(Object message) => throwsA(
       isA<PeanutException>().having((pe) => pe.message, 'message', message),
     );
 
@@ -316,7 +316,7 @@ package:peanut $packageVersion''',
       final result = await gitDir.runCommand(['cat-file', '-p', mapJsonSha]);
       final mapOutput =
           jsonDecode(result.stdout as String) as Map<String, dynamic>;
-      expect(mapOutput, Map.fromIterable(buildDirs));
+      expect(mapOutput, Map<String, dynamic>.fromIterable(buildDirs));
     });
 
     test('missing', () async {
