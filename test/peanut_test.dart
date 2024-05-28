@@ -1,5 +1,5 @@
 @Timeout.factor(4)
-library peanut_test;
+library;
 
 import 'dart:convert';
 import 'dart:io';
