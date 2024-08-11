@@ -22,9 +22,9 @@ Future<void> runFlutterBuild(
   final args = <String>[
     'build',
     'web',
-    if (options.wasm) ...[
-      '--wasm',
-    ] else ...[
+    if (options.wasm)
+      '--wasm'
+    else ...[
       '--web-renderer',
       options.webRendererString(),
     ],
