@@ -76,6 +76,7 @@ Arguments:
           [html]                 This renderer uses a combination of HTML, CSS,
                                  SVG, 2D Canvas, and WebGL.
 
+    --[no-]wasm                  Whether to build for WebAssembly (WASM).
     --extra-args                 Extra arguments to provide to the target CLI
                                  within a single string.
                                  Examples:

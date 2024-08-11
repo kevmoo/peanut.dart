@@ -22,8 +22,12 @@ Future<void> runFlutterBuild(
   final args = <String>[
     'build',
     'web',
-    '--web-renderer',
-    options.webRendererString(),
+    if (options.wasm) ...[
+      '--wasm',
+    ] else ...[
+      '--web-renderer',
+      options.webRendererString(),
+    ],
     options.release ? '--release' : '--profile',
     ...?options.splitExtraArgs()
   ];

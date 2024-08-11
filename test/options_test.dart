@@ -77,6 +77,7 @@ void main() {
       'release': false,
       'verbose': true,
       'source-branch-info': false,
+      'wasm': false
     });
     _checkDefault(
       allFileOptions,
@@ -132,6 +133,7 @@ void _checkDefault(
   expect(options.sourceBranchInfoWasParsed, wasParsed);
   expect(options.verbose, expected.verbose);
   expect(options.verboseWasParsed, wasParsed);
+  expect(options.wasm, expected.wasm);
 
   expect(options.version, jsonSkippedDefault ?? expected.version);
 }
