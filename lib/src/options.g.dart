@@ -44,6 +44,7 @@ Options _$parseOptionsResult(ArgResults result) => Options(
         result['web-renderer'] as String,
       ),
       webRendererWasParsed: result.wasParsed('web-renderer'),
+      wasm: result['wasm'] as bool,
       extraArgsWasParsed: result.wasParsed('extra-args'),
       extraArgs: result['extra-args'] as String?,
       help: result['help'] as bool,
@@ -126,6 +127,10 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
           'Use the HTML renderer on mobile devices, and CanvasKit on desktop devices.'
     },
   )
+  ..addFlag(
+    'wasm',
+    help: 'Whether to build for WebAssembly (WASM).',
+  )
   ..addOption(
     'extra-args',
     help:
@@ -171,6 +176,7 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
             'builder-options',
             'verbose',
             'web-renderer',
+            'wasm',
             'extra-args'
           ],
         );
@@ -200,6 +206,7 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
               (v) =>
                   $enumDecodeNullable(_$WebRendererEnumMap, v) ??
                   _defaultWebRenderer),
+          wasm: $checkedConvert('wasm', (v) => v as bool? ?? false),
           extraArgs: $checkedConvert('extra-args', (v) => v as String?),
         );
         return val;
@@ -234,6 +241,7 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
   val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer]!;
+  val['wasm'] = instance.wasm;
   writeNotNull('extra-args', instance.extraArgs);
   return val;
 }

@@ -1,3 +1,7 @@
+## 5.1.0
+
+- Support build wasm option for Flutter web.
+
 ## 5.0.1-wip
 
 - Require Dart 3.0

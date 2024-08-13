@@ -156,6 +156,11 @@ See the README for details.''',
   @JsonKey(includeToJson: false, includeFromJson: false)
   final bool webRendererWasParsed;
 
+  @CliOption(
+    help: 'Whether to build for WebAssembly (WASM).',
+  )
+  final bool wasm;
+
   String webRendererString() => _$WebRendererEnumMap[webRenderer]!;
 
   @CliOption(
@@ -210,6 +215,7 @@ See the README for details.''',
     this.dryRun = _defaultDryRun,
     this.webRenderer = _defaultWebRenderer,
     this.webRendererWasParsed = false,
+    this.wasm = false,
     this.extraArgsWasParsed = false,
     this.extraArgs,
     this.help = false,
@@ -235,6 +241,7 @@ See the README for details.''',
       dryRun: dryRun,
       extraArgs: extraArgsWasParsed ? extraArgs : other.extraArgs,
       webRenderer: webRendererWasParsed ? webRenderer : other.webRenderer,
+      wasm: wasm,
       help: help,
       message: messageWasParsed ? message : other.message,
       postBuildDartScript: postBuildDartScriptWasParsed
