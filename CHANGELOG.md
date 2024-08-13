@@ -1,4 +1,4 @@
-## 5.0.2
+## 5.1.0
 
 - Support build wasm option for Flutter web.
 
