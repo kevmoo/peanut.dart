@@ -150,6 +150,26 @@ Directories: ${sourcePkg.value.join(', ')}''',
       }
     }
 
+    if (options.postBuildDartScript != null) {
+      final postBuildScriptPath =
+          pkgNormalize(workingDir, options.postBuildDartScript!);
+      if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
+        throw PeanutException(
+          'The provided post-build Dart script does not '
+          'exist or is not a file.\n$postBuildScriptPath',
+        );
+      }
+
+      print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath'));
+
+      await runProcess(
+        dartPath,
+        [postBuildScriptPath, tempDir.path, jsonEncode(outputDirMap)],
+        workingDirectory: workingDir,
+      );
+      print(ansi.styleBold.wrap('Post-build script: complete\n'));
+    }
+
     if (options.dryRun) {
       print(ansi.wrapWith('*** Dry run ***\n', [ansi.yellow, ansi.styleBold]));
       return;
@@ -173,26 +193,6 @@ Directories: ${sourcePkg.value.join(', ')}''',
 
       File(p.join(tempDir.path, 'index.html'))
           .writeAsStringSync(_indexFile(links));
-    }
-
-    if (options.postBuildDartScript != null) {
-      final postBuildScriptPath =
-          pkgNormalize(workingDir, options.postBuildDartScript!);
-      if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
-        throw PeanutException(
-          'The provided post-build Dart script does not '
-          'exist or is not a file.\n$postBuildScriptPath',
-        );
-      }
-
-      print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath'));
-
-      await runProcess(
-        dartPath,
-        [postBuildScriptPath, tempDir.path, jsonEncode(outputDirMap)],
-        workingDirectory: workingDir,
-      );
-      print(ansi.styleBold.wrap('Post-build script: complete\n'));
     }
 
     var message = options.message;
