@@ -209,6 +209,15 @@ Directories:
       }
     }
 
+    if (options.versionInfo) {
+      final version = await getPackageVersion();
+      message = '''
+$message
+
+Version: ${version ?? 'Unknown'}
+''';
+    }
+
     if (options.sourceBranchInfo) {
       final currentBranch = await gitDir.currentBranch();
       var commitInfo = currentBranch.sha;

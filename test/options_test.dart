@@ -133,6 +133,8 @@ void _checkDefault(
   expect(options.sourceBranchInfoWasParsed, wasParsed);
   expect(options.verbose, expected.verbose);
   expect(options.verboseWasParsed, wasParsed);
+  expect(options.versionInfo, expected.versionInfo);
+  expect(options.versionInfoWasParsed, expected.versionInfoWasParsed);
   expect(options.wasm, expected.wasm);
 
   expect(options.version, jsonSkippedDefault ?? expected.version);

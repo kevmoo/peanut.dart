@@ -14,6 +14,7 @@ const _defaultRelease = true;
 const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
+const _defaultVersionInfo = false;
 const _defaultWebRenderer = WebRenderer.auto;
 
 const defaultMessage = 'Built <$_directoryFlag>';
@@ -187,6 +188,15 @@ See the README for details.''',
   )
   final bool version;
 
+  @CliOption(
+    defaultsTo: _defaultVersionInfo,
+    help: 'Includes the pubspec version of the package in the commit message',
+  )
+  final bool versionInfo;
+
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final bool versionInfoWasParsed;
+
   @JsonKey(includeToJson: false, includeFromJson: false)
   final bool extraArgsWasParsed;
 
@@ -220,6 +230,8 @@ See the README for details.''',
     this.extraArgs,
     this.help = false,
     this.version = false,
+    this.versionInfo = _defaultVersionInfo,
+    this.versionInfoWasParsed = false,
     this.rest = const [],
   });
 
@@ -252,6 +264,7 @@ See the README for details.''',
       sourceBranchInfo:
           sourceBranchInfoWasParsed ? sourceBranchInfo : other.sourceBranchInfo,
       version: version,
+      versionInfo: versionInfoWasParsed ? versionInfo : other.versionInfo,
       verbose: verboseWasParsed ? verbose : other.verbose,
     );
   }
