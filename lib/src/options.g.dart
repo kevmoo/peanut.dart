@@ -94,10 +94,6 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
         'Includes the name of the source branch and SHA in the commit message',
     defaultsTo: true,
   )
-  ..addFlag(
-    'version-info',
-    help: 'Includes the pubspec version of the package in the commit message',
-  )
   ..addOption(
     'post-build-dart-script',
     help:
@@ -152,6 +148,10 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
     'version',
     help: 'Print the current version.',
     negatable: false,
+  )
+  ..addFlag(
+    'version-info',
+    help: 'Includes the pubspec version of the package in the commit message',
   );
 
 final _$parserForOptions = _$populateOptionsParser(ArgParser());
@@ -183,7 +183,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
             'verbose',
             'web-renderer',
             'wasm',
-            'extra-args'
+            'extra-args',
+            'version-info'
           ],
         );
         final val = Options(
@@ -207,8 +208,6 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
               'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
           verbose:
               $checkedConvert('verbose', (v) => v as bool? ?? _defaultVerbose),
-          versionInfo: $checkedConvert(
-              'version-info', (v) => v as bool? ?? _defaultVersionInfo),
           webRenderer: $checkedConvert(
               'web-renderer',
               (v) =>
@@ -216,6 +215,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
                   _defaultWebRenderer),
           wasm: $checkedConvert('wasm', (v) => v as bool? ?? false),
           extraArgs: $checkedConvert('extra-args', (v) => v as String?),
+          versionInfo: $checkedConvert(
+              'version-info', (v) => v as bool? ?? _defaultVersionInfo),
         );
         return val;
       },
@@ -224,9 +225,9 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
         'sourceBranchInfo': 'source-branch-info',
         'postBuildDartScript': 'post-build-dart-script',
         'builderOptions': 'builder-options',
-        'versionInfo': 'version-info',
         'webRenderer': 'web-renderer',
-        'extraArgs': 'extra-args'
+        'extraArgs': 'extra-args',
+        'versionInfo': 'version-info'
       },
     );
 
@@ -249,10 +250,10 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
-  val['version-info'] = instance.versionInfo;
   val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer]!;
   val['wasm'] = instance.wasm;
   writeNotNull('extra-args', instance.extraArgs);
+  val['version-info'] = instance.versionInfo;
   return val;
 }
 
