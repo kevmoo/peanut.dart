@@ -210,12 +210,11 @@ Directories:
     }
 
     if (options.versionInfo) {
-      final version = await getPackageVersion();
+      final version = await getPackageVersion(workingDir);
       message = '''
 $message
 
-Version: ${version ?? 'Unknown'}
-''';
+Version: ${version ?? 'Unknown'}''';
     }
 
     if (options.sourceBranchInfo) {

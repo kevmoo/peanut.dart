@@ -100,6 +100,15 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   final bool sourceBranchInfoWasParsed;
 
   @CliOption(
+    defaultsTo: _defaultVersionInfo,
+    help: 'Includes the pubspec version of the package in the commit message',
+  )
+  final bool versionInfo;
+
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final bool versionInfoWasParsed;
+
+  @CliOption(
     help: 'Optional Dart script to run after all builds have completed, but '
         'before files are committed to the repository.',
   )
@@ -187,15 +196,6 @@ See the README for details.''',
     help: 'Print the current version.',
   )
   final bool version;
-
-  @CliOption(
-    defaultsTo: _defaultVersionInfo,
-    help: 'Includes the pubspec version of the package in the commit message',
-  )
-  final bool versionInfo;
-
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final bool versionInfoWasParsed;
 
   @JsonKey(includeToJson: false, includeFromJson: false)
   final bool extraArgsWasParsed;

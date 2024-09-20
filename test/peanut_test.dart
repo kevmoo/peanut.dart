@@ -139,6 +139,38 @@ package:peanut $packageVersion''',
     await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
   });
 
+  test('integration with version-info', () async {
+    await _simplePackage();
+    await _pubGet();
+    final gitDir = await _initGitDir();
+    final primaryCommit = await gitDir.showRef();
+
+    await _run(options: const Options(versionInfo: true));
+
+    expect(
+      (await gitDir.branches()).map((br) => br.branchName),
+      unorderedEquals(['main', 'gh-pages']),
+    );
+
+    final ghBranchRef = await gitDir.branchReference('gh-pages');
+
+    final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
+    expect(
+      ghCommit.message,
+      '''
+Built web
+
+Version: 1.0.0
+
+Branch: main
+Commit: ${primaryCommit.single.sha}
+
+package:peanut $packageVersion''',
+    );
+
+    await _expectStandardTreeContents(gitDir, ghCommit.treeSha);
+  });
+
   test('1 package, 2 build dirs', () async {
     await _simplePackage(buildDirs: {'example', 'web'});
     await _pubGet();
@@ -447,6 +479,7 @@ Future<void> _simplePackage({
     'pubspec.yaml',
     r'''
 name: peanut_test
+version: 1.0.0
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
