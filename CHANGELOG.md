@@ -1,3 +1,7 @@
+## 5.2.0-wip
+
+- Add `--version-info` option. This is off by default.
+
 ## 5.1.0
 
 - Support build wasm option for Flutter web.

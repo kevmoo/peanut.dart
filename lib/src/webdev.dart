@@ -73,6 +73,29 @@ Future<void> checkPubspecLock(String pkgDir) async {
   }
 }
 
+Future<String?> getPackageVersion(String workingDir) async {
+  final pubSpec = await _Pubspec.read(workingDir);
+  return pubSpec.version;
+}
+
+const String pubspecFile = 'pubspec.yaml';
+
+class _Pubspec {
+  final YamlMap? _pubspec;
+
+  _Pubspec(this._pubspec);
+
+  static Future<_Pubspec> read(String workingDir) async {
+    final pubSpec =
+        loadYaml(await File(p.join(workingDir, pubspecFile)).readAsString())
+            as YamlMap;
+
+    return _Pubspec(pubSpec);
+  }
+
+  String? get version => _pubspec?['version'] as String?;
+}
+
 class _PubspecLock {
   final YamlMap? _packages;
 

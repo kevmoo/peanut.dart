@@ -57,6 +57,8 @@ Arguments:
     --[no-]source-branch-info    Includes the name of the source branch and SHA
                                  in the commit message
                                  (defaults to on)
+    --[no-]version-info          Includes the pubspec version of the package in
+                                 the commit message
     --post-build-dart-script     Optional Dart script to run after all builds
                                  have completed, but before files are committed
                                  to the repository.

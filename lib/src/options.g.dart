@@ -49,6 +49,8 @@ Options _$parseOptionsResult(ArgResults result) => Options(
       extraArgs: result['extra-args'] as String?,
       help: result['help'] as bool,
       version: result['version'] as bool,
+      versionInfo: result['version-info'] as bool,
+      versionInfoWasParsed: result.wasParsed('version-info'),
       rest: result.rest,
     );
 
@@ -91,6 +93,10 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
     help:
         'Includes the name of the source branch and SHA in the commit message',
     defaultsTo: true,
+  )
+  ..addFlag(
+    'version-info',
+    help: 'Includes the pubspec version of the package in the commit message',
   )
   ..addOption(
     'post-build-dart-script',
@@ -172,6 +178,7 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
             'release',
             'message',
             'source-branch-info',
+            'version-info',
             'post-build-dart-script',
             'builder-options',
             'verbose',
@@ -208,6 +215,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
                   _defaultWebRenderer),
           wasm: $checkedConvert('wasm', (v) => v as bool? ?? false),
           extraArgs: $checkedConvert('extra-args', (v) => v as String?),
+          versionInfo: $checkedConvert(
+              'version-info', (v) => v as bool? ?? _defaultVersionInfo),
         );
         return val;
       },
@@ -217,7 +226,8 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
         'postBuildDartScript': 'post-build-dart-script',
         'builderOptions': 'builder-options',
         'webRenderer': 'web-renderer',
-        'extraArgs': 'extra-args'
+        'extraArgs': 'extra-args',
+        'versionInfo': 'version-info'
       },
     );
 
@@ -237,6 +247,7 @@ Map<String, dynamic> _$OptionsToJson(Options instance) {
   val['release'] = instance.release;
   val['message'] = instance.message;
   val['source-branch-info'] = instance.sourceBranchInfo;
+  val['version-info'] = instance.versionInfo;
   writeNotNull('post-build-dart-script', instance.postBuildDartScript);
   writeNotNull('builder-options', instance.builderOptions);
   val['verbose'] = instance.verbose;
