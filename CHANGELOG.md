@@ -1,10 +1,10 @@
-## 5.2.1
-
-- Moved the `post-build-dart-script` execution to ensure it runs immediately after the `flutter build web` command.
-
 ## 5.2.0-wip
 
 - Add `--version-info` option. This is off by default.
+
+## 5.2.1
+
+- Moved the `post-build-dart-script` execution to ensure it runs immediately after the `flutter build web` command.
 
 ## 5.1.0
 
