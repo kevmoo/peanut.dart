@@ -87,7 +87,7 @@ void main() {
     expect(
       output,
       '''
-Could not find an option named "bob".
+Could not find an option named "--bob".
 
 $_output''',
     );
