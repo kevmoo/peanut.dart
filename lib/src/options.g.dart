@@ -231,31 +231,22 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$OptionsToJson(Options instance) {
-  final val = <String, dynamic>{
-    'directories': instance.directories,
-    'branch': instance.branch,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('build-config', instance.buildConfig);
-  val['release'] = instance.release;
-  val['message'] = instance.message;
-  val['source-branch-info'] = instance.sourceBranchInfo;
-  val['version-info'] = instance.versionInfo;
-  writeNotNull('post-build-dart-script', instance.postBuildDartScript);
-  writeNotNull('builder-options', instance.builderOptions);
-  val['verbose'] = instance.verbose;
-  val['web-renderer'] = _$WebRendererEnumMap[instance.webRenderer]!;
-  val['wasm'] = instance.wasm;
-  writeNotNull('extra-args', instance.extraArgs);
-  return val;
-}
+Map<String, dynamic> _$OptionsToJson(Options instance) => <String, dynamic>{
+      'directories': instance.directories,
+      'branch': instance.branch,
+      if (instance.buildConfig case final value?) 'build-config': value,
+      'release': instance.release,
+      'message': instance.message,
+      'source-branch-info': instance.sourceBranchInfo,
+      'version-info': instance.versionInfo,
+      if (instance.postBuildDartScript case final value?)
+        'post-build-dart-script': value,
+      if (instance.builderOptions case final value?) 'builder-options': value,
+      'verbose': instance.verbose,
+      'web-renderer': _$WebRendererEnumMap[instance.webRenderer]!,
+      'wasm': instance.wasm,
+      if (instance.extraArgs case final value?) 'extra-args': value,
+    };
 
 const _$WebRendererEnumMap = {
   WebRenderer.canvaskit: 'canvaskit',

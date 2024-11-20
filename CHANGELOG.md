@@ -1,6 +1,7 @@
 ## 5.2.0-wip
 
 - Add `--version-info` option. This is off by default.
+- Require Dart 3.5
 
 ## 5.1.0
 
