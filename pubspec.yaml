@@ -5,7 +5,7 @@ description: >-
   app. Supports 'pub build' and the new 'pub run build_runner'.
 repository: https://github.com/kevmoo/peanut.dart
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.5.0
 
 dependencies:
   args: ^2.6.0
