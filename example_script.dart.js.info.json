@@ -3,15 +3,15 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
-    "size": 5467,
-    "ramUsage": "164.750 MB",
-    "dart2jsVersion": "3.0.0-163.0.dev",
-    "compilationMoment": "2023-01-26 11:53:45.203832",
-    "compilationDuration": 255580,
+    "size": 5243,
+    "ramUsage": "N/A MB",
+    "dart2jsVersion": "3.7.0-259.0.dev",
+    "compilationMoment": "2024-12-17 17:48:47.901982",
+    "compilationDuration": 197098,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
-    "isRuntimeTypeUsed": false,
+    "isRuntimeTypeUsed": true,
     "isIsolateInUse": false,
     "isFunctionApplyUsed": false,
     "isMirrorsUsed": false,
@@ -47,6 +47,7 @@
         "children": [
           "class/dart:_internal::LateError",
           "field/dart:_internal::printToZone",
+          "field/dart:_internal::toStringVisiting",
           "function/dart:_internal::printToConsole"
         ],
         "canonicalUri": "dart:_internal"
@@ -60,7 +61,6 @@
           "class/dart:_js_helper::BoundClosure",
           "class/dart:_js_helper::Closure",
           "class/dart:_js_helper::RuntimeError",
-          "class/dart:_js_helper::StringMatch",
           "class/dart:_js_helper::_CyclicInitializationError"
         ],
         "canonicalUri": "dart:_js_helper"
@@ -69,21 +69,11 @@
         "id": "library/dart:_js_primitives::",
         "kind": "library",
         "name": "dart2js._js_primitives",
-        "size": 264,
+        "size": 230,
         "children": [
           "function/dart:_js_primitives::printString"
         ],
         "canonicalUri": "dart:_js_primitives"
-      },
-      "dart:_js_shared_embedded_names::": {
-        "id": "library/dart:_js_shared_embedded_names::",
-        "kind": "library",
-        "name": "<unnamed>",
-        "size": 0,
-        "children": [
-          "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames"
-        ],
-        "canonicalUri": "dart:_js_shared_embedded_names"
       },
       "dart:_rti::": {
         "id": "library/dart:_rti::",
@@ -100,16 +90,6 @@
         ],
         "canonicalUri": "dart:_rti"
       },
-      "dart:collection::": {
-        "id": "library/dart:collection::",
-        "kind": "library",
-        "name": "dart.collection",
-        "size": 0,
-        "children": [
-          "field/dart:collection::_toStringVisiting"
-        ],
-        "canonicalUri": "dart:collection"
-      },
       "dart:core::": {
         "id": "library/dart:core::",
         "kind": "library",
@@ -123,7 +103,6 @@
           "class/dart:core::Null",
           "class/dart:core::Object",
           "class/dart:core::RangeError",
-          "class/dart:core::StateError",
           "class/dart:core::StringBuffer",
           "class/dart:core::UnsupportedError",
           "class/dart:core::_Enum",
@@ -241,23 +220,6 @@
         ],
         "supers": []
       },
-      "dart:_js_helper::StringMatch": {
-        "id": "class/dart:_js_helper::StringMatch",
-        "kind": "class",
-        "name": "StringMatch",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_helper::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/dart:_js_helper::StringMatch.input",
-          "field/dart:_js_helper::StringMatch.pattern",
-          "field/dart:_js_helper::StringMatch.start"
-        ],
-        "supers": []
-      },
       "dart:_js_helper::_CyclicInitializationError": {
         "id": "class/dart:_js_helper::_CyclicInitializationError",
         "kind": "class",
@@ -270,25 +232,6 @@
         },
         "children": [
           "field/dart:_js_helper::_CyclicInitializationError.variableName"
-        ],
-        "supers": []
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames": {
-        "id": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "kind": "class",
-        "name": "RtiUniverseFieldNames",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:_js_shared_embedded_names::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes",
-          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache",
-          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray",
-          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances",
-          "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules"
         ],
         "supers": []
       },
@@ -307,13 +250,12 @@
           "field/dart:_rti::Rti._bindCache",
           "field/dart:_rti::Rti._cachedRuntimeType",
           "field/dart:_rti::Rti._canonicalRecipe",
+          "field/dart:_rti::Rti._dynamicCheckData",
           "field/dart:_rti::Rti._evalCache",
           "field/dart:_rti::Rti._is",
+          "field/dart:_rti::Rti._isSubtypeCache",
           "field/dart:_rti::Rti._kind",
           "field/dart:_rti::Rti._precomputed1",
-          "field/dart:_rti::Rti._precomputed2",
-          "field/dart:_rti::Rti._precomputed3",
-          "field/dart:_rti::Rti._precomputed4",
           "field/dart:_rti::Rti._primary",
           "field/dart:_rti::Rti._rest",
           "field/dart:_rti::Rti._specializedTestResource"
@@ -515,21 +457,6 @@
           "class/dart:core::ArgumentError"
         ]
       },
-      "dart:core::StateError": {
-        "id": "class/dart:core::StateError",
-        "kind": "class",
-        "name": "StateError",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:core::",
-        "modifiers": {
-          "abstract": false
-        },
-        "children": [
-          "field/dart:core::StateError.message"
-        ],
-        "supers": []
-      },
       "dart:core::StringBuffer": {
         "id": "class/dart:core::StringBuffer",
         "kind": "class",
@@ -629,7 +556,7 @@
         "id": "function/dart:_js_primitives::printString",
         "kind": "function",
         "name": "printString",
-        "size": 264,
+        "size": 230,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_js_primitives::",
         "children": [],
@@ -650,7 +577,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof window==\"object\")return\nif(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
+        "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
         "type": "void Function(String)",
         "functionKind": 0
       },
@@ -737,7 +664,7 @@
           "external": false
         },
         "returnType": "Object",
-        "inferredReturnType": "[null|subclass=Object]",
+        "inferredReturnType": "[subclass=Object]",
         "parameters": [
           {
             "name": "universe",
@@ -766,7 +693,7 @@
           "external": false
         },
         "returnType": "Object",
-        "inferredReturnType": "[null|subclass=Object]",
+        "inferredReturnType": "[subclass=Object]",
         "parameters": [
           {
             "name": "universe",
@@ -891,7 +818,7 @@
         "parameters": [
           {
             "name": "o",
-            "type": "[null|subclass=Object]",
+            "type": "[subclass=Object]",
             "declaredType": "Object?"
           },
           {
@@ -1074,6 +1001,18 @@
         "code": "",
         "type": "void Function(String)?"
       },
+      "dart:_internal::toStringVisiting": {
+        "id": "field/dart:_internal::toStringVisiting",
+        "kind": "field",
+        "name": "toStringVisiting",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_internal::",
+        "children": [],
+        "inferredType": "Container([exact=JSExtendableArray], element: [subclass=JSArray], length: null)",
+        "code": "",
+        "type": "List<Object>"
+      },
       "dart:_js_helper::BoundClosure._interceptor": {
         "id": "field/dart:_js_helper::BoundClosure._interceptor",
         "kind": "field",
@@ -1130,7 +1069,7 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::Closure",
         "children": [],
-        "inferredType": "[null|subclass=JSInt]",
+        "inferredType": "[subclass=JSInt]",
         "code": "",
         "type": "int"
       },
@@ -1146,42 +1085,6 @@
         "code": "",
         "type": "dynamic"
       },
-      "dart:_js_helper::StringMatch.input": {
-        "id": "field/dart:_js_helper::StringMatch.input",
-        "kind": "field",
-        "name": "input",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_helper::StringMatch",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_helper::StringMatch.pattern": {
-        "id": "field/dart:_js_helper::StringMatch.pattern",
-        "kind": "field",
-        "name": "pattern",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_helper::StringMatch",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_helper::StringMatch.start": {
-        "id": "field/dart:_js_helper::StringMatch.start",
-        "kind": "field",
-        "name": "start",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_helper::StringMatch",
-        "children": [],
-        "inferredType": "[subclass=JSPositiveInt]",
-        "code": "",
-        "type": "int"
-      },
       "dart:_js_helper::_CyclicInitializationError.variableName": {
         "id": "field/dart:_js_helper::_CyclicInitializationError.variableName",
         "kind": "field",
@@ -1193,66 +1096,6 @@
         "inferredType": "[exact=JSString]",
         "code": "",
         "type": "String?"
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes": {
-        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.erasedTypes",
-        "kind": "field",
-        "name": "erasedTypes",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"eT\")",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache": {
-        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.evalCache",
-        "kind": "field",
-        "name": "evalCache",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"eC\")",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray": {
-        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.sharedEmptyArray",
-        "kind": "field",
-        "name": "sharedEmptyArray",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"sEA\")",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances": {
-        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeParameterVariances",
-        "kind": "field",
-        "name": "typeParameterVariances",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"tPV\")",
-        "code": "",
-        "type": "String"
-      },
-      "dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules": {
-        "id": "field/dart:_js_shared_embedded_names::RtiUniverseFieldNames.typeRules",
-        "kind": "field",
-        "name": "typeRules",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_js_shared_embedded_names::RtiUniverseFieldNames",
-        "children": [],
-        "inferredType": "Value([exact=JSString], value: \"tR\")",
-        "code": "",
-        "type": "String"
       },
       "dart:_rti::Rti._as": {
         "id": "field/dart:_rti::Rti._as",
@@ -1302,6 +1145,18 @@
         "code": "",
         "type": "Object?"
       },
+      "dart:_rti::Rti._dynamicCheckData": {
+        "id": "field/dart:_rti::Rti._dynamicCheckData",
+        "kind": "field",
+        "name": "_dynamicCheckData",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null]",
+        "code": "",
+        "type": "Object?"
+      },
       "dart:_rti::Rti._evalCache": {
         "id": "field/dart:_rti::Rti._evalCache",
         "kind": "field",
@@ -1318,6 +1173,18 @@
         "id": "field/dart:_rti::Rti._is",
         "kind": "field",
         "name": "_is",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "class/dart:_rti::Rti",
+        "children": [],
+        "inferredType": "[null|subclass=Object]",
+        "code": "",
+        "type": "Object?"
+      },
+      "dart:_rti::Rti._isSubtypeCache": {
+        "id": "field/dart:_rti::Rti._isSubtypeCache",
+        "kind": "field",
+        "name": "_isSubtypeCache",
         "size": 0,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::Rti",
@@ -1347,42 +1214,6 @@
         "parent": "class/dart:_rti::Rti",
         "children": [],
         "inferredType": "[null|subclass=Object]",
-        "code": "",
-        "type": "Object?"
-      },
-      "dart:_rti::Rti._precomputed2": {
-        "id": "field/dart:_rti::Rti._precomputed2",
-        "kind": "field",
-        "name": "_precomputed2",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_rti::Rti",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "Object?"
-      },
-      "dart:_rti::Rti._precomputed3": {
-        "id": "field/dart:_rti::Rti._precomputed3",
-        "kind": "field",
-        "name": "_precomputed3",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_rti::Rti",
-        "children": [],
-        "inferredType": "[null]",
-        "code": "",
-        "type": "Object?"
-      },
-      "dart:_rti::Rti._precomputed4": {
-        "id": "field/dart:_rti::Rti._precomputed4",
-        "kind": "field",
-        "name": "_precomputed4",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:_rti::Rti",
-        "children": [],
-        "inferredType": "[null]",
         "code": "",
         "type": "Object?"
       },
@@ -1478,21 +1309,9 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Type",
         "children": [],
-        "inferredType": "[null|exact=Rti]",
+        "inferredType": "[exact=Rti]",
         "code": "",
         "type": "Rti"
-      },
-      "dart:collection::_toStringVisiting": {
-        "id": "field/dart:collection::_toStringVisiting",
-        "kind": "field",
-        "name": "_toStringVisiting",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "library/dart:collection::",
-        "children": [],
-        "inferredType": "Container([exact=JSExtendableArray], element: [subclass=JSArray], length: null)",
-        "code": "",
-        "type": "List<Object>"
       },
       "dart:core::ArgumentError._hasValue": {
         "id": "field/dart:core::ArgumentError._hasValue",
@@ -1550,7 +1369,7 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::AssertionError",
         "children": [],
-        "inferredType": "[null|subclass=Object]",
+        "inferredType": "[null|exact=JSString]",
         "code": "",
         "type": "Object?"
       },
@@ -1598,7 +1417,7 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::RangeError",
         "children": [],
-        "inferredType": "[null|subclass=JSInt]",
+        "inferredType": "[null]",
         "code": "",
         "type": "num?"
       },
@@ -1610,21 +1429,9 @@
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::RangeError",
         "children": [],
-        "inferredType": "[null|subclass=JSInt]",
+        "inferredType": "[null]",
         "code": "",
         "type": "num?"
-      },
-      "dart:core::StateError.message": {
-        "id": "field/dart:core::StateError.message",
-        "kind": "field",
-        "name": "message",
-        "size": 0,
-        "outputUnit": "outputUnit/main",
-        "parent": "class/dart:core::StateError",
-        "children": [],
-        "inferredType": "[exact=JSString]",
-        "code": "",
-        "type": "String"
       },
       "dart:core::StringBuffer._contents": {
         "id": "field/dart:core::StringBuffer._contents",
@@ -1761,7 +1568,7 @@
       "id": "outputUnit/main",
       "kind": "outputUnit",
       "name": "main",
-      "size": 5467,
+      "size": 5243,
       "filename": "example_script.dart.js",
       "imports": []
     }
