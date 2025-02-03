@@ -8,17 +8,6 @@ part of 'options.dart';
 // CliGenerator
 // **************************************************************************
 
-T _$enumValueHelper<T>(Map<T, String> enumValues, String source) =>
-    enumValues.entries
-        .singleWhere(
-          (e) => e.value == source,
-          orElse: () => throw ArgumentError(
-            '`$source` is not one of the supported values: '
-            '${enumValues.values.join(', ')}',
-          ),
-        )
-        .key;
-
 Options _$parseOptionsResult(ArgResults result) => Options(
       directories: _directoriesConvert(result['directories'] as String?),
       directoriesWasParsed: result.wasParsed('directories'),
@@ -39,11 +28,6 @@ Options _$parseOptionsResult(ArgResults result) => Options(
       verbose: result['verbose'] as bool,
       verboseWasParsed: result.wasParsed('verbose'),
       dryRun: result['dry-run'] as bool,
-      webRenderer: _$enumValueHelper(
-        _$WebRendererEnumMapBuildCli,
-        result['web-renderer'] as String,
-      ),
-      webRendererWasParsed: result.wasParsed('web-renderer'),
       wasm: result['wasm'] as bool,
       extraArgsWasParsed: result.wasParsed('extra-args'),
       extraArgs: result['extra-args'] as String?,
@@ -53,12 +37,6 @@ Options _$parseOptionsResult(ArgResults result) => Options(
       versionInfoWasParsed: result.wasParsed('version-info'),
       rest: result.rest,
     );
-
-const _$WebRendererEnumMapBuildCli = <WebRenderer, String>{
-  WebRenderer.canvaskit: 'canvaskit',
-  WebRenderer.html: 'html',
-  WebRenderer.auto: 'auto'
-};
 
 ArgParser _$populateOptionsParser(ArgParser parser) => parser
   ..addOption(
@@ -118,21 +96,6 @@ ArgParser _$populateOptionsParser(ArgParser parser) => parser
         'Verifies configuration and prints commands that would be executed, but does not do any work.',
     negatable: false,
   )
-  ..addOption(
-    'web-renderer',
-    help:
-        'The renderer implementation to use when building for the web. Flutter web only.',
-    defaultsTo: 'auto',
-    allowed: ['canvaskit', 'html', 'auto'],
-    allowedHelp: <String, String>{
-      'canvaskit':
-          'This renderer uses WebGL and WebAssembly to render graphics.',
-      'html':
-          'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, and WebGL.',
-      'auto':
-          'Use the HTML renderer on mobile devices, and CanvasKit on desktop devices.'
-    },
-  )
   ..addFlag(
     'wasm',
     help: 'Whether to build for WebAssembly (WASM).',
@@ -182,7 +145,6 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
             'post-build-dart-script',
             'builder-options',
             'verbose',
-            'web-renderer',
             'wasm',
             'extra-args'
           ],
@@ -208,11 +170,6 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
               'builder-options', (v) => _builderOptionsFromMap(v as Map?)),
           verbose:
               $checkedConvert('verbose', (v) => v as bool? ?? _defaultVerbose),
-          webRenderer: $checkedConvert(
-              'web-renderer',
-              (v) =>
-                  $enumDecodeNullable(_$WebRendererEnumMap, v) ??
-                  _defaultWebRenderer),
           wasm: $checkedConvert('wasm', (v) => v as bool? ?? false),
           extraArgs: $checkedConvert('extra-args', (v) => v as String?),
           versionInfo: $checkedConvert(
@@ -225,7 +182,6 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
         'sourceBranchInfo': 'source-branch-info',
         'postBuildDartScript': 'post-build-dart-script',
         'builderOptions': 'builder-options',
-        'webRenderer': 'web-renderer',
         'extraArgs': 'extra-args',
         'versionInfo': 'version-info'
       },
@@ -243,13 +199,6 @@ Map<String, dynamic> _$OptionsToJson(Options instance) => <String, dynamic>{
         'post-build-dart-script': value,
       if (instance.builderOptions case final value?) 'builder-options': value,
       'verbose': instance.verbose,
-      'web-renderer': _$WebRendererEnumMap[instance.webRenderer]!,
       'wasm': instance.wasm,
       if (instance.extraArgs case final value?) 'extra-args': value,
     };
-
-const _$WebRendererEnumMap = {
-  WebRenderer.canvaskit: 'canvaskit',
-  WebRenderer.html: 'html',
-  WebRenderer.auto: 'auto',
-};

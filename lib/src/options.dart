@@ -15,7 +15,6 @@ const _defaultVerbose = false;
 const _defaultSourceBranchInfo = true;
 const _defaultDryRun = false;
 const _defaultVersionInfo = false;
-const _defaultWebRenderer = WebRenderer.auto;
 
 const defaultMessage = 'Built <$_directoryFlag>';
 
@@ -23,12 +22,6 @@ String get parserUsage =>
     _$populateOptionsParser(ArgParser(usageLineLength: 80)).usage;
 
 Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
-
-enum WebRenderer {
-  canvaskit,
-  html,
-  auto,
-}
 
 @JsonSerializable(
   anyMap: true,
@@ -148,30 +141,9 @@ See the README for details.''',
   final bool dryRun;
 
   @CliOption(
-    defaultsTo: _defaultWebRenderer,
-    help: 'The renderer implementation to use when building for the web. '
-        'Flutter web only.',
-    allowedHelp: {
-      WebRenderer.canvaskit:
-          'This renderer uses WebGL and WebAssembly to render graphics.',
-      WebRenderer.html:
-          'This renderer uses a combination of HTML, CSS, SVG, 2D Canvas, '
-              'and WebGL.',
-      WebRenderer.auto:
-          'Use the HTML renderer on mobile devices, and CanvasKit on desktop '
-              'devices.'
-    },
-  )
-  final WebRenderer webRenderer;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final bool webRendererWasParsed;
-
-  @CliOption(
     help: 'Whether to build for WebAssembly (WASM).',
   )
   final bool wasm;
-
-  String webRendererString() => _$WebRendererEnumMap[webRenderer]!;
 
   @CliOption(
     help:
@@ -223,8 +195,6 @@ See the README for details.''',
     this.verbose = _defaultVerbose,
     this.verboseWasParsed = false,
     this.dryRun = _defaultDryRun,
-    this.webRenderer = _defaultWebRenderer,
-    this.webRendererWasParsed = false,
     this.wasm = false,
     this.extraArgsWasParsed = false,
     this.extraArgs,
@@ -252,7 +222,6 @@ See the README for details.''',
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
       extraArgs: extraArgsWasParsed ? extraArgs : other.extraArgs,
-      webRenderer: webRendererWasParsed ? webRenderer : other.webRenderer,
       wasm: wasm,
       help: help,
       message: messageWasParsed ? message : other.message,
@@ -312,10 +281,6 @@ extension OptionsExtension on Options {
   Set<String> get buildRunnerConfigUsed => {
         if (buildConfig != _defaults.buildConfig) 'build-config',
         if (builderOptions != _defaults.builderOptions) 'builder-options',
-      };
-
-  Set<String> get flutterConfigUsed => {
-        if (webRenderer != _defaults.webRenderer) 'web-renderer',
       };
 }
 

@@ -68,16 +68,6 @@ Arguments:
     --[no-]verbose               Print more details when running.
     --dry-run                    Verifies configuration and prints commands that
                                  would be executed, but does not do any work.
-    --web-renderer               The renderer implementation to use when
-                                 building for the web. Flutter web only.
-
-          [auto] (default)       Use the HTML renderer on mobile devices, and
-                                 CanvasKit on desktop devices.
-          [canvaskit]            This renderer uses WebGL and WebAssembly to
-                                 render graphics.
-          [html]                 This renderer uses a combination of HTML, CSS,
-                                 SVG, 2D Canvas, and WebGL.
-
     --[no-]wasm                  Whether to build for WebAssembly (WASM).
     --extra-args                 Extra arguments to provide to the target CLI
                                  within a single string.
