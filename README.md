@@ -1,5 +1,5 @@
 [![Pub Package](https://img.shields.io/pub/v/peanut.svg)](https://pub.dev/packages/peanut)
-[![CI](https://github.com/kevmoo/peanut.dart/workflows/CI/badge.svg?branch=master)](https://github.com/kevmoo/peanut.dart/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/kevmoo/peanut.dart/actions/workflows/ci.yml/badge.svg)](https://github.com/kevmoo/peanut.dart/actions/workflows/ci.yml)
 
 Run `flutter build web` or `dart pub run build_runner build` and put the output
 in another branch. An easy way to update [gh-pages](https://pages.github.com/).
