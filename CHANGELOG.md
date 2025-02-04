@@ -1,7 +1,8 @@
-## 5.2.0-wip
+## 6.0.0
 
-- Add `--version-info` option. This is off by default.
-- Require Dart 3.5
+- Dropped `--web-renderer` option.
+- Added `--version-info` option. This is off by default.
+- Required Dart v3.5
 
 ## 5.1.0
 
