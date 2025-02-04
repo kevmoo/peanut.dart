@@ -5,9 +5,9 @@
     "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
     "size": 5243,
     "ramUsage": "N/A MB",
-    "dart2jsVersion": "3.7.0-259.0.dev",
-    "compilationMoment": "2024-12-17 17:48:47.901982",
-    "compilationDuration": 197098,
+    "dart2jsVersion": "3.8.0-24.0.dev",
+    "compilationMoment": "2025-02-03 20:29:08.792963",
+    "compilationDuration": 205799,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
@@ -1569,7 +1569,7 @@
       "kind": "outputUnit",
       "name": "main",
       "size": 5243,
-      "filename": "example_script.dart.js",
+      "filename": "example_script.dart2js.js",
       "imports": []
     }
   ],
