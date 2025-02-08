@@ -7,25 +7,25 @@ in another branch. An easy way to update [gh-pages](https://pages.github.com/).
 ## Install
 
 ```console
-$ dart pub global activate peanut
+dart pub global activate peanut
 ```
 
 _or_
 
 ```console
-$ flutter pub global activate peanut
+flutter pub global activate peanut
 ```
 
 ## Run
 
 ```console
-$ peanut
+peanut
 ```
 
 _or_
 
 ```console
-$ flutter pub global run peanut
+flutter pub global run peanut
 ```
 
 This will build your project into a temporary directory, and then it will update
@@ -112,14 +112,14 @@ The easiest way to push your `gh-pages` branch to github (without switching from
 your working branch) is:
 
 ```console
-$ git push origin --set-upstream gh-pages
+git push origin --set-upstream gh-pages
 ```
 
 To create (or update) your local `gh-pages` branch to match what's on the
 server.
 
 ```console
-$ git update-ref refs/heads/gh-pages origin/gh-pages
+git update-ref refs/heads/gh-pages origin/gh-pages
 ```
 
 This is also useful if you want to undo a `peanut` run.
