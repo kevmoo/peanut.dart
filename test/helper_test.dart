@@ -19,7 +19,7 @@ void main() {
     _test(
       ['web'],
       {
-        '.': {'web'}
+        '.': {'web'},
       },
       {'web': '.'},
     );
@@ -29,7 +29,7 @@ void main() {
     _test(
       ['pkg1/web'],
       {
-        'pkg1': {'web'}
+        'pkg1': {'web'},
       },
       {'pkg1/web': '.'},
     );
@@ -39,12 +39,9 @@ void main() {
     _test(
       ['example', 'web'],
       {
-        '.': {'example', 'web'}
+        '.': {'example', 'web'},
       },
-      {
-        'example': 'example',
-        'web': 'web',
-      },
+      {'example': 'example', 'web': 'web'},
     );
   });
 
@@ -52,12 +49,9 @@ void main() {
     _test(
       ['pkg/example', 'pkg/web'],
       {
-        'pkg': {'example', 'web'}
+        'pkg': {'example', 'web'},
       },
-      {
-        'pkg/example': 'example',
-        'pkg/web': 'web',
-      },
+      {'pkg/example': 'example', 'pkg/web': 'web'},
     );
   });
 
@@ -68,10 +62,7 @@ void main() {
         'example1': {'example'},
         'example2': {'web'},
       },
-      {
-        'example1/example': 'example1',
-        'example2/web': 'example2',
-      },
+      {'example1/example': 'example1', 'example2/web': 'example2'},
     );
   });
 
@@ -98,10 +89,7 @@ void main() {
         'dir/example1': {'example'},
         'dir/example2': {'web'},
       },
-      {
-        'dir/example1/example': 'example1',
-        'dir/example2/web': 'example2',
-      },
+      {'dir/example1/example': 'example1', 'dir/example2/web': 'example2'},
     );
   });
 
@@ -125,7 +113,7 @@ void main() {
         'dir/example1/example',
         'dir/example1/web',
         'dir/example2/example',
-        'dir/example2/web'
+        'dir/example2/web',
       ],
       {
         'dir/example1': {'example', 'web'},
@@ -163,10 +151,7 @@ void main() {
         '.': {'web'},
         'example1': {'web'},
       },
-      {
-        'web': 'web',
-        'example1/web': 'example1/web',
-      },
+      {'web': 'web', 'example1/web': 'example1/web'},
     );
   });
 

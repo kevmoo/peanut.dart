@@ -18,16 +18,20 @@ import 'utils.dart';
 
 const _args = ['pub', 'deps'];
 Future _runPubDeps(String workingDirectory) async {
-  final result =
-      Process.runSync(dartPath, _args, workingDirectory: workingDirectory);
+  final result = Process.runSync(
+    dartPath,
+    _args,
+    workingDirectory: workingDirectory,
+  );
 
   if (result.exitCode == 65 || result.exitCode == 66) {
     throw PeanutException((result.stderr as String).trim());
   }
 
   if (result.exitCode != 0) {
-    if ((result.stderr as String)
-        .contains('The Flutter SDK is not available.')) {
+    if ((result.stderr as String).contains(
+      'The Flutter SDK is not available.',
+    )) {
       throw PeanutException(
         '`pub` failed.\n'
         'This appears to be a Flutter project.\n'
@@ -126,8 +130,10 @@ class _PubspecLock {
   }) {
     requireDirect ??= true;
     final issues = <PackageExceptionDetails>[];
-    final missingDetails =
-        PackageExceptionDetails.missingDep(pkgName, constraint);
+    final missingDetails = PackageExceptionDetails.missingDep(
+      pkgName,
+      constraint,
+    );
 
     final pkgDataMap = _packages?[pkgName] as YamlMap?;
     if (pkgDataMap == null) {
@@ -147,7 +153,8 @@ class _PubspecLock {
         final version = pkgDataMap['version'] as String;
         final pkgVersion = Version.parse(version);
         if (!constraint.allows(pkgVersion)) {
-          final error = 'The `$pkgName` version – $pkgVersion – is not '
+          final error =
+              'The `$pkgName` version – $pkgVersion – is not '
               'within the allowed constraint – $constraint.';
           issues.add(PackageExceptionDetails._(error));
         }
@@ -169,20 +176,17 @@ class PackageException implements Exception {
 
   @override
   String toString() => <String>[
-        'PackageException',
-        ...details.map((e) => e.toString()),
-        if (unsupportedArgument != null) unsupportedArgument!,
-      ].join('\n');
+    'PackageException',
+    ...details.map((e) => e.toString()),
+    if (unsupportedArgument != null) unsupportedArgument!,
+  ].join('\n');
 }
 
 class PackageExceptionDetails {
   final String error;
   final String? description;
 
-  const PackageExceptionDetails._(
-    this.error, {
-    this.description,
-  });
+  const PackageExceptionDetails._(this.error, {this.description});
 
   static const noPubspecLock = PackageExceptionDetails._(
     '`pubspec.lock` does not exist.',
@@ -192,14 +196,13 @@ class PackageExceptionDetails {
   static PackageExceptionDetails missingDep(
     String pkgName,
     VersionConstraint constraint,
-  ) =>
-      PackageExceptionDetails._(
-        'You must have a dependency on `$pkgName` in `pubspec.yaml`.',
-        description: '''
+  ) => PackageExceptionDetails._(
+    'You must have a dependency on `$pkgName` in `pubspec.yaml`.',
+    description: '''
 # pubspec.yaml
 dev_dependencies:
   $pkgName: $constraint''',
-      );
+  );
 
   @override
   String toString() => [error, description].join('\n');

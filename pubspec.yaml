@@ -1,11 +1,11 @@
 name: peanut
-version: 6.0.0
+version: 6.0.1-wip
 description: >-
   Update your GitHub gh-pages branch with the compiled output of your Dart web
   app. Supports 'pub build' and the new 'pub run build_runner'.
 repository: https://github.com/kevmoo/peanut.dart
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   args: ^2.6.0

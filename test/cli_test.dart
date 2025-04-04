@@ -60,27 +60,20 @@ void main() {
     await proc.shouldExit(0);
   });
 
-  test(
-    'readme',
-    onPlatform: {'windows': const Skip()},
-    () {
-      final content = File('README.md').readAsStringSync();
+  test('readme', onPlatform: {'windows': const Skip()}, () {
+    final content = File('README.md').readAsStringSync();
 
-      expect(content, contains(_output));
-    },
-  );
+    expect(content, contains(_output));
+  });
 
   test('bad flag', () async {
     final proc = await _runPeanut(['--bob']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(
-      output,
-      '''
+    expect(output, '''
 Could not find an option named "--bob".
 
-$_output''',
-    );
+$_output''');
 
     await proc.shouldExit(64);
   });
@@ -89,13 +82,10 @@ $_output''',
     final proc = await _runPeanut(['foo', 'bar', 'baz']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(
-      output,
-      '''
+    expect(output, '''
 I don't understand the extra arguments: foo, bar, baz
 
-$_output''',
-    );
+$_output''');
 
     await proc.shouldExit(64);
   });
@@ -107,9 +97,7 @@ $_output''',
 
     void expectParseOptionsThrows(List<String> args, Object matcher) {
       expect(
-        () => parseOptions(
-          args,
-        ),
+        () => parseOptions(args),
         throwsA(
           isFormatException.having((e) => e.toString(), 'toString()', matcher),
         ),
@@ -119,10 +107,7 @@ $_output''',
     group('config file', () {
       test('no file', () {
         expectParseOptionsThrows(
-          [
-            '--builder-options',
-            _someFilePath,
-          ],
+          ['--builder-options', _someFilePath],
           '''
 FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML map.''',
         );
@@ -131,10 +116,7 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
       test('valid file', () async {
         await d.file('some_file.yaml', '{"bob": {"jones":42}}').create();
 
-        final options = parseOptions([
-          '--builder-options',
-          _someFilePath,
-        ]);
+        final options = parseOptions(['--builder-options', _someFilePath]);
 
         expect(options.builderOptions, hasLength(1));
         expect(options.builderOptions, containsPair('bob', {'jones': 42}));
@@ -144,10 +126,7 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
         await d.file('some_file.yaml', 'not good yaml').create();
 
         expectParseOptionsThrows(
-          [
-            '--builder-options',
-            _someFilePath,
-          ],
+          ['--builder-options', _someFilePath],
           '''
 FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML map.''',
         );
@@ -156,13 +135,10 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
       test('invalid yaml shape', () async {
         await d.file('some_file.yaml', '{"bob": "jones"}').create();
 
-        expectParseOptionsThrows(
-          [
-            '--builder-options',
-            _someFilePath,
-          ],
-          'FormatException: The value for "bob" was not a Map.',
-        );
+        expectParseOptionsThrows([
+          '--builder-options',
+          _someFilePath,
+        ], 'FormatException: The value for "bob" was not a Map.');
       });
 
       test(
@@ -172,12 +148,7 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
           await d.file('some_file.yaml', '{').create();
 
           expect(
-            () => parseOptions(
-              [
-                '--builder-options',
-                _someFilePath,
-              ],
-            ),
+            () => parseOptions(['--builder-options', _someFilePath]),
             throwsA(
               isA<ParsedYamlException>().having(
                 (e) {
@@ -201,7 +172,4 @@ line 1, column 2 of $_someFilePath: Expected node content.
 }
 
 Future<TestProcess> _runPeanut(List<String> args) =>
-    TestProcess.start(dartPath, [
-      'bin/peanut.dart',
-      ...args,
-    ]);
+    TestProcess.start(dartPath, ['bin/peanut.dart', ...args]);
