@@ -17,7 +17,7 @@ import 'peanut_exception.dart';
 import 'utils.dart';
 
 const _args = ['pub', 'deps'];
-Future _runPubDeps(String workingDirectory) async {
+Future<void> _runPubDeps(String workingDirectory) async {
   final result = Process.runSync(
     dartPath,
     _args,
