@@ -102,7 +102,8 @@ Flutter: enabled passes `--release`, otherwise passes `--profile`.
   final bool versionInfoWasParsed;
 
   @CliOption(
-    help: 'Optional Dart script to run after all builds have completed, but '
+    help:
+        'Optional Dart script to run after all builds have completed, but '
         'before files are committed to the repository.',
   )
   final String? postBuildDartScript;
@@ -134,15 +135,14 @@ See the README for details.''',
   @CliOption(
     negatable: false,
     defaultsTo: _defaultDryRun,
-    help: 'Verifies configuration and prints commands that would be executed, '
+    help:
+        'Verifies configuration and prints commands that would be executed, '
         'but does not do any work.',
   )
   @JsonKey(includeToJson: false, includeFromJson: false)
   final bool dryRun;
 
-  @CliOption(
-    help: 'Whether to build for WebAssembly (WASM).',
-  )
+  @CliOption(help: 'Whether to build for WebAssembly (WASM).')
   final bool wasm;
 
   @CliOption(
@@ -155,18 +155,11 @@ See the README for details.''',
   final String? extraArgs;
 
   @JsonKey(includeToJson: false, includeFromJson: false)
-  @CliOption(
-    abbr: 'h',
-    negatable: false,
-    help: 'Prints usage information.',
-  )
+  @CliOption(abbr: 'h', negatable: false, help: 'Prints usage information.')
   final bool help;
 
   @JsonKey(includeToJson: false, includeFromJson: false)
-  @CliOption(
-    negatable: false,
-    help: 'Print the current version.',
-  )
+  @CliOption(negatable: false, help: 'Print the current version.')
   final bool version;
 
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -225,9 +218,10 @@ See the README for details.''',
       wasm: wasm,
       help: help,
       message: messageWasParsed ? message : other.message,
-      postBuildDartScript: postBuildDartScriptWasParsed
-          ? postBuildDartScript
-          : other.postBuildDartScript,
+      postBuildDartScript:
+          postBuildDartScriptWasParsed
+              ? postBuildDartScript
+              : other.postBuildDartScript,
       release: releaseWasParsed ? release : other.release,
       rest: rest,
       sourceBranchInfo:
@@ -241,9 +235,10 @@ See the README for details.''',
   List<String>? splitExtraArgs() => extraArgs?.split(' ');
 }
 
-List<String> _directoriesConvert(String? input) => input == null
-    ? [_defaultDirectory]
-    : input.split(',').map((v) => v.trim()).toList();
+List<String> _directoriesConvert(String? input) =>
+    input == null
+        ? [_defaultDirectory]
+        : input.split(',').map((v) => v.trim()).toList();
 
 Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
   if (pathOrYamlMap == null) {
@@ -279,9 +274,9 @@ Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
 extension OptionsExtension on Options {
   static const _defaults = Options();
   Set<String> get buildRunnerConfigUsed => {
-        if (buildConfig != _defaults.buildConfig) 'build-config',
-        if (builderOptions != _defaults.builderOptions) 'builder-options',
-      };
+    if (buildConfig != _defaults.buildConfig) 'build-config',
+    if (builderOptions != _defaults.builderOptions) 'builder-options',
+  };
 }
 
 Map<String, Map<String, dynamic>>? _builderOptionsFromMap(Map? source) =>
@@ -291,15 +286,12 @@ Map<String, Map<String, dynamic>>? _builderOptionsConvert(Map? map) =>
     map == null
         ? null
         : Map<String, Map<String, dynamic>>.fromEntries(
-            map.entries.map((e) {
-              final value = e.value;
-              if (value is YamlMap) {
-                return MapEntry(
-                  e.key as String,
-                  value.cast<String, dynamic>(),
-                );
-              }
+          map.entries.map((e) {
+            final value = e.value;
+            if (value is YamlMap) {
+              return MapEntry(e.key as String, value.cast<String, dynamic>());
+            }
 
-              throw FormatException('The value for "${e.key}" was not a Map.');
-            }),
-          );
+            throw FormatException('The value for "${e.key}" was not a Map.');
+          }),
+        );

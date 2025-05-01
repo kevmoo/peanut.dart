@@ -100,15 +100,18 @@ Future<void> run({
   final outputDirMap = outputDirectoryMap(targetDirs);
 
   // create a temp dir to dump 'pub build' output to
-  final tempDir =
-      await Directory.systemTemp.createTemp('peanut.$secondsSinceEpoch.');
+  final tempDir = await Directory.systemTemp.createTemp(
+    'peanut.$secondsSinceEpoch.',
+  );
 
   try {
     final entriesList = targetDirs.entries.toList(growable: false);
     for (var i = 0; i < entriesList.length; i++) {
       final sourcePkg = entriesList[i];
       final targets = Map<String, String>.fromEntries(
-        outputDirMap.entries.where((e) => p.isWithin(sourcePkg.key, e.key)).map(
+        outputDirMap.entries
+            .where((e) => p.isWithin(sourcePkg.key, e.key))
+            .map(
               (e) => MapEntry(
                 p.split(e.key).last,
                 pkgNormalize(
@@ -126,27 +129,17 @@ Future<void> run({
 
       print('');
       print(
-        ansi.styleBold.wrap(
-          '''
+        ansi.styleBold.wrap('''
 Package:     $pkgPath$countDetails
-Directories: ${sourcePkg.value.join(', ')}''',
-        ),
+Directories: ${sourcePkg.value.join(', ')}'''),
       );
 
       final pkgDir = pkgNormalize(workingDir, sourcePkg.key);
 
       if (await isFlutterPackage(pkgDir)) {
-        await runFlutterBuild(
-          pkgDir,
-          targets,
-          options,
-        );
+        await runFlutterBuild(pkgDir, targets, options);
       } else {
-        await runBuildRunner(
-          pkgDir,
-          targets,
-          options,
-        );
+        await runBuildRunner(pkgDir, targets, options);
       }
     }
 
@@ -171,13 +164,16 @@ Directories: ${sourcePkg.value.join(', ')}''',
         }
       }
 
-      File(p.join(tempDir.path, 'index.html'))
-          .writeAsStringSync(_indexFile(links));
+      File(
+        p.join(tempDir.path, 'index.html'),
+      ).writeAsStringSync(_indexFile(links));
     }
 
     if (options.postBuildDartScript != null) {
-      final postBuildScriptPath =
-          pkgNormalize(workingDir, options.postBuildDartScript!);
+      final postBuildScriptPath = pkgNormalize(
+        workingDir,
+        options.postBuildDartScript!,
+      );
       if (!FileSystemEntity.isFileSync(postBuildScriptPath)) {
         throw PeanutException(
           'The provided post-build Dart script does not '
@@ -187,11 +183,11 @@ Directories: ${sourcePkg.value.join(', ')}''',
 
       print(ansi.styleBold.wrap('\nPost-build script: $postBuildScriptPath'));
 
-      await runProcess(
-        dartPath,
-        [postBuildScriptPath, tempDir.path, jsonEncode(outputDirMap)],
-        workingDirectory: workingDir,
-      );
+      await runProcess(dartPath, [
+        postBuildScriptPath,
+        tempDir.path,
+        jsonEncode(outputDirMap),
+      ], workingDirectory: workingDir);
       print(ansi.styleBold.wrap('Post-build script: complete\n'));
     }
 

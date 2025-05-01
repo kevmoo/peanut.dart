@@ -24,18 +24,16 @@ Future<void> runFlutterBuild(
     'web',
     if (options.wasm) '--wasm',
     options.release ? '--release' : '--profile',
-    ...?options.splitExtraArgs()
+    ...?options.splitExtraArgs(),
   ];
 
   // Print the command to the console
   final prettyArgList = args.toList()..insert(0, 'flutter');
   final prettyArgs = prettyArgList.join(' ');
   print(
-    ansi.styleBold.wrap(
-      '''
+    ansi.styleBold.wrap('''
 $_commandPrefix$prettyArgs
-''',
-    ),
+'''),
   );
 
   // Build the app

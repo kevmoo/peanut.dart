@@ -45,11 +45,8 @@ final String _flutterSdkDir = Platform.environment['FLUTTER_ROOT']!;
 
 void checkValidOptions(String name, Set<String> config) {
   if (config.isNotEmpty) {
-    throw PeanutException(
-      '''
+    throw PeanutException('''
 The follow options are not supported with a $name build:
- - ${config.join('\n - ')}''',
-      exitCode: ExitCode.usage.code,
-    );
+ - ${config.join('\n - ')}''', exitCode: ExitCode.usage.code);
   }
 }

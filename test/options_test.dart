@@ -27,7 +27,7 @@ void main() {
       branch: 'other-branch',
       buildConfig: 'some config',
       builderOptions: {
-        'some': {'options': 'value'}
+        'some': {'options': 'value'},
       },
       directories: ['example'],
       dryRun: true,
@@ -66,7 +66,7 @@ void main() {
       'branch': 'other-branch',
       'build-config': 'some config',
       'builder-options': YamlMap.wrap({
-        'some': {'options': 'value'}
+        'some': {'options': 'value'},
       }),
       'directories': ['example'],
       'message': 'other message',
@@ -74,7 +74,7 @@ void main() {
       'release': false,
       'verbose': true,
       'source-branch-info': false,
-      'wasm': false
+      'wasm': false,
     });
     _checkDefault(
       allFileOptions,

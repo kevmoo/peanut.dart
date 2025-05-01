@@ -1,3 +1,7 @@
+## 6.0.1-wip
+
+- Required Dart v3.7
+
 ## 6.0.0
 
 - Dropped `--web-renderer` option.

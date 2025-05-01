@@ -76,13 +76,11 @@ Future<void> main(List<String> args) async {
 }
 
 void _printUsage() {
-  print(
-    '''
+  print('''
 Usage: peanut [<args>]
 
 ${styleBold.wrap('Arguments:')}
-$parserUsage''',
-  );
+$parserUsage''');
 }
 
 const _peanutConfigFile = 'peanut.yaml';

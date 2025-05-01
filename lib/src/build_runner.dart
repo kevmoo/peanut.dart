@@ -14,8 +14,9 @@ Future<void> runBuildRunner(
   Map<String, String> targets,
   Options options,
 ) async {
-  final targetsValue =
-      targets.entries.map((e) => '${e.key}:${e.value}').join(',');
+  final targetsValue = targets.entries
+      .map((e) => '${e.key}:${e.value}')
+      .join(',');
 
   final extraArgs = options.splitExtraArgs();
 
@@ -38,40 +39,38 @@ Future<void> runBuildRunner(
             _defineValue(option.key, optionEntry.key, optionEntry.value),
           ],
     ...?extraArgsList,
-    [
-      '--output',
-      targetsValue,
-    ]
+    ['--output', targetsValue],
   ];
 
-  final prettyArgs =
-      args.map((list) => list.join(' ')).join(' \\\n$_argsExtraLinePrefix');
+  final prettyArgs = args
+      .map((list) => list.join(' '))
+      .join(' \\\n$_argsExtraLinePrefix');
 
   print(
-    ansi.styleBold.wrap(
-      '''
+    ansi.styleBold.wrap('''
 $_commandPrefix$prettyArgs
-''',
-    ),
+'''),
   );
 
   if (options.dryRun) {
     return;
   }
 
-  final flatArgs = args
-      .expand((list) => list)
-      .skip(1) // skip `dart`
-      .toList();
+  final flatArgs =
+      args
+          .expand((list) => list)
+          .skip(1) // skip `dart`
+          .toList();
 
   await runProcess(dartPath, flatArgs, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
 
   for (var buildDir in targets.values) {
-    for (var file in Directory(buildDir)
-        .listSync(recursive: true, followLinks: false)
-        .whereType<File>()) {
+    for (var file
+        in Directory(
+          buildDir,
+        ).listSync(recursive: true, followLinks: false).whereType<File>()) {
       final relativePath = p.relative(file.path, from: buildDir);
 
       if (_badFileGlob.matches(relativePath)) {
