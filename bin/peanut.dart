@@ -67,6 +67,9 @@ Future<void> main(List<String> args) async {
       printError(e);
       if (e is PeanutException) {
         exitCode = e.exitCode;
+        if (options.verbose) {
+          printError(stack);
+        }
       } else {
         print(stack);
         exitCode = 1;
