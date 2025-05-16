@@ -1,5 +1,6 @@
 ## 6.0.1-wip
 
+- Always print the stack with `--verbose` is set.
 - Required Dart v3.7
 
 ## 6.0.0

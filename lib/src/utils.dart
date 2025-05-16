@@ -4,10 +4,16 @@ import 'dart:io';
 import 'package:io/ansi.dart' as ansi;
 import 'package:io/io.dart';
 import 'package:path/path.dart' as p;
+import 'package:stack_trace/stack_trace.dart';
 
 import 'peanut_exception.dart';
 
-void printError(Object? object) => print(ansi.red.wrap(object.toString()));
+void printError(Object? object) {
+  if (object is StackTrace) {
+    object = Trace.from(object);
+  }
+  print(ansi.red.wrap(object.toString()));
+}
 
 Future runProcess(
   String proc,
