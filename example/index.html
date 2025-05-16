@@ -1,6 +1,11 @@
 <html lang="en">
 <head>
     <title>An example page</title>
+    <script>
+        let vars = (window._peanutVars = (window._peanutVars || {}));
+        vars.toolVersion = '{{tool_version}}';
+        vars.gitInfo = '{{git_info}}';
+    </script>
     <script defer src="example_script.dart.js"></script>
 </head>
 
@@ -8,5 +13,12 @@
 <p>Example content from the "example" directory.</p>
 <code>peanut -d example</code>
 <p>Check the dev console for "Hello!".</p>
+<dl>
+    <dt>Dart version</dt>
+    <dd id="dart_version"><em>please hold</em></dd>
+
+    <dt>Commit information</dt>
+    <dd id="commit_info"><em>please hold</em></dd>
+</dl>
 </body>
 </html>
