@@ -410,7 +410,7 @@ name: peanut_test
 version: 1.0.0
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ^3.7.0
 
 dev_dependencies:
   build_runner: ^2.0.0
