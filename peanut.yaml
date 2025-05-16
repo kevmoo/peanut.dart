@@ -2,6 +2,8 @@
 directories:
 - example
 
+post-build-dart-script: tool/post_build.dart
+
 builder-options:
   build_web_compilers|entrypoint:
     compilers:
