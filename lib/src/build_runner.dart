@@ -106,9 +106,10 @@ const _commandPrefix = 'Command:     ';
 
 final _argsExtraLinePrefix = ' ' * (_commandPrefix.length + 2);
 
-const _globItems = {
+const _badGlobItems = {
   '**.dart',
   '**.dart.js.deps',
+  '**.dart2js.js.deps',
   '**.dart.js.tar.gz',
   '**.md',
   '**.module',
@@ -126,4 +127,4 @@ const _globItems = {
   'packages/test/**',
 };
 
-final _badFileGlob = Glob('{${_globItems.join(',')}}');
+final _badFileGlob = Glob('{${_badGlobItems.join(',')}}');
