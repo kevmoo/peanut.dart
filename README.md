@@ -100,11 +100,6 @@ directories:
   - Output: http://kevmoo.github.io/pubviz/
   - Custom `peanut.yaml` file to specify `builder-options` and `example` as the
     source directory.
-- https://github.com/flutter/samples/tree/master/web
-  - Output: https://flutter.github.io/samples/
-  - Custom `peanut.yaml` file to specify `builder-options`, multiple source
-    directories, and a custom post-build file.
-- https://github.com/kevmoo/vote.dart/tree/master/vote_demo
 
 ## Git tricks
 
