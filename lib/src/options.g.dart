@@ -184,15 +184,14 @@ Options _$OptionsFromJson(Map json) => $checkedCreate(
 Map<String, dynamic> _$OptionsToJson(Options instance) => <String, dynamic>{
   'directories': instance.directories,
   'branch': instance.branch,
-  if (instance.buildConfig case final value?) 'build-config': value,
+  'build-config': ?instance.buildConfig,
   'release': instance.release,
   'message': instance.message,
   'source-branch-info': instance.sourceBranchInfo,
   'version-info': instance.versionInfo,
-  if (instance.postBuildDartScript case final value?)
-    'post-build-dart-script': value,
-  if (instance.builderOptions case final value?) 'builder-options': value,
+  'post-build-dart-script': ?instance.postBuildDartScript,
+  'builder-options': ?instance.builderOptions,
   'verbose': instance.verbose,
   'wasm': instance.wasm,
-  if (instance.extraArgs case final value?) 'extra-args': value,
+  'extra-args': ?instance.extraArgs,
 };
