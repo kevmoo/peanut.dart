@@ -38,76 +38,70 @@ Options _$parseOptionsResult(ArgResults result) => Options(
   rest: result.rest,
 );
 
-ArgParser _$populateOptionsParser(ArgParser parser) =>
-    parser
-      ..addOption(
-        'directories',
-        abbr: 'd',
-        help: 'The directories that should be built.\n(defaults to "web")',
-      )
-      ..addOption(
-        'branch',
-        abbr: 'b',
-        help: 'The git branch where the built content should be committed.',
-        defaultsTo: 'gh-pages',
-      )
-      ..addOption(
-        'build-config',
-        abbr: 'c',
-        help: 'The configuration to use when running `build_runner`.',
-      )
-      ..addFlag(
-        'release',
-        help:
-            'Flutter: enabled passes `--release`, otherwise passes `--profile`.\n  Other: enabled passes `--release`, otherwise passes `--no-release`.\n',
-        defaultsTo: true,
-      )
-      ..addOption('message', abbr: 'm', defaultsTo: 'Built <directories>')
-      ..addFlag(
-        'source-branch-info',
-        help:
-            'Includes the name of the source branch and SHA in the commit message',
-        defaultsTo: true,
-      )
-      ..addFlag(
-        'version-info',
-        help:
-            'Includes the pubspec version of the package in the commit message',
-      )
-      ..addOption(
-        'post-build-dart-script',
-        help:
-            'Optional Dart script to run after all builds have completed, but before files are committed to the repository.',
-      )
-      ..addOption(
-        'builder-options',
-        help:
-            'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.',
-      )
-      ..addFlag('verbose', help: 'Print more details when running.')
-      ..addFlag(
-        'dry-run',
-        help:
-            'Verifies configuration and prints commands that would be executed, but does not do any work.',
-        negatable: false,
-      )
-      ..addFlag('wasm', help: 'Whether to build for WebAssembly (WASM).')
-      ..addOption(
-        'extra-args',
-        help:
-            'Extra arguments to provide to the target CLI within a single string.\nExamples:\n--extra-args "--dart-define TEST_VAR=123"\n--extra-args "--dart-define --base-href=/base/"',
-      )
-      ..addFlag(
-        'help',
-        abbr: 'h',
-        help: 'Prints usage information.',
-        negatable: false,
-      )
-      ..addFlag(
-        'version',
-        help: 'Print the current version.',
-        negatable: false,
-      );
+ArgParser _$populateOptionsParser(ArgParser parser) => parser
+  ..addOption(
+    'directories',
+    abbr: 'd',
+    help: 'The directories that should be built.\n(defaults to "web")',
+  )
+  ..addOption(
+    'branch',
+    abbr: 'b',
+    help: 'The git branch where the built content should be committed.',
+    defaultsTo: 'gh-pages',
+  )
+  ..addOption(
+    'build-config',
+    abbr: 'c',
+    help: 'The configuration to use when running `build_runner`.',
+  )
+  ..addFlag(
+    'release',
+    help:
+        'Flutter: enabled passes `--release`, otherwise passes `--profile`.\n  Other: enabled passes `--release`, otherwise passes `--no-release`.\n',
+    defaultsTo: true,
+  )
+  ..addOption('message', abbr: 'm', defaultsTo: 'Built <directories>')
+  ..addFlag(
+    'source-branch-info',
+    help:
+        'Includes the name of the source branch and SHA in the commit message',
+    defaultsTo: true,
+  )
+  ..addFlag(
+    'version-info',
+    help: 'Includes the pubspec version of the package in the commit message',
+  )
+  ..addOption(
+    'post-build-dart-script',
+    help:
+        'Optional Dart script to run after all builds have completed, but before files are committed to the repository.',
+  )
+  ..addOption(
+    'builder-options',
+    help:
+        'Builder options YAML or a path to a file containing builder options YAML.\nSee the README for details.',
+  )
+  ..addFlag('verbose', help: 'Print more details when running.')
+  ..addFlag(
+    'dry-run',
+    help:
+        'Verifies configuration and prints commands that would be executed, but does not do any work.',
+    negatable: false,
+  )
+  ..addFlag('wasm', help: 'Whether to build for WebAssembly (WASM).')
+  ..addOption(
+    'extra-args',
+    help:
+        'Extra arguments to provide to the target CLI within a single string.\nExamples:\n--extra-args "--dart-define TEST_VAR=123"\n--extra-args "--dart-define --base-href=/base/"',
+  )
+  ..addFlag(
+    'help',
+    abbr: 'h',
+    help: 'Prints usage information.',
+    negatable: false,
+  )
+  ..addFlag('version', help: 'Print the current version.', negatable: false);
 
 final _$parserForOptions = _$populateOptionsParser(ArgParser());
 

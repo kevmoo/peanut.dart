@@ -15,11 +15,10 @@ void main() {
   } else if (peanutVars.gitInfo == 'DIRTY') {
     gitInfo = 'dirty'.toJS;
   } else {
-    gitInfo =
-        HTMLAnchorElement()
-          ..href =
-              'https://github.com/kevmoo/peanut.dart/commit/${peanutVars.gitInfo}'
-          ..text = 'kevmoo/peanut.dart@${peanutVars.gitInfo}';
+    gitInfo = HTMLAnchorElement()
+      ..href =
+          'https://github.com/kevmoo/peanut.dart/commit/${peanutVars.gitInfo}'
+      ..text = 'kevmoo/peanut.dart@${peanutVars.gitInfo}';
   }
 
   document.querySelector('#commit_info')!.replaceChildren(gitInfo);
