@@ -124,8 +124,9 @@ Future<void> run({
 
       final pkgPath = prettyPkgPath(sourcePkg.key);
 
-      final countDetails =
-          targetDirs.length == 1 ? '' : ' (${i + 1} of ${entriesList.length})';
+      final countDetails = targetDirs.length == 1
+          ? ''
+          : ' (${i + 1} of ${entriesList.length})';
 
       print('');
       print(
@@ -196,7 +197,8 @@ Directories: ${sourcePkg.value.join(', ')}'''),
     if (message == defaultMessage) {
       message = 'Built ${options.directories.join(', ')}';
       if (options.directories.length > 1 && message.length > 72) {
-        message = '''
+        message =
+            '''
 Built ${options.directories.length} directories
 
 Directories:
@@ -207,7 +209,8 @@ Directories:
 
     if (options.versionInfo) {
       final version = await getPackageVersion(workingDir);
-      message = '''
+      message =
+          '''
 $message
 
 Version: ${version ?? 'Unknown'}''';
@@ -219,7 +222,8 @@ Version: ${version ?? 'Unknown'}''';
       if (!await gitDir.isWorkingTreeClean()) {
         commitInfo = '$commitInfo (dirty)';
       }
-      message = '''
+      message =
+          '''
 $message
 
 Branch: ${currentBranch.branchName}
@@ -242,8 +246,9 @@ package:peanut $packageVersion''';
         ),
       );
     } else {
-      final indentedMessage =
-          LineSplitter.split(message).map((line) => '  $line\n').join();
+      final indentedMessage = LineSplitter.split(
+        message,
+      ).map((line) => '  $line\n').join();
       final shortSha = commit.treeSha.substring(0, 10);
       print(
         ansi.styleBold.wrap(
@@ -264,7 +269,8 @@ package:peanut $packageVersion''';
   }
 }
 
-String _indexFile(Map<String, String> links) => '''
+String _indexFile(Map<String, String> links) =>
+    '''
 <!DOCTYPE html>
 <html lang="en">
   <head>

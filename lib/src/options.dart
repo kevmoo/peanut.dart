@@ -210,22 +210,23 @@ See the README for details.''',
     return Options(
       branch: branchWasParsed ? branch : other.branch,
       buildConfig: buildConfigWasParsed ? buildConfig : other.buildConfig,
-      builderOptions:
-          builderOptionsWasParsed ? builderOptions : other.builderOptions,
+      builderOptions: builderOptionsWasParsed
+          ? builderOptions
+          : other.builderOptions,
       directories: directoriesWasParsed ? directories : other.directories,
       dryRun: dryRun,
       extraArgs: extraArgsWasParsed ? extraArgs : other.extraArgs,
       wasm: wasm,
       help: help,
       message: messageWasParsed ? message : other.message,
-      postBuildDartScript:
-          postBuildDartScriptWasParsed
-              ? postBuildDartScript
-              : other.postBuildDartScript,
+      postBuildDartScript: postBuildDartScriptWasParsed
+          ? postBuildDartScript
+          : other.postBuildDartScript,
       release: releaseWasParsed ? release : other.release,
       rest: rest,
-      sourceBranchInfo:
-          sourceBranchInfoWasParsed ? sourceBranchInfo : other.sourceBranchInfo,
+      sourceBranchInfo: sourceBranchInfoWasParsed
+          ? sourceBranchInfo
+          : other.sourceBranchInfo,
       version: version,
       versionInfo: versionInfoWasParsed ? versionInfo : other.versionInfo,
       verbose: verboseWasParsed ? verbose : other.verbose,
@@ -235,10 +236,9 @@ See the README for details.''',
   List<String>? splitExtraArgs() => extraArgs?.split(' ');
 }
 
-List<String> _directoriesConvert(String? input) =>
-    input == null
-        ? [_defaultDirectory]
-        : input.split(',').map((v) => v.trim()).toList();
+List<String> _directoriesConvert(String? input) => input == null
+    ? [_defaultDirectory]
+    : input.split(',').map((v) => v.trim()).toList();
 
 Map<String, Map<String, dynamic>>? _openBuildConfig(String? pathOrYamlMap) {
   if (pathOrYamlMap == null) {
@@ -284,14 +284,14 @@ Map<String, Map<String, dynamic>>? _builderOptionsFromMap(Map? source) =>
 
 Map<String, Map<String, dynamic>>? _builderOptionsConvert(Map? map) =>
     map == null
-        ? null
-        : Map<String, Map<String, dynamic>>.fromEntries(
-          map.entries.map((e) {
-            final value = e.value;
-            if (value is YamlMap) {
-              return MapEntry(e.key as String, value.cast<String, dynamic>());
-            }
+    ? null
+    : Map<String, Map<String, dynamic>>.fromEntries(
+        map.entries.map((e) {
+          final value = e.value;
+          if (value is YamlMap) {
+            return MapEntry(e.key as String, value.cast<String, dynamic>());
+          }
 
-            throw FormatException('The value for "${e.key}" was not a Map.');
-          }),
-        );
+          throw FormatException('The value for "${e.key}" was not a Map.');
+        }),
+      );

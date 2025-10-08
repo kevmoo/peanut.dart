@@ -56,21 +56,19 @@ $_commandPrefix$prettyArgs
     return;
   }
 
-  final flatArgs =
-      args
-          .expand((list) => list)
-          .skip(1) // skip `dart`
-          .toList();
+  final flatArgs = args
+      .expand((list) => list)
+      .skip(1) // skip `dart`
+      .toList();
 
   await runProcess(dartPath, flatArgs, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
 
   for (var buildDir in targets.values) {
-    for (var file
-        in Directory(
-          buildDir,
-        ).listSync(recursive: true, followLinks: false).whereType<File>()) {
+    for (var file in Directory(
+      buildDir,
+    ).listSync(recursive: true, followLinks: false).whereType<File>()) {
       final relativePath = p.relative(file.path, from: buildDir);
 
       if (_badFileGlob.matches(relativePath)) {

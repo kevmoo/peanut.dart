@@ -217,11 +217,10 @@ package:peanut $packageVersion''');
 
     expect(treeContents, contains(_treeEntry('index.html', 'blob')));
 
-    final pkgTreeHashes =
-        treeContents
-            .where((te) => te.type == 'tree')
-            .map((te) => te.sha)
-            .toSet();
+    final pkgTreeHashes = treeContents
+        .where((te) => te.type == 'tree')
+        .map((te) => te.sha)
+        .toSet();
     expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
 
     final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
@@ -286,8 +285,9 @@ package:peanut $packageVersion''');
         ]),
       );
 
-      final mapJsonSha =
-          treeContents.singleWhere((te) => te.name == 'map.json').sha;
+      final mapJsonSha = treeContents
+          .singleWhere((te) => te.name == 'map.json')
+          .sha;
 
       final result = await gitDir.runCommand(['cat-file', '-p', mapJsonSha]);
       final mapOutput =
