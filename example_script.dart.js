@@ -6,7 +6,9 @@ function relativeURL(ref) {
   return new URL(ref, base).toString();
 }
 
-if ((WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0])))) {
+const searchParams = new URLSearchParams(window.location.search);
+const forceJS = searchParams.get('force_js');
+if (!forceJS && (WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0])))) {
 
 let { compileStreaming } = await import("./example_script.mjs");
 
