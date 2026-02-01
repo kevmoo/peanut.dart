@@ -178,7 +178,7 @@ class PackageException implements Exception {
   String toString() => <String>[
     'PackageException',
     ...details.map((e) => e.toString()),
-    if (unsupportedArgument != null) unsupportedArgument!,
+    ?unsupportedArgument,
   ].join('\n');
 }
 
