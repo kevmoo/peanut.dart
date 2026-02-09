@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
+/// This script is run by peanut after the build is complete.
+///
+/// It modifies the `index.html` file in the build output directory to include
+/// information about the tool version and the git commit.
 Future<void> main(List<String> args) async {
   final director = args[0];
   final htmlFilePath = p.join(director, 'index.html');

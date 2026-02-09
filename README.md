@@ -89,7 +89,46 @@ The `peanut.yaml` from this repository:
 # Configuration for https://pub.dev/packages/peanut
 directories:
   - example
+
+# The Dart script to run after the build is complete, but before the changes are committed.
+# This script is run in the root of the package.
+# The script has access to the build output directory as the first argument.
+post-build-dart-script: tool/post_build.dart
+
+# Build options to pass to `build_runner`.
+# These are merged with any existing `build.yaml` file.
+builder-options:
+  build_web_compilers|entrypoint:
+    compilers:
+      dart2wasm:
+        args:
+          - -O4
+          - --no-strip-wasm
+      dart2js:
+        args:
+          - --stage=dump-info-all
+          - --no-frequency-based-minification
+          - --no-source-maps
+          - -O4
+  build_web_compilers|dart2js_archive_extractor:
+    filter_outputs: false
 ```
+
+## Post-build Dart script
+
+You can optionally specify a Dart script to run after the build is complete, but
+before the changes are committed.
+
+```yaml
+post-build-dart-script: tool/post_build.dart
+```
+
+This script is run in the root of the package. The build output directory is
+passed as the first argument.
+
+The second argument is a JSON-encoded map of the input directory names to their
+output locations. This is useful if you are building multiple directories. If
+you are only building one directory, you can ignore this argument.
 
 ## Examples
 
