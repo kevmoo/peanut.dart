@@ -3,11 +3,11 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
-    "size": 44872,
+    "size": 44869,
     "ramUsage": "N/A MB",
-    "dart2jsVersion": "3.11.0-217.0.dev",
-    "compilationMoment": "2025-12-07 16:36:26.414514",
-    "compilationDuration": 502333,
+    "dart2jsVersion": "3.12.0-124.0.dev",
+    "compilationMoment": "2026-02-09 15:33:48.910046",
+    "compilationDuration": 535559,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
@@ -33,7 +33,7 @@
         "id": "library/dart:_interceptors::",
         "kind": "library",
         "name": "_interceptors",
-        "size": 3622,
+        "size": 3620,
         "children": [
           "class/dart:_interceptors::ArrayIterator",
           "class/dart:_interceptors::Interceptor",
@@ -78,10 +78,12 @@
           "class/dart:_internal::FixedLengthListMixin",
           "class/dart:_internal::LateError",
           "class/dart:_internal::ListIterator",
-          "field/dart:_internal::printToZone",
-          "field/dart:_internal::toStringVisiting",
+          "field/dart:_internal::_printToZone",
+          "field/dart:_internal::_toStringVisiting",
           "function/dart:_internal::isToStringVisiting",
-          "function/dart:_internal::printToConsole"
+          "function/dart:_internal::printToConsole",
+          "function/dart:_internal::printToZone",
+          "function/dart:_internal::toStringVisiting"
         ],
         "canonicalUri": "dart:_internal"
       },
@@ -89,7 +91,7 @@
         "id": "library/dart:_js_helper::",
         "kind": "library",
         "name": "_js_helper",
-        "size": 7649,
+        "size": 7646,
         "children": [
           "class/dart:_js_helper::BoundClosure",
           "class/dart:_js_helper::Closure",
@@ -160,6 +162,16 @@
         ],
         "canonicalUri": "dart:_js_primitives"
       },
+      "dart:_js_types::": {
+        "id": "library/dart:_js_types::",
+        "kind": "library",
+        "name": "_js_types",
+        "size": 0,
+        "children": [
+          "function/dart:_js_types::JSStringType|constructor#"
+        ],
+        "canonicalUri": "dart:_js_types"
+      },
       "dart:_late_helper::": {
         "id": "library/dart:_late_helper::",
         "kind": "library",
@@ -210,7 +222,7 @@
         "id": "library/dart:_rti::",
         "kind": "library",
         "name": "rti",
-        "size": 16755,
+        "size": 16758,
         "children": [
           "class/dart:_rti::Rti",
           "class/dart:_rti::TypeRule",
@@ -325,7 +337,7 @@
         "id": "library/dart:core::",
         "kind": "library",
         "name": "dart.core",
-        "size": 1543,
+        "size": 1542,
         "children": [
           "class/dart:core::ArgumentError",
           "class/dart:core::AssertionError",
@@ -457,7 +469,7 @@
         "id": "class/dart:_interceptors::Interceptor",
         "kind": "class",
         "name": "Interceptor",
-        "size": 135,
+        "size": 134,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_interceptors::",
         "modifiers": {
@@ -493,7 +505,7 @@
         "id": "class/dart:_interceptors::JSArraySafeToStringHook",
         "kind": "class",
         "name": "JSArraySafeToStringHook",
-        "size": 290,
+        "size": 289,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_interceptors::",
         "modifiers": {
@@ -802,7 +814,7 @@
         "id": "class/dart:_js_helper::BoundClosure",
         "kind": "class",
         "name": "BoundClosure",
-        "size": 140,
+        "size": 139,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_js_helper::",
         "modifiers": {
@@ -1721,7 +1733,7 @@
         "id": "class/dart:core::Object",
         "kind": "class",
         "name": "Object",
-        "size": 156,
+        "size": 155,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:core::",
         "modifiers": {
@@ -2146,7 +2158,7 @@
         "id": "function/dart:_interceptors::Interceptor.toString",
         "kind": "function",
         "name": "toString",
-        "size": 41,
+        "size": 40,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_interceptors::Interceptor",
         "children": [],
@@ -2161,7 +2173,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){return\"Instance of '\"+A.lh(a)+\"'\"}",
+        "code": "\"[\"(a){return\"Instance of '\"+A.u(a)+\"'\"}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -2267,7 +2279,7 @@
         "id": "function/dart:_interceptors::JSArraySafeToStringHook.tryFormat",
         "kind": "function",
         "name": "tryFormat",
-        "size": 242,
+        "size": 241,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_interceptors::JSArraySafeToStringHook",
         "children": [],
@@ -2288,7 +2300,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "R(a){var t,s,r\nif(!Array.isArray(a))return null\nt=a.$flags|0\nif((t&4)!==0)s=\"const, \"\nelse if((t&2)!==0)s=\"unmodifiable, \"\nelse s=(t&1)!==0?\"fixed, \":\"\"\nr=\"Instance of '\"+A.lh(a)+\"'\"\nif(s===\"\")return r\nreturn r+\" (\"+s+\"length: \"+a.length+\")\"}",
+        "code": "R(a){var t,s,r\nif(!Array.isArray(a))return null\nt=a.$flags|0\nif((t&4)!==0)s=\"const, \"\nelse if((t&2)!==0)s=\"unmodifiable, \"\nelse s=(t&1)!==0?\"fixed, \":\"\"\nr=\"Instance of '\"+A.u(a)+\"'\"\nif(s===\"\")return r\nreturn r+\" (\"+s+\"length: \"+a.length+\")\"}",
         "type": "String? Function(Object?)",
         "functionKind": 2
       },
@@ -3104,7 +3116,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes nothing)",
         "inlinedCount": 0,
-        "code": "k(a){var t,s\nfor(t=$.p.length,s=0;s<t;++s)if(a===$.p[s])return!0\nreturn!1}",
+        "code": "k(a){var t,s\nfor(t=$.x.length,s=0;s<t;++s)if(a===$.x[s])return!0\nreturn!1}",
         "type": "bool Function(Object)",
         "functionKind": 0
       },
@@ -3135,6 +3147,52 @@
         "inlinedCount": 1,
         "code": "",
         "type": "void Function(String)",
+        "functionKind": 0
+      },
+      "dart:_internal::printToZone": {
+        "id": "function/dart:_internal::printToZone",
+        "kind": "function",
+        "name": "printToZone",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_internal::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "void Function(String)?",
+        "inferredReturnType": "[null|powerset={null}]",
+        "parameters": [],
+        "sideEffects": "SideEffects(reads static; writes nothing)",
+        "inlinedCount": 1,
+        "code": "",
+        "type": "void Function(String)? Function()",
+        "functionKind": 0
+      },
+      "dart:_internal::toStringVisiting": {
+        "id": "function/dart:_internal::toStringVisiting",
+        "kind": "function",
+        "name": "toStringVisiting",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_internal::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "List<Object>",
+        "inferredReturnType": "Container([exact=JSExtendableArray|powerset={I}{G}{M}], element: Union([subclass=JSArray|powerset={I}{GFU}{IM}], [subtype=ListBase|powerset={I}{O}{M}], powerset: {I}{GFUO}{IM}), length: null, powerset: {I}{G}{M})",
+        "parameters": [],
+        "sideEffects": "SideEffects(reads static; writes nothing)",
+        "inlinedCount": 3,
+        "code": "",
+        "type": "List<Object> Function()",
         "functionKind": 0
       },
       "dart:_js_helper::BoundClosure.BoundClosure": {
@@ -3365,7 +3423,7 @@
         "id": "function/dart:_js_helper::BoundClosure.toString",
         "kind": "function",
         "name": "toString",
-        "size": 80,
+        "size": 79,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::BoundClosure",
         "children": [],
@@ -3380,7 +3438,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){return\"Closure '\"+this.$_name+\"' of \"+(\"Instance of '\"+A.lh(this.a)+\"'\")}",
+        "code": "\"[\"(a){return\"Closure '\"+this.$_name+\"' of \"+(\"Instance of '\"+A.u(this.a)+\"'\")}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -3737,7 +3795,7 @@
         "id": "function/dart:_js_helper::Primitives.objectTypeName",
         "kind": "function",
         "name": "objectTypeName",
-        "size": 278,
+        "size": 277,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::Primitives",
         "children": [],
@@ -3758,7 +3816,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "lh(a){var t,s,r,q\nif(a instanceof A.j)return A.F(A.zK(a),null)\nt=J.ia(a)\nif(t===B.Ok||t===B.Ub||u.o.b(a)){s=B.O4(a)\nif(s!==\"Object\"&&s!==\"\")return s\nr=a.constructor\nif(typeof r==\"function\"){q=r.name\nif(typeof q==\"string\"&&q!==\"Object\"&&q!==\"\")return q}}return A.F(A.zK(a),null)}",
+        "code": "u(a){var t,s,r,q\nif(a instanceof A.j)return A.F(A.zK(a),null)\nt=J.ia(a)\nif(t===B.Ok||t===B.Ub||u.o.b(a)){s=B.O4(a)\nif(s!==\"Object\"&&s!==\"\")return s\nr=a.constructor\nif(typeof r==\"function\"){q=r.name\nif(typeof q==\"string\"&&q!==\"Object\"&&q!==\"\")return q}}return A.F(A.zK(a),null)}",
         "type": "String Function(Object?)",
         "functionKind": 0
       },
@@ -3766,7 +3824,7 @@
         "id": "function/dart:_js_helper::Primitives.safeToString",
         "kind": "function",
         "name": "safeToString",
-        "size": 234,
+        "size": 233,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::Primitives",
         "children": [],
@@ -3787,7 +3845,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "i(a){var t,s,r\nif(typeof a==\"number\"||A.y(a))return J.C(a)\nif(typeof a==\"string\")return JSON.stringify(a)\nif(a instanceof A.L)return a[\"[\"](0)\nt=$.M()\nfor(s=0;s<1;++s){r=t[s].R(a)\nif(r!=null)return r}return\"Instance of '\"+A.lh(a)+\"'\"}",
+        "code": "i(a){var t,s,r\nif(typeof a==\"number\"||A.y(a))return J.C(a)\nif(typeof a==\"string\")return JSON.stringify(a)\nif(a instanceof A.L)return a[\"[\"](0)\nt=$.M()\nfor(s=0;s<1;++s){r=t[s].R(a)\nif(r!=null)return r}return\"Instance of '\"+A.u(a)+\"'\"}",
         "type": "String Function(Object?)",
         "functionKind": 0
       },
@@ -5007,6 +5065,35 @@
         "inlinedCount": 0,
         "code": "q(a){if(typeof dartPrint==\"function\"){dartPrint(a)\nreturn}if(typeof console==\"object\"&&typeof console.log!=\"undefined\"){console.log(a)\nreturn}if(typeof print==\"function\"){print(a)\nreturn}throw\"Unable to print message: \"+String(a)}",
         "type": "void Function(String)",
+        "functionKind": 0
+      },
+      "dart:_js_types::JSStringType|constructor#": {
+        "id": "function/dart:_js_types::JSStringType|constructor#",
+        "kind": "function",
+        "name": "JSStringType|constructor#",
+        "size": 0,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_js_types::",
+        "children": [],
+        "modifiers": {
+          "static": false,
+          "const": false,
+          "factory": false,
+          "external": false
+        },
+        "returnType": "String",
+        "inferredReturnType": "[exact=JSString|powerset={I}{O}{I}]",
+        "parameters": [
+          {
+            "name": "_jsStringType",
+            "type": "[exact=JSString|powerset={I}{O}{I}]",
+            "declaredType": "String"
+          }
+        ],
+        "sideEffects": "SideEffects(reads nothing; writes nothing)",
+        "inlinedCount": 2,
+        "code": "",
+        "type": "String Function(String)",
         "functionKind": 0
       },
       "dart:_late_helper::throwLateFieldADI": {
@@ -6752,7 +6839,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "WK(a,b){return A.u(a)+\": type '\"+A.F(A.tu(a),null)+\"' is not a subtype of type '\"+b+\"'\"}",
+        "code": "WK(a,b){return A.p(a)+\": type '\"+A.F(A.tu(a),null)+\"' is not a subtype of type '\"+b+\"'\"}",
         "type": "String Function(Object?,String)",
         "functionKind": 0
       },
@@ -7568,7 +7655,7 @@
         "id": "function/dart:_rti::_Parser.parse",
         "kind": "function",
         "name": "parse",
-        "size": 1191,
+        "size": 1192,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Parser",
         "children": [],
@@ -7589,7 +7676,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "x(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.cH(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.G(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
+        "code": "eT(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.cH(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.G(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
         "type": "Rti Function(Object?)",
         "functionKind": 0
       },
@@ -9943,7 +10030,7 @@
         "id": "function/dart:_rti::_Universe.eval",
         "kind": "function",
         "name": "eval",
-        "size": 99,
+        "size": 100,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Universe",
         "children": [],
@@ -9974,7 +10061,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "Ew(a,b,c){var t,s=a.eC,r=s.get(b)\nif(r!=null)return r\nt=A.x(A.ow(a,null,b,!1))\ns.set(b,t)\nreturn t}",
+        "code": "Ew(a,b,c){var t,s=a.eC,r=s.get(b)\nif(r!=null)return r\nt=A.eT(A.ow(a,null,b,!1))\ns.set(b,t)\nreturn t}",
         "type": "Rti Function(Object?,String,bool)",
         "functionKind": 0
       },
@@ -10011,7 +10098,7 @@
         "id": "function/dart:_rti::_Universe.evalInEnvironment",
         "kind": "function",
         "name": "evalInEnvironment",
-        "size": 124,
+        "size": 125,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Universe",
         "children": [],
@@ -10042,7 +10129,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "cE(a,b,c){var t,s,r=b.z\nif(r==null)r=b.z=new Map()\nt=r.get(c)\nif(t!=null)return t\ns=A.x(A.ow(a,b,c,!0))\nr.set(c,s)\nreturn s}",
+        "code": "cE(a,b,c){var t,s,r=b.z\nif(r==null)r=b.z=new Map()\nt=r.get(c)\nif(t!=null)return t\ns=A.eT(A.ow(a,b,c,!0))\nr.set(c,s)\nreturn s}",
         "type": "Rti Function(Object?,Rti,String)",
         "functionKind": 0
       },
@@ -14184,7 +14271,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){var t=this,s=t.c,r=s==null?\"\":\" (\"+s+\")\",q=t.d,p=q==null?\"\":\": \"+q,o=t.gZ()+r+p\nif(!t.a)return o\nreturn o+t.gN()+\": \"+A.u(t.gE())}",
+        "code": "\"[\"(a){var t=this,s=t.c,r=s==null?\"\":\" (\"+s+\")\",q=t.d,p=q==null?\"\":\": \"+q,o=t.gZ()+r+p\nif(!t.a)return o\nreturn o+t.gN()+\": \"+A.p(t.gE())}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -14236,7 +14323,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){var t=this.a\nif(t!=null)return\"Assertion failed: \"+A.u(t)\nreturn\"Assertion failed\"}",
+        "code": "\"[\"(a){var t=this.a\nif(t!=null)return\"Assertion failed: \"+A.p(t)\nreturn\"Assertion failed\"}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -14288,7 +14375,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){return\"Concurrent modification during iteration: \"+A.u(this.a)+\".\"}",
+        "code": "\"[\"(a){return\"Concurrent modification during iteration: \"+A.p(this.a)+\".\"}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -14375,7 +14462,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "u(a){if(typeof a==\"number\"||A.y(a)||a==null)return J.C(a)\nif(typeof a==\"string\")return JSON.stringify(a)\nreturn A.i(a)}",
+        "code": "p(a){if(typeof a==\"number\"||A.y(a)||a==null)return J.C(a)\nif(typeof a==\"string\")return JSON.stringify(a)\nreturn A.i(a)}",
         "type": "String Function(Object?)",
         "functionKind": 0
       },
@@ -14414,7 +14501,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "t(a,b,c){var t,s\nif(A.k(a))return b+\"...\"+c\nt=new A.v(b)\n$.p.push(a)\ntry{s=t\ns.a=A.H(s.a,a,\", \")}finally{$.p.pop()}t.a+=c\ns=t.a\nreturn s.charCodeAt(0)==0?s:s}",
+        "code": "t(a,b,c){var t,s\nif(A.k(a))return b+\"...\"+c\nt=new A.v(b)\n$.x.push(a)\ntry{s=t\ns.a=A.H(s.a,a,\", \")}finally{$.x.pop()}t.a+=c\ns=t.a\nreturn s.charCodeAt(0)==0?s:s}",
         "type": "String Function(Iterable<dynamic>,[String,String])",
         "functionKind": 0
       },
@@ -14468,7 +14555,7 @@
         "id": "function/dart:core::Object.toString",
         "kind": "function",
         "name": "toString",
-        "size": 44,
+        "size": 43,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:core::Object",
         "children": [],
@@ -14483,7 +14570,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){return\"Instance of '\"+A.lh(this)+\"'\"}",
+        "code": "\"[\"(a){return\"Instance of '\"+A.u(this)+\"'\"}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -15194,10 +15281,10 @@
         "code": "",
         "type": "int"
       },
-      "dart:_internal::printToZone": {
-        "id": "field/dart:_internal::printToZone",
+      "dart:_internal::_printToZone": {
+        "id": "field/dart:_internal::_printToZone",
         "kind": "field",
-        "name": "printToZone",
+        "name": "_printToZone",
         "size": 0,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_internal::",
@@ -15206,16 +15293,16 @@
         "code": "",
         "type": "void Function(String)?"
       },
-      "dart:_internal::toStringVisiting": {
-        "id": "field/dart:_internal::toStringVisiting",
+      "dart:_internal::_toStringVisiting": {
+        "id": "field/dart:_internal::_toStringVisiting",
         "kind": "field",
-        "name": "toStringVisiting",
+        "name": "_toStringVisiting",
         "size": 27,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_internal::",
         "children": [],
         "inferredType": "Container([exact=JSExtendableArray|powerset={I}{G}{M}], element: Union([subclass=JSArray|powerset={I}{GFU}{IM}], [subtype=ListBase|powerset={I}{O}{M}], powerset: {I}{GFUO}{IM}), length: null, powerset: {I}{G}{M})",
-        "code": "$.p=A.QI([],A.q7(\"jd<j>\"))",
+        "code": "$.x=A.QI([],A.q7(\"jd<j>\"))",
         "type": "List<Object>"
       },
       "dart:_js_helper::BoundClosure._interceptor": {
@@ -16046,7 +16133,7 @@
         "id": "function/dart:_late_helper::throwLateFieldADI"
       }
     ],
-    "field/dart:_internal::toStringVisiting": [
+    "field/dart:_internal::_toStringVisiting": [
       {
         "id": "function/dart:_rti::_setArrayType"
       },
@@ -16721,7 +16808,14 @@
     ],
     "function/dart:_internal::isToStringVisiting": [
       {
-        "id": "field/dart:_internal::toStringVisiting"
+        "id": "field/dart:_internal::_toStringVisiting"
+      },
+      {
+        "id": "function/dart:_internal::toStringVisiting",
+        "mask": "inlined"
+      },
+      {
+        "id": "function/dart:_internal::toStringVisiting"
       }
     ],
     "function/dart:_js_helper::BoundClosure._computeFieldNamed": [
@@ -23621,13 +23715,20 @@
     ],
     "function/dart:core::Iterable.iterableToFullString": [
       {
-        "id": "field/dart:_internal::toStringVisiting"
+        "id": "field/dart:_internal::_toStringVisiting"
       },
       {
         "id": "field/dart:core::StringBuffer._contents"
       },
       {
         "id": "function/dart:_internal::isToStringVisiting"
+      },
+      {
+        "id": "function/dart:_internal::toStringVisiting",
+        "mask": "inlined"
+      },
+      {
+        "id": "function/dart:_internal::toStringVisiting"
       },
       {
         "id": "function/dart:_js_helper::Primitives.flattenString"
@@ -23775,9 +23876,17 @@
       {
         "id": "function/dart:_internal::printToConsole",
         "mask": "inlined"
+      },
+      {
+        "id": "function/dart:_internal::printToZone",
+        "mask": "inlined"
       }
     ],
     "function/dart:js_interop::StringToJSString|get#toJS": [
+      {
+        "id": "function/dart:_js_types::JSStringType|constructor#",
+        "mask": "inlined"
+      },
       {
         "id": "function/dart:js_interop::JSString|constructor#_",
         "mask": "inlined"
@@ -23795,6 +23904,9 @@
         "id": "function/dart:_internal::printToConsole"
       },
       {
+        "id": "function/dart:_internal::printToZone"
+      },
+      {
         "id": "function/dart:_js_helper::S"
       },
       {
@@ -23806,6 +23918,9 @@
       },
       {
         "id": "function/dart:_js_primitives::printString"
+      },
+      {
+        "id": "function/dart:_js_types::JSStringType|constructor#"
       },
       {
         "id": "function/dart:core::print",
@@ -23874,7 +23989,7 @@
       "id": "outputUnit/main",
       "kind": "outputUnit",
       "name": "main",
-      "size": 44872,
+      "size": 44869,
       "filename": "example_script.dart2js.js",
       "imports": []
     }
