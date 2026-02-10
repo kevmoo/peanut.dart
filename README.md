@@ -89,7 +89,58 @@ The `peanut.yaml` from this repository:
 # Configuration for https://pub.dev/packages/peanut
 directories:
   - example
+
+# The Dart script to run after the build is complete, but before the changes are committed.
+# This script is run in the root of the package.
+# The script has access to the root of the build output directory as the first argument.
+post-build-dart-script: tool/post_build.dart
+
+# Build options to pass to `build_runner`.
+# These are merged with any existing `build.yaml` file.
+builder-options:
+  build_web_compilers|entrypoint:
+    compilers:
+      dart2wasm:
+        args:
+          - -O4
+          - --no-strip-wasm
+      dart2js:
+        args:
+          - --stage=dump-info-all
+          - --no-frequency-based-minification
+          - --no-source-maps
+          - -O4
+  build_web_compilers|dart2js_archive_extractor:
+    filter_outputs: false
 ```
+
+## Post-build Dart script
+
+You can optionally specify a Dart script to run after the build is complete, but
+before the changes are committed.
+
+```yaml
+post-build-dart-script: tool/post_build.dart
+```
+
+This script is run from the root of the package.
+
+It receives two arguments:
+
+1.  The path to a temporary directory which contains the build output. For
+    example, if you are building a single directory `web`, the output will be in
+    a `web` subdirectory of this temporary directory.
+2.  A JSON-encoded map where keys are the source directories that were built,
+    and values are the corresponding output sub-directories within the temporary
+    directory from the first argument.
+
+For example, if you run `peanut -d web`, the script will be called with:
+
+*   `args[0]`: `/tmp/peanut.xyz` (a temporary path)
+*   `args[1]`: `{"web":"."}`
+
+The `index.html` for the `web` build would be at
+`/tmp/peanut.xyz/index.html`.
 
 ## Examples
 

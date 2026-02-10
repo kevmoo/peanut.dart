@@ -2,8 +2,14 @@
 directories:
 - example
 
+
+# The Dart script to run after the build is complete, but before the changes are committed.
+# This script is run in the root of the package.
+# The script has access to the root of the build output directory as the first argument.
 post-build-dart-script: tool/post_build.dart
 
+# Build options to pass to `build_runner`.
+# These are merged with any existing `build.yaml` file.
 builder-options:
   build_web_compilers|entrypoint:
     compilers:

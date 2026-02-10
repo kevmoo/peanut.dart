@@ -1,6 +1,7 @@
 ## 6.0.1-wip
 
 - Always print the stack with `--verbose` is set.
+- Much improved documentation on the `post-build-dart-script` option.
 - Required Dart v3.9
 
 ## 6.0.0
