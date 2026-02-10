@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
@@ -7,8 +8,13 @@ import 'package:path/path.dart' as p;
 /// It modifies the `index.html` file in the build output directory to include
 /// information about the tool version and the git commit.
 Future<void> main(List<String> args) async {
-  final director = args[0];
-  final htmlFilePath = p.join(director, 'index.html');
+  final buildRoot = args[0];
+  final outputMap = jsonDecode(args[1]) as Map<String, dynamic>;
+
+  // This example script assumes it only operates on one directory.
+  // A more robust script could iterate over `outputMap.values`.
+  final outputDir = outputMap.values.first as String;
+  final htmlFilePath = p.join(buildRoot, outputDir, 'index.html');
 
   final htmlFile = File(htmlFilePath);
   final contents = htmlFile.readAsStringSync();

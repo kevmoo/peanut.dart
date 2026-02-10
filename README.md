@@ -92,7 +92,7 @@ directories:
 
 # The Dart script to run after the build is complete, but before the changes are committed.
 # This script is run in the root of the package.
-# The script has access to the build output directory as the first argument.
+# The script has access to the root of the build output directory as the first argument.
 post-build-dart-script: tool/post_build.dart
 
 # Build options to pass to `build_runner`.
@@ -123,12 +123,24 @@ before the changes are committed.
 post-build-dart-script: tool/post_build.dart
 ```
 
-This script is run in the root of the package. The build output directory is
-passed as the first argument.
+This script is run from the root of the package.
 
-The second argument is a JSON-encoded map of the input directory names to their
-output locations. This is useful if you are building multiple directories. If
-you are only building one directory, you can ignore this argument.
+It receives two arguments:
+
+1.  The path to a temporary directory which contains the build output. For
+    example, if you are building a single directory `web`, the output will be in
+    a `web` subdirectory of this temporary directory.
+2.  A JSON-encoded map where keys are the source directories that were built,
+    and values are the corresponding output sub-directories within the temporary
+    directory from the first argument.
+
+For example, if you run `peanut -d web`, the script will be called with:
+
+*   `args[0]`: `/tmp/peanut.xyz` (a temporary path)
+*   `args[1]`: `{"web":"."}`
+
+The `index.html` for the `web` build would be at
+`/tmp/peanut.xyz/index.html`.
 
 ## Examples
 
