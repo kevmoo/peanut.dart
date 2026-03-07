@@ -3,11 +3,11 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
-    "size": 44869,
+    "size": 44951,
     "ramUsage": "N/A MB",
-    "dart2jsVersion": "3.12.0-124.0.dev",
-    "compilationMoment": "2026-02-09 15:33:48.910046",
-    "compilationDuration": 535559,
+    "dart2jsVersion": "3.12.0-210.1.beta",
+    "compilationMoment": "2026-03-07 10:56:31.263211",
+    "compilationDuration": 505276,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
@@ -33,7 +33,7 @@
         "id": "library/dart:_interceptors::",
         "kind": "library",
         "name": "_interceptors",
-        "size": 3620,
+        "size": 3699,
         "children": [
           "class/dart:_interceptors::ArrayIterator",
           "class/dart:_interceptors::Interceptor",
@@ -53,6 +53,7 @@
           "class/dart:_interceptors::LegacyJavaScriptObject",
           "class/dart:_interceptors::PlainJavaScriptObject",
           "class/dart:_interceptors::UnknownJavaScriptObject",
+          "field/dart:_interceptors::DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME",
           "field/dart:_interceptors::DART_CLOSURE_PROPERTY_NAME",
           "field/dart:_interceptors::_JS_INTEROP_INTERCEPTOR_TAG",
           "function/dart:_interceptors::JS_INTEROP_INTERCEPTOR_TAG",
@@ -222,7 +223,7 @@
         "id": "library/dart:_rti::",
         "kind": "library",
         "name": "rti",
-        "size": 16758,
+        "size": 16760,
         "children": [
           "class/dart:_rti::Rti",
           "class/dart:_rti::TypeRule",
@@ -663,7 +664,7 @@
         "id": "class/dart:_interceptors::JavaScriptFunction",
         "kind": "class",
         "name": "JavaScriptFunction",
-        "size": 130,
+        "size": 152,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_interceptors::",
         "modifiers": {
@@ -2098,7 +2099,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes field)",
         "inlinedCount": 0,
-        "code": "G(){var t,s=this,r=s.a,q=r.length\nif(s.b!==q)throw A.b(A.l(r))\nt=s.c\nif(t>=q){s.d=null\nreturn!1}s.d=r[t]\ns.c=t+1\nreturn!0}",
+        "code": "G(){var t,s=this,r=s.a,q=r.length\nif(s.b!==q)throw A.b(A.G(r))\nt=s.c\nif(t>=q){s.d=null\nreturn!1}s.d=r[t]\ns.c=t+1\nreturn!0}",
         "type": "bool Function()",
         "functionKind": 2
       },
@@ -2584,7 +2585,7 @@
         "id": "function/dart:_interceptors::JavaScriptFunction.toString",
         "kind": "function",
         "name": "toString",
-        "size": 90,
+        "size": 112,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_interceptors::JavaScriptFunction",
         "children": [],
@@ -2599,7 +2600,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){var t=a[$.K()]\nif(t==null)return this.u(a)\nreturn\"JavaScript function for \"+J.C(t)}",
+        "code": "\"[\"(a){var t=a[$.K()]\nif(t==null)t=a[$.l()]\nif(t==null)return this.u(a)\nreturn\"JavaScript function for \"+J.C(t)}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -4890,7 +4891,7 @@
         ],
         "sideEffects": "SideEffects(reads nothing; writes nothing)",
         "inlinedCount": 0,
-        "code": "l(a){throw A.b(A.o(a))}",
+        "code": "G(a){throw A.b(A.o(a))}",
         "type": "dynamic Function(dynamic)",
         "functionKind": 0
       },
@@ -7655,7 +7656,7 @@
         "id": "function/dart:_rti::_Parser.parse",
         "kind": "function",
         "name": "parse",
-        "size": 1192,
+        "size": 1193,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Parser",
         "children": [],
@@ -7676,7 +7677,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "eT(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.cH(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.G(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
+        "code": "eT(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.cH(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.Be(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
         "type": "Rti Function(Object?)",
         "functionKind": 0
       },
@@ -8014,7 +8015,7 @@
         "id": "function/dart:_rti::_Parser.toTypesNamed",
         "kind": "function",
         "name": "toTypesNamed",
-        "size": 63,
+        "size": 64,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Parser",
         "children": [],
@@ -8045,7 +8046,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "G(a,b,c){var t,s=c.length\nfor(t=2;t<s;t+=3)c[t]=A.KQ(a,b,c[t])}",
+        "code": "Be(a,b,c){var t,s=c.length\nfor(t=2;t<s;t+=3)c[t]=A.KQ(a,b,c[t])}",
         "type": "void Function(Object?,Rti?,Object?)",
         "functionKind": 0
       },
@@ -15197,6 +15198,18 @@
         "code": "",
         "type": "int"
       },
+      "dart:_interceptors::DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME": {
+        "id": "field/dart:_interceptors::DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME",
+        "kind": "field",
+        "name": "DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME",
+        "size": 58,
+        "outputUnit": "outputUnit/main",
+        "parent": "library/dart:_interceptors::",
+        "children": [],
+        "inferredType": "[exact=JSString|powerset={I}{O}{I}]",
+        "code": "t($,\"cK\",\"l\",()=>A.e(\"_$dart_dartClosure_dartJSInterop\"))",
+        "type": "String"
+      },
       "dart:_interceptors::DART_CLOSURE_PROPERTY_NAME": {
         "id": "field/dart:_interceptors::DART_CLOSURE_PROPERTY_NAME",
         "kind": "field",
@@ -16110,6 +16123,14 @@
         "id": "function/dart:_late_helper::throwLateFieldADI"
       }
     ],
+    "field/dart:_interceptors::DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME": [
+      {
+        "id": "function/dart:_js_helper::getIsolateAffinityTag"
+      },
+      {
+        "id": "function/dart:_late_helper::throwLateFieldADI"
+      }
+    ],
     "field/dart:_interceptors::DART_CLOSURE_PROPERTY_NAME": [
       {
         "id": "function/dart:_js_helper::getIsolateAffinityTag"
@@ -16470,6 +16491,9 @@
       }
     ],
     "function/dart:_interceptors::JavaScriptFunction.toString": [
+      {
+        "id": "field/dart:_interceptors::DART_CLOSURE_DART_JSINTEROP_PROPERTY_NAME"
+      },
       {
         "id": "field/dart:_interceptors::DART_CLOSURE_PROPERTY_NAME"
       },
@@ -23989,7 +24013,7 @@
       "id": "outputUnit/main",
       "kind": "outputUnit",
       "name": "main",
-      "size": 44869,
+      "size": 44951,
       "filename": "example_script.dart2js.js",
       "imports": []
     }
