@@ -108,9 +108,22 @@ class _PubspecLock {
   static Future<_PubspecLock> read(String pkgDir) async {
     await _runPubDeps(pkgDir);
 
+    var currentDir = pkgDir;
+    File pubspecLockFile;
+    while (true) {
+      pubspecLockFile = File(p.join(currentDir, 'pubspec.lock'));
+      if (pubspecLockFile.existsSync()) {
+        break;
+      }
+      final parentDir = p.dirname(currentDir);
+      if (parentDir == currentDir) {
+        throw PackageException([PackageExceptionDetails.noPubspecLock]);
+      }
+      currentDir = parentDir;
+    }
+
     final pubspecLock =
-        loadYaml(await File(p.join(pkgDir, 'pubspec.lock')).readAsString())
-            as YamlMap;
+        loadYaml(await pubspecLockFile.readAsString()) as YamlMap;
 
     final packages = pubspecLock['packages'] as YamlMap;
     return _PubspecLock(packages);

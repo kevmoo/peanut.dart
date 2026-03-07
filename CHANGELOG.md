@@ -1,5 +1,6 @@
-## 6.0.1-wip
+## 6.0.1
 
+- Support Dart workspaces by resolving pubspec.lock up the directory tree
 - Always print the stack with `--verbose` is set.
 - Much improved documentation on the `post-build-dart-script` option.
 - Required Dart v3.9
