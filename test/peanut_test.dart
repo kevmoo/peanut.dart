@@ -4,22 +4,20 @@ library;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:checks/checks.dart';
 import 'package:git/git.dart';
 import 'package:path/path.dart' as p;
 import 'package:peanut/src/peanut.dart';
 import 'package:peanut/src/peanut_exception.dart';
 import 'package:peanut/src/utils.dart';
 import 'package:peanut/src/version.dart';
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 
-TypeMatcher _treeEntry(String name, String type) => isA<TreeEntry>()
-    .having((te) => te.name, 'name', name)
-    .having((te) => te.type, 'type', type);
-
-Matcher _throwsPeanutException(Object message) => throwsA(
-  isA<PeanutException>().having((pe) => pe.message, 'message', message),
-);
+void Function(Subject<TreeEntry>) _treeEntry(String name, String type) =>
+    (it) => it
+      ..has((te) => te.name, 'name').equals(name)
+      ..has((te) => te.type, 'type').equals(type);
 
 Future<void> _run({Options? options}) =>
     run(workingDirectory: d.sandbox, options: options ?? const Options());
@@ -28,9 +26,10 @@ void main() {
   test('not a git dir', () async {
     await _simplePackage();
 
-    await expectLater(
-      _run(),
-      _throwsPeanutException('Not a git directory: ${d.sandbox}'),
+    await check(_run()).throws<PeanutException>(
+      (it) => it
+          .has((pe) => pe.message, 'message')
+          .equals('Not a git directory: ${d.sandbox}'),
     );
   });
 
@@ -38,9 +37,12 @@ void main() {
     await _simplePackage();
     await _initGitDir();
 
-    await expectLater(
+    await check(
       _run(options: const Options(directories: [])),
-      _throwsPeanutException('At least one directory must be provided.'),
+    ).throws<PeanutException>(
+      (it) => it
+          .has((pe) => pe.message, 'message')
+          .equals('At least one directory must be provided.'),
     );
   });
 
@@ -49,11 +51,14 @@ void main() {
     await _pubGet();
     await _initGitDir();
 
-    await expectLater(
+    await check(
       _run(options: const Options(directories: ['../temp/silly'])),
-      _throwsPeanutException(
-        '"../temp/silly" is not in the working directory "${d.sandbox}".',
-      ),
+    ).throws<PeanutException>(
+      (it) => it
+          .has((pe) => pe.message, 'message')
+          .equals(
+            '"../temp/silly" is not in the working directory "${d.sandbox}".',
+          ),
     );
   });
 
@@ -62,12 +67,15 @@ void main() {
     await _pubGet();
     await _initGitDir();
 
-    await expectLater(
+    await check(
       _run(options: Options(directories: [d.sandbox])),
-      _throwsPeanutException(
-        '"${d.sandbox}" is the same as the working directory, '
-        'which is not allowed.',
-      ),
+    ).throws<PeanutException>(
+      (it) => it
+          .has((pe) => pe.message, 'message')
+          .equals(
+            '"${d.sandbox}" is the same as the working directory, '
+            'which is not allowed.',
+          ),
     );
   });
 
@@ -76,9 +84,12 @@ void main() {
     await _pubGet();
     await _initGitDir();
 
-    await expectLater(
+    await check(
       _run(options: const Options(branch: 'main')),
-      _throwsPeanutException('Cannot update the current branch "main".'),
+    ).throws<PeanutException>(
+      (it) => it
+          .has((pe) => pe.message, 'message')
+          .equals('Cannot update the current branch "main".'),
     );
   });
 
@@ -90,15 +101,14 @@ void main() {
 
     await _run();
 
-    expect(
+    check(
       (await gitDir.branches()).map((br) => br.branchName),
-      unorderedEquals(['main', 'gh-pages']),
-    );
+    ).unorderedEquals(['main', 'gh-pages']);
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    check(ghCommit.message).equals('''
 Built web
 
 Branch: main
@@ -117,15 +127,14 @@ package:peanut $packageVersion''');
 
     await _run(options: const Options(versionInfo: true));
 
-    expect(
+    check(
       (await gitDir.branches()).map((br) => br.branchName),
-      unorderedEquals(['main', 'gh-pages']),
-    );
+    ).unorderedEquals(['main', 'gh-pages']);
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    check(ghCommit.message).equals('''
 Built web
 
 Version: 1.0.0
@@ -146,15 +155,14 @@ package:peanut $packageVersion''');
 
     await _run(options: const Options(directories: ['example', 'web']));
 
-    expect(
+    check(
       (await gitDir.branches()).map((br) => br.branchName),
-      unorderedEquals(['main', 'gh-pages']),
-    );
+    ).unorderedEquals(['main', 'gh-pages']);
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    check(ghCommit.message).equals('''
 Built example, web
 
 Branch: main
@@ -164,12 +172,11 @@ package:peanut $packageVersion''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
-    expect(
+    check(
       treeContents.map((te) => te.name),
-      unorderedEquals(['example', 'web', 'index.html']),
-    );
+    ).unorderedEquals(['example', 'web', 'index.html']);
 
-    expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+    check(treeContents).any(_treeEntry('index.html', 'blob'));
 
     for (var te in treeContents.where((te) => te.type == 'tree')) {
       await _expectStandardTreeContents(gitDir, te.sha);
@@ -192,15 +199,14 @@ package:peanut $packageVersion''');
       ),
     );
 
-    expect(
+    check(
       (await gitDir.branches()).map((br) => br.branchName),
-      unorderedEquals(['main', 'gh-pages']),
-    );
+    ).unorderedEquals(['main', 'gh-pages']);
 
     final ghBranchRef = await gitDir.branchReference('gh-pages');
 
     final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-    expect(ghCommit.message, '''
+    check(ghCommit.message).equals('''
 Built pkg1/example, pkg1/web, pkg2/example, pkg2/web
 
 Branch: main
@@ -210,24 +216,20 @@ package:peanut $packageVersion''');
 
     final treeContents = await gitDir.lsTree(ghCommit.treeSha);
 
-    expect(
+    check(
       treeContents.map((te) => te.name),
-      unorderedEquals(packages.followedBy(['index.html'])),
-    );
+    ).unorderedEquals(packages.followedBy(['index.html']));
 
-    expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+    check(treeContents).any(_treeEntry('index.html', 'blob'));
 
     final pkgTreeHashes = treeContents
         .where((te) => te.type == 'tree')
         .map((te) => te.sha)
         .toSet();
-    expect(pkgTreeHashes, hasLength(1), reason: 'should be identical');
+    check(because: 'should be identical', pkgTreeHashes).length.equals(1);
 
     final pkgContent = await gitDir.lsTree(pkgTreeHashes.single);
-    expect(
-      pkgContent.map((te) => te.name),
-      unorderedEquals(['example', 'web']),
-    );
+    check(pkgContent.map((te) => te.name)).unorderedEquals(['example', 'web']);
 
     for (var te in pkgContent) {
       await _expectStandardTreeContents(gitDir, te.sha);
@@ -257,15 +259,14 @@ void main(List<String> args) {
         ),
       );
 
-      expect(
+      check(
         (await gitDir.branches()).map((br) => br.branchName),
-        unorderedEquals(['main', 'gh-pages']),
-      );
+      ).unorderedEquals(['main', 'gh-pages']);
 
       final ghBranchRef = await gitDir.branchReference('gh-pages');
 
       final ghCommit = await gitDir.commitFromRevision(ghBranchRef!.sha);
-      expect(ghCommit.message, '''
+      check(ghCommit.message).equals('''
 Built example, web
 
 Branch: main
@@ -274,16 +275,13 @@ Commit: ${primaryCommit.single.sha}
 package:peanut $packageVersion''');
 
       final treeContents = await gitDir.lsTree(ghCommit.treeSha);
-      expect(
-        treeContents,
-        unorderedEquals([
-          _treeEntry('example', 'tree'),
-          _treeEntry('index.html', 'blob'),
-          _treeEntry('map.json', 'blob'),
-          _treeEntry('some_file.txt', 'blob'),
-          _treeEntry('web', 'tree'),
-        ]),
-      );
+      check(treeContents).unorderedMatches([
+        _treeEntry('example', 'tree'),
+        _treeEntry('index.html', 'blob'),
+        _treeEntry('map.json', 'blob'),
+        _treeEntry('some_file.txt', 'blob'),
+        _treeEntry('web', 'tree'),
+      ]);
 
       final mapJsonSha = treeContents
           .singleWhere((te) => te.name == 'map.json')
@@ -292,7 +290,7 @@ package:peanut $packageVersion''');
       final result = await gitDir.runCommand(['cat-file', '-p', mapJsonSha]);
       final mapOutput =
           jsonDecode(result.stdout as String) as Map<String, dynamic>;
-      expect(mapOutput, Map<String, dynamic>.fromIterable(buildDirs));
+      check(mapOutput).deepEquals(Map<String, dynamic>.fromIterable(buildDirs));
     });
 
     test('missing', () async {
@@ -300,14 +298,15 @@ package:peanut $packageVersion''');
       await _pubGet();
       await _initGitDir();
 
-      await expectLater(
+      await check(
         _run(options: const Options(postBuildDartScript: 'post_build.dart')),
-        _throwsPeanutException(
-          startsWith(
-            'The provided post-build Dart script does not exist '
-            'or is not a file.',
-          ),
-        ),
+      ).throws<PeanutException>(
+        (it) => it
+            .has((pe) => pe.message, 'message')
+            .startsWith(
+              'The provided post-build Dart script does not exist or '
+              'is not a file.',
+            ),
       );
     });
 
@@ -323,11 +322,12 @@ void main() {
       await _pubGet();
       await _initGitDir();
 
-      await expectLater(
+      await check(
         _run(options: const Options(postBuildDartScript: 'post_build.dart')),
-        _throwsPeanutException(
-          allOf(startsWith('Error running "'), endsWith('\nExit code 123')),
-        ),
+      ).throws<PeanutException>(
+        (it) => it.has((pe) => pe.message, 'message')
+          ..startsWith('Error running "')
+          ..endsWith('\nExit code 123'),
       );
     });
   });
@@ -340,12 +340,9 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
     final treeContents = await gitDir.lsTree(treeSha);
 
     try {
-      expect(treeContents, hasLength(2));
-      expect(
-        treeContents,
-        contains(_treeEntry('example_script.dart.js', 'blob')),
-      );
-      expect(treeContents, contains(_treeEntry('index.html', 'blob')));
+      check(treeContents).length.equals(2);
+      check(treeContents).any(_treeEntry('example_script.dart.js', 'blob'));
+      check(treeContents).any(_treeEntry('index.html', 'blob'));
 
       _standardTreeContentSha = treeSha;
     } catch (e) {
@@ -353,11 +350,10 @@ Future<void> _expectStandardTreeContents(GitDir gitDir, String treeSha) async {
       rethrow;
     }
   } else {
-    expect(
+    check(
+      because: 'Standard directory content should be identical across tests.',
       treeSha,
-      _standardTreeContentSha,
-      reason: 'Standard directory content should be identical across tests.',
-    );
+    ).equals(_standardTreeContentSha!);
   }
 }
 
@@ -368,16 +364,15 @@ Future<void> _pubGet({String? parent}) async {
     '--offline',
     '--no-precompile',
   ], workingDirectory: p.join(d.sandbox, parent));
-  expect(
-    proc.exitCode,
-    0,
-    reason: [
+  check(
+    because: [
       'STDOUT:',
       proc.stdout as String,
       'STDERR:',
       proc.stderr as String,
     ].map((str) => str.trim()).join('\n'),
-  );
+    proc.exitCode,
+  ).equals(0);
 }
 
 Future<GitDir> _initGitDir() async {
@@ -390,7 +385,9 @@ Future<GitDir> _initGitDir() async {
   await gitDir.runCommand(['add', '.']);
   await gitDir.runCommand(['commit', '-m', 'dummy commit']);
 
-  expect((await gitDir.branches()).map((br) => br.branchName), ['main']);
+  check(
+    (await gitDir.branches()).map((br) => br.branchName),
+  ).deepEquals(['main']);
   return gitDir;
 }
 

@@ -1,5 +1,6 @@
+import 'package:checks/checks.dart';
 import 'package:peanut/src/options.dart';
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
 import 'package:yaml/yaml.dart';
 
 void main() {
@@ -7,19 +8,15 @@ void main() {
   final emptyFileOptions = decodeYaml({});
 
   test('empty args', () {
-    _checkDefault(emptyArgsOptions, _defaultOptions, isFalse);
+    _checkDefault(emptyArgsOptions, _defaultOptions);
   });
 
   test('empty file', () {
-    _checkDefault(emptyFileOptions, _defaultOptions, isNull);
+    _checkDefault(emptyFileOptions, _defaultOptions);
   });
 
   test('merged', () {
-    _checkDefault(
-      emptyArgsOptions.merge(emptyFileOptions),
-      _defaultOptions,
-      isNull,
-    );
+    _checkDefault(emptyArgsOptions.merge(emptyFileOptions), _defaultOptions);
   });
 
   test('all options', () {
@@ -60,7 +57,7 @@ void main() {
       '--verbose',
       '--version',
     ]);
-    _checkDefault(allArgsOptions, allOptions, isTrue, wasParsed: true);
+    _checkDefault(allArgsOptions, allOptions, wasParsed: true);
 
     final allFileOptions = decodeYaml({
       'branch': 'other-branch',
@@ -76,26 +73,20 @@ void main() {
       'source-branch-info': false,
       'wasm': false,
     });
-    _checkDefault(
-      allFileOptions,
-      allOptions,
-      isNull,
-      jsonSkippedDefault: false,
-    );
+    _checkDefault(allFileOptions, allOptions, jsonSkippedDefault: false);
 
     // empty args, full file
     _checkDefault(
       emptyArgsOptions.merge(allFileOptions),
       allOptions,
-      isNull,
       jsonSkippedDefault: false,
     );
 
     // all args, empty file
-    _checkDefault(allArgsOptions.merge(emptyFileOptions), allOptions, isNull);
+    _checkDefault(allArgsOptions.merge(emptyFileOptions), allOptions);
 
     // all args, full file
-    _checkDefault(allArgsOptions.merge(allFileOptions), allOptions, isNull);
+    _checkDefault(allArgsOptions.merge(allFileOptions), allOptions);
   });
 }
 
@@ -103,36 +94,42 @@ const _defaultOptions = Options();
 
 void _checkDefault(
   Options options,
-  Options expected,
-  Matcher parsedValue, {
+  Options expected, {
   bool? jsonSkippedDefault,
   bool wasParsed = false,
 }) {
-  expect(options.branch, expected.branch);
-  expect(options.branchWasParsed, wasParsed);
-  expect(options.buildConfig, expected.buildConfig);
-  expect(options.buildConfigWasParsed, wasParsed);
-  expect(options.builderOptions, expected.builderOptions);
-  expect(options.builderOptionsWasParsed, wasParsed);
-  expect(options.directories, expected.directories);
-  expect(options.directoriesWasParsed, wasParsed);
+  check(options.branch).equals(expected.branch);
+  check(options.branchWasParsed).equals(wasParsed);
+  check(options.buildConfig).equals(expected.buildConfig);
+  check(options.buildConfigWasParsed).equals(wasParsed);
 
-  expect(options.dryRun, jsonSkippedDefault ?? expected.dryRun);
-  expect(options.help, jsonSkippedDefault ?? expected.help);
+  final builderOptions = expected.builderOptions;
+  if (builderOptions == null) {
+    check(options.builderOptions).isNull();
+  } else {
+    check(options.builderOptions).isNotNull().deepEquals(builderOptions);
+  }
+  check(options.builderOptionsWasParsed).equals(wasParsed);
 
-  expect(options.message, expected.message);
-  expect(options.messageWasParsed, wasParsed);
-  expect(options.postBuildDartScript, expected.postBuildDartScript);
-  expect(options.postBuildDartScriptWasParsed, wasParsed);
-  expect(options.release, expected.release);
-  expect(options.releaseWasParsed, wasParsed);
-  expect(options.sourceBranchInfo, expected.sourceBranchInfo);
-  expect(options.sourceBranchInfoWasParsed, wasParsed);
-  expect(options.verbose, expected.verbose);
-  expect(options.verboseWasParsed, wasParsed);
-  expect(options.versionInfo, expected.versionInfo);
-  expect(options.versionInfoWasParsed, expected.versionInfoWasParsed);
-  expect(options.wasm, expected.wasm);
+  check(options.directories).deepEquals(expected.directories);
+  check(options.directoriesWasParsed).equals(wasParsed);
 
-  expect(options.version, jsonSkippedDefault ?? expected.version);
+  check(options.dryRun).equals(jsonSkippedDefault ?? expected.dryRun);
+  check(options.help).equals(jsonSkippedDefault ?? expected.help);
+
+  check(options.message).equals(expected.message);
+  check(options.messageWasParsed).equals(wasParsed);
+  check(options.postBuildDartScript).equals(expected.postBuildDartScript);
+  check(options.postBuildDartScriptWasParsed).equals(wasParsed);
+  check(options.release).equals(expected.release);
+  check(options.releaseWasParsed).equals(wasParsed);
+  check(options.sourceBranchInfo).equals(expected.sourceBranchInfo);
+  check(options.sourceBranchInfoWasParsed).equals(wasParsed);
+  check(options.verbose).equals(expected.verbose);
+  check(options.verboseWasParsed).equals(wasParsed);
+  check(options.versionInfo).equals(expected.versionInfo);
+  check(options.versionInfoWasParsed).equals(expected.versionInfoWasParsed);
+  check(options.wasm).equals(expected.wasm);
+
+  check(options.version).equals(jsonSkippedDefault ?? expected.version);
 }

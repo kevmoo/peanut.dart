@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:checked_yaml/checked_yaml.dart';
+import 'package:checks/checks.dart';
 import 'package:path/path.dart' as p;
 import 'package:peanut/src/options.dart';
 import 'package:peanut/src/utils.dart';
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
@@ -55,7 +56,7 @@ void main() {
     final proc = await _runPeanut(['--help']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, _output);
+    check(output).equals(_output);
 
     await proc.shouldExit(0);
   });
@@ -63,14 +64,14 @@ void main() {
   test('readme', onPlatform: {'windows': const Skip()}, () {
     final content = File('README.md').readAsStringSync();
 
-    expect(content, contains(_output));
+    check(content).contains(_output);
   });
 
   test('bad flag', () async {
     final proc = await _runPeanut(['--bob']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''
+    check(output).equals('''
 Could not find an option named "--bob".
 
 $_output''');
@@ -82,7 +83,7 @@ $_output''');
     final proc = await _runPeanut(['foo', 'bar', 'baz']);
 
     final output = await proc.stdoutStream().join('\n');
-    expect(output, '''
+    check(output).equals('''
 I don't understand the extra arguments: foo, bar, baz
 
 $_output''');
@@ -92,16 +93,14 @@ $_output''');
 
   group('builder options', () {
     test('not provided', () async {
-      expect(parseOptions([]).builderOptions, isNull);
+      check(parseOptions([]).builderOptions).isNull();
     });
 
-    void expectParseOptionsThrows(List<String> args, Object matcher) {
-      expect(
-        () => parseOptions(args),
-        throwsA(
-          isFormatException.having((e) => e.toString(), 'toString()', matcher),
-        ),
-      );
+    void expectParseOptionsThrows(List<String> args, String expectedMessage) {
+      check(() => parseOptions(args))
+          .throws<FormatException>()
+          .has((e) => e.toString(), 'toString()')
+          .equals(expectedMessage);
     }
 
     group('config file', () {
@@ -118,8 +117,9 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
 
         final options = parseOptions(['--builder-options', _someFilePath]);
 
-        expect(options.builderOptions, hasLength(1));
-        expect(options.builderOptions, containsPair('bob', {'jones': 42}));
+        final builderOptions = check(options.builderOptions).isNotNull();
+        builderOptions.length.equals(1);
+        builderOptions['bob'].deepEquals({'jones': 42});
       });
 
       test('invalid file', () async {
@@ -147,24 +147,18 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
         () async {
           await d.file('some_file.yaml', '{').create();
 
-          expect(
-            () => parseOptions(['--builder-options', _someFilePath]),
-            throwsA(
-              isA<ParsedYamlException>().having(
-                (e) {
-                  printOnFailure(e.formattedMessage ?? '');
-                  return e.formattedMessage;
-                },
-                'formattedMessage',
-                '''
+          check(() => parseOptions(['--builder-options', _someFilePath]))
+              .throws<ParsedYamlException>()
+              .has((e) {
+                printOnFailure(e.formattedMessage ?? '');
+                return e.formattedMessage;
+              }, 'formattedMessage')
+              .equals('''
 line 1, column 2 of $_someFilePath: Expected node content.
   ╷
 1 │ {
   │  ^
-  ╵''',
-              ),
-            ),
-          );
+  ╵''');
         },
       );
     });
