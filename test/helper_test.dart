@@ -1,8 +1,9 @@
 @TestOn('!windows')
 library;
 
+import 'package:checks/checks.dart';
 import 'package:peanut/src/helpers.dart';
-import 'package:test/test.dart';
+import 'package:test/scaffolding.dart';
 
 void _test(
   List<String> directories,
@@ -10,8 +11,11 @@ void _test(
   Map<String, String> outputMap,
 ) {
   final value = targetDirectories('root', directories);
-  expect(value, expectedTargetDirectories, reason: 'target directories');
-  expect(outputDirectoryMap(value), outputMap, reason: 'output map');
+  check(
+    because: 'target directories',
+    value,
+  ).deepEquals(expectedTargetDirectories);
+  check(because: 'output map', outputDirectoryMap(value)).deepEquals(outputMap);
 }
 
 void main() {
