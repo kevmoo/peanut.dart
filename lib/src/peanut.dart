@@ -49,22 +49,6 @@ Future<void> run({
   // key: package dir; value: all dirs to build within that package
   final targetDirs = targetDirectories(workingDir, options.directories);
 
-  for (var dir in options.directories) {
-    final fullPath = pkgNormalize(workingDir, dir);
-
-    if (p.equals(workingDir, dir)) {
-      throw PeanutException(
-        '"$dir" is the same as the working directory, which is not allowed.',
-      );
-    }
-
-    if (!p.isWithin(workingDir, fullPath)) {
-      throw PeanutException(
-        '"$dir" is not in the working directory "$workingDir".',
-      );
-    }
-  }
-
   String prettyPkgPath(String pkgPath) => pkgPath == '.' ? workingDir : pkgPath;
 
   print(ansi.styleBold.wrap('Validating packages:'));
