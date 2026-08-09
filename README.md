@@ -136,11 +136,10 @@ It receives two arguments:
 
 For example, if you run `peanut -d web`, the script will be called with:
 
-*   `args[0]`: `/tmp/peanut.xyz` (a temporary path)
-*   `args[1]`: `{"web":"."}`
+- `args[0]`: `/tmp/peanut.xyz` (a temporary path)
+- `args[1]`: `{"web":"."}`
 
-The `index.html` for the `web` build would be at
-`/tmp/peanut.xyz/index.html`.
+The `index.html` for the `web` build would be at `/tmp/peanut.xyz/index.html`.
 
 ## Examples
 
