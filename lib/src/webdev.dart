@@ -82,7 +82,7 @@ Future<String?> getPackageVersion(String workingDir) async {
   return pubSpec.version;
 }
 
-const String pubspecFile = 'pubspec.yaml';
+const String _pubspecFile = 'pubspec.yaml';
 
 class _Pubspec {
   final YamlMap? _pubspec;
@@ -91,7 +91,7 @@ class _Pubspec {
 
   static Future<_Pubspec> read(String workingDir) async {
     final pubSpec =
-        loadYaml(await File(p.join(workingDir, pubspecFile)).readAsString())
+        loadYaml(await File(p.join(workingDir, _pubspecFile)).readAsString())
             as YamlMap;
 
     return _Pubspec(pubSpec);
