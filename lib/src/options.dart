@@ -21,7 +21,7 @@ const defaultMessage = 'Built <$_directoryFlag>';
 String get parserUsage =>
     _$populateOptionsParser(ArgParser(usageLineLength: 80)).usage;
 
-Options decodeYaml(Map? yaml) => _$OptionsFromJson(yaml!);
+Options decodeYaml(Map<dynamic, dynamic>? yaml) => _$OptionsFromJson(yaml!);
 
 @JsonSerializable(
   anyMap: true,
@@ -279,11 +279,13 @@ extension OptionsExtension on Options {
   };
 }
 
-Map<String, Map<String, dynamic>>? _builderOptionsFromMap(Map? source) =>
-    _builderOptionsConvert(source as YamlMap?);
+Map<String, Map<String, dynamic>>? _builderOptionsFromMap(
+  Map<dynamic, dynamic>? source,
+) => _builderOptionsConvert(source as YamlMap?);
 
-Map<String, Map<String, dynamic>>? _builderOptionsConvert(Map? map) =>
-    map == null
+Map<String, Map<String, dynamic>>? _builderOptionsConvert(
+  Map<dynamic, dynamic>? map,
+) => map == null
     ? null
     : Map<String, Map<String, dynamic>>.fromEntries(
         map.entries.map((e) {
