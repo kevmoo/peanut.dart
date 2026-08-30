@@ -15,7 +15,7 @@ void printError(Object? object) {
   print(ansi.red.wrap(object.toString()));
 }
 
-Future runProcess(
+Future<void> runProcess(
   String proc,
   List<String> args, {
   String? workingDirectory,

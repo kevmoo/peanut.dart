@@ -430,7 +430,7 @@ final _exampleFiles = Map.fromEntries(
   ),
 );
 
-Future _logGitTree(GitDir gitDir, String sha, {int depth = 0}) async {
+Future<void> _logGitTree(GitDir gitDir, String sha, {int depth = 0}) async {
   final treeContents = await gitDir.lsTree(sha);
 
   for (var te in treeContents) {

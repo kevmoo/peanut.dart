@@ -6,7 +6,7 @@ targets:
       source_gen|combining_builder:
         options:
           ignore_for_file:
-          - lines_longer_than_80_chars
+          - type=lint
       build_web_compilers|entrypoint:
         # These are globs for the entrypoints you want to compile.
         generate_for:
