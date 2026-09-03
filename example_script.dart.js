@@ -1,26 +1,50 @@
 (async () => {
-const thisScript = document.currentScript;
+const isWorker = typeof document === 'undefined';
+const thisScript = isWorker ? undefined : document.currentScript;
 
 function relativeURL(ref) {
+  if (isWorker) {
+    return new URL(ref, self.location.href).toString();
+  }
   const base = thisScript?.src ?? document.baseURI;
   return new URL(ref, base).toString();
 }
 
-const searchParams = new URLSearchParams(window.location.search);
-const forceJS = searchParams.get('force_js');
-if (!forceJS && (WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0])))) {
+const forceJS = (() => {
+  if (thisScript && thisScript.src) {
+    const fromScript = new URL(thisScript.src).searchParams.get('force_js');
+    if (fromScript) return fromScript;
+  }
+  return new URLSearchParams(self.location.search).get('force_js');
+})();
+if (!forceJS && (WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0]))&&WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,96,0,1,123,3,2,1,0,10,10,1,8,0,65,0,253,15,253,98,11]))&&!WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,2,23,1,14,119,97,115,109,58,106,115,45,115,116,114,105,110,103,4,99,97,115,116,0,0]),{"builtins":["js-string"]}))) {
 
-let { compileStreaming } = await import("./example_script.mjs");
+const moduleLoadingCache = new Map();
+function getModuleBytes(m, callback) {
+  const cached = moduleLoadingCache.get(m);
+  if (!!cached) return cached;
+  const loadPromise = fetch(relativeURL(`./${m}`)).then((b) => callback(m, b));
+  moduleLoadingCache.set(m, loadPromise);
+  return loadPromise;
+}
+function loadDeferredModules(modules, handleWasmBytes) {
+  return Promise.all(modules.map((m) => getModuleBytes(m, handleWasmBytes)));
+}
+let { compileStreaming } = await import(relativeURL("./example_script.mjs"));
 
 let app = await compileStreaming(fetch(relativeURL("example_script.wasm")));
-let module = await app.instantiate({});
+let module = await app.instantiate({}, {loadDeferredModules: loadDeferredModules});
 module.invokeMain();
 
 } else {
-const scriptTag = document.createElement("script");
-scriptTag.type = "application/javascript";
-scriptTag.src = relativeURL("./example_script.dart2js.js");
-document.head.append(scriptTag);
+if (isWorker) {
+  importScripts(relativeURL("./example_script.dart2js.js"));
+} else {
+  const scriptTag = document.createElement("script");
+  scriptTag.type = "application/javascript";
+  scriptTag.src = relativeURL("./example_script.dart2js.js");
+  document.head.append(scriptTag);
+}
 }
 
 })();

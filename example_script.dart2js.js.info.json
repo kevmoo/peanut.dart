@@ -3,11 +3,11 @@
   "dump_minor_version": 1,
   "program": {
     "entrypoint": "function/org-dartlang-app:///example/example_script.dart::main",
-    "size": 44951,
+    "size": 44969,
     "ramUsage": "N/A MB",
-    "dart2jsVersion": "3.12.0-210.1.beta",
-    "compilationMoment": "2026-03-07 10:56:31.263211",
-    "compilationDuration": 505276,
+    "dart2jsVersion": "3.14.0-188.0.dev",
+    "compilationMoment": "2026-09-02 19:12:39.014238",
+    "compilationDuration": 460764,
     "toJsonDuration": 0,
     "dumpInfoDuration": 0,
     "noSuchMethodEnabled": false,
@@ -23,7 +23,7 @@
         "id": "library/dart:_foreign_helper::",
         "kind": "library",
         "name": "_foreign_helper",
-        "size": 42,
+        "size": 43,
         "children": [
           "class/dart:_foreign_helper::JS_CONST"
         ],
@@ -33,7 +33,7 @@
         "id": "library/dart:_interceptors::",
         "kind": "library",
         "name": "_interceptors",
-        "size": 3699,
+        "size": 3671,
         "children": [
           "class/dart:_interceptors::ArrayIterator",
           "class/dart:_interceptors::Interceptor",
@@ -74,7 +74,7 @@
         "id": "library/dart:_internal::",
         "kind": "library",
         "name": "dart._internal",
-        "size": 501,
+        "size": 502,
         "children": [
           "class/dart:_internal::FixedLengthListMixin",
           "class/dart:_internal::LateError",
@@ -92,7 +92,7 @@
         "id": "library/dart:_js_helper::",
         "kind": "library",
         "name": "_js_helper",
-        "size": 7646,
+        "size": 7625,
         "children": [
           "class/dart:_js_helper::BoundClosure",
           "class/dart:_js_helper::Closure",
@@ -147,7 +147,7 @@
         "id": "library/dart:_js_names::",
         "kind": "library",
         "name": "dart._js_names",
-        "size": 0,
+        "size": 37,
         "children": [
           "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways"
         ],
@@ -223,7 +223,7 @@
         "id": "library/dart:_rti::",
         "kind": "library",
         "name": "rti",
-        "size": 16760,
+        "size": 16776,
         "children": [
           "class/dart:_rti::Rti",
           "class/dart:_rti::TypeRule",
@@ -338,7 +338,7 @@
         "id": "library/dart:core::",
         "kind": "library",
         "name": "dart.core",
-        "size": 1542,
+        "size": 1547,
         "children": [
           "class/dart:core::ArgumentError",
           "class/dart:core::AssertionError",
@@ -434,7 +434,7 @@
         "id": "class/dart:_foreign_helper::JS_CONST",
         "kind": "class",
         "name": "JS_CONST",
-        "size": 42,
+        "size": 43,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_foreign_helper::",
         "modifiers": {
@@ -815,7 +815,7 @@
         "id": "class/dart:_js_helper::BoundClosure",
         "kind": "class",
         "name": "BoundClosure",
-        "size": 139,
+        "size": 135,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_js_helper::",
         "modifiers": {
@@ -1734,7 +1734,7 @@
         "id": "class/dart:core::Object",
         "kind": "class",
         "name": "Object",
-        "size": 155,
+        "size": 160,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:core::",
         "modifiers": {
@@ -2600,7 +2600,7 @@
         "parameters": [],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "\"[\"(a){var t=a[$.K()]\nif(t==null)t=a[$.l()]\nif(t==null)return this.u(a)\nreturn\"JavaScript function for \"+J.C(t)}",
+        "code": "\"[\"(a){var t=a[$.K()]\nif(t==null)t=a[$.j()]\nif(t==null)return this.u(a)\nreturn\"JavaScript function for \"+J.C(t)}",
         "type": "String Function()",
         "functionKind": 2
       },
@@ -2833,7 +2833,7 @@
         "id": "function/dart:_interceptors::getNativeInterceptor",
         "kind": "function",
         "name": "getNativeInterceptor",
-        "size": 736,
+        "size": 706,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_interceptors::",
         "children": [],
@@ -2854,7 +2854,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "ks(a){var t,s,r,q,p,o=a[v.dispatchPropertyName]\nif(o==null)if($.B==null){A.h()\no=a[v.dispatchPropertyName]}if(o!=null){t=o.p\nif(!1===t)return o.i\nif(!0===t)return a\ns=Object.getPrototypeOf(a)\nif(t===s)return o.i\nif(o.e===s)throw A.b(A.n(\"Return interceptor for \"+A.d(t(a,o))))}r=a.constructor\nif(r==null)q=null\nelse{p=$.z\nif(p==null)p=$.z=v.getIsolateTag(\"_$dart_js\")\nq=r[p]}if(q!=null)return q\nq=A.w(a)\nif(q!=null)return q\nif(typeof a==\"function\")return B.DG\nt=Object.getPrototypeOf(a)\nif(t==null)return B.ZQ\nif(t===Object.prototype)return B.ZQ\nif(typeof r==\"function\"){p=$.z\nif(p==null)p=$.z=v.getIsolateTag(\"_$dart_js\")\nObject.defineProperty(r,p,{value:B.vB,enumerable:false,writable:true,configurable:true})\nreturn B.vB}return B.vB}",
+        "code": "ks(a){var t,s,r,q,p,o=\"_$dart_js\",n=a[v.dispatchPropertyName]\nif(n==null)if($.B==null){A.h()\nn=a[v.dispatchPropertyName]}if(n!=null){t=n.p\nif(!1===t)return n.i\nif(!0===t)return a\ns=Object.getPrototypeOf(a)\nif(t===s)return n.i\nif(n.e===s)throw A.b(A.n(\"Return interceptor for \"+A.d(t(a,n))))}r=a.constructor\nif(r==null)q=null\nelse{p=$.z\nif(p==null)p=$.z=A.E(o)\nq=r[p]}if(q!=null)return q\nq=A.w(a)\nif(q!=null)return q\nif(typeof a==\"function\")return B.DG\nt=Object.getPrototypeOf(a)\nif(t==null)return B.ZQ\nif(t===Object.prototype)return B.ZQ\nif(typeof r==\"function\"){p=$.z\nif(p==null)p=$.z=A.E(o)\nObject.defineProperty(r,p,{value:B.vB,enumerable:false,writable:true,configurable:true})\nreturn B.vB}return B.vB}",
         "type": "dynamic Function(dynamic)",
         "functionKind": 0
       },
@@ -3234,7 +3234,7 @@
         "id": "function/dart:_js_helper::BoundClosure._computeFieldNamed",
         "kind": "function",
         "name": "_computeFieldNamed",
-        "size": 220,
+        "size": 219,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::BoundClosure",
         "children": [],
@@ -3255,7 +3255,7 @@
         ],
         "sideEffects": "SideEffects(reads nothing; writes nothing)",
         "inlinedCount": 0,
-        "code": "L4(a){var t,s,r,q=new A.rT(\"receiver\",\"interceptor\"),p=Object.getOwnPropertyNames(q)\np.$flags=1\nt=p\nfor(p=t.length,s=0;s<p;++s){r=t[s]\nif(q[r]===a)return r}throw A.b(new A.AT(!1,null,null,\"Field name \"+a+\" not found.\"))}",
+        "code": "L4(a){var t,s,r,q=new A.e(\"receiver\",\"interceptor\"),p=Object.getOwnPropertyNames(q)\np.$flags=1\nt=p\nfor(p=t.length,s=0;s<p;++s){r=t[s]\nif(q[r]===a)return r}throw A.b(new A.AT(!1,null,null,\"Field name \"+a+\" not found.\"))}",
         "type": "String Function(String)",
         "functionKind": 0
       },
@@ -3657,7 +3657,7 @@
         "id": "function/dart:_js_helper::Closure.fromTearOff",
         "kind": "function",
         "name": "fromTearOff",
-        "size": 679,
+        "size": 678,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::Closure",
         "children": [],
@@ -3678,7 +3678,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "f(a1){var t,s,r,q,p,o,n,m,l,k,j=a1.co,i=a1.iS,h=a1.iI,g=a1.nDA,f=a1.aI,e=a1.fs,d=a1.cs,c=e[0],b=d[0],a=j[c],a0=a1.fT\na0.toString\nt=i?Object.create(new A.zx().constructor.prototype):Object.create(new A.rT(null,null).constructor.prototype)\nt.$initialize=t.constructor\ns=i?function static_tear_off(){this.$initialize()}:function tear_off(a2,a3){this.$initialize(a2,a3)}\nt.constructor=s\ns.prototype=t\nt.$_name=c\nt.$_target=a\nr=!i\nif(r)q=A.bx(c,a,h,g)\nelse{t.$static_name=c\nq=a}t.$S=A.fm(a0,i,h)\nt[b]=q\nfor(p=q,o=1;o<e.length;++o){n=e[o]\nif(typeof n==\"string\"){m=j[n]\nl=n\nn=m}else l=\"\"\nk=d[o]\nif(k!=null){if(r)n=A.bx(l,n,h,g)\nt[k]=n}if(o===f)p=n}t.$C=p\nt.$R=a1.rC\nt.$D=a1.dV\nreturn s}",
+        "code": "f(a1){var t,s,r,q,p,o,n,m,l,k,j=a1.co,i=a1.iS,h=a1.iI,g=a1.nDA,f=a1.aI,e=a1.fs,d=a1.cs,c=e[0],b=d[0],a=j[c],a0=a1.fT\na0.toString\nt=i?Object.create(new A.zx().constructor.prototype):Object.create(new A.e(null,null).constructor.prototype)\nt.$initialize=t.constructor\ns=i?function static_tear_off(){this.$initialize()}:function tear_off(a2,a3){this.$initialize(a2,a3)}\nt.constructor=s\ns.prototype=t\nt.$_name=c\nt.$_target=a\nr=!i\nif(r)q=A.bx(c,a,h,g)\nelse{t.$static_name=c\nq=a}t.$S=A.fm(a0,i,h)\nt[b]=q\nfor(p=q,o=1;o<e.length;++o){n=e[o]\nif(typeof n==\"string\"){m=j[n]\nl=n\nn=m}else l=\"\"\nk=d[o]\nif(k!=null){if(r)n=A.bx(l,n,h,g)\nt[k]=n}if(o===f)p=n}t.$C=p\nt.$R=a1.rC\nt.$D=a1.dV\nreturn s}",
         "type": "dynamic Function(Object?)",
         "functionKind": 0
       },
@@ -3796,7 +3796,7 @@
         "id": "function/dart:_js_helper::Primitives.objectTypeName",
         "kind": "function",
         "name": "objectTypeName",
-        "size": 277,
+        "size": 278,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_js_helper::Primitives",
         "children": [],
@@ -3817,7 +3817,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "u(a){var t,s,r,q\nif(a instanceof A.j)return A.F(A.zK(a),null)\nt=J.ia(a)\nif(t===B.Ok||t===B.Ub||u.o.b(a)){s=B.O4(a)\nif(s!==\"Object\"&&s!==\"\")return s\nr=a.constructor\nif(typeof r==\"function\"){q=r.name\nif(typeof q==\"string\"&&q!==\"Object\"&&q!==\"\")return q}}return A.F(A.zK(a),null)}",
+        "code": "u(a){var t,s,r,q\nif(a instanceof A.Mh)return A.F(A.zK(a),null)\nt=J.ia(a)\nif(t===B.Ok||t===B.Ub||u.o.b(a)){s=B.O4(a)\nif(s!==\"Object\"&&s!==\"\")return s\nr=a.constructor\nif(typeof r==\"function\"){q=r.name\nif(typeof q==\"string\"&&q!==\"Object\"&&q!==\"\")return q}}return A.F(A.zK(a),null)}",
         "type": "String Function(Object?)",
         "functionKind": 0
       },
@@ -4229,8 +4229,8 @@
           }
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 2,
-        "code": "e(a){return v.getIsolateTag(a)}",
+        "inlinedCount": 0,
+        "code": "E(a){return v.getIsolateTag(a)}",
         "type": "String Function(String)",
         "functionKind": 0
       },
@@ -4429,7 +4429,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "r(a,b){var t\nif(a==null)a=new A.E()\nb.dartException=a\nt=A.J\nif(\"defineProperty\" in Object){Object.defineProperty(b,\"message\",{get:t})\nb.name=\"\"}else b.toString=t\nreturn b}",
+        "code": "r(a,b){var t\nif(a==null)a=new A.l()\nb.dartException=a\nt=A.J\nif(\"defineProperty\" in Object){Object.defineProperty(b,\"message\",{get:t})\nb.name=\"\"}else b.toString=t\nreturn b}",
         "type": "dynamic Function(dynamic,dynamic)",
         "functionKind": 0
       },
@@ -4956,7 +4956,7 @@
         "id": "function/dart:_js_helper::unminifyOrTag",
         "kind": "function",
         "name": "unminifyOrTag",
-        "size": 76,
+        "size": 60,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_js_helper::",
         "children": [],
@@ -4977,7 +4977,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "NQ(a){var t=v.mangledGlobalNames[a]\nif(t!=null)return t\nreturn\"minified:\"+a}",
+        "code": "NQ(a){var t=A.Jg(a)\nif(t!=null)return t\nreturn\"minified:\"+a}",
         "type": "String Function(String)",
         "functionKind": 0
       },
@@ -5014,7 +5014,7 @@
         "id": "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways",
         "kind": "function",
         "name": "unmangleGlobalNameIfPreservedAnyways",
-        "size": 0,
+        "size": 37,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_js_names::",
         "children": [],
@@ -5034,8 +5034,8 @@
           }
         ],
         "sideEffects": "SideEffects(reads anything; writes nothing)",
-        "inlinedCount": 2,
-        "code": "",
+        "inlinedCount": 0,
+        "code": "Jg(a){return v.mangledGlobalNames[a]}",
         "type": "String? Function(String)",
         "functionKind": 0
       },
@@ -7166,7 +7166,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 1,
-        "code": "oU(a,b){var t=b.splice(a.p)\nA.cH(a.u,a.e,t)\na.p=b.pop()\nreturn t}",
+        "code": "oU(a,b){var t=b.splice(a.p)\nA.rT(a.u,a.e,t)\na.p=b.pop()\nreturn t}",
         "type": "JSArray<dynamic> Function(Object?,Object?)",
         "functionKind": 0
       },
@@ -7677,7 +7677,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "eT(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.cH(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.Be(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
+        "code": "eT(a){var t,s,r,q,p,o,n,m=a.r,l=a.s\nfor(t=m.length,s=0;s<t;){r=m.charCodeAt(s)\nif(r>=48&&r<=57)s=A.A(s+1,r,m,l)\nelse if((((r|32)>>>0)-97&65535)<26||r===95||r===36||r===124)s=A.R8(a,s,m,l,!1)\nelse if(r===46)s=A.R8(a,s,m,l,!0)\nelse{++s\nswitch(r){case 44:break\ncase 58:l.push(!1)\nbreak\ncase 33:l.push(!0)\nbreak\ncase 59:l.push(A.KQ(a.u,a.e,l.pop()))\nbreak\ncase 94:l.push(A.Hc(a.u,l.pop()))\nbreak\ncase 35:l.push(A.mZ(a.u,5,\"#\"))\nbreak\ncase 64:l.push(A.mZ(a.u,2,\"@\"))\nbreak\ncase 126:l.push(A.mZ(a.u,3,\"~\"))\nbreak\ncase 60:l.push(a.p)\na.p=l.length\nbreak\ncase 62:A.rD(a,l)\nbreak\ncase 38:A.I3(a,l)\nbreak\ncase 63:q=a.u\nl.push(A.Bc(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 47:q=a.u\nl.push(A.LN(q,A.KQ(q,a.e,l.pop()),a.n))\nbreak\ncase 40:l.push(-3)\nl.push(a.p)\na.p=l.length\nbreak\ncase 41:A.Mt(a,l)\nbreak\ncase 91:l.push(a.p)\na.p=l.length\nbreak\ncase 93:p=l.splice(a.p)\nA.rT(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-1)\nbreak\ncase 123:l.push(a.p)\na.p=l.length\nbreak\ncase 125:p=l.splice(a.p)\nA.Be(a.u,a.e,p)\na.p=l.pop()\nl.push(p)\nl.push(-2)\nbreak\ncase 43:o=m.indexOf(\"(\",s)\nl.push(m.substring(s,o))\nl.push(-4)\nl.push(a.p)\na.p=l.length\ns=o+1\nbreak\ndefault:throw\"Bad character \"+r}}}n=l.pop()\nreturn A.KQ(a.u,a.e,n)}",
         "type": "Rti Function(Object?)",
         "functionKind": 0
       },
@@ -8007,7 +8007,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "cH(a,b,c){var t,s=c.length\nfor(t=0;t<s;++t)c[t]=A.KQ(a,b,c[t])}",
+        "code": "rT(a,b,c){var t,s=c.length\nfor(t=0;t<s;++t)c[t]=A.KQ(a,b,c[t])}",
         "type": "void Function(Object?,Rti?,Object?)",
         "functionKind": 0
       },
@@ -9685,7 +9685,7 @@
         "id": "function/dart:_rti::_Universe._parseRecipe",
         "kind": "function",
         "name": "_parseRecipe",
-        "size": 0,
+        "size": 39,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Universe",
         "children": [],
@@ -9720,8 +9720,8 @@
           }
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
-        "inlinedCount": 2,
-        "code": "",
+        "inlinedCount": 0,
+        "code": "z1(a,b,c,d){return A.eT(A.ow(a,b,c,d))}",
         "type": "Rti Function(Object?,Object?,String,bool)",
         "functionKind": 0
       },
@@ -10031,7 +10031,7 @@
         "id": "function/dart:_rti::_Universe.eval",
         "kind": "function",
         "name": "eval",
-        "size": 100,
+        "size": 94,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Universe",
         "children": [],
@@ -10062,7 +10062,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "Ew(a,b,c){var t,s=a.eC,r=s.get(b)\nif(r!=null)return r\nt=A.eT(A.ow(a,null,b,!1))\ns.set(b,t)\nreturn t}",
+        "code": "Ew(a,b,c){var t,s=a.eC,r=s.get(b)\nif(r!=null)return r\nt=A.z1(a,null,b,!1)\ns.set(b,t)\nreturn t}",
         "type": "Rti Function(Object?,String,bool)",
         "functionKind": 0
       },
@@ -10099,7 +10099,7 @@
         "id": "function/dart:_rti::_Universe.evalInEnvironment",
         "kind": "function",
         "name": "evalInEnvironment",
-        "size": 125,
+        "size": 119,
         "outputUnit": "outputUnit/main",
         "parent": "class/dart:_rti::_Universe",
         "children": [],
@@ -10130,7 +10130,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "cE(a,b,c){var t,s,r=b.z\nif(r==null)r=b.z=new Map()\nt=r.get(c)\nif(t!=null)return t\ns=A.eT(A.ow(a,b,c,!0))\nr.set(c,s)\nreturn s}",
+        "code": "cE(a,b,c){var t,s,r=b.z\nif(r==null)r=b.z=new Map()\nt=r.get(c)\nif(t!=null)return t\ns=A.z1(a,b,c,!0)\nr.set(c,s)\nreturn s}",
         "type": "Rti Function(Object?,Rti,String)",
         "functionKind": 0
       },
@@ -12479,7 +12479,7 @@
         "id": "function/dart:_rti::_isJSObject",
         "kind": "function",
         "name": "_isJSObject",
-        "size": 146,
+        "size": 147,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -12500,7 +12500,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes nothing)",
         "inlinedCount": 0,
-        "code": "xD(a){var t=this\nif(a==null)return!1\nif(typeof a==\"object\"){if(a instanceof A.j)return!!a[t.f]\nreturn!0}if(typeof a==\"function\")return!0\nreturn!1}",
+        "code": "xD(a){var t=this\nif(a==null)return!1\nif(typeof a==\"object\"){if(a instanceof A.Mh)return!!a[t.f]\nreturn!0}if(typeof a==\"function\")return!0\nreturn!1}",
         "type": "bool Function(Object?)",
         "functionKind": 0
       },
@@ -12508,7 +12508,7 @@
         "id": "function/dart:_rti::_isJSObjectStandalone",
         "kind": "function",
         "name": "_isJSObjectStandalone",
-        "size": 116,
+        "size": 117,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -12529,7 +12529,7 @@
         ],
         "sideEffects": "SideEffects(reads nothing; writes nothing)",
         "inlinedCount": 0,
-        "code": "Vl(a){if(typeof a==\"object\"){if(a instanceof A.j)return u.m.b(a)\nreturn!0}if(typeof a==\"function\")return!0\nreturn!1}",
+        "code": "Vl(a){if(typeof a==\"object\"){if(a instanceof A.Mh)return u.m.b(a)\nreturn!0}if(typeof a==\"function\")return!0\nreturn!1}",
         "type": "bool Function(Object?)",
         "functionKind": 0
       },
@@ -12537,7 +12537,7 @@
         "id": "function/dart:_rti::_isListTestViaProperty",
         "kind": "function",
         "name": "_isListTestViaProperty",
-        "size": 163,
+        "size": 164,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -12558,7 +12558,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "yM(a){var t,s=this\nif(a==null)return A.lR(s)\nif(typeof a!=\"object\")return!1\nif(Array.isArray(a))return!0\nt=s.f\nif(a instanceof A.j)return!!a[t]\nreturn!!J.ia(a)[t]}",
+        "code": "yM(a){var t,s=this\nif(a==null)return A.lR(s)\nif(typeof a!=\"object\")return!1\nif(Array.isArray(a))return!0\nt=s.f\nif(a instanceof A.Mh)return!!a[t]\nreturn!!J.ia(a)[t]}",
         "type": "bool Function(Object?)",
         "functionKind": 0
       },
@@ -12780,7 +12780,7 @@
         "id": "function/dart:_rti::_isTestViaProperty",
         "kind": "function",
         "name": "_isTestViaProperty",
-        "size": 103,
+        "size": 104,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -12801,7 +12801,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "t4(a){var t,s=this\nif(a==null)return A.lR(s)\nt=s.f\nif(a instanceof A.j)return!!a[t]\nreturn!!J.ia(a)[t]}",
+        "code": "t4(a){var t,s=this\nif(a==null)return A.lR(s)\nt=s.f\nif(a instanceof A.Mh)return!!a[t]\nreturn!!J.ia(a)[t]}",
         "type": "bool Function(Object?)",
         "functionKind": 0
       },
@@ -13386,7 +13386,7 @@
         "id": "function/dart:_rti::_unminifyOrTag",
         "kind": "function",
         "name": "_unminifyOrTag",
-        "size": 76,
+        "size": 60,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -13407,7 +13407,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "o3(a){var t=v.mangledGlobalNames[a]\nif(t!=null)return t\nreturn\"minified:\"+a}",
+        "code": "o3(a){var t=A.Jg(a)\nif(t!=null)return t\nreturn\"minified:\"+a}",
         "type": "String Function(String)",
         "functionKind": 0
       },
@@ -13662,7 +13662,7 @@
         "id": "function/dart:_rti::instanceType",
         "kind": "function",
         "name": "instanceType",
-        "size": 96,
+        "size": 97,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_rti::",
         "children": [],
@@ -13683,7 +13683,7 @@
         ],
         "sideEffects": "SideEffects(reads anything; writes anything)",
         "inlinedCount": 0,
-        "code": "zK(a){if(a instanceof A.j)return A.Lh(a)\nif(Array.isArray(a))return A.D(a)\nreturn A.VU(J.ia(a))}",
+        "code": "zK(a){if(a instanceof A.Mh)return A.Lh(a)\nif(Array.isArray(a))return A.D(a)\nreturn A.VU(J.ia(a))}",
         "type": "Rti Function(Object?)",
         "functionKind": 0
       },
@@ -14633,7 +14633,7 @@
           },
           {
             "name": "separator",
-            "type": "Value([exact=JSString|powerset={I}{O}{I}], value: \", \", powerset: {I}{O}{I})",
+            "type": "[exact=JSString|powerset={I}{O}{I}]",
             "declaredType": "String"
           }
         ],
@@ -14782,7 +14782,7 @@
           },
           {
             "name": "separator",
-            "type": "Value([exact=JSString|powerset={I}{O}{I}], value: \", \", powerset: {I}{O}{I})",
+            "type": "[exact=JSString|powerset={I}{O}{I}]",
             "declaredType": "String"
           }
         ],
@@ -15207,7 +15207,7 @@
         "parent": "library/dart:_interceptors::",
         "children": [],
         "inferredType": "[exact=JSString|powerset={I}{O}{I}]",
-        "code": "t($,\"cK\",\"l\",()=>A.e(\"_$dart_dartClosure_dartJSInterop\"))",
+        "code": "t($,\"cK\",\"j\",()=>A.E(\"_$dart_dartClosure_dartJSInterop\"))",
         "type": "String"
       },
       "dart:_interceptors::DART_CLOSURE_PROPERTY_NAME": {
@@ -15219,7 +15219,7 @@
         "parent": "library/dart:_interceptors::",
         "children": [],
         "inferredType": "[exact=JSString|powerset={I}{O}{I}]",
-        "code": "t($,\"fa\",\"K\",()=>A.e(\"_$dart_dartClosure\"))",
+        "code": "t($,\"fa\",\"K\",()=>A.E(\"_$dart_dartClosure\"))",
         "type": "String"
       },
       "dart:_interceptors::_JS_INTEROP_INTERCEPTOR_TAG": {
@@ -15310,12 +15310,12 @@
         "id": "field/dart:_internal::_toStringVisiting",
         "kind": "field",
         "name": "_toStringVisiting",
-        "size": 27,
+        "size": 28,
         "outputUnit": "outputUnit/main",
         "parent": "library/dart:_internal::",
         "children": [],
         "inferredType": "Container([exact=JSExtendableArray|powerset={I}{G}{M}], element: Union([subclass=JSArray|powerset={I}{GFU}{IM}], [subtype=ListBase|powerset={I}{O}{M}], powerset: {I}{GFUO}{IM}), length: null, powerset: {I}{G}{M})",
-        "code": "$.x=A.QI([],A.q7(\"jd<j>\"))",
+        "code": "$.x=A.QI([],A.q7(\"jd<Mh>\"))",
         "type": "List<Object>"
       },
       "dart:_js_helper::BoundClosure._interceptor": {
@@ -16482,12 +16482,6 @@
       },
       {
         "id": "function/dart:_rti::findType"
-      }
-    ],
-    "function/dart:_interceptors::JS_INTEROP_INTERCEPTOR_TAG": [
-      {
-        "id": "function/dart:_js_helper::getIsolateAffinityTag",
-        "mask": "inlined"
       }
     ],
     "function/dart:_interceptors::JavaScriptFunction.toString": [
@@ -17800,10 +17794,6 @@
       }
     ],
     "function/dart:_js_helper::unminifyOrTag": [
-      {
-        "id": "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways",
-        "mask": "inlined"
-      },
       {
         "id": "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways"
       }
@@ -20523,6 +20513,14 @@
         "mask": "inlined"
       }
     ],
+    "function/dart:_rti::_Universe._parseRecipe": [
+      {
+        "id": "function/dart:_rti::_Parser.create"
+      },
+      {
+        "id": "function/dart:_rti::_Parser.parse"
+      }
+    ],
     "function/dart:_rti::_Universe.addErasedTypes": [
       {
         "id": "function/dart:_rti::_Universe.erasedTypes",
@@ -20631,16 +20629,6 @@
     ],
     "function/dart:_rti::_Universe.eval": [
       {
-        "id": "function/dart:_rti::_Parser.create"
-      },
-      {
-        "id": "function/dart:_rti::_Parser.parse"
-      },
-      {
-        "id": "function/dart:_rti::_Universe._parseRecipe",
-        "mask": "inlined"
-      },
-      {
         "id": "function/dart:_rti::_Universe._parseRecipe"
       },
       {
@@ -20689,16 +20677,6 @@
       },
       {
         "id": "function/dart:_rti::Rti._setEvalCache"
-      },
-      {
-        "id": "function/dart:_rti::_Parser.create"
-      },
-      {
-        "id": "function/dart:_rti::_Parser.parse"
-      },
-      {
-        "id": "function/dart:_rti::_Universe._parseRecipe",
-        "mask": "inlined"
       },
       {
         "id": "function/dart:_rti::_Universe._parseRecipe"
@@ -23237,10 +23215,6 @@
     ],
     "function/dart:_rti::_unminifyOrTag": [
       {
-        "id": "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways",
-        "mask": "inlined"
-      },
-      {
         "id": "function/dart:_js_names::unmangleGlobalNameIfPreservedAnyways"
       }
     ],
@@ -24013,7 +23987,7 @@
       "id": "outputUnit/main",
       "kind": "outputUnit",
       "name": "main",
-      "size": 44951,
+      "size": 44969,
       "filename": "example_script.dart2js.js",
       "imports": []
     }
