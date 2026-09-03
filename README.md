@@ -114,6 +114,14 @@ builder-options:
     filter_outputs: false
 ```
 
+You can pass extra arguments to the target CLI with `extra-args`:
+
+```yaml
+# Configuration for https://pub.dev/packages/peanut
+
+extra-args: "--base-href /base/"
+```
+
 ## Post-build Dart script
 
 You can optionally specify a Dart script to run after the build is complete, but
