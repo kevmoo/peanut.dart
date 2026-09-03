@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cli_util/cli_util.dart' as cli_util;
 import 'package:io/ansi.dart' as ansi;
 import 'package:io/io.dart';
 import 'package:path/path.dart' as p;
@@ -38,16 +39,16 @@ Future<void> runProcess(
   }
 }
 
-String get dartPath => Platform.resolvedExecutable;
+String get dartPath => cli_util.dartExecutable ?? 'dart';
 
-final String flutterPath = p.join(
-  _flutterSdkDir,
-  'bin',
-  Platform.isWindows ? 'flutter.bat' : 'flutter',
-);
-
-/// The path to the root directory of the Flutter SDK.
-final String _flutterSdkDir = Platform.environment['FLUTTER_ROOT']!;
+String get flutterPath {
+  final flutterRoot = Platform.environment['FLUTTER_ROOT'];
+  final flutterBin = Platform.isWindows ? 'flutter.bat' : 'flutter';
+  if (flutterRoot != null && flutterRoot.isNotEmpty) {
+    return p.join(flutterRoot, 'bin', flutterBin);
+  }
+  return flutterBin;
+}
 
 void checkValidOptions(String name, Set<String> config) {
   if (config.isNotEmpty) {

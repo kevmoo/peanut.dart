@@ -1,3 +1,8 @@
+## 6.0.2
+
+- Fix AOT self-invocation loop when running `build_runner` by using `package:cli_util` for Dart SDK discovery.
+- Fix crash when `FLUTTER_ROOT` environment variable is unset.
+
 ## 6.0.1
 
 - Support Dart workspaces by resolving pubspec.lock up the directory tree
