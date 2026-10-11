@@ -1,3 +1,5 @@
+## 6.0.3-wip
+
 ## 6.0.2
 
 - Fix AOT self-invocation loop when running `build_runner` by using
