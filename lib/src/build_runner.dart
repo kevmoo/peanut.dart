@@ -36,7 +36,7 @@ Future<void> runBuildRunner(
         for (var optionEntry in option.value.entries)
           [
             '--define',
-            _defineValue(option.key, optionEntry.key, optionEntry.value),
+            '${option.key}=${optionEntry.key}=${jsonEncode(optionEntry.value)}',
           ],
     ...?extraArgsList,
     ['--output', targetsValue],
@@ -64,32 +64,12 @@ $_commandPrefix$prettyArgs
   await runProcess(dartPath, flatArgs, workingDirectory: pkgDirectory);
 
   var deleteCount = 0;
-
   for (var buildDir in targets.values) {
-    for (var file in Directory(
+    deleteCount = _deleteExtraFiles(
       buildDir,
-    ).listSync(recursive: true, followLinks: false).whereType<File>()) {
-      final relativePath = p.relative(file.path, from: buildDir);
-
-      if (_badFileGlob.matches(relativePath)) {
-        if (deleteCount == 0) {
-          print('');
-          stdout.write(
-            ansi.styleBold.wrap('Deleting extra files from output directory'),
-          );
-          if (options.verbose) {
-            print('');
-          }
-        }
-        if (options.verbose) {
-          print('  $relativePath');
-        } else {
-          stdout.write('.');
-        }
-        file.deleteSync();
-        deleteCount++;
-      }
-    }
+      deleteCount: deleteCount,
+      verbose: options.verbose,
+    );
   }
   if (deleteCount > 0) {
     // Ensure we add a new line is added after printing `.` for deleted files
@@ -97,8 +77,36 @@ $_commandPrefix$prettyArgs
   }
 }
 
-String _defineValue(String builder, String option, Object? value) =>
-    '$builder=$option=${jsonEncode(value)}';
+int _deleteExtraFiles(
+  String buildDir, {
+  required int deleteCount,
+  required bool verbose,
+}) {
+  for (var file in Directory(
+    buildDir,
+  ).listSync(recursive: true, followLinks: false).whereType<File>()) {
+    final relativePath = p.relative(file.path, from: buildDir);
+    if (!_badFileGlob.matches(relativePath)) continue;
+
+    if (deleteCount == 0) {
+      print('');
+      stdout.write(
+        ansi.styleBold.wrap('Deleting extra files from output directory'),
+      );
+      if (verbose) {
+        print('');
+      }
+    }
+    if (verbose) {
+      print('  $relativePath');
+    } else {
+      stdout.write('.');
+    }
+    file.deleteSync();
+    deleteCount++;
+  }
+  return deleteCount;
+}
 
 const _commandPrefix = 'Command:     ';
 

@@ -49,31 +49,7 @@ Future<void> run({
   // key: package dir; value: all dirs to build within that package
   final targetDirs = targetDirectories(workingDir, options.directories);
 
-  String prettyPkgPath(String pkgPath) => pkgPath == '.' ? workingDir : pkgPath;
-
-  print(ansi.styleBold.wrap('Validating packages:'));
-  for (var entry in targetDirs.entries) {
-    final entryDir = pkgNormalize(workingDir, entry.key);
-    print(ansi.styleBold.wrap('  ${prettyPkgPath(entry.key)}'));
-    try {
-      await checkPubspecLock(entryDir);
-    } on FileSystemException catch (e) {
-      throw PeanutException('${e.message} ${e.path}');
-    }
-
-    for (var dir in entry.value) {
-      final buildDirPath = p.join(entryDir, dir);
-      if (FileSystemEntity.typeSync(buildDirPath) ==
-          FileSystemEntityType.notFound) {
-        stderr.writeln(
-          ansi.yellow.wrap(
-            'The `$buildDirPath` directory does not exist. This may cause the '
-            'build to fail. Try setting the `directory` flag.',
-          ),
-        );
-      }
-    }
-  }
+  await _validatePackages(targetDirs, workingDir);
 
   if (options.dryRun) {
     print(ansi.wrapWith('\n*** Dry run ***', [ansi.yellow, ansi.styleBold]));
@@ -90,6 +66,7 @@ Future<void> run({
 
   try {
     final entriesList = targetDirs.entries.toList(growable: false);
+    final tempOutputPath = options.dryRun ? 'temp_dir' : tempDir.path;
     for (var i = 0; i < entriesList.length; i++) {
       final sourcePkg = entriesList[i];
       final targets = Map<String, String>.fromEntries(
@@ -98,15 +75,12 @@ Future<void> run({
             .map(
               (e) => MapEntry(
                 p.split(e.key).last,
-                pkgNormalize(
-                  options.dryRun ? 'temp_dir' : tempDir.path,
-                  e.value,
-                ),
+                pkgNormalize(tempOutputPath, e.value),
               ),
             ),
       );
 
-      final pkgPath = prettyPkgPath(sourcePkg.key);
+      final pkgPath = _prettyPkgPath(workingDir, sourcePkg.key);
 
       final countDetails = targetDirs.length == 1
           ? ''
@@ -133,26 +107,7 @@ Directories: ${sourcePkg.value.join(', ')}'''),
       return;
     }
 
-    if (outputDirMap.length == 1) {
-      // TODO(kevmoo): warn if there is no root `index.html` file!
-    } else {
-      // create root HTML file!
-      final links = <String, String>{};
-
-      for (var item in outputDirMap.values) {
-        final rootHtmlFilePath = p.join(tempDir.path, item, 'index.html');
-        if (FileSystemEntity.isFileSync(rootHtmlFilePath)) {
-          links[item] = item;
-        } else {
-          print('"$item" does not contain an "index.html" file. Skipping.');
-          // TODO(kevmoo): search for another file?
-        }
-      }
-
-      File(
-        p.join(tempDir.path, 'index.html'),
-      ).writeAsStringSync(_indexFile(links));
-    }
+    _writeRootIndexHtml(outputDirMap, tempDir);
 
     if (options.postBuildDartScript != null) {
       final postBuildScriptPath = pkgNormalize(
@@ -176,80 +131,143 @@ Directories: ${sourcePkg.value.join(', ')}'''),
       print(ansi.styleBold.wrap('Post-build script: complete\n'));
     }
 
-    var message = options.message;
+    await _commitAndReport(options, workingDir, gitDir, tempDir.path);
+  } finally {
+    await tempDir.delete(recursive: true);
+  }
+}
 
-    if (message == defaultMessage) {
-      message = 'Built ${options.directories.join(', ')}';
-      if (options.directories.length > 1 && message.length > 72) {
-        message =
-            '''
+String _prettyPkgPath(String workingDir, String pkgPath) =>
+    pkgPath == '.' ? workingDir : pkgPath;
+
+Future<void> _validatePackages(
+  Map<String, Set<String>> targetDirs,
+  String workingDir,
+) async {
+  print(ansi.styleBold.wrap('Validating packages:'));
+  for (var entry in targetDirs.entries) {
+    final entryDir = pkgNormalize(workingDir, entry.key);
+    print(ansi.styleBold.wrap('  ${_prettyPkgPath(workingDir, entry.key)}'));
+    try {
+      await checkPubspecLock(entryDir);
+    } on FileSystemException catch (e) {
+      throw PeanutException('${e.message} ${e.path}');
+    }
+
+    for (var dir in entry.value) {
+      final buildDirPath = p.join(entryDir, dir);
+      if (FileSystemEntity.typeSync(buildDirPath) ==
+          FileSystemEntityType.notFound) {
+        stderr.writeln(
+          ansi.yellow.wrap(
+            'The `$buildDirPath` directory does not exist. This may cause the '
+            'build to fail. Try setting the `directory` flag.',
+          ),
+        );
+      }
+    }
+  }
+}
+
+void _writeRootIndexHtml(Map<String, String> outputDirMap, Directory tempDir) {
+  if (outputDirMap.length == 1) {
+    // TODO(kevmoo): warn if there is no root `index.html` file!
+    return;
+  }
+
+  // create root HTML file!
+  final links = <String, String>{};
+
+  for (var item in outputDirMap.values) {
+    final rootHtmlFilePath = p.join(tempDir.path, item, 'index.html');
+    if (FileSystemEntity.isFileSync(rootHtmlFilePath)) {
+      links[item] = item;
+    } else {
+      print('"$item" does not contain an "index.html" file. Skipping.');
+      // TODO(kevmoo): search for another file?
+    }
+  }
+
+  File(p.join(tempDir.path, 'index.html')).writeAsStringSync(_indexFile(links));
+}
+
+Future<void> _commitAndReport(
+  Options options,
+  String workingDir,
+  GitDir gitDir,
+  String tempDirPath,
+) async {
+  var message = options.message;
+
+  if (message == defaultMessage) {
+    message = 'Built ${options.directories.join(', ')}';
+    if (options.directories.length > 1 && message.length > 72) {
+      message =
+          '''
 Built ${options.directories.length} directories
 
 Directories:
   ${options.directories.join('\n  ')}
 ''';
-      }
     }
+  }
 
-    if (options.versionInfo) {
-      final version = await getPackageVersion(workingDir);
-      message =
-          '''
+  if (options.versionInfo) {
+    final version = await getPackageVersion(workingDir);
+    message =
+        '''
 $message
 
 Version: ${version ?? 'Unknown'}''';
-    }
+  }
 
-    if (options.sourceBranchInfo) {
-      final currentBranch = await gitDir.currentBranch();
-      var commitInfo = currentBranch.sha;
-      if (!await gitDir.isWorkingTreeClean()) {
-        commitInfo = '$commitInfo (dirty)';
-      }
-      message =
-          '''
+  if (options.sourceBranchInfo) {
+    final currentBranch = await gitDir.currentBranch();
+    var commitInfo = currentBranch.sha;
+    if (!await gitDir.isWorkingTreeClean()) {
+      commitInfo = '$commitInfo (dirty)';
+    }
+    message =
+        '''
 $message
 
 Branch: ${currentBranch.branchName}
 Commit: $commitInfo
 
 package:peanut $packageVersion''';
-    }
-    final commit = await gitDir.updateBranchWithDirectoryContents(
-      options.branch,
-      tempDir.path,
-      message,
-    );
+  }
+  final commit = await gitDir.updateBranchWithDirectoryContents(
+    options.branch,
+    tempDirPath,
+    message,
+  );
 
-    print('');
-    if (commit == null) {
+  print('');
+  if (commit == null) {
+    print(
+      ansi.wrapWith(
+        'No change in branch "${options.branch}". No commit created.\n',
+        [ansi.yellow, ansi.styleBold],
+      ),
+    );
+  } else {
+    final indentedMessage = LineSplitter.split(
+      message,
+    ).map((line) => '  $line\n').join();
+    final shortSha = commit.treeSha.substring(0, 10);
+    print(
+      ansi.styleBold.wrap(
+        'Branch "${options.branch}" was updated with commit $shortSha',
+      ),
+    );
+    print(indentedMessage);
+    if (options.branch == 'gh-pages') {
       print(
-        ansi.wrapWith(
-          'No change in branch "${options.branch}". No commit created.\n',
-          [ansi.yellow, ansi.styleBold],
-        ),
+        'To push your gh-pages branch to github '
+        '(without switching from your working branch), run:\n'
+        '  git push origin --set-upstream gh-pages',
       );
-    } else {
-      final indentedMessage = LineSplitter.split(
-        message,
-      ).map((line) => '  $line\n').join();
-      final shortSha = commit.treeSha.substring(0, 10);
-      print(
-        ansi.styleBold.wrap(
-          'Branch "${options.branch}" was updated with commit $shortSha',
-        ),
-      );
-      print(indentedMessage);
-      if (options.branch == 'gh-pages') {
-        print(
-          'To push your gh-pages branch to github '
-          '(without switching from your working branch), run:\n'
-          '  git push origin --set-upstream gh-pages',
-        );
-      }
     }
-  } finally {
-    await tempDir.delete(recursive: true);
   }
 }
 
