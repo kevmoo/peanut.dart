@@ -1,5 +1,7 @@
 ## 6.0.3-wip
 
+- Require `sdk: ^3.12.0`.
+
 ## 6.0.2
 
 - Fix AOT self-invocation loop when running `build_runner` by using
