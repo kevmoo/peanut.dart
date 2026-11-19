@@ -105,7 +105,7 @@ void _checkDefault(
 
   final builderOptions = expected.builderOptions;
   if (builderOptions == null) {
-    check(options.builderOptions).isNull();
+    check(options.builderOptions).isNull;
   } else {
     check(options.builderOptions).isNotNull().deepEquals(builderOptions);
   }

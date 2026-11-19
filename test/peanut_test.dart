@@ -14,10 +14,9 @@ import 'package:peanut/src/version.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 
-void Function(Subject<TreeEntry>) _treeEntry(String name, String type) =>
-    (it) => it
-      ..has((te) => te.name, 'name').equals(name)
-      ..has((te) => te.type, 'type').equals(type);
+Condition<TreeEntry> _treeEntry(String name, String type) => .it()
+  ..has('name', (te) => te.name).equals(name)
+  ..has('type', (te) => te.type).equals(type);
 
 Future<void> _run({Options? options}) =>
     run(workingDirectory: d.sandbox, options: options ?? const Options());
@@ -27,9 +26,11 @@ void main() {
     await _simplePackage();
 
     await check(_run()).throws<PeanutException>(
-      (it) => it
-          .has((pe) => pe.message, 'message')
-          .equals('Not a git directory: ${d.sandbox}'),
+      .it()
+        ..has(
+          'message',
+          (pe) => pe.message,
+        ).equals('Not a git directory: ${d.sandbox}'),
     );
   });
 
@@ -40,9 +41,11 @@ void main() {
     await check(
       _run(options: const Options(directories: [])),
     ).throws<PeanutException>(
-      (it) => it
-          .has((pe) => pe.message, 'message')
-          .equals('At least one directory must be provided.'),
+      .it()
+        ..has(
+          'message',
+          (pe) => pe.message,
+        ).equals('At least one directory must be provided.'),
     );
   });
 
@@ -54,11 +57,10 @@ void main() {
     await check(
       _run(options: const Options(directories: ['../temp/silly'])),
     ).throws<PeanutException>(
-      (it) => it
-          .has((pe) => pe.message, 'message')
-          .equals(
-            '"../temp/silly" is not in the working directory "${d.sandbox}".',
-          ),
+      .it()
+        ..has('message', (pe) => pe.message).equals(
+          '"../temp/silly" is not in the working directory "${d.sandbox}".',
+        ),
     );
   });
 
@@ -70,12 +72,11 @@ void main() {
     await check(
       _run(options: Options(directories: [d.sandbox])),
     ).throws<PeanutException>(
-      (it) => it
-          .has((pe) => pe.message, 'message')
-          .equals(
-            '"${d.sandbox}" is the same as the working directory, '
-            'which is not allowed.',
-          ),
+      .it()
+        ..has('message', (pe) => pe.message).equals(
+          '"${d.sandbox}" is the same as the working directory, '
+          'which is not allowed.',
+        ),
     );
   });
 
@@ -87,9 +88,11 @@ void main() {
     await check(
       _run(options: const Options(branch: 'main')),
     ).throws<PeanutException>(
-      (it) => it
-          .has((pe) => pe.message, 'message')
-          .equals('Cannot update the current branch "main".'),
+      .it()
+        ..has(
+          'message',
+          (pe) => pe.message,
+        ).equals('Cannot update the current branch "main".'),
     );
   });
 
@@ -301,12 +304,11 @@ package:peanut $packageVersion''');
       await check(
         _run(options: const Options(postBuildDartScript: 'post_build.dart')),
       ).throws<PeanutException>(
-        (it) => it
-            .has((pe) => pe.message, 'message')
-            .startsWith(
-              'The provided post-build Dart script does not exist or '
-              'is not a file.',
-            ),
+        .it()
+          ..has('message', (pe) => pe.message).startsWith(
+            'The provided post-build Dart script does not exist or '
+            'is not a file.',
+          ),
       );
     });
 
@@ -325,9 +327,12 @@ void main() {
       await check(
         _run(options: const Options(postBuildDartScript: 'post_build.dart')),
       ).throws<PeanutException>(
-        (it) => it.has((pe) => pe.message, 'message')
-          ..startsWith('Error running "')
-          ..endsWith('\nExit code 123'),
+        .it()
+          ..has('message', (pe) => pe.message).which(
+            .it()
+              ..startsWith('Error running "')
+              ..endsWith('\nExit code 123'),
+          ),
       );
     });
   });

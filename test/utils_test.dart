@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('dartPath returns non-empty executable path', () {
-    check(dartPath).isNotEmpty();
+    check(dartPath).isNotEmpty;
   });
 
   test('flutterPath handles unset or set FLUTTER_ROOT without throwing', () {
