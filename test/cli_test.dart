@@ -93,13 +93,13 @@ $_output''');
 
   group('builder options', () {
     test('not provided', () async {
-      check(parseOptions([]).builderOptions).isNull();
+      check(parseOptions([]).builderOptions).isNull;
     });
 
     void expectParseOptionsThrows(List<String> args, String expectedMessage) {
       check(() => parseOptions(args))
           .throws<FormatException>()
-          .has((e) => e.toString(), 'toString()')
+          .has('toString()', (e) => e.toString())
           .equals(expectedMessage);
     }
 
@@ -149,10 +149,10 @@ FormatException: "$_someFilePath" is neither a path to a YAML file nor a YAML ma
 
           check(() => parseOptions(['--builder-options', _someFilePath]))
               .throws<ParsedYamlException>()
-              .has((e) {
+              .has('formattedMessage', (e) {
                 printOnFailure(e.formattedMessage ?? '');
                 return e.formattedMessage;
-              }, 'formattedMessage')
+              })
               .equals('''
 line 1, column 2 of $_someFilePath: Expected node content.
   ╷
